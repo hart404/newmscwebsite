@@ -1,0 +1,570 @@
+/*
+ * MSC Style - Created 1/19/2012 Phil Hartley
+ */
+ 
+h1 {
+	font-family: "Book Antiqua", "Palatino Linotype", Palatino, serif;
+	font-size: 24px;
+}
+
+h2 {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 20px;
+}
+
+h3 {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 16px;
+}
+
+h3 {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(13, 92, 133);
+}
+
+p {
+    color: rgb(242, 227, 188);
+}
+
+body {
+	background-color: rgb(96, 87, 82);
+}
+
+.highlight1 {
+	color: red;
+	font-weight: bold;
+}
+
+.highlight2 {
+	color: black;
+	font-weight: bold;
+}
+
+p {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.bigp {
+	font-size: 20px;
+}
+
+.headerBlue {
+    background-color: rgb(10, 74, 106);
+}
+
+.bodyBlue {
+    background-color: rgb(13, 92, 133);
+}
+
+.headerGreen {
+    background-color: rgb(118, 126, 64);
+}
+
+.bodyGreen {
+    background-color: rgb(148, 158, 80);
+}
+
+.headerYellow {
+    background-color: rgb(149, 111, 0);
+}
+
+.bodyYellow {
+    background-color: rgb(186, 139, 0);
+}
+
+.textBuff {
+    color: rgb(242, 227, 188);
+}
+
+.redEventText {
+    color: rgb(139, 14, 4);
+}
+
+.grayEventText {
+    color: rgb(84, 83, 74);
+}
+
+.marginRight {
+    margin-right: 26px;
+}
+
+.padded {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.pageHeader {
+    height: 220px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	background-image: url("../images/layout/img_main-background-960x194.png");
+	background-repeat:no-repeat;
+    background-position:left top;
+}
+
+.headerIcons {
+	float: right;
+	margin-top: 5px;
+	margin-right: 44px;
+}
+
+.topMenu {
+	float: right;
+	clear: right;
+	margin-top: 140px;
+}
+
+.topMenu ul {
+	list-style: none;
+	font-family: Arial;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.topMenu ul a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.topMenuListItem {
+	width: 150px;
+	float: left;
+	text-align: center;
+}
+
+.logo {
+	margin-top: 80px;
+	margin-left: 20px; 
+	float: left;    
+}
+
+.bottomMenu {
+	margin-left: 120px;
+	width: 960px;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	clear: both;
+}
+
+.bottomMenu ul {
+	list-style: none;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.bottomMenu ul a {
+	color: rgb(153, 143, 134);
+	text-decoration: none;
+}
+
+.bottomMenuListItem {
+	width: 150px;
+	float: left;
+	text-align: center;
+}
+
+.galleria-thumbnails {
+	float: left;
+	margin-left: 150px;
+}
+
+.mscGallery {
+	width: 100%;
+	display: table;
+}
+
+.blockHeader {
+	list-style: none;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 30px;
+	font-weight: 100;
+	color: rgb(242, 227, 188);
+	border-style: none;
+	width: 370px;
+	height: 50px;
+	padding-top: 1px;
+	padding-bottom: 5px;
+	margin-top: 20px;
+    padding-left: 10px;
+    padding-right: -10px;
+}
+
+.blockFooter {
+	height: 24px;
+	color: rgb(242, 227, 188);
+    font-size: 18px;
+    font-weight: 200;
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+    display: inline-table;
+    vertical-align: middle;
+    width: 380px;
+}
+
+.homePageItem {
+	width: 380px;
+	float: left;
+	border-style: none;
+}
+
+.homePageItems {
+	background-image: url("../images/layout/img_events-background-960x130.png");
+    background-repeat:no-repeat;
+    background-position:left top;	
+    height: 100px;
+}
+
+.homePageItem h2 {
+	clear: left;
+}
+
+.homePageSubItem {
+	padding: 10px;
+}
+
+.relativeContainerRight {
+	position: relative;
+	min-height: 150px;
+	width: 200px;
+	float: right;
+}
+
+.relativeContainer {
+	position: relative;
+	min-height: 982px;
+	clear: both;
+	margin: 0;
+}
+
+.imageLeft {
+	float: left;
+	margin: 10px;
+	border-style: inset;
+	border-color: rgba(255, 255, 255, 0.8);
+	-webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+
+.imageText {
+	font-family: Arial;
+	font-size: 20px;
+	padding: 10px;
+	clear: both;
+}
+
+.imageText h2 {
+	color: white;
+	font-weight: normal;
+}
+
+.homePageSubItem h2 {
+	color: white;
+    font-weight: normal;
+}
+
+.imageButton {
+	padding: 10px;
+}
+
+.container {
+	width: 1194px;
+	margin: auto;
+}
+
+.date {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.menu {
+	margin-bottom: 20px;
+	width: 100%;
+	z-index: 100;
+}
+
+.menuContainer {
+	background-image: url('../images/layout/img_menu-background-1192x71.png');
+	height: 51px;
+	padding-top: 20px;
+}
+
+.eventOrNews {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.gallery {
+	clear: both;
+	z-index: -100;
+}
+
+.eventSelection {
+	width: 290px;
+	float: left;
+	background-color: rgb(196, 150, 12);
+	margin: 0;
+	height: 100%;
+}
+
+.trailheadContainer {
+	float: right;
+	width: 900px;
+	padding-left: 4px;
+	height: 687px;
+	background-color: rgb(255, 242, 212);
+    margin: 0;
+}
+
+.eventContainer {
+    float: right;
+    width: 900px;
+    padding-left: 4px;
+    height: 100%;
+    background-color: rgb(255, 242, 212);
+    margin: 0;
+}
+
+.mscPanel {
+	float: right;
+	width: 72%;
+	padding-left: 4px;
+}
+
+.mscPanel ul {
+	padding-left: 24px;
+}
+
+#calendar {
+	padding: 10px;
+}
+
+#innerCalendar {
+	border: inset;
+	border-width: 4px;
+	border-color: rgba(216, 169, 30, 0.2);
+    background-color: #F0F0F0;
+}
+
+#calendarTable {
+	text-align: center;
+	font-size: 16px;
+}
+
+#calendarTable tbody tr th, #calendarTable tbody tr td {
+	width: 39px;
+	border: 1px;
+	border-color: #E8E8E8;
+	border-style: solid;
+	margin: 2px;
+}
+
+.calendarHeader {
+}
+
+.calendarRow {
+}
+
+.calendarMonthSelection {
+	font-weight: bold;
+	font-size: 16px;
+	padding: 4px;
+	padding-left: 10px;
+	border: 1px;
+	border-color: #E8E8E8;
+	border-style: solid;
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-top: 2px;
+	width: 245px;
+}
+
+.calendarMonthYear {
+	text-align: center;
+	width: 80%;
+}
+
+.calendarLeftArrow {
+	float: left;
+	width: 10%;
+	display: inline;
+}
+
+.calendarRightArrow {
+	float: right;
+	width: 10%;
+	display: inline;
+}
+
+.previousMonth {
+	color: gray;
+}
+
+.previousMonthHasEvents {
+	color: gray;
+	text-decoration: underline;
+}
+
+.currentMonth {
+	color: rgb(13, 92, 133);
+	font-weight: bold;
+}
+
+.currentMonthHasEvents {
+	color: rgb(13, 92, 133);
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.nextMonth {
+	color: gray;
+}
+
+.nextMonthHasEvents {
+	color: gray;
+	text-decoration: underline;
+}
+
+.actionButton {
+	margin-left: auto;
+	margin-right: auto;
+	padding:4px;
+	width: auto;
+	display: table;
+}
+
+.sidebarNavigation {
+	height: 100%;
+	width: 27%;
+	float: left;
+}
+
+.sidebarNavigationNarrow {
+	width: 290px;
+	float: left;
+	height: 687px;
+}
+
+.sidebarHeading {
+	color: rgb(242, 227, 188);
+	font-size: 24px;
+	padding: 15px;
+	font-family: arial, helvetica, sans-serif;
+	font-weight: normal;
+	width: 258px;
+	text-align: right;
+}
+
+.sidebarLink {
+	font-size: 20px;
+	color: rgb(55, 53, 52);
+	padding: 16px;
+	width: 258px;
+	padding: 16px;
+    text-align: right;
+}
+
+.sidebarLink:hover {
+	background-color: rgb(118, 124, 64);
+}
+
+.sidebarLinkInner {
+    font-size: 20px;
+    color: rgb(55, 53, 52);
+    width: 80px;
+}
+
+
+.sidebarLink a {
+	text-decoration: none;
+}
+
+.sidebarLinkCurrent {
+    font-size: 20px;
+    color: rgb(55, 53, 52);
+    padding: 16px;
+    background-color: rgb(118, 124, 64);
+    text-align: right;
+}
+
+.trailheadMap {
+	width: 400px;
+	height: 500px;
+	margin-top: 10px;
+    box-shadow: 2px 2px 8px #888;
+    -moz-box-shadow: 2px 2px 8px #888;
+    -webkit-box-shadow: 2px 2px 8px #888;
+}
+
+.hikeMap {
+    width: 480px;
+    height: 600px;
+    margin-top: 30px;
+    box-shadow: 2px 2px 8px #888;
+    -moz-box-shadow: 2px 2px 8px #888;
+    -webkit-box-shadow: 2px 2px 8px #888;
+}
+
+.mapSurround {
+	height: 657px;
+	width: 500px;
+	float: right;
+}
+
+.trailheadMapSurround {
+	height: 577px;
+	width: 903px;
+	padding: 40px;
+	position: relative;
+}
+
+.trailheadMap {
+	background-image: url("../images/general/img_complete-trailhead-map-330x583.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+	width: 383px;
+	height: 550px;
+	position: relative;
+	left: 40px;    
+    box-shadow: 2px 0 5px #888;
+    -moz-box-shadow: 2px 0 5px #888;
+    -webkit-box-shadow: 2px 0 5px #888;
+}
+
+.ui-dialog-titlebar {
+	background-color: white;
+}
+
+.trailhead {
+	width: 38%;
+	padding-left: 10px;
+	float: left;
+}
+
+.hikeList {
+	list-style-type: none;
+	display: block;
+}
+
+.mscTimeline {
+	height: 350px; 
+	border: 1px solid #aaa;
+	width: 100%;
+}
+
+#calendarSpinner {
+	padding-top: 10px;
+	float: right;
+	visibility: hidden;
+}

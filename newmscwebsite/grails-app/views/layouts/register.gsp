@@ -1,0 +1,22 @@
+<!DOCTYPE html 
+      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="en-US"
+      lang="en-US">
+<head profile="http://www.w3.org/2005/10/profile">
+<title><g:layoutTitle default="McDowell Sonoran Conservancy" /></title>
+<link rel="icon" type="image/png" href="<g:createLinkTo dir='/images/layout' file='img_cactus-16x16.png'/>"/>
+<link rel="shortcut icon" href="<g:createLinkTo dir='/images/layout' file='img_cactus-16x16.png'/>"></link>
+<link rel="stylesheet" href="<g:createLinkTo dir='css' file='mscmain.css' />" />
+<g:layoutHead />
+</head>
+<body>
+<div class="container">
+	<img class="logo" alt="logo" src="<g:resource dir='images/layout' file='img_logo_rgb_for-web.png'/>">
+	<g:layoutBody />
+	<g:render template="/layouts/footer"/>
+</div>
+</body>
+</html>
