@@ -1,4 +1,4 @@
-package newmscwebite;
+package newmscwebsite;
 
 public enum Activity {
 	BIKING, DOGS, HORSES, FAMILY, HANDICAP, HIKING, CLIMBING

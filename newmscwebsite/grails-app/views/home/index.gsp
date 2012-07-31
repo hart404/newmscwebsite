@@ -27,22 +27,27 @@
 			<div class="blockHeader headerBlue">
 				<h1>Support Us</h1>
 			</div>
-			<div class="bodyBlue withHeight">
-				<img class="imageLeft" src="<g:createLinkTo dir='images/general' file='img_black-throated-sparrow-150x150.png'/>" />
-				<div class="relativeContainerRight">
+			<div class="homePageSubItem bodyBlue" >
+				<div class="imageContainer">
+				    <div class="innerGlow">
+                    </div>
 					<div class="imageText">
-						<p>Aenean elit justo, sagittis quis convallis et, congue quis tortor. Duis varius interdum ultricies.</p>
+						<p>The McDowell Sonoran Conservancy is a non-profit conservation organization that engages the community to protect the McDowell Sonoran Preserve.  
+						Your support will ensure that the Preserve continues to be a natural open space to visit and enjoy, as well as a permanent sanctuary for wildlife.</p>
 					</div>
 					<div class="imageButton">
-						<img src="<g:createLinkTo dir='images/layout' file='img_actionbutton-donateNow-164x30.png'/>" />
+						<img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/>
 					</div>
 				</div>
 				<div class="imageText bodyBlue">
 					<h2>Stay in Touch</h2>
-					<p>Signup for the biweekly eNewsletter to stay informed about the MSC.</p>
+					<p>Signup for the biweekly eNewsletter to stay informed about the Conservancy.</p>
 				</div>
 				<div class="imageButton bodyBlue">
-					<img src="<g:createLinkTo dir='images/layout' file='img_actionbutton-signupNow-164x30.png'/>" />
+				    <g:form name="registerUser" url="[action:'registerUser',controller:'person']">
+                        <input type="text" name="email" class="email" placeholder="email address"/>
+                        <input type="image" value="Submit" class="subscribeButton" alt="Submit" src="<g:createLinkTo dir='images/layout' file='img_subscribe-112x28.png'/>"/>
+					</g:form>
 					<p></p>
 				</div>
 			</div>
@@ -76,14 +81,23 @@
 			</div>
 			<div class="homePageSubItem bodyYellow">
 				<g:each var="event" in="${events}">
-					<h2>
-						${event.title}
-					</h2>
-					<p>
-						<span class="date"> ${event.formattedStartTime()}
-						</span>&nbsp;
-						<g:link controller="event" action="displayEvent" id="${event.id}">Learn More &raquo</g:link>
-					</p>
+				    <div class='outerEvent'>
+					    <div class='calendarIcon'>
+	                        <img src="<g:createLinkTo dir='images/layout' file='calendar-${event.startTime.dayOfMonth}.png'/>">
+	                    </div>
+	                    <div class='eventShort'>
+							<h2>
+								${event.title}
+							</h2>
+							<p>
+								<span class="date"> ${event.formattedStartTime()}
+								</span>&nbsp;
+							</p>
+							<p>
+								<g:link controller="event" action="displayEvent" id="${event.id}">Learn More &raquo</g:link>
+							</p>
+						</div>
+					</div>
 				</g:each>
 			</div>
 			<div class="blockFooter headerYellow">

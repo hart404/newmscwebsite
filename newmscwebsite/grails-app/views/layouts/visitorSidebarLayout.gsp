@@ -26,9 +26,6 @@
 <div class="container">
 	<g:render template="/layouts/header"/>
 	<g:render template="/layouts/navigationBar"/>
-	<div>
-		<crumbs:trail/>
-	</div>
 	<div class="sidebarNavigation">
 		<h1 class="sidebarHeading">Visitor Information</h1>
 		<g:if test="${currentView == 'planYourVisit'}">

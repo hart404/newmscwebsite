@@ -59,6 +59,9 @@ environments {
 	test {
 		grails.serverURL = "http://localhost:8080/${appName}"
 	}
+	production {
+		grails.serverURL = "http://newmscwebsite.cloudfoundry.com/${appName}"
+	}
 }
 
 // log4j configuration
@@ -87,6 +90,8 @@ log4j = {
     error   'org.mortbay.log'
 	
 	error	'org.codehaus.groovy.grails.plugins.springsecurity'
+	
+	info	'org.grails.s3'
 }
 
 // Added by the Spring Security Core plugin:
@@ -132,5 +137,6 @@ grails.gorm.default.mapping = {
 grails.plugin.cloudfoundry.showStackTrace = true
 
 grails.serverURL="http://newmscwebsite.cloudfoundry.com"
+
 
   

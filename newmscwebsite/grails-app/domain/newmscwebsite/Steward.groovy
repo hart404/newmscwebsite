@@ -2,15 +2,16 @@ package newmscwebsite
 
 import groovy.transform.InheritConstructors
 
-@InheritConstructors
+
+
 class Steward extends Person {
 	String tshirtSize
 	String emergencyContact
 	String emergencyRelationship
 	String emergencyPhone
 	Photo photoLocation
-	boolean isMasterSteward = false
-	String cltPosition = ""
+	boolean masterSteward = false
+	String CLTPosition = ""
 	int classNumber
 
     static constraints = {

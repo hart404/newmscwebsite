@@ -1,7 +1,5 @@
 package newmscwebsite
 
-import newmscwebite.Category;
-
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
@@ -20,15 +18,19 @@ class Event {
 	// Priority of 1 means event will be displayed on home page
 	int eventPriority = 10
 	Trailhead location
+	Photo mainPhoto
+	
+	static transients = ['calendarIcon']
+	
 	List<Category> categories = []
 	List<Person> attendees = []
-	Photo mainPhoto
+	List<Photo> photos
 	List<Photo> additionalPhotos = []
-	
 	static hasMany = [
 		categories: Category, 
 		attendees: Person, 
-		photos: Photo
+		photos: Photo,
+		additionalPhotos: Photo
 	]
 	
     static constraints = {
@@ -47,7 +49,7 @@ class Event {
     }
 	
 	public String formattedStartTime() {
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy hh:mmaa")
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMM dd, yyyy h:mm aa")
 		formatter.print(startTime)
 	}
 	
@@ -72,5 +74,5 @@ class Event {
 	def beforeUpdate = {
 		startDate = new LocalDate(startTime)
 	}
-
+	
 }

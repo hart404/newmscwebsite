@@ -1,9 +1,12 @@
 package newmscwebsite
 
 import grails.converters.JSON
-import uk.co.desirableobjects.ajaxuploader.exception.FileUploadException
-import org.springframework.web.multipart.MultipartHttpServletRequest
+
+import javax.servlet.http.HttpServletRequest
+
+import org.grails.s3.*
 import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.multipart.MultipartHttpServletRequest
 
 import com.drew.imaging.ImageMetadataReader
 import com.drew.metadata.Directory
@@ -13,12 +16,14 @@ import com.drew.metadata.exif.ExifIFD0Directory
 import com.drew.metadata.iptc.IptcDirectory
 import com.drew.metadata.jpeg.JpegDirectory
 
-import javax.servlet.http.HttpServletRequest
-
 class PhotoController {
+	static final String DEFAULT_S3_SOURCE = 'https://s3.amazonaws.com/conservancyImages/'
+	
+	def amazonS3Service
+	
 	// Remember to terminate the path with a '/'
-	def rootDirectory = "./web-app"
-	def defaultUploadDirectory = "/images/uploaded/"
+	def rootDirectory = System.getProperty("user.home")
+	def defaultUploadDirectory = '/upload/'
 
 	def uploadPhotos = {
 	}
@@ -28,23 +33,31 @@ class PhotoController {
 	}
 
 	def upload = {
+		println "Root Directory: ${rootDirectory}"	
 		try {
+			createUploadDirectory()
 			File uploaded = createTemporaryFile()
 			InputStream inputStream = selectInputStream(request)
 			uploadFile(inputStream, uploaded)
-			def newFile = new File(rootDirectory + defaultUploadDirectory + params.qqfile)
-			if (newFile.isFile()) {
-				log.error("File already exists.")
-				throw new FileUploadException("File already exists")
-			} else {
-				newFile.createNewFile()
-				copyFile(uploaded, newFile)
-				createPhotoForFile(newFile, defaultUploadDirectory)
-			}
+			createPhotoForFile(uploaded, DEFAULT_S3_SOURCE + uploaded.name, params.qqfile)
+			transferFileToS3(uploaded)
 			return render(text: [success:true] as JSON, contentType:'text/json')
 		} catch (FileUploadException e) {
 			log.error("Failed to upload file.", e)
 			return render(text: [success:false, message: e.message] as JSON, contentType:'text/json')	
+		}
+	}
+	
+	def transferFileToS3(file) {
+		amazonS3Service.putFile(file)
+	}
+	
+	def createUploadDirectory() {
+		// Create the defaultUploadDirectory if necessary
+		def directory = new File(rootDirectory + defaultUploadDirectory)
+		if (!directory.isDirectory()) {
+			log.info("Creating temporary directory")
+			directory.mkdir()
 		}
 	}
 
@@ -59,7 +72,16 @@ class PhotoController {
 	private File createTemporaryFile() {
 		File uploaded
 		UUID uuid = UUID.randomUUID()
-		uploaded = File.createTempFile(uuid.toString(), '.tmp')
+		try {
+			uploaded = File.createTempFile(uuid.toString(), '.jpg')
+		} catch (IOException e) {
+			// Using CloudFoundry, the temp directory is protected
+			// Create a file in a directory beneath root
+			log.info("Could not create temporary file")
+			createUploadDirectory()
+			uploaded = new File(rootDirectory + defaultUploadDirectory, uuid)
+			uploaded.createNewFile()
+		}
 		return uploaded
 	}
 
@@ -71,24 +93,16 @@ class PhotoController {
 		}
 	}
 
-	private boolean copyFile(File source, File destination) {
-		def reader = source.newReader()
-		destination.withWriter { writer -> writer << reader }
-		reader.close()
-	}
-	
-	private void createPhotoForFile(File source, String defaultUploadDirectory) {
+	private void createPhotoForFile(File source, String sourceURL, String originalFileName) {
 		Metadata metadata = ImageMetadataReader.readMetadata(source)
-		for (Directory directory : metadata.getDirectories()) {
-			for (Tag tag : directory.getTags()) {
-				System.out.println(tag)
-			}
-		}
 		def metadataMap = [path: defaultUploadDirectory, fileName: source.getName()]
 		addJPEGItems(metadataMap, metadata)
 		addEXIFItems(metadataMap, metadata)
 		addIPTCItems(metadataMap, metadata)
-		new Photo(metadataMap).save(failOnError: true)
+		def photo = new Photo(metadataMap)
+		photo.source = sourceURL
+		photo.originalFileName = originalFileName
+		photo.save(failOnError: true)
 	}
 	
 	private void addJPEGItems(metadataMap, metadata) {

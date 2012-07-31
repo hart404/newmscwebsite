@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Donate Now</h1>
-<p class="bigp">Help us care for the McDowell Sonoran Preserve. Your support will ensure that the Preserve conKnues to be a prisKne open space to visit and enjoy, as well as a permanent sanctuary for wildlife.</p>
+<p class="bigp">Help us care for the McDowell Sonoran Preserve. Your support will ensure that the Preserve continues to be a pristine open space to visit and enjoy, as well as a permanent sanctuary for wildlife.</p>
 <h2>Donation Details</h2>
 <g:form name="donateForm" controller="donate" action="donateNow">
 <p class="bigp">Choose the gift level you wish to support:</p>

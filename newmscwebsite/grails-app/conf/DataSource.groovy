@@ -1,9 +1,7 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-    username = "root"
-    password = "uni-dev"
-	dialect = org.hibernate.dialect.MySQLInnoDBDialect
+	dialect = org.hibernate.dialect.MySQLDialect
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -16,11 +14,13 @@ environments {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop','update'
             url = "jdbc:mysql://localhost/mscmsc"
+			username = "root"
+			password = "uni-dev"
         }
     }
     test {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "create-drop"
             url = "jdbc:mysql://localhost/mscmsc"
         }
     }

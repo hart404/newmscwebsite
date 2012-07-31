@@ -1,7 +1,5 @@
 package newmscwebsite
 
-import newmscwebite.Activity;
-import newmscwebite.Amenity;
 
 class Trailhead {
 	

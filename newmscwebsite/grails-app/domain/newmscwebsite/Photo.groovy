@@ -2,7 +2,7 @@ package newmscwebsite
 
 class Photo {
 	
-	static searchable = [only: ['keywords', 'allKeywords', 'artist', 'fileName']]
+	static searchable = [only: ['keywords', 'allKeywords', 'artist', 'fileName', 'originalFileName', 'usageRights']]
 	
 	List<String> keywords
 	String allKeywords
@@ -10,13 +10,14 @@ class Photo {
 	String copyright
 	int height
 	int width
-	String path
+	String source
 	String fileName
+	String originalFileName
 	Date dateCreated
 	String usageRights
 
     static constraints = {
-		path(nullable: false)
+		source(nullable: false)
 		fileName(nullable: false)
 		usageRights(nullable: true)
     }

@@ -1,4 +1,4 @@
-package newmscwebite;
+package newmscwebsite;
 
 public enum Amenity {
 	DIRECTORY, HORSE_TRAILS, INFORMATION, RESTROOM, SEATING, SHELTER, WATER

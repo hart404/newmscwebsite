@@ -1,19 +1,17 @@
-import newmscwebite.Activity;
-import newmscwebite.Amenity;
+import newmscwebsite.Activity
+import newmscwebsite.Amenity
 import newmscwebsite.Event
 import newmscwebsite.GeographicCoordinates
 import newmscwebsite.Hike
-import newmscwebsite.Trailhead
-import newmscwebsite.TrailheadService
 import newmscwebsite.NewsItem
 import newmscwebsite.SecRole
 import newmscwebsite.SecUser
 import newmscwebsite.SecUserSecRole
 import newmscwebsite.StreetAddress
+import newmscwebsite.Trailhead
+import newmscwebsite.TrailheadService
 
 import org.joda.time.format.DateTimeFormat
-
-import simple.cms.SCMSHTMLWidget
 
 
 class BootStrap {
@@ -22,27 +20,17 @@ class BootStrap {
 	def springSecurityService
 
 	def init = { servletContext ->
-		createAdminUser()
+		println "Root directory: ${System.getProperty("user.home")}"
 		createRoles()
+		createAdminUser()
 		createLocations()
 		createEvents()
 		createNews()
-		createHTMLWidgets()
 		createHikes()
 	}
 
-	def destroy = {
-	}
-
-	void createHTMLWidgets() {
-		if (!SCMSHTMLWidget.count()) {
-			def widget = new SCMSHTMLWidget(htmlText: "Default html text", htmlId: "html1", cssClass: "htmlWidget")
-			widget.save(failOnError: true)
-			println "HTMLWidget id: ${widget.id}"
-		}
-	}
-
 	void createRoles() {
+		println "Roles: ${SecRole.count()}"
 		if (!SecRole.count()) {
 			println "Creating Roles"
 			new SecRole(authority: "ROLE_ADMIN").save(failOnError: true)
@@ -74,73 +62,75 @@ class BootStrap {
 
 	void createEvents() {
 		// Create some events
+		println "Events: ${Event.count()}"
 		if (!Event.count()) {
 			println "Creating Events"
-			def formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm aa")
+			def formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm")
 			new Event(title: "Public Hike: Two Mountain Loop", shortDescription: "Two Mountain Loop",
 					moreInformation: "Two Mountain Loop. This 8 mile hike around Cone Mountain and Brown's Mountain reveals a wide variety of Sonoran Desert plants and rock formations. Little elevation change but many slippery ups and downs. Allow 5 hours. Bring lunch. Please arrive at the Brown's Ranch Trailhead by 8:45 am.",
-					startTime: formatter.parseDateTime("06/11/2012 9:00 AM"),
+					startTime: formatter.parseDateTime("07/11/2012 9:00"),
 					eventPriority: 2, location: trailheadService.brownsRanch()).save(failOnError: true)
 			new Event(title: "Public Hike: All Things Arizona", shortDescription: "All Things Arizona",
 					moreInformation: "This hike on the Old Jeep Trail is a wonderful celebration of Arizona's 100th birthday and ties in beautifully with fourth grade Arizona heritage curriculum. Learn about the state flower, state tree, state bird, and more. This 4 mile hike on a trail that feels very remote and has beautiful views. Moderate uphill sections, some of it on rocky terrain. Allow 3 hours. Please arrive at the Lost Dog Wash Trailhead by 8:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime("06/12/2012 9:00 AM"),
+					startTime: formatter.parseDateTime("07/12/2012 9:00"),
 					eventPriority: 2, location: trailheadService.lostDog()).save(failOnError: true)
 			new Event(title: "Public Hike: Hiking Equipment and Technique", shortDescription: "Hiking Equipment and Technique",
 					moreInformation: "Learn how to make your hiking experience more pleasurable with the proper equipment and supplies, how to pace yourself, and even learn the difference between a stick and a pole on this approximate 4 mile hike. Mostly gradual inclines with a couple of short steep areas. Allow 2 hours. Please arrive at Gateway Trailhead by 8:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime("06/19/2012 9:00 AM"),
+					startTime: formatter.parseDateTime("07/19/2012 9:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Herpetology Survey Training", shortDescription: "Training for reptile portion of the flora & fauna survey",
 					moreInformation: "Dave Weber, Principal Investigator for the reptile & amphibian portion of the flora & fauna baseline survey, will be holding a training on safety and data collection methods. This is a mandatory training if you wish to participate in the reptile project. Location TBD",
-					startTime: formatter.parseDateTime("06/25/2012 10:00 AM"),
+					startTime: formatter.parseDateTime("07/25/2012 10:00"),
 					eventPriority: 2).save(failOnError: true)
 			new Event(title: "First Friday Family Series", shortDescription: "Crawly Creatures of the Sonoran Desert",
 					moreInformation: "More reptiles, please! Ranger Amy Ford from the McDowell Mountain Regional Park next door brings her collection of snakes and desert tortoise to share with us. What a nice neighbor!",
-					startTime: formatter.parseDateTime("06/02/2012 4:30 PM"),
+					startTime: formatter.parseDateTime("07/02/2012 16:30"),
 					eventPriority: 1, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
 					moreInformation: "'Plants and wildflowers of the Preserve.' Trailside Naturalist station at the jct. of the Bajada Nature Trail and amphitheater",
-					startTime: formatter.parseDateTime("06/06/2012 9:00 AM"),
+					startTime: formatter.parseDateTime("07/06/2012 9:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
 					moreInformation: "'Plants and wildflowers of the Preserve.' Trailside Naturalist station at the jct. of the Bajada Nature Trail and amphitheater",
-					startTime: formatter.parseDateTime("06/10/2012 9:00 AM"),
+					startTime: formatter.parseDateTime("07/10/2012 9:00"),
 					eventPriority: 1, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Public Hike: Wildflowers on the Old Jeep Trail", shortDescription: "Come see the preserve's wonderful display of wildflowers",
 					moreInformation: "Wildflowers on the Old Jeep Trail A 4 mile hike on a remote, peaceful trail with beautiful views and wildflower identification. Moderate uphill sections, some of it on rocky terrain. Allow 3 hours. Please arrive at the Lost Dog Wash Trailhead by 7:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime("06/04/2012 8:00 AM"),
+					startTime: formatter.parseDateTime("07/04/2012 8:00"),
 					eventPriority: 2, location: trailheadService.lostDog()).save(failOnError: true)
 			new Event(title: "Public Hike: Marcus Landslide", shortDescription: "Witness the largest landslide in Arizona!",
 					moreInformation: "Marcus Landslide Pre-registration required. A moderate 4 mile hike to the second largest landslide in Arizona on the east side of East End mountain including a discussion of the geological history of the area. This 2 hour hike is suitable for all hikers. Please arrive at Brown`s Ranch Trailhead by 7:45 am. Maximum 20 people. Call Jill at 480-998-7971 x104 to pre-register. ",
-					startTime: formatter.parseDateTime("06/10/2012 8:00 AM"),
+					startTime: formatter.parseDateTime("07/10/2012 8:00"),
 					eventPriority: 2, location: trailheadService.brownsRanch()).save(failOnError: true)
 			new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
-					moreInformation: "Stop by the Traillside Naturalist Station for a 'Taste of the Desert'. Master Steward Alice Demetra puts out a culinary spread of edible cacti. Learn about how you can incorporate these spiny plants into your diet. Trailside Naturalist station at jct. of Bajada Nature Trail and amphitheater.",
-					startTime: formatter.parseDateTime("06/17/2012 9:00 AM"),
+					moreInformation: "Stop by the Trailside Naturalist Station for a 'Taste of the Desert'. Master Steward Alice Demetra puts out a culinary spread of edible cacti. Learn about how you can incorporate these spiny plants into your diet. Trailside Naturalist station at jct. of Bajada Nature Trail and amphitheater.",
+					startTime: formatter.parseDateTime("07/17/2012 9:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Photo Workshop", shortDescription: "Photo Workshop Part I",
-					moreInformation: "Join expert outdoor photographer and MSC steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
-					startTime: formatter.parseDateTime("06/15/2012 5:00 PM"),
+					moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
+					startTime: formatter.parseDateTime("07/15/2012 17:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Photo Workshop", shortDescription: "Photo Workshop Part II",
-					moreInformation: "Join expert outdoor photographer and MSC steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
-					startTime: formatter.parseDateTime("06/17/2012 6:00 AM"),
+					moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
+					startTime: formatter.parseDateTime("07/17/2012 6:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Flying insect survey training", shortDescription: "Learn how to do real research into creepy crawlies",
 					moreInformation: "Presentation followed by in-the-field training led by Principal Investigator, Ron Rutowski. Location TBD. Please contact Lesley@mcdowellsonoran.org or at x 105 for details.",
-					startTime: formatter.parseDateTime("06/24/2012 10:00 AM"),
+					startTime: formatter.parseDateTime("07/24/2012 10:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Public Hike: Wildflower Walk on Sunrise Trail", shortDescription: "Come see the preserve's wonderful display of wildflowers",
 					moreInformation: "Wildflower Walk on Sunrise Trail Join Botany Expert, Steve Jones and photographer/author of Wildflowers and More Marianne Skov Jensen as we hunt for wildflowers on the Sunrise Trail. Along the way, you`ll hear interesting tidbits about the wildflowers we find and also learn simple tips for taking better flower photos. A 3 mile hike on gently but steadily rising terrain, with a few steeper areas. Poles recommended. Allow 3 1/2 hours. Please arrive at Ringtail Trailhead by 7:45 am. Appropriate for children ages 8 and up",
-					startTime: formatter.parseDateTime("06/18/2012 8:00 AM"),
+					startTime: formatter.parseDateTime("07/18/2012 8:00"),
 					eventPriority: 2, location: trailheadService.ringtail()).save(failOnError: true)
 			new Event(title: "Public Hike: Birding in the Preserve", shortDescription: "Join us for a light hike and learn about some of the preserve's birds.",
 					moreInformation: "Birding in the Preserve This 3 mile hike (it may be less depending on what we see) follows the Quartz Trail and the Paradise Trail up Ironwood Wash and allows for seeing and hearing a variety of desert birds. Allow 2 hours. Please arrive at the Quartz Trailhead by 7:45 am. Appropriate for ages 10 and up. Please note that this is a birding hike that involves lots of stopping and starting. Expect that you will spend 2/3 of the time stationary.",
-					startTime: formatter.parseDateTime("06/30/2012 8:00 AM"),
+					startTime: formatter.parseDateTime("07/30/2012 8:00"),
 					eventPriority: 1, location: trailheadService.gateway()).save(failOnError: true)
 		}
 	}
 
 	void createLocations() {
+		println "Locations: ${Trailhead.count()}"
 		if (!Trailhead.count()) {
 			println "Creating Locations"
 			def amenities = [
@@ -284,19 +274,25 @@ class BootStrap {
 	}
 
 	void createNews() {
+		println "News: ${NewsItem.count()}"
 		if (!NewsItem.count()) {
-			new NewsItem(title: "Office Administrator Position", summary: "MSC is seeking a part-time Office Administrator.", moreInformation: "Nancy Howe is retiring to become a full-time steward, and MSC is looking to fill the position of part-time office administrator. This is a five-day, 20 hour per week position. The job description is available here. To apply, please send a cover letter with resume to MSC Office Administration. Review of applications will begin the week of February 6.", important: true).save(failOnError: true)
-			new NewsItem(title: "Photo Workshops February and March 2012", summary: "Join expert outdoor photographer and MSC steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve.", moreInformation: "Join expert outdoor photographer and MSC steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera. You will learn how to make better photographs and have fun in the process. The Saturday session in the Preserve includes individual attention for each participant. From novice to more experienced photographers, there is something for everyone. Please call 480-998-7971 ext. 102 to register.", important: true).save(failOnError: true)
-			new NewsItem(title: "Become an MSC Volunteer", summary: "Sign up for the next volunteer orientation (March 3rd and 10th) and make an impact on your community. You'll learn about MSC, the Preserve, and all the ways you can help care for our living treasure. Everyone's welcome. We have indoor and outdoor work and are ADA compliant. Call today and get started", moreInformation: "MSC's Volunteers, called Stewards, Play a Vital Role in the Preserve. Become a McDowell Sonoran Conservancy Steward. Work hard, have fun, and make an impact on your community. MSC volunteers champion the preservation of open space, steward the McDowell Sonoran Preserve, and engage the community in preserving our environment. What we all have in common is our passion for nature and a desire to make our community a better place.", important: true).save(failOnError: true)
-			new NewsItem(title: "MSC Office Hours", summary: "We are open Monday through Friday, 9 - 4. Call us at 998.7971.", moreInformation: "Thank you for visiting our website. If you would like to contact us, please see the information below. For questions about volunteering: Jill@mcdowellsonoran.org. For questions about making a gift: Molly@mcdowellsonoran.org. For any other question: Nancy@mcdowellsonoran.org", important: false).save(failOnError: false)
-			new NewsItem(title: "Natural History I Class (March Session)", summary: "Open to the Public! An intimate look at the McDowells", moreInformation: "Natural History 1 consists of four 90-minute modules covering the geology of central Arizona, the ecology of the Sonoran Desert, and the plants and animals that are common in the Preserve. There will be two sessions in the morning and two in the afternoon with a long lunch break in between. Bring water, snacks, and plan to either bring your lunch or go off-campus. All of the material for the four sessions is available on the MSC website; please download a set before class if you want to take notes on the slides.", important: false).save(failOnError: false)
+			println "Creating News Items"
+			new NewsItem(title: "Office Administrator Position", summary: "The Conservancy is seeking a part-time Office Administrator.", moreInformation: "Nancy Howe is retiring to become a full-time steward, and the Conservancy is looking to fill the position of part-time office administrator. This is a five-day, 20 hour per week position. The job description is available here. To apply, please send a cover letter with resume to Conservancy Office Administration. Review of applications will begin the week of February 6.", important: true).save(failOnError: true)
+			new NewsItem(title: "Photo Workshops February and March 2012", summary: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve.", moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera. You will learn how to make better photographs and have fun in the process. The Saturday session in the Preserve includes individual attention for each participant. From novice to more experienced photographers, there is something for everyone. Please call 480-998-7971 ext. 102 to register.", important: true).save(failOnError: true)
+			new NewsItem(title: "Become a Conservancy Volunteer", summary: "Sign up for the next volunteer orientation (March 3rd and 10th) and make an impact on your community. You'll learn about the Conservancy, the Preserve, and all the ways you can help care for our living treasure. Everyone's welcome. We have indoor and outdoor work and are ADA compliant. Call today and get started", moreInformation: "Conservancy's Volunteers, called Stewards, Play a Vital Role in the Preserve. Become a McDowell Sonoran Conservancy Steward. Work hard, have fun, and make an impact on your community. The Conservancy volunteers champion the preservation of open space, steward the McDowell Sonoran Preserve, and engage the community in preserving our environment. What we all have in common is our passion for nature and a desire to make our community a better place.", important: true).save(failOnError: true)
+			new NewsItem(title: "Conservancy Office Hours", summary: "We are open Monday through Friday, 9 - 4. Call us at 998.7971.", moreInformation: "Thank you for visiting our website. If you would like to contact us, please see the information below. For questions about volunteering: Jill@mcdowellsonoran.org. For questions about making a gift: Molly@mcdowellsonoran.org. For any other question: Nancy@mcdowellsonoran.org", important: false).save(failOnError: false)
+			new NewsItem(title: "Natural History I Class (March Session)", summary: "Open to the Public! An intimate look at the McDowells", moreInformation: "Natural History 1 consists of four 90-minute modules covering the geology of central Arizona, the ecology of the Sonoran Desert, and the plants and animals that are common in the Preserve. There will be two sessions in the morning and two in the afternoon with a long lunch break in between. Bring water, snacks, and plan to either bring your lunch or go off-campus. All of the material for the four sessions is available on the Conservancy website; please download a set before class if you want to take notes on the slides.", important: false).save(failOnError: false)
 		}
 	}
 	
 	void createHikes() {
+		println "Hikes: ${Hike.count()}"
 		if (!Hike.count()) {
+			println "Creating Hikes"
 			def lostDog = trailheadService.lostDog()
 			def gateway = trailheadService.gateway()
+			def brownsRanch = trailheadService.brownsRanch()
+			def tomsThumb = trailheadService.tomsThumb()
 			def bajadaNatureTrail = new Hike(
 				name: "Bajada Nature Trail",
 				description: "A barrier-free semi-loop trail with a smooth, solid surface; &frac14 and &frac12 mile loops available.",
@@ -389,6 +385,52 @@ class BootStrap {
 			lostDog.addToHikes(sunriseEast)
 			lostDog.addToHikes(ringtailLoop)
 			lostDog.save(failOnError: true)
+			def brownsRanchHike = new Hike(
+				name: "Brown's Ranch",
+				description: "Gentle out-and-back hike on a very wide trail with occasional sandy stretches; crosses one wash.",
+				noteworthyFeatures: "Ends at the location of Brown's Ranch, with many ranching structures still visible. This area was used for ranching from the later 1800s until the mid-1950s. Site of CNUW experiments to determine how best to restore this grazed area. Excellent wildflowers in spring.",
+				directions: "Follow the trail to the...",
+				kmlFileName: "BrownsRanch.kml",
+				elevationGain: 100,
+				roundTripDistance: 3.1
+			)
+			brownsRanch.addToHikes(brownsRanchHike)
+			brownsRanch.save(failOnError: true)
+			def marcusLandslide = new Hike(
+				name: "Marcus Landslide",
+				description: "Gentle out-and-back hike with optional small loop; a few moderate sections.",
+				noteworthyFeatures: "Interpretive geology trail starting at trailhead and ending beside or on top of the second largest landslide in AZ; remote area with many beautiful rock formations; excellent wildflowers in spring.",
+				directions: "Follow the trail to the...",
+				kmlFileName: "MarcusLandslide.kml",
+				elevationGain: 300,
+				roundTripDistance: 3.7
+			)
+			def tomsThumbEastEndLoop = new Hike(
+				name: "Tom's Thumb/East End Loop",
+				description: "Extremely challenging semi-loop hike with many very steep and loose sections; three major climbs.",
+				noteworthyFeatures: "Exceptional views throughout the hike; dramatic rock formations and changes in rock/trail composition in transition between granitic and metamorphic rock; changes in vegetation and wildflowers as elevation changes; seldom-used sections offer great solitude; crosses one of the few springs in the Preserve.",
+				directions: "Follow the trail to the...",
+				kmlFileName: "TomsThumbEastEndLoop.kml",
+				elevationGain: 2500,
+				roundTripDistance: 11.1
+			)
+			def lookoutViewpoint = new Hike(
+				name: "Lookout Viewpoint",
+				description: "Challenging out-and-back hike with many very steep and loose sections; spur trail to viewpoint is narrow and rocky.",
+				noteworthyFeatures: "Best viewpoint in the McDowell Mountains, with extensive views east and west from top of a cliff; trail crosses boundary between granite and metamorphic rock, with obvious differences in trail composition and nearby rock; spectacular rock formations; unusual vegetation and flowers found only at high elevation.",
+				directions: "Follow the trail to the...",
+				kmlFileName: "LookoutViewpoint.kml",
+				elevationGain: 1100,
+				roundTripDistance: 5.7
+			)
+			tomsThumb.addToHikes(marcusLandslide)
+			tomsThumb.addToHikes(tomsThumbEastEndLoop)
+			tomsThumb.addToHikes(lookoutViewpoint)
+			tomsThumb.save(failOnError: true)
 		}
 	}
+	
+	def destroy = {
+	}
+
 }
