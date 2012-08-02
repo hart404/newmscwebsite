@@ -5,13 +5,37 @@
 </head>
 <body>
 	<div id="gallery" class="mscGallery">
-		<img src="<g:createLinkTo dir='images/adspace' file='img_challenge.png'/>" longdesc="<g:createLink controller='event' action='challenge'/>">
-		<img src="<g:createLinkTo dir='images/adspace' file='img_poppies.png'/>" longdesc="<g:createLink controller='event' action='wildflowers'/>">
-		<img src="<g:createLinkTo dir='images/adspace' file='img_tomsthumb.png'/>" longdesc="<g:createLink controller='donate' action='index'/>">
 	</div>
 	<script>
+    	var data = [
+            {
+                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
+                image: '/newmscwebsite/images/adspace/img_challenge.png',
+                big: '/newmscwebsite/images/adspace/img_challenge.png',
+                link: '${serverPath}'
+            },
+            {
+                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
+                image: '/newmscwebsite/images/adspace/img_poppies.png',
+                big: '/newmscwebsite/images/adspace/img_poppies.png',
+                link: '${serverPath}'
+            },
+            {
+                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
+                image: '/newmscwebsite/images/adspace/img_tomsthumb.png',
+                big: '/newmscwebsite/images/adspace/img_tomsthumb.png',
+                link: '${serverPath}'
+            },
+            {
+                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
+                image: '/newmscwebsite/images/adspace/LR_100_4004.jpg',
+                big: '/newmscwebsite/images/adspace/LR_100_4004.jpg',
+                link: '${serverPath}'
+            }
+        ];
 		Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
 		$("#gallery").galleria({
+			dataSource: data,
 			showInfo: false,
 			transition: 'fade',
 			transitionSpeed: 1000,

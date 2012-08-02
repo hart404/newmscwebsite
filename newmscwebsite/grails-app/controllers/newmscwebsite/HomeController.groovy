@@ -13,7 +13,7 @@ class HomeController {
 
     def index = {
 		// Retrieve priority 1 events. That is, the ones that should be displayed on the home page
-		[events: Event.findAllByEventPriority(1), newsItems: NewsItem.findAllByImportant(true)]
+		[events: Event.findAllByEventPriority(1), newsItems: NewsItem.findAllByImportant(true), serverPath: grailsApplication.config.grails.serverURL]
 	}
 	
 }

@@ -388,7 +388,7 @@ class BootStrap {
 			def brownsRanchHike = new Hike(
 				name: "Brown's Ranch",
 				description: "Gentle out-and-back hike on a very wide trail with occasional sandy stretches; crosses one wash.",
-				noteworthyFeatures: "Ends at the location of Brown's Ranch, with many ranching structures still visible. This area was used for ranching from the later 1800s until the mid-1950s. Site of CNUW experiments to determine how best to restore this grazed area. Excellent wildflowers in spring.",
+				noteworthyFeatures: "Ends at the location of Brown's Ranch, with many ranching structures still visible. This area was used for ranching from the later 1800s until the mid-1950s. Site of Scottsdale Community College Center for Native and Urban Wildlife experiments to determine how best to restore this grazed area. Excellent wildflowers in spring.",
 				directions: "Follow the trail to the...",
 				kmlFileName: "BrownsRanch.kml",
 				elevationGain: 100,

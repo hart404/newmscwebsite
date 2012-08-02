@@ -135,7 +135,7 @@ grails.gorm.default.mapping = {
 
 grails.plugin.cloudfoundry.showStackTrace = true
 
-grails.serverURL="http://newmscwebsite.cloudfoundry.com"
+// grails.serverURL="http://newmscwebsite.cloudfoundry.com"
 
 
   
