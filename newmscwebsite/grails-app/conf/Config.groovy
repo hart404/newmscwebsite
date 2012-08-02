@@ -60,7 +60,7 @@ environments {
 		grails.serverURL = "http://localhost:8080/${appName}"
 	}
 	production {
-		grails.serverURL = "http://newmscwebsite.cloudfoundry.com/${appName}"
+		grails.serverURL = "http://newmscwebsite.cloudfoundry.com"
 	}
 }
 
@@ -90,8 +90,7 @@ log4j = {
     error   'org.mortbay.log'
 	
 	error	'org.codehaus.groovy.grails.plugins.springsecurity'
-	
-	info	'org.grails.s3'
+
 }
 
 // Added by the Spring Security Core plugin:

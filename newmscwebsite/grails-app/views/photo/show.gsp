@@ -11,7 +11,7 @@
 	</g:if>
 	<g:else>
 		<div>
-			<img src="<g:createLinkTo dir='${photo.path}' file='${photo.fileName}'/>"/>
+			<img src="${photo.source}"/>
 		</div>
 	</g:else>
 	<p class="bigp">Name: ${photo.fileName}</p>

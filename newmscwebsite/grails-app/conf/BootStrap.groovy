@@ -68,63 +68,63 @@ class BootStrap {
 			def formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm")
 			new Event(title: "Public Hike: Two Mountain Loop", shortDescription: "Two Mountain Loop",
 					moreInformation: "Two Mountain Loop. This 8 mile hike around Cone Mountain and Brown's Mountain reveals a wide variety of Sonoran Desert plants and rock formations. Little elevation change but many slippery ups and downs. Allow 5 hours. Bring lunch. Please arrive at the Brown's Ranch Trailhead by 8:45 am.",
-					startTime: formatter.parseDateTime("07/11/2012 9:00"),
+					startTime: formatter.parseDateTime("08/11/2012 9:00"),
 					eventPriority: 2, location: trailheadService.brownsRanch()).save(failOnError: true)
 			new Event(title: "Public Hike: All Things Arizona", shortDescription: "All Things Arizona",
 					moreInformation: "This hike on the Old Jeep Trail is a wonderful celebration of Arizona's 100th birthday and ties in beautifully with fourth grade Arizona heritage curriculum. Learn about the state flower, state tree, state bird, and more. This 4 mile hike on a trail that feels very remote and has beautiful views. Moderate uphill sections, some of it on rocky terrain. Allow 3 hours. Please arrive at the Lost Dog Wash Trailhead by 8:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime("07/12/2012 9:00"),
+					startTime: formatter.parseDateTime("08/12/2012 9:00"),
 					eventPriority: 2, location: trailheadService.lostDog()).save(failOnError: true)
 			new Event(title: "Public Hike: Hiking Equipment and Technique", shortDescription: "Hiking Equipment and Technique",
 					moreInformation: "Learn how to make your hiking experience more pleasurable with the proper equipment and supplies, how to pace yourself, and even learn the difference between a stick and a pole on this approximate 4 mile hike. Mostly gradual inclines with a couple of short steep areas. Allow 2 hours. Please arrive at Gateway Trailhead by 8:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime("07/19/2012 9:00"),
+					startTime: formatter.parseDateTime("08/19/2012 9:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Herpetology Survey Training", shortDescription: "Training for reptile portion of the flora & fauna survey",
 					moreInformation: "Dave Weber, Principal Investigator for the reptile & amphibian portion of the flora & fauna baseline survey, will be holding a training on safety and data collection methods. This is a mandatory training if you wish to participate in the reptile project. Location TBD",
-					startTime: formatter.parseDateTime("07/25/2012 10:00"),
+					startTime: formatter.parseDateTime("08/25/2012 10:00"),
 					eventPriority: 2).save(failOnError: true)
 			new Event(title: "First Friday Family Series", shortDescription: "Crawly Creatures of the Sonoran Desert",
 					moreInformation: "More reptiles, please! Ranger Amy Ford from the McDowell Mountain Regional Park next door brings her collection of snakes and desert tortoise to share with us. What a nice neighbor!",
-					startTime: formatter.parseDateTime("07/02/2012 16:30"),
+					startTime: formatter.parseDateTime("08/02/2012 16:30"),
 					eventPriority: 1, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
 					moreInformation: "'Plants and wildflowers of the Preserve.' Trailside Naturalist station at the jct. of the Bajada Nature Trail and amphitheater",
-					startTime: formatter.parseDateTime("07/06/2012 9:00"),
+					startTime: formatter.parseDateTime("08/06/2012 9:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
 					moreInformation: "'Plants and wildflowers of the Preserve.' Trailside Naturalist station at the jct. of the Bajada Nature Trail and amphitheater",
-					startTime: formatter.parseDateTime("07/10/2012 9:00"),
+					startTime: formatter.parseDateTime("08/10/2012 9:00"),
 					eventPriority: 1, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Public Hike: Wildflowers on the Old Jeep Trail", shortDescription: "Come see the preserve's wonderful display of wildflowers",
 					moreInformation: "Wildflowers on the Old Jeep Trail A 4 mile hike on a remote, peaceful trail with beautiful views and wildflower identification. Moderate uphill sections, some of it on rocky terrain. Allow 3 hours. Please arrive at the Lost Dog Wash Trailhead by 7:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime("07/04/2012 8:00"),
+					startTime: formatter.parseDateTime("08/04/2012 8:00"),
 					eventPriority: 2, location: trailheadService.lostDog()).save(failOnError: true)
 			new Event(title: "Public Hike: Marcus Landslide", shortDescription: "Witness the largest landslide in Arizona!",
 					moreInformation: "Marcus Landslide Pre-registration required. A moderate 4 mile hike to the second largest landslide in Arizona on the east side of East End mountain including a discussion of the geological history of the area. This 2 hour hike is suitable for all hikers. Please arrive at Brown`s Ranch Trailhead by 7:45 am. Maximum 20 people. Call Jill at 480-998-7971 x104 to pre-register. ",
-					startTime: formatter.parseDateTime("07/10/2012 8:00"),
+					startTime: formatter.parseDateTime("08/10/2012 8:00"),
 					eventPriority: 2, location: trailheadService.brownsRanch()).save(failOnError: true)
 			new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
 					moreInformation: "Stop by the Trailside Naturalist Station for a 'Taste of the Desert'. Master Steward Alice Demetra puts out a culinary spread of edible cacti. Learn about how you can incorporate these spiny plants into your diet. Trailside Naturalist station at jct. of Bajada Nature Trail and amphitheater.",
-					startTime: formatter.parseDateTime("07/17/2012 9:00"),
+					startTime: formatter.parseDateTime("08/17/2012 9:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Photo Workshop", shortDescription: "Photo Workshop Part I",
 					moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
-					startTime: formatter.parseDateTime("07/15/2012 17:00"),
+					startTime: formatter.parseDateTime("08/15/2012 17:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Photo Workshop", shortDescription: "Photo Workshop Part II",
 					moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
-					startTime: formatter.parseDateTime("07/17/2012 6:00"),
+					startTime: formatter.parseDateTime("08/17/2012 6:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Flying insect survey training", shortDescription: "Learn how to do real research into creepy crawlies",
 					moreInformation: "Presentation followed by in-the-field training led by Principal Investigator, Ron Rutowski. Location TBD. Please contact Lesley@mcdowellsonoran.org or at x 105 for details.",
-					startTime: formatter.parseDateTime("07/24/2012 10:00"),
+					startTime: formatter.parseDateTime("08/24/2012 10:00"),
 					eventPriority: 2, location: trailheadService.gateway()).save(failOnError: true)
 			new Event(title: "Public Hike: Wildflower Walk on Sunrise Trail", shortDescription: "Come see the preserve's wonderful display of wildflowers",
 					moreInformation: "Wildflower Walk on Sunrise Trail Join Botany Expert, Steve Jones and photographer/author of Wildflowers and More Marianne Skov Jensen as we hunt for wildflowers on the Sunrise Trail. Along the way, you`ll hear interesting tidbits about the wildflowers we find and also learn simple tips for taking better flower photos. A 3 mile hike on gently but steadily rising terrain, with a few steeper areas. Poles recommended. Allow 3 1/2 hours. Please arrive at Ringtail Trailhead by 7:45 am. Appropriate for children ages 8 and up",
-					startTime: formatter.parseDateTime("07/18/2012 8:00"),
+					startTime: formatter.parseDateTime("08/18/2012 8:00"),
 					eventPriority: 2, location: trailheadService.ringtail()).save(failOnError: true)
 			new Event(title: "Public Hike: Birding in the Preserve", shortDescription: "Join us for a light hike and learn about some of the preserve's birds.",
 					moreInformation: "Birding in the Preserve This 3 mile hike (it may be less depending on what we see) follows the Quartz Trail and the Paradise Trail up Ironwood Wash and allows for seeing and hearing a variety of desert birds. Allow 2 hours. Please arrive at the Quartz Trailhead by 7:45 am. Appropriate for ages 10 and up. Please note that this is a birding hike that involves lots of stopping and starting. Expect that you will spend 2/3 of the time stationary.",
-					startTime: formatter.parseDateTime("07/30/2012 8:00"),
+					startTime: formatter.parseDateTime("08/30/2012 8:00"),
 					eventPriority: 1, location: trailheadService.gateway()).save(failOnError: true)
 		}
 	}

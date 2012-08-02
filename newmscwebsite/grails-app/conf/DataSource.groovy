@@ -20,8 +20,9 @@ environments {
     }
     test {
         dataSource {
+			dialect = "org.hibernate.dialect.H2Dialect"
             dbCreate = "create-drop"
-            url = "jdbc:mysql://localhost/mscmsc"
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE"
         }
     }
     production {

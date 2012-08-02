@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest
 import com.drew.imaging.ImageMetadataReader
 import com.drew.metadata.Directory
 import com.drew.metadata.Metadata
-import com.drew.metadata.Tag
 import com.drew.metadata.exif.ExifIFD0Directory
 import com.drew.metadata.iptc.IptcDirectory
 import com.drew.metadata.jpeg.JpegDirectory
@@ -130,4 +129,5 @@ class PhotoController {
 		metadataMap["allKeywords"] = directory?.getString(IptcDirectory.TAG_KEYWORDS) ?: ""
 		// metadataMap["usageRights"] = directory?.getString(IptcDirectory.TAG_) ?: ""
 	}
+
 }

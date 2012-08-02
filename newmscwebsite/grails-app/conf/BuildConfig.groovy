@@ -27,8 +27,8 @@ grails.project.dependency.resolution = {
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 		compile "org.jadira.usertype:usertype.jodatime:1.9"
 		runtime 'mysql:mysql-connector-java:5.1.19'
-		// Add HSQLDB as a runtime dependency
-		runtime 'hsqldb:hsqldb:1.8.0.10'
+		compile 'net.java.dev.jets3t:jets3t:0.9.0'
+		compile 'org.apache.httpcomponents:httpclient:4.0-alpha4'
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"
