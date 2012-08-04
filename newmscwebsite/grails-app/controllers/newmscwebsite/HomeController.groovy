@@ -1,6 +1,6 @@
 package newmscwebsite
 
-import simple.cms.SCMSHTMLWidget
+import org.joda.time.LocalDate
 
 class HomeController {
 	
@@ -13,7 +13,9 @@ class HomeController {
 
     def index = {
 		// Retrieve priority 1 events. That is, the ones that should be displayed on the home page
-		[events: Event.findAllByEventPriority(1), newsItems: NewsItem.findAllByImportant(true), serverPath: grailsApplication.config.grails.serverURL]
+		def events = Event.findAllByEventPriority(1) as List
+		events = events.findAll { event -> event.startDate >= LocalDate.now()}
+		[events: events, newsItems: NewsItem.findAllByImportant(true)]
 	}
 	
 }

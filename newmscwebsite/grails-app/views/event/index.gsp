@@ -7,12 +7,12 @@
 	<g:javascript>
 		jQuery.ajaxSetup({
 			beforeSend: function() {
-				var el = $('#calendarSpinner');
-				el.css('visibility', 'visible');
+				var element = $('#calendarSpinner');
+				element.css('visibility', 'visible');
 			},
 			complete: function(){
-				var el = $('#calendarSpinner');
-				el.css('visibility', 'hidden');
+				var element = $('#calendarSpinner');
+				element.css('visibility', 'hidden');
 			},
 			success: function() {}
 		});

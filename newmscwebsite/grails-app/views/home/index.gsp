@@ -9,28 +9,28 @@
 	<script>
     	var data = [
             {
-                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
-                image: '/newmscwebsite/images/adspace/img_challenge.png',
-                big: '/newmscwebsite/images/adspace/img_challenge.png',
-                link: '${serverPath}'
+                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
+                image: 'images/adspace/img_challenge.png',
+                big: 'images/adspace/img_challenge.png',
+                link: "<g:createLink controller='event' action='challenge'/>"
             },
             {
-                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
-                image: '/newmscwebsite/images/adspace/img_poppies.png',
-                big: '/newmscwebsite/images/adspace/img_poppies.png',
-                link: '${serverPath}'
+                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
+                image: 'images/adspace/img_poppies.png',
+                big: 'images/adspace/img_poppies.png',
+                link: "<g:createLink controller='event' action='wildflowers'/>"
             },
             {
-                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
-                image: '/newmscwebsite/images/adspace/img_tomsthumb.png',
-                big: '/newmscwebsite/images/adspace/img_tomsthumb.png',
-                link: '${serverPath}'
+                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
+                image: 'images/adspace/img_tomsthumb.png',
+                big: 'images/adspace/img_tomsthumb.png',
+                link: "<g:createLink controller='donate' action='index'/>"
             },
             {
-                thumb: '/newmscwebsite/images/adspace/img_adspace-thumbnail-16x16.png',
-                image: '/newmscwebsite/images/adspace/LR_100_4004.jpg',
-                big: '/newmscwebsite/images/adspace/LR_100_4004.jpg',
-                link: '${serverPath}'
+                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
+                image: 'images/adspace/LR_100_4004.jpg',
+                big: 'images/adspace/LR_100_4004.jpg',
+                link: "<g:createLink controller='donate' action='index'/>"
             }
         ];
 		Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");

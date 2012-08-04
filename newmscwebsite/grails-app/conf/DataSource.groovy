@@ -2,6 +2,7 @@ dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
 	dialect = org.hibernate.dialect.MySQLDialect
+	dbCreate = "create-drop"
 }
 hibernate {
     cache.use_second_level_cache = true

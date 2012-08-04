@@ -13,12 +13,14 @@
 								<li><a href="#"><span>Nature Guides</span></a></li>
 								<li><a href="#"><span>Family Passport</span></a></li>
 								<li><a href="#"><span>Know Before You Go</span></a></li>
-							</ul></li>
+							</ul>
+						</li>
 						<li><a href="<g:createLink controller='trailhead' action='mapOfThePreserve'/>"><span>Trailheads & Directions</span></a></li>
 						<li><a href="#"><span>Recreation</span></a></li>
 						<li><a href="#"><span>Photo Gallery</span></a></li>
 					</ul>
-				</div></li>
+				</div>
+			</li>
 			<li><a
 				href="<g:createLink controller='aboutMSC' action='index' />"><span>About
 						Us</span></a></li>
@@ -32,13 +34,36 @@
 						<li><a href="#" class="parent"><span>Large Mammals</span></a></li>
 						<li><a href="#" class="parent"><span>Flora</span></a></li>
 					</ul>
-				</div></li>
+				</div>
+			</li>
 			<li><a
 				href="<g:createLink controller='volunteer' action='index' />"
 				class="parent"><span>Volunteer</span></a></li>
 			<li><a
 				href="<g:createLink controller='supportUs' action='index' />"
-				class="parent"><span>Support Us</span></a></li>
+				class="parent"><span>Support Us</span></a>
+			</li>
+			<sec:ifAnyGranted roles="ROLE_ADMIN" >
+			 <li><a href="#"><span>Admin</span></a>
+			     <div>
+                    <ul class="sub_menu">
+                        <li><a href="<g:createLink controller='person' action='list'/>"><span>Manage Users</span></a>
+                        </li>
+                        <li><a href="<g:createLink controller='photo' action='list'/>"><span>Photos</span></a>
+                            <ul class="sub_menu">
+                                <li><a href="<g:createLink controller='photo' action='list'/>"><span>Manage Photos</span></a></li>
+                                <li><a href="<g:createLink controller='photo' action='uploadPhotos'/>"><span>Upload Photos</span></a></li>
+                                <li><a href="<g:createLink controller='photo' action='deleteAllPhotos'/>"><span>Delete All Photos</span></a></li>
+                           </ul>
+                        </li>
+                        <li><a href="<g:createLink controller='event' action='list'/>"><span>Manage Events</span></a>
+                        </li>
+                        <li><a href="<g:createLink controller='adSpacePhoto' action='list'/>"><span>Manage Ad Space</span></a></li>
+                        <li><a href="<g:createLink uri='/searchable'/>"><span>Search</span></a></li>
+                    </ul>
+                 </div>
+			 </li>
+			</sec:ifAnyGranted>
 		</ul>
 	</div>
 </div>

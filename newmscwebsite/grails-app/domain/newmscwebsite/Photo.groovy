@@ -1,5 +1,8 @@
 package newmscwebsite
 
+/*
+ * Note: the URL for the photo is source + path + fileName
+ */
 class Photo {
 	
 	static searchable = [only: ['keywords', 'allKeywords', 'artist', 'fileName', 'originalFileName', 'usageRights']]
@@ -11,6 +14,7 @@ class Photo {
 	int height
 	int width
 	String source
+	String path
 	String fileName
 	String originalFileName
 	Date dateCreated
@@ -21,4 +25,14 @@ class Photo {
 		fileName(nullable: false)
 		usageRights(nullable: true)
     }
+	
+	def fullPath() {
+		def url = source + '/' + path + '/' + fileName
+		println url
+		url
+	}
+	
+	String toString() {
+		originalFileName
+	}
 }

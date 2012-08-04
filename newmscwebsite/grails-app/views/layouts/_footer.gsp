@@ -7,11 +7,11 @@
 		<li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'contactUs')}" class="parent"><span>Contact Us</span></a></li>
 		<li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'sitemap')}" class="parent"><span>Sitemap</span></a></li>
 		<sec:ifNotLoggedIn>
-			<li class="bottomMenuListItem"><a href="${createLink(controller: 'login')}" class="parent"><span>Steward Login</span></a></li>
+			<li class="bottomMenuListItem"><a href="${createLink(controller: 'login')}" class="parent"><span>Login</span></a></li>
 		</sec:ifNotLoggedIn>	
 		<sec:ifLoggedIn>
 			<li class="bottomMenuListItem"><a href="${createLink(controller: 'logout')}" class="parent"><span>Logout</span></a></li>
-			Welcome, <sec:loggedInUserInfo field="username" class="bottomMenuListItem"/>
+			<li class="bottomMenuListItem">Welcome, <sec:loggedInUserInfo field="username" class="bottomMenuListItem"/></li>
 		</sec:ifLoggedIn>	
 	</ul>
 </div>

@@ -210,11 +210,12 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .bottomMenu {
-	margin-left: 120px;
-	width: 960px;
+	margin-left: auto;
+	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 40px;
 	clear: both;
+	vertical-align:center;
 }
 
 .bottomMenu ul {
@@ -236,8 +237,18 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .galleria-thumbnails {
-	float: left;
-	margin-left: 150px;
+	float: right;
+}
+
+.galleria-thumbnails .galleria-image {
+    height: 20px;
+    width: 30px;
+    margin: 1px;
+    border: 1px solid rgb(242, 227, 188);
+    background-color: rgba(13, 92, 133, 0.2);
+    float: left;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
 .mscGallery {
@@ -412,6 +423,15 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	padding-left: 4px;
 	height: 687px;
 	background-color: rgb(255, 242, 212);
+    margin: 0;
+}
+
+.generalContainer {
+    float: right;
+    width: 100%;
+    padding: 0;
+    height: 687px;
+    background-color: rgb(255, 242, 212);
     margin: 0;
 }
 

@@ -16,9 +16,11 @@ import com.drew.metadata.iptc.IptcDirectory
 import com.drew.metadata.jpeg.JpegDirectory
 
 class PhotoController {
-	static final String DEFAULT_S3_SOURCE = 'https://s3.amazonaws.com/conservancyImages/'
+	static final String DEFAULT_S3_SOURCE = 'https://s3.amazonaws.com'
+	static final String DEFAULT_PATH = "conservancyImages"
 	
 	def amazonS3Service
+	def searchableService
 	
 	// Remember to terminate the path with a '/'
 	def rootDirectory = System.getProperty("user.home")
@@ -28,7 +30,10 @@ class PhotoController {
 	}
 	
 	def show = {
-		[photo: Photo.get(params.id)]
+		println "Photo ID: ${params.id}"
+		def photoToShow = Photo.get(params.id)
+		assert photoToShow != null
+		[photo: photoToShow]
 	}
 
 	def upload = {
@@ -38,7 +43,7 @@ class PhotoController {
 			File uploaded = createTemporaryFile()
 			InputStream inputStream = selectInputStream(request)
 			uploadFile(inputStream, uploaded)
-			createPhotoForFile(uploaded, DEFAULT_S3_SOURCE + uploaded.name, params.qqfile)
+			createPhotoForFile(uploaded, DEFAULT_S3_SOURCE, DEFAULT_PATH, uploaded.name, params.qqfile)
 			transferFileToS3(uploaded)
 			return render(text: [success:true] as JSON, contentType:'text/json')
 		} catch (FileUploadException e) {
@@ -92,7 +97,7 @@ class PhotoController {
 		}
 	}
 
-	private void createPhotoForFile(File source, String sourceURL, String originalFileName) {
+	private void createPhotoForFile(File source, String sourceURL, String path, String fileName, String originalFileName) {
 		Metadata metadata = ImageMetadataReader.readMetadata(source)
 		def metadataMap = [path: defaultUploadDirectory, fileName: source.getName()]
 		addJPEGItems(metadataMap, metadata)
@@ -100,6 +105,8 @@ class PhotoController {
 		addIPTCItems(metadataMap, metadata)
 		def photo = new Photo(metadataMap)
 		photo.source = sourceURL
+		photo.path = path
+		photo.fileName = fileName
 		photo.originalFileName = originalFileName
 		photo.save(failOnError: true)
 	}
@@ -128,6 +135,14 @@ class PhotoController {
 		metadataMap["keywords"] = (directory?.getStringArray(IptcDirectory.TAG_KEYWORDS) ?: []) as List
 		metadataMap["allKeywords"] = directory?.getString(IptcDirectory.TAG_KEYWORDS) ?: ""
 		// metadataMap["usageRights"] = directory?.getString(IptcDirectory.TAG_) ?: ""
+	}
+	
+	def deleteAllPhotos() {
+		Photo.where { }.deleteAll()
+	}
+	
+	def photosWithKeywords(String keywords) {
+		def results = Photo.search(keywords)
 	}
 
 }

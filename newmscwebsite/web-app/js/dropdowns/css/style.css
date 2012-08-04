@@ -18,12 +18,13 @@ ul.dropdown li.hover a              { color: rgb(242, 227, 188); }
 /* 
 	LEVEL TWO
 */
-ul.dropdown ul 						{ width: 220px; visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 100; background: rgb(96, 87, 82); }
-ul.dropdown ul li 					{ display: block; list-style: none; font-weight: normal; z-index: 100; color: white; }
+ul.dropdown ul 						{ width: 100%; visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 100; background: rgb(96, 87, 82); }
+ul.dropdown ul li 					{ display: block; list-style: none; font-weight: normal; z-index: 100; color: white; border-right: none; }
 									  
                                     /* IE 6 & 7 Needs Inline Block */
 ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block;  text-decoration: none; z-index: 100; text-align: left; } 
 ul.dropdown ul li a:hover           { color: white; } 
+ul.dropdown ul li:last-child        { border-right: none; } /* Doesn't work in IE */
 
 /* 
 	LEVEL THREE
