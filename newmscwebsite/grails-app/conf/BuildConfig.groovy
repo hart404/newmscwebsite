@@ -28,7 +28,7 @@ grails.project.dependency.resolution = {
 		compile "org.jadira.usertype:usertype.jodatime:1.9"
 		runtime 'mysql:mysql-connector-java:5.1.19'
 		compile 'net.java.dev.jets3t:jets3t:0.9.0'
-		compile 'org.apache.httpcomponents:httpclient:4.0-alpha4'
+		compile 'org.apache.httpcomponents:httpclient:4.1.2'
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

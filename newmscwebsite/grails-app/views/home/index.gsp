@@ -7,44 +7,26 @@
 	<div id="gallery" class="mscGallery">
 	</div>
 	<script>
-    	var data = [
-            {
-                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
-                image: 'images/adspace/img_challenge.png',
-                big: 'images/adspace/img_challenge.png',
-                link: "<g:createLink controller='event' action='challenge'/>"
-            },
-            {
-                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
-                image: 'images/adspace/img_poppies.png',
-                big: 'images/adspace/img_poppies.png',
-                link: "<g:createLink controller='event' action='wildflowers'/>"
-            },
-            {
-                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
-                image: 'images/adspace/img_tomsthumb.png',
-                big: 'images/adspace/img_tomsthumb.png',
-                link: "<g:createLink controller='donate' action='index'/>"
-            },
-            {
-                thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
-                image: 'images/adspace/LR_100_4004.jpg',
-                big: 'images/adspace/LR_100_4004.jpg',
-                link: "<g:createLink controller='donate' action='index'/>"
-            }
-        ];
-		Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
-		$("#gallery").galleria({
-			dataSource: data,
-			showInfo: false,
-			transition: 'fade',
-			transitionSpeed: 1000,
-			showImagenav: false,
-			autoplay: 5000,
-			width: 1194,
-			height: 400,
-			imageCrop: true
-		});
+    	var data = []
+        jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto'
+            action='adSpacePhotos' />",success:function(json, textStatus){loadAdSpace(json);},error:function(XMLHttpRequest,textStatus,errorThrown){console.log(errorThrown)}});
+
+        function loadAdSpace(json) {
+            var data = eval(json);
+            console.log(data);
+        	Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
+				$("#gallery").galleria({
+					dataSource: data,
+					showInfo: false,
+					transition: 'fade',
+					transitionSpeed: 1000,
+					showImagenav: false,
+					autoplay: 5000,
+					width: 1194,
+					height: 400,
+					imageCrop: true
+				});
+        };
     </script>
     <div class="homePageItems">
 		<div class="homePageItem marginRight">

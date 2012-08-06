@@ -3,20 +3,7 @@
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head profile="http://www.w3.org/2005/10/profile">
-	<title><g:layoutTitle default="McDowell Sonoran Conservancy" /></title>
-	<link rel="icon" type="image/png" href="<g:createLinkTo dir='/images/layout' file='img_cactus-16x16.png'/>" />
-	<link rel="shortcut icon" href="<g:createLinkTo dir='/images/layout' file='img_cactus-16x16.png'/>" />
-	<link rel="stylesheet" href="<g:createLinkTo dir='css' file='mscmain.css' />" />
-	<link rel="stylesheet" href="<g:createLinkTo dir='/js/dropdowns/css' file='style.css'/>" type="text/css" media="screen, projection"/>
-    <g:javascript library="jquery" plugin="jquery"/>    
-    <r:layoutResources/>
-	<!--[if lte IE 7]>
-		<link rel="stylesheet" type="text/css" href="<g:createLinkTo dir='/js/dropdowns/css' file='ie.css'/>" media="screen" />
-	<![endif]-->	
-	<script type="text/javascript" src="<g:createLinkTo dir='/js/dropdowns/js' file='jquery.dropdownPlain.js'/>"></script>
-	<script type="text/javascript" src="<g:createLinkTo dir='/js/galleria' file='galleria-1.2.6.min.js'/>"></script>
-    <script type="text/javascript" src="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/js' file='jquery-ui-1.8.21.custom.min.js'/>"></script>
-	<link rel="stylesheet" type="text/css" href="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/css/custom-theme' file='jquery-ui-1.8.21.custom.css'/>"/>
+    <g:render template="/layouts/commonHead" />
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
 	<g:layoutHead />
 	<ga:trackPageview />

@@ -1,9 +1,11 @@
 import newmscwebsite.Activity
+import newmscwebsite.AdSpacePhoto
 import newmscwebsite.Amenity
 import newmscwebsite.Event
 import newmscwebsite.GeographicCoordinates
 import newmscwebsite.Hike
 import newmscwebsite.NewsItem
+import newmscwebsite.Photo
 import newmscwebsite.SecRole
 import newmscwebsite.SecUser
 import newmscwebsite.SecUserSecRole
@@ -27,6 +29,7 @@ class BootStrap {
 		createEvents()
 		createNews()
 		createHikes()
+		createAdSpace()
 	}
 
 	void createRoles() {
@@ -427,6 +430,30 @@ class BootStrap {
 			tomsThumb.addToHikes(tomsThumbEastEndLoop)
 			tomsThumb.addToHikes(lookoutViewpoint)
 			tomsThumb.save(failOnError: true)
+		}
+	}
+	
+	def createAdSpace() {
+		if (!AdSpacePhoto.count()) {
+			println "Creating Adspace Images"
+			def serverURL = "http://newmscwebsite.cloudfoundry.com"
+			def adSpacePath = "images/adspace" 
+			def wildflowers = new Photo(source: serverURL, path: adSpacePath, originalFileName: "img_poppies.jpg", fileName: "img_poppies.jpg", width: 1194, height: 403, keywords: ["adspace"], allKeywords: "adspace", artist: "Phil", copyright: "None")
+			wildflowers.save(failOnError: true, flush: true)
+			def challenge = new Photo(source: serverURL, path: adSpacePath, originalFileName: "img_challenge.jpg", fileName: "img_challenge.jpg", width: 1194, height: 403, keywords: ["adspace"], allKeywords: "adspace", artist: "Phil", copyright: "None")
+			challenge.save(failOnError: true, flush: true)
+			def tomsThumb = new Photo(source: serverURL, path: adSpacePath, originalFileName: "img_tomsthumb.jpg", fileName: "img_tomsthumb.jpg", width: 1194, height: 403, keywords: ["adspace"], allKeywords: "adspace", artist: "Phil", copyright: "None")
+			tomsThumb.save(failOnError: true, flush: true)
+			def donate = new Photo(source: serverURL, path: adSpacePath, originalFileName: "LR_100_4004.jpg", fileName: "LR_100_4004.jpg", width: 936, height: 288, keywords: ["adspace"], allKeywords: "adspace", artist: "Barry White", copyright: "All Rights Reserved")
+			donate.save(failOnError: true, flush: true)
+			def wildflowerAd = new AdSpacePhoto(title: "Wildflowers", link: "event/wildflowers", photo: wildflowers)
+			wildflowerAd.save(failOnError: true, flush: true)
+			def challengeAd = new AdSpacePhoto(title: "Challenge", link: "event/challenge", photo: challenge)
+			challengeAd.save(failOnError: true, flush: true)
+			def tomsThumbAd = new AdSpacePhoto(title: "Toms Thumb", link: "donate/index", photo: tomsThumb)
+			tomsThumbAd.save(failOnError: true, flush: true)
+			def donateAd = new AdSpacePhoto(title: "Donate", link: "donate/index", photo: donate)
+			donateAd.save(failOnError: true, flush: true)
 		}
 	}
 	

@@ -5,7 +5,7 @@ package newmscwebsite
  */
 class Photo {
 	
-	static searchable = [only: ['keywords', 'allKeywords', 'artist', 'fileName', 'originalFileName', 'usageRights']]
+	static searchable = [only: ['keywords', 'allKeywords', 'artist', 'source', 'path', 'fileName', 'originalFileName', 'usageRights', 'width', 'height']]
 	
 	List<String> keywords
 	String allKeywords

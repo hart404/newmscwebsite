@@ -141,8 +141,11 @@ class PhotoController {
 		Photo.where { }.deleteAll()
 	}
 	
-	def photosWithKeywords(String keywords) {
-		def results = Photo.search(keywords)
+	def searchForPhotos() {
+		def keywords = params["keywords"]
+		params.max = 5
+		def results = Photo.search(keywords, params)
+		render(template: "/photo/photoSearchList", model: ["searchResult": results])
 	}
 
 }

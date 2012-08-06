@@ -427,9 +427,8 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .generalContainer {
-    float: right;
-    width: 100%;
-    padding: 0;
+    width: 1154px;
+    padding: 20px;
     height: 687px;
     background-color: rgb(255, 242, 212);
     margin: 0;
