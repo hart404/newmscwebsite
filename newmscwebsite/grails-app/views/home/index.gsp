@@ -7,26 +7,27 @@
 	<div id="gallery" class="mscGallery">
 	</div>
 	<script>
-    	var data = []
-        jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto'
-            action='adSpacePhotos' />",success:function(json, textStatus){loadAdSpace(json);},error:function(XMLHttpRequest,textStatus,errorThrown){console.log(errorThrown)}});
-
-        function loadAdSpace(json) {
-            var data = eval(json);
-            console.log(data);
-        	Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
-				$("#gallery").galleria({
-					dataSource: data,
-					showInfo: false,
-					transition: 'fade',
-					transitionSpeed: 1000,
-					showImagenav: false,
-					autoplay: 5000,
-					width: 1194,
-					height: 400,
-					imageCrop: true
-				});
-        };
+	    function loadAdSpace(json) {
+	        var data = eval(json);
+	        console.log(data);
+	        console.log(json);
+	        Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
+	        $("#gallery").galleria({
+	            dataSource: data,
+	            showInfo: false,
+	            transition: 'fade',
+	            transitionSpeed: 1000,
+	            showImagenav: false,
+	            autoplay: 5000,
+	            width: 1194,
+	            height: 400,
+	            imageCrop: true
+	        });
+	    };
+	</script>
+	<script>
+        jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto' action='adSpacePhotos' />", 
+            success:function(json, textStatus){loadAdSpace(json);}, error:function(XMLHttpRequest,textStatus,errorThrown){console.log(errorThrown)}});
     </script>
     <div class="homePageItems">
 		<div class="homePageItem marginRight">

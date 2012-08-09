@@ -9,24 +9,30 @@ class AdSpacePhotoController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	def adSpacePhotos() {
-		def photos = AdSpacePhoto.where {displayStartDate >= LocalDate.now() && displayEndDate <= LocalDate.now()}
-		photos = photos as List
-		renderPhotosAsJSON(photos)
+		def photos = AdSpacePhoto.list()
+		def yesterday = LocalDate.now().minusDays(1)
+		def today = LocalDate.now()
+		photos = photos.findAll { photo -> photo.displayStartDate.isAfter(yesterday) && today.isBefore(photo.displayEndDate)}
+		render(contentType: "text/json") {
+			renderPhotosAsJSON(photos)
+		}
 	}
 	
-	def renderPhotosAsJSON(photos) {
+	def renderPhotosAsJSON(adSpacePhotos) {
 		def result = []
-		photos.each { photo ->
+		adSpacePhotos.each { adSpacePhoto ->
+			def photo = adSpacePhoto.photo
 			def map = [
-				thumb: '/images/adspace/img_adSpace-thumbnail-17x17.png',
-				image: "/${photo.path}/${photo.fileName}",
-				title: "${photo.title}",
-				description: "${photo.description}",
-				link: "${grailsApplication.config.grails.serverURL}}",
+				thumb: 'images/adspace/img_adspace-thumbnail-16x16.png',
+				image: "${photo.fullPath()}",
+				title: "${adSpacePhoto.title}",
+				description: "${adSpacePhoto.description}",
+				link: "${adSpacePhoto.link}",
 			]			
 			result << map
 		}
-		result as JSONArray
+		result
+		
 	}
 	
 	def index() {

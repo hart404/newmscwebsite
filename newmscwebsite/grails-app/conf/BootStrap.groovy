@@ -432,8 +432,9 @@ class BootStrap {
 			tomsThumb.save(failOnError: true)
 		}
 	}
-	
+	 
 	def createAdSpace() {
+		println "Ad Space Photos: ${AdSpacePhoto.count()}"
 		if (!AdSpacePhoto.count()) {
 			println "Creating Adspace Images"
 			def serverURL = "http://newmscwebsite.cloudfoundry.com"

@@ -31,5 +31,12 @@ grails.project.dependency.resolution = {
 		compile 'net.java.dev.jets3t:jets3t:0.9.0'
 		compile 'org.apache.httpcomponents:httpclient:4.1.2'
 	}
+	
+	plugins {
+		build(":tomcat:$grailsVersion",
+			  ":release:1.0.0") {
+			export = false
+		}
+	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

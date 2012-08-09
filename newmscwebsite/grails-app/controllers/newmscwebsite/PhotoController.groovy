@@ -108,7 +108,11 @@ class PhotoController {
 		photo.path = path
 		photo.fileName = fileName
 		photo.originalFileName = originalFileName
-		photo.save(failOnError: true)
+		println "Size: ${photo.allKeywords.size()} All Keywords: ${photo.allKeywords}"
+		def savedPhoto = photo.save()
+		if (savedPhoto == null) {
+			log.error("Problem uploading photo: ${photo.originalFileName}, ${photo.allKeywords}")
+		}
 	}
 	
 	private void addJPEGItems(metadataMap, metadata) {

@@ -26,6 +26,10 @@ class Photo {
 		usageRights(nullable: true)
     }
 	
+	static mapping = {
+		allKeywords type: "text"
+	}
+	
 	def fullPath() {
 		def url = source + '/' + path + '/' + fileName
 		println url
