@@ -30,14 +30,12 @@ class PhotoController {
 	}
 	
 	def show = {
-		println "Photo ID: ${params.id}"
 		def photoToShow = Photo.get(params.id)
 		assert photoToShow != null
 		[photo: photoToShow]
 	}
 
 	def upload = {
-		println "Root Directory: ${rootDirectory}"	
 		try {
 			createUploadDirectory()
 			File uploaded = createTemporaryFile()
@@ -151,5 +149,11 @@ class PhotoController {
 		def results = Photo.search(keywords, params)
 		render(template: "/photo/photoSearchList", model: ["searchResult": results])
 	}
+	
+	def list() {
+		params.max = Math.min(params.max ? params.int('max') : 5, 100)
+		[photoInstanceList: Photo.list(params), photoInstanceTotal: Photo.count()]
+	}
+
 
 }
