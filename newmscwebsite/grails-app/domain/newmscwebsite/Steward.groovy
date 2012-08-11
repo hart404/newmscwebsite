@@ -1,6 +1,6 @@
 package newmscwebsite
 
-import groovy.transform.InheritConstructors
+import simple.cms.SCMSPhoto
 
 
 
@@ -9,7 +9,7 @@ class Steward extends Person {
 	String emergencyContact
 	String emergencyRelationship
 	String emergencyPhone
-	Photo photoLocation
+	SCMSPhoto photoLocation
 	boolean masterSteward = false
 	String CLTPosition = ""
 	int classNumber

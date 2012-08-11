@@ -5,6 +5,8 @@ import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
+import simple.cms.SCMSPhoto
+
 
 class Event {
 	String title
@@ -18,19 +20,19 @@ class Event {
 	// Priority of 1 means event will be displayed on home page
 	int eventPriority = 10
 	Trailhead location
-	Photo mainPhoto
+	SCMSPhoto mainPhoto
 	
 	static transients = ['calendarIcon']
 	
 	List<Category> categories = []
 	List<Person> attendees = []
-	List<Photo> photos
-	List<Photo> additionalPhotos = []
+	List<SCMSPhoto> photos
+	List<SCMSPhoto> additionalPhotos = []
 	static hasMany = [
 		categories: Category, 
 		attendees: Person, 
-		photos: Photo,
-		additionalPhotos: Photo
+		photos: SCMSPhoto,
+		additionalPhotos: SCMSPhoto
 	]
 	
     static constraints = {

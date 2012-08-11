@@ -53,8 +53,6 @@ class TrailheadController {
 		def coordinatesInstance = new GeographicCoordinates(params)
 		locationInstance.address = addressInstance
 		locationInstance.coordinates = coordinatesInstance
-		println params
-		println locationInstance
         if (locationInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'location.label', default: 'Location'), locationInstance.id])}"
             redirect(action: "show", id: locationInstance.id)
