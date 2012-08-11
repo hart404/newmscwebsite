@@ -104,6 +104,7 @@ grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptU
 grails.plugins.springsecurity.interceptUrlMap = [
 	'/**':			['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
+grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 
 grails {
 	mail {

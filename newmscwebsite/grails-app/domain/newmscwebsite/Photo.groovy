@@ -32,7 +32,6 @@ class Photo {
 	
 	def fullPath() {
 		def url = source + '/' + path + '/' + fileName
-		println url
 		url
 	}
 	

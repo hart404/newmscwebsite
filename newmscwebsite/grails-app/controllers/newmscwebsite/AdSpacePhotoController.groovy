@@ -45,7 +45,6 @@ class AdSpacePhotoController {
 	}
 
 	def create() {
-		println params
 		[adSpacePhotoInstance: new AdSpacePhoto(params)]
 	}
 

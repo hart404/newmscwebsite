@@ -106,7 +106,6 @@ class PhotoController {
 		photo.path = path
 		photo.fileName = fileName
 		photo.originalFileName = originalFileName
-		println "Size: ${photo.allKeywords.size()} All Keywords: ${photo.allKeywords}"
 		def savedPhoto = photo.save()
 		if (savedPhoto == null) {
 			log.error("Problem uploading photo: ${photo.originalFileName}, ${photo.allKeywords}")

@@ -38,7 +38,6 @@ class EventController {
 			monthNumber--
 		}
 		def generator = new DateGenerator(monthNumber, year, eventService)
-		println year + " " + monthNumber
 		render(template:"/event/calendarTemplate", model:[rows: generator.getCalendarRows(), year: generator.getYear(), month: generator.getMonthName(), monthNumber: generator.getMonthNumber()])		
 	}
 
@@ -53,7 +52,6 @@ class EventController {
 			monthNumber++
 		}
 		def generator = new DateGenerator(monthNumber, year, eventService)
-		println year + " " + monthNumber
 		render(template:"/event/calendarTemplate", model:[rows: generator.getCalendarRows(), year: generator.getYear(), month: generator.getMonthName(), monthNumber: generator.getMonthNumber()])		
 	}
 	
@@ -77,14 +75,12 @@ class EventController {
 
     def create = {
         def eventInstance = new Event()
-		println params
         eventInstance.properties = params
         return [eventInstance: eventInstance]
     }
 
     def save = {
         def eventInstance = new Event(params)
-		println params
         if (eventInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])}"
             redirect(action: "show", id: eventInstance.id)

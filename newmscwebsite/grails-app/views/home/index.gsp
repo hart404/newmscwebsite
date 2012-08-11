@@ -8,9 +8,11 @@
 	</div>
 	<script>
 	    function loadAdSpace(json) {
+	    	if (typeof console == "undefined" || typeof console.log == "undefined") 
+	    	{
+	    	   var console = { log: function() {} }; 
+	    	}
 	        var data = eval(json);
-	        console.log(data);
-	        console.log(json);
 	        Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
 	        $("#gallery").galleria({
 	            dataSource: data,
@@ -26,7 +28,7 @@
 	    };
 	</script>
 	<script>
-        jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto' action='adSpacePhotos' />", 
+       jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto' action='adSpacePhotos' />", 
             success:function(json, textStatus){loadAdSpace(json);}, error:function(XMLHttpRequest,textStatus,errorThrown){console.log(errorThrown)}});
     </script>
     <div class="homePageItems">
