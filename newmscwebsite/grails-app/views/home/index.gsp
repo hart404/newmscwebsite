@@ -41,8 +41,7 @@
 				    <div class="innerGlow">
                     </div>
 					<div class="imageText">
-						<p>The McDowell Sonoran Conservancy is a non-profit conservation organization that engages the community to protect the McDowell Sonoran Preserve.  
-						Your support will ensure that the Preserve continues to be a natural open space to visit and enjoy, as well as a permanent sanctuary for wildlife.</p>
+						<p><scms:htmlWidget widget="${donateText}" /></p>
 					</div>
 					<div class="imageButton">
 						<img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/>

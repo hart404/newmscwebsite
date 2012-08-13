@@ -104,7 +104,6 @@ grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptU
 grails.plugins.springsecurity.interceptUrlMap = [
 	'/**':			['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
-grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 
 grails {
 	mail {
@@ -136,7 +135,7 @@ grails.gorm.default.mapping = {
 
 grails.plugin.cloudfoundry.showStackTrace = true
 
-// grails.serverURL="http://newmscwebsite.cloudfoundry.com"
+grails.serverURL="http://newmscwebsite.cloudfoundry.com"
 
 
   

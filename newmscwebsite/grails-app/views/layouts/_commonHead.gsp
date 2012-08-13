@@ -9,7 +9,8 @@
 <![endif]-->    
 <g:javascript library="jquery" plugin="jquery"/>    
 <r:layoutResources/>
-<gui:resources components="richEditor, datePicker, dialog"/>
+<ckeditor:resources/>
+<gui:resources components="richEditor,datePicker,dialog"/>
 <script type="text/javascript" src="<g:createLinkTo dir='/js/dropdowns/js' file='jquery.dropdownPlain.js'/>"></script>
 <script type="text/javascript" src="<g:createLinkTo dir='/js/galleria' file='galleria-1.2.6.min.js'/>"></script>
 <script type="text/javascript" src="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/js' file='jquery-ui-1.8.21.custom.min.js'/>"></script>
