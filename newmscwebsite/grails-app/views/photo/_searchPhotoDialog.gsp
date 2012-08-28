@@ -39,6 +39,13 @@
                 $("#dialog-form").dialog("open");
                 return false;
             });
+
+        $("#dialog-form").keydown(function (event) {
+            if (event.keyCode == 13) {
+                $(this).parent()
+                       .find("button:eq(0)").trigger("click");
+            }
+        });
     });
 
     function searchForKeywords(keywords, offset) {

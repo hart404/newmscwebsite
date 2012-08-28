@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="container">
-	<img class="logo" alt="logo" src="<g:resource dir='images/layout' file='img_logo_rgb_for-web.png'/>">
+	<img class="logo" alt="logo" src="<g:resource dir='images/layout' file='img_logo_rgb_for-web.png'/>" />
 	<g:layoutBody />
 	<g:render template="/layouts/footer"/>
 </div>

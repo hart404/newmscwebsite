@@ -20,6 +20,7 @@
 		// Global variable to hold on to selections
 		var currentDateSelections = [];
 		var isMouseDown = false;
+		var ajaxMode = "afterToday";   // Either "afterToday" or "dateAndCategory"
 		
 		function calendarDragStart(event, year, monthNumber, day, selectedDate) {
 			isMouseDown = true;
@@ -48,28 +49,77 @@
 		}
 		
 		function getEvents() {
-			var requestedDatesString = '{"dates": [';
-			for (var selection in currentDateSelections) {
-				requestedDatesString += '{"year":';
-				requestedDatesString += currentDateSelections[selection][0];
-				requestedDatesString += ', "monthNumber":';
-				requestedDatesString += currentDateSelections[selection][1];
-				requestedDatesString += ', "day":';
-				requestedDatesString += currentDateSelections[selection][2];
-				requestedDatesString += '}';
-				if (selection != currentDateSelections.length - 1) {
-					requestedDatesString += ',';
-				}
-			}
-			requestedDatesString += ']}';
-			jQuery.ajax({type:'POST',data:{'dates': requestedDatesString}, url:"<g:createLink
+		    ajaxMode = "dateAndCategory";
+			var requestedDates = getRequestedDates();
+			var requestedCategories = getRequestedCategories();
+			jQuery.ajax({type:'POST',data:{'dates': requestedDates, 'categories': requestedCategories, 'offset': 0, 'max': ${max}}, url:"<g:createLink
 			controller='event' action='getEventsForDates' />",success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
 		}
 		
+        function getRequestedDates() {
+            var requestedDatesString = '{"dates": [';
+            for (var selection in currentDateSelections) {
+                requestedDatesString += '{"year":';
+                requestedDatesString += currentDateSelections[selection][0];
+                requestedDatesString += ', "monthNumber":';
+                requestedDatesString += currentDateSelections[selection][1];
+                requestedDatesString += ', "day":';
+                requestedDatesString += currentDateSelections[selection][2];
+                requestedDatesString += '}';
+                if (selection != currentDateSelections.length - 1) {
+                    requestedDatesString += ',';
+                }
+            }
+            requestedDatesString += ']}';
+            return requestedDatesString;
+        }
+        
+		function getRequestedCategories() {
+		    var requestedCategories = '';
+		    if ($("#family").attr("checked")) {
+		        requestedCategories += '"family"';
+		    }
+		    if ($("#fitness").attr("checked")) {
+		        if (requestedCategories.length > 0) requestedCategories += ', ';
+                requestedCategories += '"fitness"';
+            }
+            if ($("#hike").attr("checked")) {
+                if (requestedCategories.length > 0) requestedCategories += ', ';
+                requestedCategories += '"hike"';
+            }
+            if ($("#classOrLecture").attr("checked")) {
+                if (requestedCategories.length > 0) requestedCategories += ', ';
+                requestedCategories += '"classOrLecture"';
+            }
+            if ($("#specialEvent").attr("checked")) {
+                if (requestedCategories.length > 0) requestedCategories += ', ';
+                requestedCategories += '"specialEvent"';
+            }
+            if ($("#volunteerEvent").attr("checked")) {
+                if (requestedCategories.length > 0) requestedCategories += ', ';
+                requestedCategories += '"volunteerEvent"';
+            }
+            return '{"categories": [' + requestedCategories + "]}";
+		}
+		
 		function calendarResetToToday() {
+		    ajaxMode = "afterToday";
 			clearSelections();
+			var requestedCategories = getRequestedCategories();
 			jQuery.ajax({type:'POST',url:"<g:createLink controller='event'
-			action='getEventsAfterToday' />",success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+			action='getEventsAfterToday' />", data: {'categories': requestedCategories, 'offset': 0, 'max': ${max}}, success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+		}
+		
+		function findEvents(offset, max) {
+		    var requestedDates = getRequestedDates();
+            var requestedCategories = getRequestedCategories();
+		    if (ajaxMode == "afterToday") {
+		        jQuery.ajax({type:'POST',url:"<g:createLink controller='event'
+                action='getEventsAfterToday' />", data: {'categories': requestedCategories, 'offset': offset, 'max': max}, success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+            } else {
+	            jQuery.ajax({type:'POST',data:{'dates': requestedDates, 'categories': requestedCategories, 'offset': offset, 'max': max}, url:"<g:createLink
+	            controller='event' action='getEventsForDates' />",success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});                
+            }
 		}
 		
 		function clearSelections() {
@@ -78,6 +128,13 @@
 			}
 			currentDateSelections = [];
 		}	
+		
+		function setCheckboxes() {
+		    var checkboxes = ["#family", "#fitness", "#hike", "#classOrLecture", "#specialEvent", "#volunteerEvent"];
+		    for (index in checkboxes) {
+		        $(checkboxes[index]).attr('checked', true);
+		    }
+		}
 		
 		function deselectAll() {
 			if (window.getSelection) {
@@ -107,27 +164,27 @@
 			<div class="homePageSubItem">
 				<h2 class="buffText">Event Type</h2>
 				<p class="bigp">
-					<g:checkBox name="family" value="${true}" />
+					<g:checkBox name="family" value="${true}" onclick='getEvents()' />
 					Family
 				</p>
 				<p class="bigp">
-					<g:checkBox name="fitness" value="${true}" />
+					<g:checkBox name="fitness" value="${true}" onclick='getEvents()' />
 					Fitness
 				</p>
 				<p class="bigp">
-					<g:checkBox name="hikes" value="${true}" />
+					<g:checkBox name="hike" value="${true}" onclick='getEvents()' />
 					Hikes
 				</p>
 				<p class="bigp">
-					<g:checkBox name="classesLectures" value="${true}" />
+					<g:checkBox name="classOrLecture" value="${true}" onclick='getEvents()' />
 					Classes/Lectures
 				</p>
 				<p class="bigp">
-					<g:checkBox name="specialEvents" value="${true}" />
+					<g:checkBox name="specialEvent" value="${true}" onclick='getEvents()' />
 					Special Events
 				</p>
 				<p class="bigp">
-					<g:checkBox name="volunteerEvents" value="${true}" />
+					<g:checkBox name="volunteerEvent" value="${true}" onclick='getEvents()' />
 					Volunteer Events
 				</p>
 			</div>

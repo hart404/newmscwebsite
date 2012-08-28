@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="mainLayout">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -17,7 +17,7 @@
 			</ul>
 		</div>
 		<div id="show-person" class="content scaffold-show" role="main">
-			<h1>Show Dynamic Lead</h1>
+			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -41,6 +41,42 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${personInstance?.firstName}">
+				<li class="fieldcontain">
+					<span id="firstName-label" class="property-label"><g:message code="person.firstName.label" default="First Name" /></span>
+					
+						<span class="property-value" aria-labelledby="firstName-label"><g:fieldValue bean="${personInstance}" field="firstName"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.middleInitial}">
+				<li class="fieldcontain">
+					<span id="middleInitial-label" class="property-label"><g:message code="person.middleInitial.label" default="Middle Initial" /></span>
+					
+						<span class="property-value" aria-labelledby="middleInitial-label"><g:fieldValue bean="${personInstance}" field="middleInitial"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.lastName}">
+				<li class="fieldcontain">
+					<span id="lastName-label" class="property-label"><g:message code="person.lastName.label" default="Last Name" /></span>
+					
+						<span class="property-value" aria-labelledby="lastName-label"><g:fieldValue bean="${personInstance}" field="lastName"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.address}">
+				<li class="fieldcontain">
+					<span id="address-label" class="property-label"><g:message code="person.address.label" default="Address" /></span>
+					
+						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${personInstance}" field="address"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${personInstance?.homePhone}">
 				<li class="fieldcontain">
 					<span id="homePhone-label" class="property-label"><g:message code="person.homePhone.label" default="Home Phone" /></span>
@@ -55,6 +91,42 @@
 					<span id="cellPhone-label" class="property-label"><g:message code="person.cellPhone.label" default="Cell Phone" /></span>
 					
 						<span class="property-value" aria-labelledby="cellPhone-label"><g:fieldValue bean="${personInstance}" field="cellPhone"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.photo}">
+				<li class="fieldcontain">
+					<span id="photo-label" class="property-label"><g:message code="person.photo.label" default="Photo" /></span>
+					
+						<span class="property-value" aria-labelledby="photo-label"><g:link controller="SCMSPhoto" action="show" id="${personInstance?.photo?.id}">${personInstance?.photo?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.tshirtSize}">
+				<li class="fieldcontain">
+					<span id="tshirtSize-label" class="property-label"><g:message code="person.tshirtSize.label" default="Tshirt Size" /></span>
+					
+						<span class="property-value" aria-labelledby="tshirtSize-label"><g:fieldValue bean="${personInstance}" field="tshirtSize"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.position}">
+				<li class="fieldcontain">
+					<span id="position-label" class="property-label"><g:message code="person.position.label" default="Position" /></span>
+					
+						<span class="property-value" aria-labelledby="position-label"><g:fieldValue bean="${personInstance}" field="position"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.classNumber}">
+				<li class="fieldcontain">
+					<span id="classNumber-label" class="property-label"><g:message code="person.classNumber.label" default="Class Number" /></span>
+					
+						<span class="property-value" aria-labelledby="classNumber-label"><g:fieldValue bean="${personInstance}" field="classNumber"/></span>
 					
 				</li>
 				</g:if>
@@ -77,15 +149,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${personInstance?.address}">
-				<li class="fieldcontain">
-					<span id="address-label" class="property-label"><g:message code="person.address.label" default="Address" /></span>
-					
-						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${personInstance}" field="address"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${personInstance?.dateCreated}">
 				<li class="fieldcontain">
 					<span id="dateCreated-label" class="property-label"><g:message code="person.dateCreated.label" default="Date Created" /></span>
@@ -95,11 +158,29 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${personInstance?.email}">
+				<g:if test="${personInstance?.emergencyContact}">
 				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="person.email.label" default="Email" /></span>
+					<span id="emergencyContact-label" class="property-label"><g:message code="person.emergencyContact.label" default="Emergency Contact" /></span>
 					
-						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${personInstance}" field="email"/></span>
+						<span class="property-value" aria-labelledby="emergencyContact-label"><g:fieldValue bean="${personInstance}" field="emergencyContact"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.emergencyPhone}">
+				<li class="fieldcontain">
+					<span id="emergencyPhone-label" class="property-label"><g:message code="person.emergencyPhone.label" default="Emergency Phone" /></span>
+					
+						<span class="property-value" aria-labelledby="emergencyPhone-label"><g:fieldValue bean="${personInstance}" field="emergencyPhone"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.emergencyRelationship}">
+				<li class="fieldcontain">
+					<span id="emergencyRelationship-label" class="property-label"><g:message code="person.emergencyRelationship.label" default="Emergency Relationship" /></span>
+					
+						<span class="property-value" aria-labelledby="emergencyRelationship-label"><g:fieldValue bean="${personInstance}" field="emergencyRelationship"/></span>
 					
 				</li>
 				</g:if>
@@ -113,29 +194,20 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${personInstance?.firstName}">
-				<li class="fieldcontain">
-					<span id="firstName-label" class="property-label"><g:message code="person.firstName.label" default="First Name" /></span>
-					
-						<span class="property-value" aria-labelledby="firstName-label"><g:fieldValue bean="${personInstance}" field="firstName"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personInstance?.lastName}">
-				<li class="fieldcontain">
-					<span id="lastName-label" class="property-label"><g:message code="person.lastName.label" default="Last Name" /></span>
-					
-						<span class="property-value" aria-labelledby="lastName-label"><g:fieldValue bean="${personInstance}" field="lastName"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${personInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="person.lastUpdated.label" default="Last Updated" /></span>
 					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${personInstance?.lastUpdated}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${personInstance?.masterSteward}">
+				<li class="fieldcontain">
+					<span id="masterSteward-label" class="property-label"><g:message code="person.masterSteward.label" default="Master Steward" /></span>
+					
+						<span class="property-value" aria-labelledby="masterSteward-label"><g:formatBoolean boolean="${personInstance?.masterSteward}" /></span>
 					
 				</li>
 				</g:if>

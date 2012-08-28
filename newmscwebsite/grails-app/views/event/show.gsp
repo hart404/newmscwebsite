@@ -72,9 +72,16 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="event.eventPriority.label" default="Event Priority" /></td>
+                            <td valign="top" class="name"><g:message code="event.showOnHomePage.label" default="Show on Home Page" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "eventPriority")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "showOnHomePage")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="event.categories.label" default="Categories" /></td>
+                            
+                            <td valign="top" class="value">${eventInstance.formattedCategories()}</td>
                             
                         </tr>
                     

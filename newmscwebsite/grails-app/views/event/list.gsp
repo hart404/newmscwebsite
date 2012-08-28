@@ -34,6 +34,9 @@
                         
                             <g:sortableColumn property="startTime" title="${message(code: 'event.startTime.label', default: 'Start Time')}" />
                         
+                            <g:sortableColumn property="endTime" title="${message(code: 'event.endTime.label', default: 'Start Time')}" />
+                            
+                            <th><g:message code="event.photo.label" default="Photo" /></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +54,14 @@
                             <td>${fieldValue(bean: eventInstance, field: "location")}</td>
                         
                             <td>${fieldValue(bean: eventInstance, field: "startTime")}</td>
+                        
+                            <td>${fieldValue(bean: eventInstance, field: "endTime")}</td>
+                        
+                            <td>
+                                <g:if test="${eventInstance.mainPhoto}" >
+                                    <img src="${eventInstance.mainPhoto?.fullPath()}" height="100" width="${(100 / eventInstance.mainPhoto.height) * eventInstance.mainPhoto.width}" />
+                                </g:if>
+                            </td>
                         
                         </tr>
                     </g:each>

@@ -14,7 +14,7 @@ class SecUser {
 	Date lastUpdated
 
 	static constraints = {
-		username blank: false, unique: true
+		username blank: false, unique: true, email: true
 		password blank: false
 	}
 
@@ -37,6 +37,6 @@ class SecUser {
 	}
 
 	protected void encodePassword() {
-		password = springSecurityService.encodePassword(password)
+		password = springSecurityService.encodePassword(password, username)
 	}
 }

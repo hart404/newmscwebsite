@@ -38,8 +38,7 @@
 			</div>
 			<div class="homePageSubItem bodyBlue" >
 				<div class="imageContainer">
-				    <div class="innerGlow">
-                    </div>
+				    <scms:photoWidget widget='${donatePhoto}' photoCssClass="innerGlow imageDonate"/>
 					<div class="imageText">
 						<p><scms:htmlWidget widget="${donateText}" /></p>
 					</div>

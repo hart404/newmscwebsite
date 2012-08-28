@@ -1,8 +1,10 @@
 package newmscwebsite
 
+import groovy.json.JsonSlurper
+
 import org.joda.time.LocalDate
 
-import groovy.json.JsonSlurper
+import simple.cms.SCMSPhoto
 
 class EventController {
 
@@ -12,11 +14,16 @@ class EventController {
 	
 	def index = {
 		def generator = new DateGenerator(eventService)
-		[events: eventService.findAllAfterToday(), 
+		def events = eventService.findAllAfterTodayInitial()
+		println "Total event count: ${eventService.countAllAfterToday()}"
+		[events: events, 
 			rows: generator.getCalendarRows(), 
 			year: generator.getYear(), 
 			month: generator.getMonthName(), 
-			monthNumber: generator.getMonthNumber()]
+			monthNumber: generator.getMonthNumber(),
+			offset: 0,
+			max: 5,
+			eventCount: eventService.countAllAfterToday()]
 	}
 	
 	def challenge = {
@@ -60,12 +67,41 @@ class EventController {
 		def dateList = jsonDateList.dates.collect {
 			new LocalDate(it.year, it.monthNumber, it.day)
 		}
-		def events = eventService.findAllInDateList(dateList)
-		render(template:"/event/eventsTemplate", model:["events": events])
+		def jsonCategories = new JsonSlurper().parseText(params.categories)
+		def categories = jsonCategories.categories.collect { category -> Category.fromString(category)}
+		def events = eventService.findAllInDateListAndCategories(dateList, categories)
+		def eventCount = events.size()
+		def startEvent = params.offset as Integer
+		def endEvent = startEvent + (params.max as Integer) - 1
+		endEvent = Math.min(eventCount - 1, endEvent)
+		if (!events.isEmpty()) {
+			events = events[startEvent..endEvent]
+		}
+		params.offset = params.offset as Integer
+		params.max = params.max as Integer
+		render(template:"/event/eventsTemplate", model:["events": events, "eventCount": eventCount, offset: params.offset, max: params.max])
 	}
 	
 	def getEventsAfterToday() {
-		render(template:"/event/eventsTemplate", model:[events: eventService.findAllAfterToday()])
+		def events = []
+		if (!params.categories) {
+			events = eventService.findAllAfterToday()
+		} else {
+			def jsonCategories = new JsonSlurper().parseText(params.categories)
+			def categories = jsonCategories.categories.collect { category -> Category.fromString(category)}
+			events = eventService.findAllAfterToday(categories)
+    	}
+		def eventCount = events.size()
+		def startEvent = params.offset as Integer
+		def endEvent = startEvent + (params.max as Integer) - 1
+		endEvent = Math.min(eventCount - 1, endEvent)
+		def myParams = params
+		if (!events.isEmpty()) {
+			events = events[startEvent..endEvent]
+		}
+		params.offset = params.offset as Integer
+		params.max = params.max as Integer
+		render(template:"/event/eventsTemplate", model:[events: events, "eventCount": eventCount, offset: params.offset, max: params.max])
 	}
 
     def list = {
@@ -80,7 +116,14 @@ class EventController {
     }
 
     def save = {
+		def photo = SCMSPhoto.get(params.photoId)
         def eventInstance = new Event(params)
+		eventInstance.mainPhoto = photo
+		def categories = getCategoriesFrom(params)
+		println "Categories: ${categories}"
+		categories.each { category ->
+			eventInstance.addToCategories(category)
+		}
         if (eventInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])}"
             redirect(action: "show", id: eventInstance.id)
@@ -89,6 +132,19 @@ class EventController {
             render(view: "create", model: [eventInstance: eventInstance])
         }
     }
+	
+	def getCategoriesFrom(map) {
+		def result = []
+		map.each { key, value ->
+			if (value == "on") {
+				def category = Category.fromString(key)
+				if (category) {
+					result << Category.fromString(key)
+				}
+			}
+		}
+		result
+	}
 
     def show = {
         def eventInstance = Event.get(params.id)
@@ -114,6 +170,16 @@ class EventController {
 
     def update = {
         def eventInstance = Event.get(params.id)
+		if (params.photoId != eventInstance.mainPhoto?.id) {
+			def photo = SCMSPhoto.get(params.photoId)
+			eventInstance.mainPhoto = photo
+		}
+		def categories = getCategoriesFrom(params)
+		categories.each { category ->
+			if (!eventInstance.categories.contains(category)) {
+				eventInstance.addToCategories(category)
+			}
+		}
         if (eventInstance) {
             if (params.version) {
                 def version = params.version.toLong()

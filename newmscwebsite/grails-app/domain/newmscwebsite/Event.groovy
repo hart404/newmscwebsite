@@ -17,10 +17,10 @@ class Event {
 	LocalDate startDate
 	Date dateCreated
 	Date lastUpdated
-	// Priority of 1 means event will be displayed on home page
-	int eventPriority = 10
+	boolean showOnHomePage = false
 	Trailhead location
 	SCMSPhoto mainPhoto
+	boolean stewardOnly = false;
 	
 	static transients = ['calendarIcon']
 	
@@ -44,7 +44,6 @@ class Event {
 		startDate(nullable: true)
 		endTime(nullable: true)
 		location(nullable: true)
-		eventPriority(range: 1..10)
 		dateCreated(display: false)
 		lastUpdated(display: false)
 		mainPhoto(nullable:true)
@@ -65,6 +64,19 @@ class Event {
 		formatter.print(startTime)
 	}
 	
+	def formattedCategories() {
+		if (categories?.isEmpty()) {
+			return "No categories selected for this event"
+		} else {
+			def result = ""
+			categories.each { category ->
+				result += category.formatted()
+				result += ", "
+			}
+			return result [0..-3]
+		}
+	}
+	
 	public String toString() {
 		"${title} ${formattedStartTime()}"
 	}
@@ -75,6 +87,30 @@ class Event {
 	
 	def beforeUpdate = {
 		startDate = new LocalDate(startTime)
+	}
+	
+	boolean isFamily() {
+		categories.contains(Category.FAMILY)
+	}
+	
+	boolean isHike() {
+		categories.contains(Category.HIKE)
+	}
+	
+	boolean isFitness() {
+		categories.contains(Category.FITNESS)
+	}
+	
+	boolean isClassOrLecture() {
+		categories.contains(Category.CLASS_OR_LECTURE)
+	}
+	
+	boolean isSpecialEvent() {
+		categories.contains(Category.SPECIAL_EVENT)
+	}
+	
+	boolean isVolunteerEvent() {
+		categories.contains(Category.VOLUNTEER_EVENT)
 	}
 	
 }

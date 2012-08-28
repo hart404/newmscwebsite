@@ -11,6 +11,8 @@
 		<p class="bigp"><span class="highlight2">Location: </span><g:if test="${event.location}"><g:link controller="trailhead" action="displayLocation" id="${event.location.id}">${event.location}</g:link></g:if><g:else>TBD</g:else></p>
 		<p class="bigp">${event.shortDescription}</p>
 		<p class="bigp">${event.moreInformation}</p>
+        <img src="${event.photo.mainPhoto.fullPath()}" />
+        <p class="bigp">${event.formattedCategories()}</p>
 	</div>
 </body>
 </html>

@@ -27,12 +27,10 @@
 					
 						<g:sortableColumn property="title" title="${message(code: 'adSpacePhoto.title.label', default: 'Title')}" />
 					
-						<g:sortableColumn property="description" title="${message(code: 'adSpacePhoto.description.label', default: 'Description')}" />
-					
-						<g:sortableColumn property="displayEndDate" title="${message(code: 'adSpacePhoto.displayEndDate.label', default: 'Display End Date')}" />
-					
 						<g:sortableColumn property="displayStartDate" title="${message(code: 'adSpacePhoto.displayStartDate.label', default: 'Display Start Date')}" />
 					
+                        <g:sortableColumn property="displayEndDate" title="${message(code: 'adSpacePhoto.displayEndDate.label', default: 'Display End Date')}" />
+                    
 						<th><g:message code="adSpacePhoto.photo.label" default="Photo" /></th>
 					
 					</tr>
@@ -43,12 +41,10 @@
 					
 						<td><g:link action="show" id="${adSpacePhotoInstance.id}">${fieldValue(bean: adSpacePhotoInstance, field: "title")}</g:link></td>
 					
-						<td>${fieldValue(bean: adSpacePhotoInstance, field: "description")}</td>
-					
-						<td>${fieldValue(bean: adSpacePhotoInstance, field: "displayEndDate")}</td>
-					
 						<td>${fieldValue(bean: adSpacePhotoInstance, field: "displayStartDate")}</td>
 					
+                        <td>${fieldValue(bean: adSpacePhotoInstance, field: "displayEndDate")}</td>
+                    
 						<td>${fieldValue(bean: adSpacePhotoInstance, field: "photo")}</td>
 					
 					</tr>

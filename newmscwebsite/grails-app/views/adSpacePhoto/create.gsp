@@ -19,7 +19,7 @@
 		</div>
 		<div id="create-adSpacePhoto" class="content scaffold-create"
 			role="main">
-			<h1>Create Dynamic Lead</h1>
+			<h1>Create Dynamic Lead/Ad Space</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">
 					${flash.message}
@@ -103,7 +103,7 @@
 				</fieldset>
 			</g:form>
 		</div>
-		<g:render template="/photo/searchPhotoDialog"/>
+		<g:render template="/photo/searchPhotoDialog" plugin="simple-cms" />
 	</div>
 </body>
 </html>

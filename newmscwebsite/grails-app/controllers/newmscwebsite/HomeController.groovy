@@ -2,11 +2,12 @@ package newmscwebsite
 
 import org.joda.time.LocalDate
 
-import simple.cms.SCMSHardCodedPage
+import simple.cms.SCMSStaticPage
 
 class HomeController {
 	
 	def homeService
+	def eventService
 	
 	static navigation = [
 		group:'navigationBar',
@@ -16,16 +17,14 @@ class HomeController {
 	]
 
     def index = {
-		// Retrieve priority 1 events. That is, the ones that should be displayed on the home page
-		def events = Event.findAllByEventPriority(1) as List
-		events = events.findAll { event -> event.startDate >= LocalDate.now()}
+		def events = eventService.findEventsForHomePage()
 		def map = [events: events, newsItems: NewsItem.findAllByImportant(true)]
 		addWidgetsToMap(map)
 		map
 	}
 	
 	def addWidgetsToMap(map) {
-		def page = SCMSHardCodedPage.findByUri('home')
+		def page = SCMSStaticPage.findByLink('home')
 		if (page == null) {
 			page = homeService.generateHomePage()
 		}

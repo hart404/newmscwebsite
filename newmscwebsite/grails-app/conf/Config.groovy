@@ -107,10 +107,10 @@ grails.plugins.springsecurity.interceptUrlMap = [
 
 grails {
 	mail {
-	  host = "smtp.gmail.com"
+	  host = "email-smtp.us-east-1.amazonaws.com"
 	  port = 465
-	  username = "hart404@gmail.com"
-	  password = "-----"
+	  username = "AKIAJBKQWYCGJ7DTMVPA"
+	  password = "Ahgi0BAFtWdMvxH4MbV+/NPdK4xqJQnOb64GHt0V4Hey"
 	  props = ["mail.smtp.auth":"true",
 			   "mail.smtp.socketFactory.port":"465",
 			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
@@ -136,6 +136,10 @@ grails.gorm.default.mapping = {
 grails.plugin.cloudfoundry.showStackTrace = true
 
 grails.serverURL="http://newmscwebsite.cloudfoundry.com"
+
+// grails.serverURL="http://newmscwebsite.elasticbeanstalk.com"
+
+grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 
 
   

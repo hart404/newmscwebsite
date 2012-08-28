@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="mainLayout">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<div id="list-person" class="content scaffold-list" role="main">
-			<h1>Dynamic Leads</h1>
+			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -28,13 +28,13 @@
 					
 						<g:sortableColumn property="password" title="${message(code: 'person.password.label', default: 'Password')}" />
 					
-						<th><g:message code="person.homePhone.label" default="Home Phone" /></th>
+						<g:sortableColumn property="firstName" title="${message(code: 'person.firstName.label', default: 'First Name')}" />
 					
-						<th><g:message code="person.cellPhone.label" default="Cell Phone" /></th>
+						<g:sortableColumn property="middleInitial" title="${message(code: 'person.middleInitial.label', default: 'Middle Initial')}" />
 					
-						<g:sortableColumn property="accountExpired" title="${message(code: 'person.accountExpired.label', default: 'Account Expired')}" />
+						<g:sortableColumn property="lastName" title="${message(code: 'person.lastName.label', default: 'Last Name')}" />
 					
-						<g:sortableColumn property="accountLocked" title="${message(code: 'person.accountLocked.label', default: 'Account Locked')}" />
+						<th><g:message code="person.address.label" default="Address" /></th>
 					
 					</tr>
 				</thead>
@@ -46,13 +46,13 @@
 					
 						<td>${fieldValue(bean: personInstance, field: "password")}</td>
 					
-						<td>${fieldValue(bean: personInstance, field: "homePhone")}</td>
+						<td>${fieldValue(bean: personInstance, field: "firstName")}</td>
 					
-						<td>${fieldValue(bean: personInstance, field: "cellPhone")}</td>
+						<td>${fieldValue(bean: personInstance, field: "middleInitial")}</td>
 					
-						<td><g:formatBoolean boolean="${personInstance.accountExpired}" /></td>
+						<td>${fieldValue(bean: personInstance, field: "lastName")}</td>
 					
-						<td><g:formatBoolean boolean="${personInstance.accountLocked}" /></td>
+						<td>${fieldValue(bean: personInstance, field: "address")}</td>
 					
 					</tr>
 				</g:each>

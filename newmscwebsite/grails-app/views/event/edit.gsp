@@ -67,12 +67,26 @@
                                 </td>
                             </tr>
                         
+	                        <tr class="prop">
+	                            <td valign="top" class="name">
+	                                <label for="location">
+	                                    <g:message code="event.photo.label" default="Location" />
+	                                </label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'photo', 'errors')}">
+	                                <span id="photoFileName">-None Selected-</span>
+	                                <button id="search">Search for Photo</button>
+	                                <input type="hidden" name="photoId" id="photoId" value="" />
+	                            </td>
+	                        </tr>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="startTime"><g:message code="event.startTime.label" default="Start Time" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'startTime', 'errors')}">
-                                    <joda:dateTimePicker name="startTime" value="${eventInstance?.startTime}" ></joda:dateTimePicker>
+                                    <richui:dateChooser name="startTime" format="MM-dd-yyyy" time="true" />
                                 </td>
                             </tr>
                         
@@ -81,19 +95,73 @@
                                   <label for="endTime"><g:message code="event.endTime.label" default="End Time" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'endTime', 'errors')}">
-                                    <joda:dateTimePicker name="endTime" value="${eventInstance?.endTime}"  noSelection="['': '']"></joda:dateTimePicker>
+                                    <richui:dateChooser name="startTime" format="MM-dd-yyyy" time="true" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="eventPriority"><g:message code="event.eventPriority.label" default="Event Priority" /></label>
+                                  <label for="eventPriority"><g:message code="event.showOnHomePage.label" default="Show on Home Page" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'eventPriority', 'errors')}">
-                                    <g:select name="eventPriority" from="${1..10}" class="range" required="" value="${fieldValue(bean: eventInstance, field: 'eventPriority')}"/>
-                                </td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: eventInstance, field: 'showOnHomePage', 'errors')}">
+                                <g:checkBox name="showOnHomePage" value="${eventInstance.showOnHomePage}" />
+                            </td>
                             </tr>
-                        
+	                        <tr class="prop">
+	                            <td valign="top" class="name"><label for="family"><g:message
+	                                        code="event.family.label" default="Family" /></label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'categories', 'errors')}">
+	                                <g:checkBox name="family" value="${eventInstance.isFamily()}" />
+	                            </td>
+	                        </tr>
+	                        <tr class="prop">
+	                            <td valign="top" class="name"><label for="fitness"><g:message
+	                                        code="event.fitness.label" default="Fitness" /></label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'categories', 'errors')}">
+	                                <g:checkBox name="fitness" value="${eventInstance.isFitness()}" />
+	                            </td>
+	                        </tr>
+	                        <tr class="prop">
+	                            <td valign="top" class="name"><label for="hike"><g:message
+	                                        code="event.hike.label" default="Hike" /></label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'categories', 'errors')}">
+	                                <g:checkBox name="hike" value="${eventInstance.isHike()}" />
+	                            </td>
+	                        </tr>
+	                        <tr class="prop">
+	                            <td valign="top" class="name"><label for="classOrLecture"><g:message
+	                                        code="event.classOrLecture.label" default="Class or Lecture" /></label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'categories', 'errors')}">
+	                                <g:checkBox name="classOrLecture" value="${eventInstance.isClassOrLecture()}" />
+	                            </td>
+	                        </tr>
+	                        <tr class="prop">
+	                            <td valign="top" class="name"><label for="specialEvent"><g:message
+	                                        code="event.specialEvent.label" default="Special Event" /></label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'categories', 'errors')}">
+	                                <g:checkBox name="specialEvent" value="${eventInstance.isSpecialEvent()}" />
+	                            </td>
+	                        </tr>
+	                        <tr class="prop">
+	                            <td valign="top" class="name"><label for="volunteerEvent"><g:message
+	                                        code="event.volunteerEvent.label" default="Volunteer Event" /></label>
+	                            </td>
+	                            <td valign="top"
+	                                class="value ${hasErrors(bean: eventInstance, field: 'categories', 'errors')}">
+	                                <g:checkBox name="volunteerEvent" value="${eventInstance.isVolunteerEvent()}" />
+	                            </td>
+	                        </tr>                       
                         </tbody>
                     </table>
                 </div>
@@ -103,5 +171,6 @@
                 </div>
             </g:form>
         </div>
+        <g:render template="/photo/searchPhotoDialog" plugin="simple-cms" />
     </body>
 </html>
