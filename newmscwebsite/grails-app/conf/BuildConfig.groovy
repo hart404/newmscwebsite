@@ -23,6 +23,7 @@ grails.project.dependency.resolution = {
 		mavenRepo "http://download.java.net/maven/2/"
 		mavenRepo "http://repository.jboss.com/maven2/"
 		mavenRepo "http://repo.springsource.org/milestone"
+		mavenRepo "http://mavenrepo.google-api-java-client.googlecode.com/hg"
 	}
 	dependencies {
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -30,6 +31,7 @@ grails.project.dependency.resolution = {
 		runtime 'mysql:mysql-connector-java:5.1.19'
 		compile 'net.java.dev.jets3t:jets3t:0.9.0'
 		compile 'org.apache.httpcomponents:httpclient:4.1.2'
+		compile 'com.google.apis:google-api-services-calendar:v3-rev16-1.8.0-beta'
 	}
 	
 	plugins {

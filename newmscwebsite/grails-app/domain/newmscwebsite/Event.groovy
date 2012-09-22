@@ -21,6 +21,7 @@ class Event {
 	Trailhead location
 	SCMSPhoto mainPhoto
 	boolean stewardOnly = false;
+	String otherLocation = ""
 	
 	static transients = ['calendarIcon']
 	
@@ -46,7 +47,11 @@ class Event {
 		location(nullable: true)
 		dateCreated(display: false)
 		lastUpdated(display: false)
-		mainPhoto(nullable:true)
+		mainPhoto(nullable: true)
+		otherLocation(nullable: true)
+		categories validator: { list ->
+			if (list.isEmpty()) return false
+		}
     }
 	
 	public String formattedStartTime() {

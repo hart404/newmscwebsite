@@ -15,7 +15,6 @@ class EventController {
 	def index = {
 		def generator = new DateGenerator(eventService)
 		def events = eventService.findAllAfterTodayInitial()
-		println "Total event count: ${eventService.countAllAfterToday()}"
 		[events: events, 
 			rows: generator.getCalendarRows(), 
 			year: generator.getYear(), 
@@ -119,8 +118,8 @@ class EventController {
 		def photo = SCMSPhoto.get(params.photoId)
         def eventInstance = new Event(params)
 		eventInstance.mainPhoto = photo
+		eventInstance.categories.clear()
 		def categories = getCategoriesFrom(params)
-		println "Categories: ${categories}"
 		categories.each { category ->
 			eventInstance.addToCategories(category)
 		}
@@ -174,11 +173,10 @@ class EventController {
 			def photo = SCMSPhoto.get(params.photoId)
 			eventInstance.mainPhoto = photo
 		}
+		eventInstance.categories.clear()
 		def categories = getCategoriesFrom(params)
 		categories.each { category ->
-			if (!eventInstance.categories.contains(category)) {
-				eventInstance.addToCategories(category)
-			}
+			eventInstance.addToCategories(category)
 		}
         if (eventInstance) {
             if (params.version) {

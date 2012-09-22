@@ -12,6 +12,8 @@ class SecUser {
 	boolean passwordExpired
 	Date dateCreated
 	Date lastUpdated
+	
+	static transients = ['email']
 
 	static constraints = {
 		username blank: false, unique: true, email: true
@@ -39,4 +41,18 @@ class SecUser {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password, username)
 	}
+	
+	def getEmail() {
+		username
+	}
+	
+	def hasAuthority(String authority) {
+		def authoritiesStringList = getAuthorities().collect { role -> role.authority}
+		authoritiesStringList.contains(authority)
+	}
+	
+	def hasAuthority(SecRole authority) {
+		getAuthorities().contains(authority)
+	}
+	
 }

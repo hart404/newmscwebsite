@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="generatedLayout">
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -28,15 +28,6 @@
 					<span id="username-label" class="property-label"><g:message code="person.username.label" default="Username" /></span>
 					
 						<span class="property-value" aria-labelledby="username-label"><g:fieldValue bean="${personInstance}" field="username"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${personInstance?.password}">
-				<li class="fieldcontain">
-					<span id="password-label" class="property-label"><g:message code="person.password.label" default="Password" /></span>
-					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${personInstance}" field="password"/></span>
 					
 				</li>
 				</g:if>
@@ -212,20 +203,25 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${personInstance?.passwordExpired}">
+				<g:if test="${personInstance?.wantsWeeklyEmail}">
 				<li class="fieldcontain">
-					<span id="passwordExpired-label" class="property-label"><g:message code="person.passwordExpired.label" default="Password Expired" /></span>
+					<span id="wantsWeeklyEmail-label" class="property-label"><g:message code="person.wantsWeeklyEmail.label" default="Wants Weekly Email" /></span>
 					
-						<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${personInstance?.passwordExpired}" /></span>
+						<span class="property-value" aria-labelledby="wantsWeeklyEmail-label"><g:formatBoolean boolean="${personInstance?.wantsWeeklyEmail}" /></span>
 					
 				</li>
 				</g:if>
+				<li class="fieldcontain">
+                    <span id="authorities-label" class="property-label"><g:message code="person.authorities.label" default="Authorities" /></span>
+                        <span class="property-value" aria-labelledby="authorities-label"><g:fieldValue bean="${personInstance}" field="authorities" /></span>
+                </li>
 			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${personInstance?.id}" />
 					<g:link class="edit" action="edit" id="${personInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                    <g:link class="changePassword" action="changePassword" id="${personInstance?.id}"><g:message code="default.button.changepassword.label" default="Change Password" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

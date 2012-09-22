@@ -1,10 +1,8 @@
-y
-
 <%@ page import="newmscwebsite.Event"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="layout" content="mainLayout" />
+<meta name="layout" content="generatedLayout" />
 <g:set var="entityName"
 	value="${message(code: 'event.label', default: 'Event')}" />
 <title><g:message code="default.create.label"
@@ -81,10 +79,20 @@ y
 							</td>
 						</tr>
 
+                        <tr class="prop">
+                            <td valign="top" class="name"><label for="title"><g:message
+                                        code="event.otherLocation.label" default="Other Location" /></label></td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: eventInstance, field: 'otherLocation', 'errors')}">
+                                <g:textField name="otherLocation" 
+                                    value="${eventInstance?.otherLocation}" />
+                            </td>
+                        </tr>
+
 						<tr class="prop">
 							<td valign="top" class="name">
 								<label for="location">
-    								<g:message code="event.photo.label" default="Location" />
+    								<g:message code="event.photo.label" default="Photo" />
 								</label>
 							</td>
 							<td valign="top"
@@ -115,7 +123,16 @@ y
 							</td>
 						</tr>
 
-						<tr class="prop">
+                        <tr class="prop">
+                            <td valign="top" class="name"><label for="stewardOnly"><g:message
+                                        code="event.stewardOnly.label" default="Steward Only Event" /></label>
+                            </td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: eventInstance, field: 'stewardOnly', 'errors')}">
+                                <g:checkBox name="stewardOnly" value="${false}" />
+                            </td>
+                        </tr>
+ 						<tr class="prop">
 							<td valign="top" class="name"><label for="showOnHomePage"><g:message
 										code="event.showOnHomePage.label" default="Show on Home Page" /></label>
 							</td>
@@ -124,6 +141,8 @@ y
 								<g:checkBox name="showOnHomePage" value="${false}" />
 							</td>
 						</tr>
+						<tr><td></td></tr>
+						<tr><td><strong>Categories</strong></td></tr>
                         <tr class="prop">
                             <td valign="top" class="name"><label for="family"><g:message
                                         code="event.family.label" default="Family" /></label>

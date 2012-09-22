@@ -79,6 +79,10 @@ body {
     background-color: rgb(186, 139, 0);
 }
 
+.bodyLightYellow {
+    background-color: rgb(255, 242, 212);
+}
+
 .textBuff {
     color: rgb(242, 227, 188);
 }
@@ -91,15 +95,50 @@ body {
     color: rgb(84, 83, 74);
 }
 
+.eventPhoto {
+	width: 200px;
+	height: 200px;
+	float: left;
+	background-size: cover;
+	margin-top: 30px;
+}
+
+.eventBody {
+    float: right;
+    width: 600px;
+}
+
+.individualEventBody {
+    float: right;
+    width: 80%;
+}
+
+.newsItemBody {
+    float: right;
+    width: 900px;
+}
+
 .scmsPhotoContainer {
 	float: right;
 	margin: 10px;
 	width: 370px;
 }
 
+.scmsPeoplePhotoContainer {
+    float: right;
+    margin: 10px;
+    width: 650px;
+}
+
+.scmsPhoto {
+	display: inline-block;
+}
+
+.scmsPhotoList {
+	list-style-type: none;
+}
+
 .scmsHtmlContainer {
-	width: 60%;
-	float: left;
 }
 
 .scmsHtmlContainer p {
@@ -107,9 +146,57 @@ body {
     font-size: 18px;
 }
 
+.scmsHtmlContainer h1 {
+    color: rgb(139, 14, 4);
+    font-size: 28px;
+}
+
+.scmsHtmlContainer h2 {
+    color: rgb(84, 83, 74);
+    font-size: 24px;
+}
+
+.scmsHtmlContainer h3 {
+    color: rgb(84, 83, 74);
+    font-size: 20px;
+}
+
+.scmsHtmlContainer ul {
+    color: rgb(84, 83, 74);
+    font-size: 18px;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.scmsHtmlContainer ol {
+    color: rgb(84, 83, 74);
+    font-size: 18px;
+    font-family: arial, helvetica, sans-serif;
+}
+
 .scmsCaption p {
 	color: rgb(84, 83, 74);
 	font-style: italic;
+}
+
+.scmsGalleryCaption {
+    color: rgb(84, 83, 74)!important;
+    font-style: italic;
+    width: 100%!important;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.scmsGalleryContainer {
+	clear: both;
+}
+
+.scmsGalleryPhotoWidget {
+	width: 170px!important;
+	text-align: center;
+	float: left;
+}
+
+.scmsGalleryTitle {
+	margin-left: 100px;
 }
 
 ::-webkit-input-placeholder  { color: rgb(153, 143, 134); }
@@ -234,7 +321,6 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	padding-top: 20px;
 	padding-bottom: 40px;
 	clear: both;
-	vertical-align:center;
 }
 
 .bottomMenu ul {
@@ -242,6 +328,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	font-family: Arial;
 	font-size: 12px;
 	font-weight: 600;
+	text-align: center;
 }
 
 .bottomMenu ul a {
@@ -250,9 +337,9 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .bottomMenuListItem {
-	width: 150px;
-	float: left;
-	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+	display: inline;
 }
 
 .galleria-thumbnails {
@@ -293,7 +380,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 
 .blockFooter {
 	height: 24px;
-	color: rgb(242, 227, 188);
+	color: rgb(242, 227, 188)!important;
     font-size: 18px;
     font-weight: 200;
     margin: 0;
@@ -302,6 +389,10 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
     display: inline-table;
     vertical-align: middle;
     width: 380px;
+}
+
+.blockFooter a {
+    color: rgb(242, 227, 188)!important;
 }
 
 .homePageItem {
@@ -338,9 +429,9 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 
 .relativeContainer {
 	position: relative;
-	min-height: 982px;
 	clear: both;
 	margin: 0;
+	overflow: hidden;
 }
 
 .imageLeft {
@@ -417,13 +508,16 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 
 .menuContainer {
 	background-image: url('../images/layout/img_menu-background-1192x71.png');
-	height: 51px;
+	height: 31px;
 	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .eventOrNews {
 	padding-top: 10px;
 	padding-left: 10px;
+	padding-right: 10px;
+	overflow: hidden;
 }
 
 .gallery {
@@ -437,6 +531,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	background-color: rgb(196, 150, 12);
 	margin: 0;
 	height: 100%;
+	position: relative;
 }
 
 .trailheadContainer {
@@ -451,9 +546,18 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 .generalContainer {
     width: 1154px;
     padding: 20px;
-    height: 687px;
+    overflow: hidden;
     background-color: rgb(255, 242, 212);
     margin: 0;
+}
+
+.contentContainer {
+    width: 76.6%;
+    padding: 20px;
+    overflow: hidden;
+    background-color: rgb(255, 242, 212);
+    margin: 0;
+    float: right;
 }
 
 .eventContainer {
@@ -468,8 +572,16 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 .newsContainer {
     width: 100%;
     padding-left: 4px;
-    background-color: rgb(255, 242, 212);
+    background-color: rgb(148, 158, 80);
     margin: 0;
+}
+
+.newsItemContainer {
+    width: 1154px;
+    padding: 20px;
+    overflow: hidden;
+    margin: 0;
+    background-color: rgb(148, 158, 80);
 }
 
 .mscPanel {
@@ -581,9 +693,11 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .sidebarNavigation {
+	background-color: rgb(148, 158, 80);
 	height: 100%;
-	width: 27%;
+	width: 20%;
 	float: left;
+	position: absolute;
 }
 
 .sidebarNavigationNarrow {
@@ -598,17 +712,20 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	padding: 15px;
 	font-family: arial, helvetica, sans-serif;
 	font-weight: normal;
-	width: 258px;
 	text-align: right;
 }
 
 .sidebarLink {
 	font-size: 20px;
-	color: rgb(55, 53, 52);
-	padding: 16px;
-	width: 258px;
+	color: rgb(242, 227, 188);
 	padding: 16px;
     text-align: right;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.sidebarLink a {
+    font-size: 20px;
+    color: rgb(242, 227, 188);
 }
 
 .sidebarLink:hover {
@@ -628,10 +745,18 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 
 .sidebarLinkCurrent {
     font-size: 20px;
-    color: rgb(55, 53, 52);
-    padding: 16px;
+    color: rgb(242, 227, 188);
     background-color: rgb(118, 124, 64);
     text-align: right;
+    padding: 16px;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.sidebarLinkCurrent p {
+    font-size: 20px;
+    color: rgb(242, 227, 188);
+    margin: 0;
+    padding: 0;
 }
 
 .trailheadMap {
@@ -660,9 +785,10 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 
 .trailheadMapSurround {
 	height: 577px;
-	width: 903px;
-	padding: 40px;
+	padding-top: 20px;
 	position: relative;
+	float: right;
+	padding-right: 100px;
 }
 
 .trailheadMap {
@@ -676,6 +802,10 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
     box-shadow: 2px 0 5px #888;
     -moz-box-shadow: 2px 0 5px #888;
     -webkit-box-shadow: 2px 0 5px #888;
+}
+
+.trailheadsHtmlWidget {
+	padding: 20px;
 }
 
 .ui-dialog-titlebar {

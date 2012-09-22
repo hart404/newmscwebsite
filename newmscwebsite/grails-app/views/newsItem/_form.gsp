@@ -37,12 +37,11 @@
 <div
     class="fieldcontain ${hasErrors(bean: newsItemInstance, field: 'photo', 'error')} required">
     <label for="photo"> <g:message
-            code="newsItem.photo.label" default="Photo" /> <span
-        class="required-indicator">*</span>
+            code="newsItem.photo.label" default="Photo" /> 
     </label>
     <span id="photoFileName">-None Selected-</span>
     <button id="search">Search for Photo</button>
-    <input type="hidden" name="photoId" id= "photoId" value=""/>
+    <input type="hidden" name="photoId" id= "photoId" value="${newsItemInstance.photo.id}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: newsItemInstance, field: 'displayStartDate', 'error')} required">

@@ -9,9 +9,8 @@
 	<title><g:layoutTitle default="McDowell Sonoran Conservancy" /></title>
 	<link rel="icon" type="image/png" href="<g:createLinkTo dir='/images/layout' file='img_cactus-16x16.png'/>"/>
 	<link rel="shortcut icon" href="<g:createLinkTo dir='/images/layout' file='img_cactus-16x16.png'/>"></link>
-	<link rel="stylesheet" href="<g:createLinkTo dir='css' file='mscmain.css' />" />
+	<link rel="stylesheet" href="<g:createLinkTo dir='css' file='bottomMenu.css' />" />
     <script src="<g:createLinkTo dir='/js/jquery' file='jquery-1.7.1.min.js'/>" type="text/javascript"></script>
-    <link rel="stylesheet" media="screen" href="${resource(dir:'css',file:'reset.css',plugin:'spring-security-ui')}"/>
     <link rel="stylesheet" media="screen" href="${resource(dir:'css',file:'spring-security-ui.css',plugin:'spring-security-ui')}"/>
     <jqui:resources theme="smoothness"/>
     <link rel="stylesheet" media="screen" href="${resource(dir:'css/smoothness',file:'jquery-ui-1.8.2.custom.css',plugin:'spring-security-ui')}"/>
@@ -19,6 +18,7 @@
     <link rel="stylesheet" media="screen" href="${resource(dir:'css',file:'jquery.safari-checkbox.css',plugin:'spring-security-ui')}"/>
     <link rel="stylesheet" media="screen" href="${resource(dir:'css',file:'auth.css')}"/>
     <g:layoutHead />
+    <ga:trackPageview />
 </head>
 <body>
 <div class="container">

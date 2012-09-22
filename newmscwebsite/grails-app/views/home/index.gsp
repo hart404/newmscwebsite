@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta name="layout" content="homeLayout" />
-<title>Home</title>
+<title>McDowell Sonoran Conservancy</title>
 </head>
 <body>
 	<div id="gallery" class="mscGallery">
@@ -43,7 +43,7 @@
 						<p><scms:htmlWidget widget="${donateText}" /></p>
 					</div>
 					<div class="imageButton">
-						<img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/>
+						<a href="<g:createLink controller='donate'/>"><img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/></a>
 					</div>
 				</div>
 				<div class="imageText bodyBlue">
@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<div class="blockFooter headerBlue">
-                Support us &raquo
+                <a href="<g:createLink controller='donate'/>">Support us &raquo</a>
             </div>          
 		</div>
 		<div class="homePageItem marginRight">
@@ -78,7 +78,7 @@
 				</g:each>
 			</div>
 			<div class="blockFooter headerGreen">
-                See all news &raquo
+                <a href="<g:createLink controller='newsItem'/>">See all news &raquo</a>
             </div>          
 			
 		</div>
@@ -108,9 +108,12 @@
 				</g:each>
 			</div>
 			<div class="blockFooter headerYellow">
-                See all events &raquo
+                <a href="<g:createLink controller='event'/>">See all events &raquo</a>
             </div>			
 		</div>
     </div>
+    <g:render template="/widget/updateHtmlWidgetDialog" plugin="simple-cms" />
+    <g:render template="/widget/updatePhotoWidget" plugin="simple-cms" />
+    <g:render template="/photo/searchPhotoDialog" plugin="simple-cms" />
 </body>
 </html>

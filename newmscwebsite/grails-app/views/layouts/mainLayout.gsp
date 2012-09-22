@@ -7,6 +7,7 @@
       lang="en-US">
 <head profile="http://www.w3.org/2005/10/profile">
     <g:render template="/layouts/commonHead" />
+    <ga:trackPageview />
 </head>
 <body onload="${pageProperty(name:'body.onload')}">
 <div class="container">

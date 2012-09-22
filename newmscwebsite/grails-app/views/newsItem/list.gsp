@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="mainLayout">
+		<meta name="layout" content="generatedLayout">
 		<g:set var="entityName" value="${message(code: 'newsItem.label', default: 'NewsItem')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -42,7 +42,7 @@
 				<g:each in="${newsItemInstanceList}" status="i" var="newsItemInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${newsItemInstance.id}">${fieldValue(bean: newsItemInstance, field: "title")}</g:link></td>
+						<td><g:link action="edit" id="${newsItemInstance.id}">${fieldValue(bean: newsItemInstance, field: "title")}</g:link></td>
 					
 						<td>${fieldValue(bean: newsItemInstance, field: "summary")}</td>
 					

@@ -1,3 +1,5 @@
+<html>
+
 <head>
 <title><g:message code='spring.security.ui.login.title'/></title>
 <meta name='layout' content='register'/>
@@ -14,10 +16,10 @@
 
 	<h1><g:message code='spring.security.ui.login.signin'/></h1>
 
-	<table>
+	<table style="width: 400px; ">
 		<tr>
-			<td><label for="username"><g:message code='spring.security.ui.login.username'/></label></td>
-			<td><input name="j_username" id="username" size="20" /></td>
+			<td><label for="username"><g:message code='spring.security.ui.login.username'/> (your email address)</label></td>
+			<td><input name="j_username" id="username" size="40" /></td>
 		</tr>
 		<tr>
 			<td><label for="password"><g:message code='spring.security.ui.login.password'/></label></td>
@@ -34,11 +36,14 @@
 		</tr>
 		<tr>
 			<td colspan='2'>
-				<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'>Register</s2ui:linkButton>
-				<s2ui:submitButton elementId='loginButton' form='loginForm' messageCode='spring.security.ui.login.login'>Login</s2ui:submitButton>
+				<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>
+				<s2ui:submitButton elementId='loginButton' form='loginForm' messageCode='spring.security.ui.login.login'/>
 			</td>
 		</tr>
 	</table>
+	<g:if test="${flash.message}">
+	           <div class="message" role="status">${flash.message}</div>
+    </g:if>
 
 	</div>
 	</form>
@@ -55,3 +60,4 @@ $(document).ready(function() {
 </script>
 
 </body>
+</html>

@@ -1,5 +1,7 @@
 package newmscwebsite
 
+import simple.cms.SCMSStaticPage
+
 class TrailheadController {
 	
 	TrailheadService trailheadService
@@ -7,8 +9,22 @@ class TrailheadController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	def mapOfThePreserve = {
-		[currentView: "mapOfThePreserve"]
+		def map = [:]
+		map.currentView = "mapOfThePreserve"
+		addWidgetsToMap(map)
+		map
 	}
+	
+	def addWidgetsToMap(map) {
+		def page = SCMSStaticPage.findByLink('trailheadsMap')
+		if (page == null) {
+			page = trailheadService.generateWidgetForTrailheadPage()
+		}
+		page.widgets.each { widget ->
+			map[widget.widgetId] = widget
+		}
+	}
+
 	
 	def brownsRanch = {
 		redirect(action: "displayLocation", params: [id: trailheadService.brownsRanch().id])

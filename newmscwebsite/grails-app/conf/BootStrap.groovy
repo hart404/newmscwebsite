@@ -5,6 +5,8 @@ import newmscwebsite.Event
 import newmscwebsite.GeographicCoordinates
 import newmscwebsite.Hike
 import newmscwebsite.NewsItem
+import newmscwebsite.Person
+import newmscwebsite.Phone
 import newmscwebsite.SecRole
 import newmscwebsite.SecUser
 import newmscwebsite.SecUserSecRole
@@ -14,6 +16,7 @@ import newmscwebsite.TrailheadService
 
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
+import org.springframework.core.io.ClassPathResource
 
 import simple.cms.SCMSAdSpacePhoto
 import simple.cms.SCMSMenu
@@ -21,14 +24,21 @@ import simple.cms.SCMSMenuBar
 import simple.cms.SCMSMenuItem
 import simple.cms.SCMSPhoto
 
+import groovy.sql.Sql
+
+
 
 class BootStrap {
 
 	TrailheadService trailheadService
 	def springSecurityService
+	def grailsApplication
+	def personService
 
 	def init = { servletContext ->
 		println "Root directory: ${System.getProperty("user.home")}"
+		personService.updateStewards()
+		// updateSql()
 		createRoles()
 		createAdminUser()
 		createLocations()
@@ -37,6 +47,8 @@ class BootStrap {
 		createHikes()
 		createAdSpace()
 		createMenus()
+		// createStewards()
+		// websiteUpdates()
 	}
 
 	void createRoles() {
@@ -77,7 +89,7 @@ class BootStrap {
 			addVolunteer(menuBar)
 			addSupportUs(menuBar)
 			addAdministration(menuBar)
-			menuBar.save(failOnError: true)
+			menuBar.save(failOnError: true) 
 		}
 	}
 	
@@ -92,36 +104,47 @@ class BootStrap {
 		SCMSMenu planYourVisit = new SCMSMenu(title: "Plan Your Visit")
 		addPlanYourVisitSubItems(planYourVisit)
 		visitThePreserve.addToMenuItems(planYourVisit)
-		visitThePreserve.addToMenuItems(new SCMSMenuItem(title: "Trailheads & Directions", link: "trailhead/mapOfThePreserve"))
-		visitThePreserve.addToMenuItems(new SCMSMenuItem(title: "Recreation", link: "content/recreation"))
-		visitThePreserve.addToMenuItems(new SCMSMenuItem(title: "PhotoGallery", link: "photoGallery"))
+		visitThePreserve.addToMenuItems(new SCMSMenu(title: "Trailheads & Directions", link: "trailhead/mapOfThePreserve"))
+		visitThePreserve.addToMenuItems(new SCMSMenu(title: "Recreation", link: "content/pages/recreation"))
+		visitThePreserve.addToMenuItems(new SCMSMenu(title: "PhotoGallery", link: "photoGallery"))
 		menuBar.addToMenus(visitThePreserve)
 	}
 	
 	def addPlanYourVisitSubItems(planYourVisit) {
 		// Pathfinders, Nature Guides, Family Passport, Know Before You Go
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Pathfinders", link: "content/pathfinders"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Nature Guides", link: "content/natureGuides"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Family Passport", link: "content/familyPassport"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Know Before You Go", link: "content/knowBeforeYouGo"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Pathfinders", link: "content/pages/pathfinders"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Nature Guides", link: "content/pages/natureGuides"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Family Passport", link: "content/pages/familyPassport"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Know Before You Go", link: "content/pages/knowBeforeYouGo"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "FAQs", link: "content/pages/faqs"))
 	}
 	
 	def addAboutUs(menuBar) {
-		menuBar.addToMenus(new SCMSMenu(title: "About Us", link: "aboutUs"))
+		def aboutUs = new SCMSMenu(title: "About Us", link: "aboutUs")
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mission and Vision", link: "content/pages/missionAndVision"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "History", link: "content/pages/history"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "People", link: "content/pages/people"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Gift Shop", link: "content/pages/giftShop"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mountain Lines Magazine", link: "content/pages/mountainLines"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Press Kit", link: "content/pages/pressKit"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Contact", link: "content/pages/contact"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Annual Reports", link: "content/pages/annualReports"))
+		menuBar.addToMenus(aboutUs)
 	}
 	
 	def addEducationAndResearch(menuBar) {
 		SCMSMenu educationAndResearch = new SCMSMenu(title: "Education & Research")
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Birds", link: "content/birds"))
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Small Mammals", link: "content/smallMammals"))
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Large Mammals", link: "content/largeMammals"))
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Flora", link: "content/flora"))
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Herpatology", link: "content/herpatology"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Adult Learning", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "School Groups & Youth", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Online Learning", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Field Institute", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Conservation", link: "content/pages/herpatology"))
+		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Publications & News", link: "content/pages/herpatology"))
 		menuBar.addToMenus(educationAndResearch)
 	}
 	
 	def addVolunteer(menuBar) {
-		menuBar.addToMenus(new SCMSMenu(title: "Volunteer", link: "content/volunteer"))
+		menuBar.addToMenus(new SCMSMenu(title: "Volunteer", link: "content/pages/volunteer"))
 	}
 	
 	def addSupportUs(menuBar) {
@@ -152,115 +175,6 @@ class BootStrap {
 	}
 
 	void createEvents() {
-		// Create some events
-		println "Events: ${Event.count()}"
-		if (!Event.count()) {
-			println "Creating Events"
-			def formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm")
-			def today = LocalDate.now()
-			def todayFormatter = DateTimeFormat.forPattern("MM/dd/yyyy")
-			def event = new Event(title: "Public Hike: Two Mountain Loop", shortDescription: "Two Mountain Loop",
-					moreInformation: "Two Mountain Loop. This 8 mile hike around Cone Mountain and Brown's Mountain reveals a wide variety of Sonoran Desert plants and rock formations. Little elevation change but many slippery ups and downs. Allow 5 hours. Bring lunch. Please arrive at the Brown's Ranch Trailhead by 8:45 am.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(2)) + " 9:00"),
-					location: trailheadService.brownsRanch())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FITNESS)
-			event.save(failOnError: true)
-			event = new Event(title: "Public Hike: All Things Arizona", shortDescription: "All Things Arizona",
-					moreInformation: "This hike on the Old Jeep Trail is a wonderful celebration of Arizona's 100th birthday and ties in beautifully with fourth grade Arizona heritage curriculum. Learn about the state flower, state tree, state bird, and more. This 4 mile hike on a trail that feels very remote and has beautiful views. Moderate uphill sections, some of it on rocky terrain. Allow 3 hours. Please arrive at the Lost Dog Wash Trailhead by 8:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(3)) + " 9:00"),
-					location: trailheadService.lostDog())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-			event = new Event(title: "Public Hike: Hiking Equipment and Technique", shortDescription: "Hiking Equipment and Technique",
-					moreInformation: "Learn how to make your hiking experience more pleasurable with the proper equipment and supplies, how to pace yourself, and even learn the difference between a stick and a pole on this approximate 4 mile hike. Mostly gradual inclines with a couple of short steep areas. Allow 2 hours. Please arrive at Gateway Trailhead by 8:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(6)) + " 9:00"),
-					location: trailheadService.gateway())
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.save(failOnError: true)
-			event = new Event(title: "Herpetology Survey Training", shortDescription: "Training for reptile portion of the flora & fauna survey",
-					moreInformation: "Dave Weber, Principal Investigator for the reptile & amphibian portion of the flora & fauna baseline survey, will be holding a training on safety and data collection methods. This is a mandatory training if you wish to participate in the reptile project. Location TBD",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(10)) + " 10:00"))
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.save(failOnError: true)
-			event = new Event(title: "First Friday Family Series", shortDescription: "Crawly Creatures of the Sonoran Desert",
-					moreInformation: "More reptiles, please! Ranger Amy Ford from the McDowell Mountain Regional Park next door brings her collection of snakes and desert tortoise to share with us. What a nice neighbor!",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(14)) + " 16:30"),
-					showOnHomePage: true, location: trailheadService.gateway())
-			event.addToCategories(Category.FAMILY)
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.save(failOnError: true)
-			event = new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
-					moreInformation: "'Plants and wildflowers of the Preserve.' Trailside Naturalist station at the jct. of the Bajada Nature Trail and amphitheater",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(18)) + " 9:00"),
-					location: trailheadService.gateway())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-			event = new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
-					moreInformation: "'Plants and wildflowers of the Preserve.' Trailside Naturalist station at the jct. of the Bajada Nature Trail and amphitheater",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(8)) + " 9:00"),
-					showOnHomePage: true, location: trailheadService.gateway())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-			event = new Event(title: "Public Hike: Wildflowers on the Old Jeep Trail", shortDescription: "Come see the preserve's wonderful display of wildflowers",
-					moreInformation: "Wildflowers on the Old Jeep Trail A 4 mile hike on a remote, peaceful trail with beautiful views and wildflower identification. Moderate uphill sections, some of it on rocky terrain. Allow 3 hours. Please arrive at the Lost Dog Wash Trailhead by 7:45 am. Appropriate for ages 8 and up.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(8)) + " 8:00"),
-					location: trailheadService.lostDog())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-			event = new Event(title: "Public Hike: Marcus Landslide", shortDescription: "Witness the largest landslide in Arizona!",
-					moreInformation: "Marcus Landslide Pre-registration required. A moderate 4 mile hike to the second largest landslide in Arizona on the east side of East End mountain including a discussion of the geological history of the area. This 2 hour hike is suitable for all hikers. Please arrive at Brown's Ranch Trailhead by 7:45 am. Maximum 20 people. Call Jill at 480-998-7971 x104 to pre-register. ",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(8)) + " 8:00"),
-					location: trailheadService.brownsRanch())
-			event.addToCategories(Category.HIKE)
-			event.save(failOnError: true)
-			event = new Event(title: "Trailside Naturalist", shortDescription: "Take a guided tour through aspects of the preserve's fauna and flora",
-					moreInformation: "Stop by the Trailside Naturalist Station for a 'Taste of the Desert'. Master Steward Alice Demetra puts out a culinary spread of edible cacti. Learn about how you can incorporate these spiny plants into your diet. Trailside Naturalist station at jct. of Bajada Nature Trail and amphitheater.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(20)) + " 9:00"),
-					location: trailheadService.gateway())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-			event = new Event(title: "Photo Workshop", shortDescription: "Photo Workshop Part I",
-					moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(22)) + " 17:00"),
-					location: trailheadService.gateway())
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.addToCategories(Category.SPECIAL_EVENT)
-			event.save(failOnError: true)
-			event = new Event(title: "Photo Workshop", shortDescription: "Photo Workshop Part II",
-					moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(24)) + " 6:00"),
-					location: trailheadService.gateway())
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.addToCategories(Category.SPECIAL_EVENT)
-			event.save(failOnError: true)
-			event = new Event(title: "Flying insect survey training", shortDescription: "Learn how to do real research into creepy crawlies",
-					moreInformation: "Presentation followed by in-the-field training led by Principal Investigator, Ron Rutowski. Location TBD. Please contact Lesley@mcdowellsonoran.org or at x 105 for details.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(28)) + " 10:00"),
-					location: trailheadService.gateway())
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.save(failOnError: true)
-			event = new Event(title: "Public Hike: Wildflower Walk on Sunrise Trail", shortDescription: "Come see the preserve's wonderful display of wildflowers",
-					moreInformation: "Wildflower Walk on Sunrise Trail Join Botany Expert, Steve Jones and photographer/author of Wildflowers and More Marianne Skov Jensen as we hunt for wildflowers on the Sunrise Trail. Along the way, you'll hear interesting tidbits about the wildflowers we find and also learn simple tips for taking better flower photos. A 3 mile hike on gently but steadily rising terrain, with a few steeper areas. Poles recommended. Allow 3 1/2 hours. Please arrive at Ringtail Trailhead by 7:45 am. Appropriate for children ages 8 and up",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(30)) + " 8:00"),
-					location: trailheadService.ringtail())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-			event = new Event(title: "Public Hike: Birding in the Preserve", shortDescription: "Join us for a light hike and learn about some of the preserve's birds.",
-					moreInformation: "Birding in the Preserve This 3 mile hike (it may be less depending on what we see) follows the Quartz Trail and the Paradise Trail up Ironwood Wash and allows for seeing and hearing a variety of desert birds. Allow 2 hours. Please arrive at the Quartz Trailhead by 7:45 am. Appropriate for ages 10 and up. Please note that this is a birding hike that involves lots of stopping and starting. Expect that you will spend 2/3 of the time stationary.",
-					startTime: formatter.parseDateTime(todayFormatter.print(today.plusDays(31)) + " 8:00"),
-					showOnHomePage: true, location: trailheadService.gateway())
-			event.addToCategories(Category.HIKE)
-			event.addToCategories(Category.CLASS_OR_LECTURE)
-			event.addToCategories(Category.FAMILY)
-			event.save(failOnError: true)
-		}
 	}
 
 	void createLocations() {
@@ -408,19 +322,6 @@ class BootStrap {
 	}
 
 	void createNews() {
-		println "News: ${NewsItem.count()}"
-		if (!NewsItem.count()) {
-			def displayStartDate = LocalDate.now()
-			def displayEndDate = displayStartDate.plusYears(4)
-			println "Creating News Items"
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "Office Administrator Position", summary: "The Conservancy is seeking a part-time Office Administrator.", moreInformation: "Nancy Howe is retiring to become a full-time steward, and the Conservancy is looking to fill the position of part-time office administrator. This is a five-day, 20 hour per week position. The job description is available here. To apply, please send a cover letter with resume to Conservancy Office Administration. Review of applications will begin the week of February 6.", important: true).save(failOnError: true)
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "Photo Workshops February and March 2012", summary: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve.", moreInformation: "Join expert outdoor photographer and Conservancy steward Richard Buchbinder for a two-day photography workshop in the McDowell Sonoran Preserve that will both sharpen your artistic eye and technical skills with your camera. You will learn how to make better photographs and have fun in the process. The Saturday session in the Preserve includes individual attention for each participant. From novice to more experienced photographers, there is something for everyone. Please call 480-998-7971 ext. 102 to register.", important: true).save(failOnError: true)
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "Become a Conservancy Volunteer", summary: "Sign up for the next volunteer orientation (March 3rd and 10th) and make an impact on your community. You'll learn about the Conservancy, the Preserve, and all the ways you can help care for our living treasure. Everyone's welcome. We have indoor and outdoor work and are ADA compliant. Call today and get started", moreInformation: "Conservancy's Volunteers, called Stewards, Play a Vital Role in the Preserve. Become a McDowell Sonoran Conservancy Steward. Work hard, have fun, and make an impact on your community. The Conservancy volunteers champion the preservation of open space, steward the McDowell Sonoran Preserve, and engage the community in preserving our environment. What we all have in common is our passion for nature and a desire to make our community a better place.", important: true).save(failOnError: true)
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "Conservancy Office Hours", summary: "We are open Monday through Friday, 9 - 4. Call us at 998.7971.", moreInformation: "Thank you for visiting our website. If you would like to contact us, please see the information below. For questions about volunteering: Jill@mcdowellsonoran.org. For questions about making a gift: Molly@mcdowellsonoran.org. For any other question: Nancy@mcdowellsonoran.org", important: false).save(failOnError: false)
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "Natural History I Class (March Session)", summary: "Open to the Public! An intimate look at the McDowells", moreInformation: "Natural History I consists of four 90-minute modules covering the geology of central Arizona, the ecology of the Sonoran Desert, and the plants and animals that are common in the Preserve. There will be two sessions in the morning and two in the afternoon with a long lunch break in between. Bring water, snacks, and plan to either bring your lunch or go off-campus. All of the material for the four sessions is available on the Conservancy website; please download a set before class if you want to take notes on the slides.", important: false).save(failOnError: false)
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "Natural History II Class (April Session)", summary: "Open to the Public! An intimate look at the McDowells", moreInformation: "Natural History II consists of four 90-minute modules covering the geology of central Arizona, the ecology of the Sonoran Desert, and the plants and animals that are common in the Preserve. There will be two sessions in the morning and two in the afternoon with a long lunch break in between. Bring water, snacks, and plan to either bring your lunch or go off-campus. All of the material for the four sessions is available on the Conservancy website; please download a set before class if you want to take notes on the slides.", important: false).save(failOnError: false)
-			new NewsItem(displayStartDate: displayStartDate, displayEndDate: displayEndDate, title: "New Steward Orientation", summary: "Be a Steward of the McDowell Sonoran Preserve!", moreInformation: "Work hard, have fun, and make an impact on your community. Conservancy volunteers champion the preservation of open space, steward the McDowell Sonoran Preserve, and engage the community in preserving our environment. What we all have in common is our passion for nature and a desire to make our community a better place.", important: false).save(failOnError: false)
-		}
 	}
 	
 	void createHikes() {
@@ -569,31 +470,119 @@ class BootStrap {
 	}
 	 
 	def createAdSpace() {
-		println "Ad Space Photos: ${SCMSAdSpacePhoto.count()}"
-		if (!SCMSAdSpacePhoto.count()) {
-			println "Creating Adspace Images"
-			def serverURL = "http://newmscwebsite.cloudfoundry.com"
-			def adSpacePath = "images/adspace" 
-			def gatewayKids = new SCMSPhoto(description: "Gateway Kids", source: serverURL, path: adSpacePath, originalFileName: "LR_Gateway kids_1736.jpg", fileName: "LR_Gateway kids_1736.jpg", width: 1194, height: 403, keywords: ["adspace"], allKeywords: "adspace", artist: "Phil", copyright: "None")
-			gatewayKids.save(failOnError: true, flush: true)
-			def gatewayWindgate = new SCMSPhoto(description: "Gateway Windgate", source: serverURL, path: adSpacePath, originalFileName: "LR_Gateway-Windgate Trails.jpg", fileName: "LR_Gateway-Windgate Trails.jpg", width: 1194, height: 403, keywords: ["adspace"], allKeywords: "adspace", artist: "Phil", copyright: "None")
-			gatewayWindgate.save(failOnError: true, flush: true)
-			def hummer = new SCMSPhoto(description: "Hummer at Rest", source: serverURL, path: adSpacePath, originalFileName: "LR_Hummer at Rest.jpg", fileName: "LR_Hummer at Rest.jpg", width: 1194, height: 403, keywords: ["adspace"], allKeywords: "adspace", artist: "Phil", copyright: "None")
-			hummer.save(failOnError: true, flush: true)
-			def stewards = new SCMSPhoto(description: "Steward Discussion", source: serverURL, path: adSpacePath, originalFileName: "LR_mjensen-survey-insect-lost-dog-3403.jpg", fileName: "LR_mjensen-survey-insect-lost-dog-3403.jpg", width: 936, height: 288, keywords: ["adspace"], allKeywords: "adspace", artist: "Barry White", copyright: "All Rights Reserved")
-			stewards.save(failOnError: true, flush: true)
-			def mcdowells = new SCMSPhoto(description: "View from the McDowells", source: serverURL, path: adSpacePath, originalFileName: "LR_100_4004.jpg", fileName: "LR_100_4004.jpg", width: 936, height: 288, keywords: ["adspace"], allKeywords: "adspace", artist: "Barry White", copyright: "All Rights Reserved")
-			mcdowells.save(failOnError: true, flush: true)
-			def gatewayKidsAd = new SCMSAdSpacePhoto(title: "Gateway Kids", link: "supportUs/index", photo: gatewayKids)
-			gatewayKidsAd.save(failOnError: true, flush: true)
-			def gatewayWindgateAd = new SCMSAdSpacePhoto(title: "Gateway Windgate", link: "volunteer", photo: gatewayWindgate)
-			gatewayWindgateAd.save(failOnError: true, flush: true)
-			def hummerAd = new SCMSAdSpacePhoto(title: "Hummer at Rest", link: "volunteer", photo: hummer)
-			hummerAd.save(failOnError: true, flush: true)
-			def stewardsAd = new SCMSAdSpacePhoto(title: "Steward Discussion", link: "aboutUs", photo: stewards)
-			stewardsAd.save(failOnError: true, flush: true)
-			def mcdowellsAd = new SCMSAdSpacePhoto(title: "View from the McDowells", link: "donate/index", photo: mcdowells)
-			mcdowellsAd.save(failOnError: true, flush: true)
+	}
+	
+	def createStewards() {
+		def resource = new ClassPathResource("MC_Steward_Data.csv")
+		File stewardFile = resource.getFile()
+		stewardFile.eachCsvLine { tokens ->
+			// Ignore the header line
+			if (tokens[0] != "FirstName") {
+				// First Name, Last Name, Home Phone, Cell Phone, Email, Class Number
+				createSteward(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5])
+			}
+		}
+	}
+	
+	def createSteward(firstName, lastName, homePhone, cellPhone, email, classNumber) {
+		def stewardRole = SecRole.findByAuthority("ROLE_STEWARD")
+		def person = Person.findByUsername(email)
+		if (person == null) {
+			def steward = new Person()
+			steward.firstName = firstName
+			steward.lastName = lastName
+			steward.username = email
+			steward.password = 'conservancy'
+			def home = new Phone(number: homePhone)
+			def cell = new Phone(number: cellPhone)
+			steward.homePhone = home
+			steward.cellPhone = cell
+			steward.classNumber = classNumber
+			steward.enabled = true
+			steward.accountExpired = false
+			steward.accountLocked = false
+			steward.passwordExpired = false
+			if (steward.validate()) {
+				steward.save(failOnError: true, flush: true)
+				SecUserSecRole.create(steward, stewardRole, true)
+				println "Created steward account for ${firstName} ${lastName}"
+			} else {
+				println "Failed to create account for ${firstName} ${lastName}"
+				steward.errors.allErrors.each {
+					println it
+				}
+			}
+		} else {
+			person.classNumber = classNumber
+			person.homePhone = new Phone(number: homePhone)
+			person.cellPhone = new Phone(number: cellPhone)
+			person.enabled = true
+			person.accountExpired = false
+			person.accountLocked = false
+			person.passwordExpired = false
+			if (person.validate()) {
+				person.save(failOnError: true, flush: true)
+			} else {
+				println "Failed to modify account for ${firstName} ${lastName}"
+				person.errors.allErrors.each {
+					println it
+				}
+			}
+		}
+	}
+	
+	def updateSql() {
+/*		def modifyCoordinatesColumns = "ALTER TABLE `mscmsc`.`trailhead` CHANGE COLUMN `coordinates_latitude` `coordinates_latitude` DECIMAL(19,6) NOT NULL  , CHANGE COLUMN `coordinates_longitude` `coordinates_longitude` DECIMAL(19,6) NOT NULL  ;"
+		def db = [url:'jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc', user:'root', password:'uni-dev01', driver:'com.mysql.jdbc.Driver']
+		def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
+		sql.execute(modifyCoordinatesColumns) */
+		try {
+			def phils = Person.findAllByUsernameLike("hart404%")
+			phils.each { phil ->
+				println "Deleting: ${phil.username}"
+				phil.delete(failOnError: true, flush: true)
+			}
+		} catch(e) {
+			println "Deleting phils failed: ${e}"
+		}
+	}
+	
+	def websiteUpdates() {
+		def brownsRanch = trailheadService.brownsRanch()
+		def coordinates = new GeographicCoordinates(latitude: 33.755755, longitude: -111.843926)
+		brownsRanch.description = "The Brown's Ranch Trailhead will be the first trailhead to provide access to the northern region of the McDowell Sonoran Preserve.  The Trailhead will be located approximately 1.25 miles north of the intersection of Alma School Parkway and Dynamite Boulevard. Brown's Ranch Trailhead is currently under construction, and expected to open in June 2013.  Please check back here for updates."
+		brownsRanch.coordinates = coordinates
+		if (brownsRanch != null) {
+			println "Saving Brown's Ranch"
+			brownsRanch.save(failOnError: true, flush: true)
+		}
+		def tomsThumb = trailheadService.tomsThumb()
+		coordinates = new GeographicCoordinates(latitude: 33.694258, longitude: -111.801881)
+		tomsThumb.coordinates = coordinates
+		def address = new StreetAddress(street: "23015 N 128th St", zip: "85255")
+		tomsThumb.address = address
+		if (tomsThumb != null) {
+			println "Saving Tom's Thumb"
+			tomsThumb.save(failOnError: true, flush: true)
+		}
+		address = new StreetAddress(street: "12601 N 124th St", zip: "85259")
+		def lostDog = trailheadService.lostDog()
+		coordinates = new GeographicCoordinates(latitude: 33.599552, longitude: -111.812910)
+		lostDog.address = address
+		lostDog.coordinates = coordinates
+		if (lostDog != null) {
+			println "Saving Lost Dog"
+			lostDog.save(failOnError: true, flush: true)
+		}
+		coordinates = new GeographicCoordinates(latitude: 33.699199, longitude: -111.887407)
+		address = new StreetAddress(street: "8950 E. Pinnacle Peak Road", zip: "85255")
+		def florenceElyNelson = Trailhead.findByInternalName("florenceElyNelson")
+		if (florenceElyNelson == null) {
+			florenceElyNelson = new Trailhead(name: "Florence Ely Nelson Center", internalName: "florenceElyNelson", description: "The Florence Ely Nelson Center is located on the north east corner of Pinnacle Peak and Pima Rd behind the small strip mall. From the junction of Pinnacle Peak and Pima, head east and take the third turn on your left.", address: address, coordinates: coordinates, "amenities": [], "activities": [])
+		}
+		florenceElyNelson.coordinates = coordinates
+		if (florenceElyNelson != null) {
+			florenceElyNelson.save(failOnError: true, flush:true)
 		}
 	}
 	

@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="mainLayout" />
+        <meta name="layout" content="generatedLayout" />
         <g:set var="entityName" value="${message(code: 'event.label', default: 'Event')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
@@ -22,8 +22,6 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'event.id.label', default: 'Id')}" />
-                        
                             <g:sortableColumn property="title" title="${message(code: 'event.title.label', default: 'Title')}" />
                         
                             <g:sortableColumn property="shortDescription" title="${message(code: 'event.shortDescription.label', default: 'Short Description')}" />
@@ -31,10 +29,12 @@
                             <g:sortableColumn property="moreInformation" title="${message(code: 'event.moreInformation.label', default: 'More Information')}" />
                         
                             <th><g:message code="event.location.label" default="Location" /></th>
+                            <th><g:message code="event.otherLocation.label" default="Other Location" /></th>
+                            <th><g:message code="event.stewardOnly.label" default="Steward Only" />
                         
                             <g:sortableColumn property="startTime" title="${message(code: 'event.startTime.label', default: 'Start Time')}" />
                         
-                            <g:sortableColumn property="endTime" title="${message(code: 'event.endTime.label', default: 'Start Time')}" />
+                            <g:sortableColumn property="endTime" title="${message(code: 'event.endTime.label', default: 'End Time')}" />
                             
                             <th><g:message code="event.photo.label" default="Photo" /></th>
                         </tr>
@@ -43,15 +43,19 @@
                     <g:each in="${eventInstanceList}" status="i" var="eventInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "id")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: eventInstance, field: "title")}</td>
+                            <td><g:link action="edit" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "title")}</g:link></td>
                         
                             <td>${fieldValue(bean: eventInstance, field: "shortDescription")}</td>
                         
                             <td>${fieldValue(bean: eventInstance, field: "moreInformation")}</td>
                         
                             <td>${fieldValue(bean: eventInstance, field: "location")}</td>
+                        
+                            <td>${fieldValue(bean: eventInstance, field: "otherLocation")}</td>
+                            
+                            <td>
+                                <g:if test="${eventInstance.stewardOnly}">Yes</g:if><g:else>No</g:else>
+                            </td>
                         
                             <td>${fieldValue(bean: eventInstance, field: "startTime")}</td>
                         

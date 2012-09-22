@@ -5,8 +5,8 @@ class GeographicCoordinates {
 	BigDecimal longitude
 
     static constraints = {
-		latitude(nullable: false)
-		longitude(nullable: false)
+		latitude(nullable: false, scale: 6)
+		longitude(nullable: false, scale: 6)
     }
 
 	@Override

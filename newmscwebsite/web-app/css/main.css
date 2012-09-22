@@ -187,7 +187,8 @@ td.errors textarea {
 
 table {
     border: 1px solid #ccc;
-    width: 100%
+    width: 100%;
+    font-family: sans-serif;
 }
 tr {
     border: 0;
@@ -196,7 +197,6 @@ td, th {
     padding: 5px 6px;
 }
 th {
-    background: #fff url(../images/skin/shadow.jpg);
     color: #666;
     font-size: 11px;
     font-weight: bold;
@@ -222,10 +222,10 @@ th.desc a {
 }
 
 .odd {
-    background: #f7f7f7;
+    background: rgb(158, 145, 136);
 }
 .even {
-    background: #fff;
+    background: rgb(191, 168, 124);
 }
 
 /* LIST */

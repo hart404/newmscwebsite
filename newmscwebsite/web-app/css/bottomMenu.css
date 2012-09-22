@@ -1,0 +1,33 @@
+
+.logo {
+    margin-top: 80px;
+    margin-left: 20px; 
+    float: left;    
+}
+
+.bottomMenu {
+    margin-left: auto;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    clear: both;
+}
+
+.bottomMenu ul {
+    list-style: none;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.bottomMenu ul a {
+    color: rgb(153, 143, 134);
+    text-decoration: none;
+}
+
+.bottomMenuListItem {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: inline;
+}

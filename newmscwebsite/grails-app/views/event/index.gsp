@@ -192,9 +192,9 @@
 		<div class="eventContainer">
 			<div class="blockHeader">
 				<h1 class="redEventText">Events</h1>
-			</div>
+			</div>	
 			<div class="eventOrNews" id="eventList">
-				<g:render template="/event/eventsTemplate"></g:render>
+			    <g:render template="/event/eventsTemplate"></g:render>
 			</div>
 		</div>
 	</div>

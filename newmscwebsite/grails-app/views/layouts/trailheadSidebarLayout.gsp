@@ -33,10 +33,10 @@
 		<div class="sidebarLink"><a href="<g:createLink controller='trailhead' action='gateway'/>" class="sidebarLinkInner">Gateway</a></div>
 		</g:else>
 		<g:if test="${currentView == 'lostDog'}">
-		<div class="sidebarLinkCurrent">Lost Dog Wash/Sunset Trail</div>
+		<div class="sidebarLinkCurrent">Lost Dog Wash/Sunrise Trail</div>
 		</g:if>
 		<g:else>
-		<div class="sidebarLink"><a href="<g:createLink controller='trailhead' action='lostDog'/>" class="sidebarLinkInner">Lost Dog Wash/Sunset Trail</a></div>
+		<div class="sidebarLink"><a href="<g:createLink controller='trailhead' action='lostDog'/>" class="sidebarLinkInner">Lost Dog Wash/Sunrise Trail</a></div>
 		</g:else>
 		<g:if test="${currentView == 'tomsThumb'}">
 		<div class="sidebarLinkCurrent">Tom's Thumb and East End</div>

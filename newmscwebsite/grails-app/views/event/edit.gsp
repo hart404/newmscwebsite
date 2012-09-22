@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="mainLayout" />
+        <meta name="layout" content="generatedLayout" />
         <g:set var="entityName" value="${message(code: 'event.label', default: 'Event')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
@@ -67,17 +67,26 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="otherLocation"><g:message code="event.otherLocation.label" default="Other Location" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'otherLocation', 'errors')}">
+                                    <g:textField name="otherLocation" value="${eventInstance?.otherLocation}"/>
+                                </td>
+                            </tr>
+                        
 	                        <tr class="prop">
 	                            <td valign="top" class="name">
-	                                <label for="location">
-	                                    <g:message code="event.photo.label" default="Location" />
+	                                <label for="photo">
+	                                    <g:message code="event.mainPhoto.label" default="Photo" />
 	                                </label>
 	                            </td>
 	                            <td valign="top"
-	                                class="value ${hasErrors(bean: eventInstance, field: 'photo', 'errors')}">
-	                                <span id="photoFileName">-None Selected-</span>
+	                                class="value ${hasErrors(bean: eventInstance, field: 'mainPhoto', 'errors')}">
+	                                <span id="photoFileName"><g:if test="${eventInstance?.mainPhoto == null}">-None Selected-</g:if><g:else>${eventInstance?.mainPhoto.originalFileName}</g:else></span>
 	                                <button id="search">Search for Photo</button>
-	                                <input type="hidden" name="photoId" id="photoId" value="" />
+	                                <input type="hidden" name="photoId" id="photoId" value="${eventInstance?.mainPhoto?.id}" />
 	                            </td>
 	                        </tr>
 
@@ -101,13 +110,27 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="eventPriority"><g:message code="event.showOnHomePage.label" default="Show on Home Page" /></label>
+                                  <label for="showOnHomePage"><g:message code="event.showOnHomePage.label" default="Show on Home Page" /></label>
                                 </td>
                             <td valign="top"
                                 class="value ${hasErrors(bean: eventInstance, field: 'showOnHomePage', 'errors')}">
                                 <g:checkBox name="showOnHomePage" value="${eventInstance.showOnHomePage}" />
                             </td>
                             </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="stewardOnly"><g:message code="event.stewardOnly.label" default="Steward Only Event" /></label>
+                                </td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: eventInstance, field: 'stewardOnly', 'errors')}">
+                                <g:checkBox name="stewardOnly" value="${eventInstance.stewardOnly}" />
+                            </td>
+                            </tr>
+                            
+	                        <tr><td></td></tr>
+	                        <tr><td><strong>Categories</strong></td></tr>
+
 	                        <tr class="prop">
 	                            <td valign="top" class="name"><label for="family"><g:message
 	                                        code="event.family.label" default="Family" /></label>

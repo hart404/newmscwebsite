@@ -71,14 +71,16 @@ body {
 					<img src="<g:createLinkTo dir='/images/activities' file='${activity.icon()}'/>" width="32" height="32"/>
 				</g:each>
 			</p>
-	        <p class="bigp">
-                <span class="redEventText">Hikes: </span>
-                <ul class="hikeList">
-                <g:each var="hike" in="${location.getHikesInOrder()}">
-                    <li><g:link controller='trailhead' action='displayHike' id='${hike.id}'>${hike.name}</g:link></li>
-                </g:each>
-                </ul>
-            </p>
+			<g:if test="${location.hikes != null && (!location.hikes.isEmpty())}" >
+		        <p class="bigp">
+	                <span class="redEventText">Hikes: </span>
+	                <ul class="hikeList">
+		                <g:each var="hike" in="${location.getHikesInOrder()}">
+		                    <li><g:link controller='trailhead' action='displayHike' id='${hike.id}'>${hike.name}</g:link></li>
+		                </g:each>
+	                </ul>
+	            </p>
+            </g:if>
     		
 		</div>
 	</div>

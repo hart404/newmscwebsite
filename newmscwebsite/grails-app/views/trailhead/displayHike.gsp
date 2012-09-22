@@ -43,7 +43,7 @@ body {
                     mapTypeId: google.maps.MapTypeId.HYBRID
             }
             var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-            var georssLayer = new google.maps.KmlLayer("http://newmscwebsite.cloudfoundry.com/maps/${hike.kmlFileName.encodeAsURL()}");
+            var georssLayer = new google.maps.KmlLayer("http://mcdowellsonoran.org/maps/${hike.kmlFileName.encodeAsURL()}");
             georssLayer.setMap(map);                    
             var map2 = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
  		}

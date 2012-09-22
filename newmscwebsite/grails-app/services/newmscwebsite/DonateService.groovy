@@ -1,0 +1,34 @@
+package newmscwebsite
+
+import net.authorize.Environment
+import net.authorize.Merchant
+import net.authorize.TransactionType
+import net.authorize.aim.Result
+import net.authorize.aim.Transaction
+import net.authorize.data.creditcard.CreditCard
+
+class DonateService {
+	
+	def grailsApplication
+
+	def processDonation() {
+		def apiLoginId = grailsApplication.config.authorize.net.api.login.identity
+		def transactionKey = grailsApplication.config.authorize.net.transaction.key
+		Merchant merchant = Merchant.createMerchant(Environment.SANDBOX, apiLoginId, transactionKey)
+		CreditCard creditCard = CreditCard.createCreditCard()
+		creditCard.setCreditCardNumber("370000000000002")
+		creditCard.setExpirationMonth("12")
+		creditCard.setExpirationYear("2015")
+
+		// Create AUTH transaction
+		Transaction authCaptureTransaction = merchant.createAIMTransaction(TransactionType.AUTH_CAPTURE, new BigDecimal(1.99))
+		authCaptureTransaction.setCreditCard(creditCard)
+
+		Result<Transaction> result = (Result<Transaction>) merchant.postTransaction(authCaptureTransaction)
+
+		println result.getTarget().getTransactionId()
+		println "responseCode = " + result.getResponseCode()
+		println "responseText = " + result.getResponseText()
+		println "reasonResponseCode = " + result.getReasonResponseCode()
+	}
+}

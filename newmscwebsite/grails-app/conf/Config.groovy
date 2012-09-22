@@ -1,7 +1,7 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
+grails.config.locations = ["classpath:SecretConfig.properties"]
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
@@ -60,18 +60,16 @@ environments {
 		grails.serverURL = "http://localhost:8080/${appName}"
 	}
 	production {
-		grails.serverURL = "http://newmscwebsite.cloudfoundry.com"
+		grails.serverURL = "http://www.mcdowellsonoran.org"
 	}
 }
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+	
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    }
 
     error  	'org.codehaus.groovy.grails.web.servlet',  //  controllers
            	'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -90,6 +88,10 @@ log4j = {
     error   'org.mortbay.log'
 	
 	error	'org.codehaus.groovy.grails.plugins.springsecurity'
+	
+	error 	'org.springframework.security'
+	
+	debug 	'newmscwebsite'
 
 }
 
@@ -102,31 +104,66 @@ import grails.plugins.springsecurity.SecurityConfigType
 
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
-	'/**':			['IS_AUTHENTICATED_ANONYMOUSLY']
+	'/login/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/logout/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/denied':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/register/forgotPassword/**':		['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/register/index/**':				['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/*.html':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/*.xml':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/*.gsp':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/css/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/js/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/images/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/html/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/maps/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/pdfs/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/home/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/content/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/*/list/**':						['IS_AUTHENTICATED_REMEMBERED'],
+	'/*/create/**':						['IS_AUTHENTICATED_REMEMBERED'],
+	'/*/save/**':						['IS_AUTHENTICATED_REMEMBERED'],
+	'/*/update/**':						['IS_AUTHENTICATED_REMEMBERED'],
+	'/*/delete/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/event/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/donate/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/newsItem/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/trailhead/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/person/**':						['IS_AUTHENTICATED_REMEMBERED'],
+	'/photo/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/adSpacePhoto/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/trailhead/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/gallery/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/lightbox/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/plugins/*/js/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/plugins/*/css/**':				['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/plugins/*/jquery-ui/js/**':		['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/plugins/*/jquery-ui/themes/**':	['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/':								['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/error':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/**':								['IS_AUTHENTICATED_REMEMBERED'],
 ]
 
-grails {
-	mail {
-	  host = "email-smtp.us-east-1.amazonaws.com"
-	  port = 465
-	  username = "AKIAJBKQWYCGJ7DTMVPA"
-	  password = "Ahgi0BAFtWdMvxH4MbV+/NPdK4xqJQnOb64GHt0V4Hey"
-	  props = ["mail.smtp.auth":"true",
-			   "mail.smtp.socketFactory.port":"465",
-			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-			   "mail.smtp.socketFactory.fallback":"false"]
-	}
- }
+/* Disable until GoDaddy situation is sorted out.
+grails.plugins.springsecurity.secureChannel.definition = [
+	'/donate/**':         'REQUIRES_SECURE_CHANNEL'
+]
+*/
+
+grails.plugins.springsecurity.ui.forgotPassword.emailFrom = 'info@mcdowellsonoran.org'
+grails.plugins.springsecurity.ui.register.emailFrom = 'info@mcdowellsonoran.org'
+
+grails.plugins.springsecurity.useSecurityEventListener = true
+grails.plugins.springsecurity.logout.handlerNames =
+	['rememberMeServices',
+	 'securityContextLogoutHandler',
+	 'securityEventListener']
 
 breadcrumbs.selector="title"
 
 grails.resources.debug = true
 
 grails.views.javascript.library="jquery"
-
-maps.google.api.key="AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0"
-
-google.analytics.webPropertyID = "UA-20562408-1"
 
 grails.gorm.default.mapping = {
 	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
@@ -135,11 +172,18 @@ grails.gorm.default.mapping = {
 
 grails.plugin.cloudfoundry.showStackTrace = true
 
-grails.serverURL="http://newmscwebsite.cloudfoundry.com"
+grails {
+	mail {
+	  host = "email-smtp.us-east-1.amazonaws.com"
+	  port = 465
+	  props = ["mail.smtp.auth":"true",
+			   "mail.smtp.socketFactory.port":"465",
+			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			   "mail.smtp.socketFactory.fallback":"false"]
+	}
+}
 
-// grails.serverURL="http://newmscwebsite.elasticbeanstalk.com"
 
-grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 
 
   

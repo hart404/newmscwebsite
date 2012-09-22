@@ -18,21 +18,34 @@ class Person extends SecUser {
 	SCMSPhoto photo
 	boolean masterSteward = false
 	CLTPosition position
-	int classNumber
-
+	String classNumber
+	boolean wantsWeeklyEmail
+	Boolean hasStewardRole = false
+	
 	static embedded = ['address', 'homePhone', 'cellPhone']
 
 	static constraints = {
 		firstName(nullable: false, size: 1..30)
 		middleInitial(nullable: true, size: 1..4)
 		lastName(nullable: false, size: 1..50)
-		address(nullable: true)
-		
+		address(nullable: true)		
 		homePhone(nullable: true)
 		cellPhone(nullable: true)
 		photo(nullable: true)
 		tshirtSize(inList: ["Y", "S", "M", "L", "XL", "XXL"], nullable: true)
 		position(nullable: true)
-		classNumber(inList: [1..50])
+		classNumber(nullable: true)
+		emergencyContact(nullable: true)
+		emergencyPhone(nullable: true)
+		emergencyRelationship(nullable: true)
+		hasStewardRole(nullable: false)
+	}
+	
+	static mapping = {
+		sort lastName: "asc"
+	}
+	
+	String toString() {
+		firstName + " " + lastName
 	}
 }

@@ -2,16 +2,21 @@ package newmscwebsite
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import simple.cms.SCMSMenu
+import simple.cms.SCMSPhoto
+
 class PersonController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	def personService
 
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 50, 100)
         [personInstanceList: Person.list(params), personInstanceTotal: Person.count()]
     }
 
@@ -20,12 +25,37 @@ class PersonController {
     }
 
     def save() {
-        def personInstance = new Person(params)
+		println params
+		if (params.password == null) {
+			params.password = "conservancy"
+		}
+		
+		def keysToRemove = ["street", "apartment", "city", "state", "zip", "homePhone", "cellPhone"]
+		def newParams = [:]
+		params.each {
+			if (!(it.key in keysToRemove)) {
+				newParams[it.key] = it.value
+			}
+		}
+
+        def personInstance = new Person(newParams)
+		def address = new StreetAddress(params)
+		personInstance.address = address
+		if (!params.homePhone.isEmpty()) {
+			def homePhone = new Phone(number: params.homePhone)
+			personInstance.homePhone = homePhone
+		}
+		if (!params.cellPhone.isEmpty()) {
+			def cellPhone = new Phone(number: params.cellPhone)
+			personInstance.cellPhone = cellPhone
+		}
         if (!personInstance.save(flush: true)) {
             render(view: "create", model: [personInstance: personInstance])
             return
         }
-
+		
+		updateAuthorities(personInstance, params)
+		personInstance.save(flush: true)
 		flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
         redirect(action: "show", id: personInstance.id)
     }
@@ -53,6 +83,7 @@ class PersonController {
     }
 
     def update() {
+		println params
         def personInstance = Person.get(params.id)
         if (!personInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
@@ -70,8 +101,33 @@ class PersonController {
                 return
             }
         }
-
-        personInstance.properties = params
+		
+		if (params.photoId != personInstance?.photo?.id) {
+			def photo = SCMSPhoto.get(params.photoId)
+			personInstance.photo = photo
+		}
+		
+		updateAuthorities(personInstance, params)
+		
+		def address = new StreetAddress(params)
+		personInstance.address = address
+		if (!params.homePhone.isEmpty() && params.homePhone != personInstance.homePhone.number) {
+			def homePhone = new Phone(number: params.homePhone)
+			personInstance.homePhone = homePhone
+		}
+		if (!params.cellPhone.isEmpty() && params.cellPhone != personInstance.cellPhone.number) {
+			def cellPhone = new Phone(number: params.cellPhone)
+			personInstance.cellPhone = cellPhone
+		}
+		
+		def keysToRemove = ["street", "apartment", "city", "state", "zip", "homePhone", "cellPhone"]
+		def newParams = [:]
+		params.each {
+			if (!(it.key in keysToRemove)) {
+				newParams[it.key] = it.value
+			}
+		}
+        personInstance.properties = newParams
 
         if (!personInstance.save(flush: true)) {
             render(view: "edit", model: [personInstance: personInstance])
@@ -81,6 +137,42 @@ class PersonController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
         redirect(action: "show", id: personInstance.id)
     }
+	
+	def updateAuthorities(person, params) {
+		def rolesMap = createRolesMap()
+		rolesMap.each { entry ->
+			println "Updating: ${person} - ${params[entry.key]} - ${entry.value}"
+			updateAuthority(person, params[entry.key], entry.value)
+		}
+	}
+	
+	def updateAuthority(person, onOff, role) {
+		if (onOff == "on") {
+			if (!person.authorities.contains(role)) {
+				SecUserSecRole.create(person, role, true)
+				if (role.authority == "ROLE_STEWARD") {
+					person.hasStewardRole = true
+				}
+			}
+		} 
+		if (onOff == "off") {
+			if (person.authorities.contains(role)) {
+				SecUserSecRole.remove(person, role, true)
+				if (role.authority == "ROLE_STEWARD") {
+					person.hasStewardRole = false
+				}
+			}
+		}
+	}
+	
+	def createRolesMap() {
+		def roles = SecRole.list()
+		def rolesMap = [:]
+		roles.each { role ->
+			rolesMap[role.authority.toLowerCase()] = role
+		}
+		rolesMap
+	}
 
     def delete() {
         def personInstance = Person.get(params.id)
@@ -100,4 +192,38 @@ class PersonController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def registerUser() {
+		params
+	}
+	
+	def stewardList() {
+		params.max = Math.min(params.max ? params.int('max') : 50, 100)
+		params.sort = params.sort ?: "firstName"
+		def stewardMenu = SCMSMenu.findByTitle("Steward")
+		if (stewardMenu == null) {
+			stewardMenu = new SCMSMenu(title: "Steward")
+		}
+		[stewards: personService.getStewards(params), stewardCount: personService.countAllStewards(params), menu: stewardMenu]
+	}
+	
+	def changePassword() {
+		[personInstance: Person.get(params.id)]
+	}
+	
+	def updatePassword() {
+		def newPassword = params.newPassword
+		def repeatNewPassword = params.repeatNewPassword
+		if (newPassword != repeatNewPassword) {
+			flash.message = "Passwords do not match"
+			redirect(action: "changePassword")
+			return
+		}
+		def person = Person.get(params.id)
+		person.password = newPassword
+		person.save(failOnError: true, flush: true)
+		flash.message = "Password updated"
+		redirect(action: 'show', id: person.id)
+	}
+
 }

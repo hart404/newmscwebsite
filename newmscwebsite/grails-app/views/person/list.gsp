@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="generatedLayout">
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -24,13 +24,9 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="username" title="${message(code: 'person.username.label', default: 'Username')}" />
-					
-						<g:sortableColumn property="password" title="${message(code: 'person.password.label', default: 'Password')}" />
+						<g:sortableColumn property="username" title="${message(code: 'person.username.label', default: 'Email')}" />
 					
 						<g:sortableColumn property="firstName" title="${message(code: 'person.firstName.label', default: 'First Name')}" />
-					
-						<g:sortableColumn property="middleInitial" title="${message(code: 'person.middleInitial.label', default: 'Middle Initial')}" />
 					
 						<g:sortableColumn property="lastName" title="${message(code: 'person.lastName.label', default: 'Last Name')}" />
 					
@@ -43,8 +39,6 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${personInstance.id}">${fieldValue(bean: personInstance, field: "username")}</g:link></td>
-					
-						<td>${fieldValue(bean: personInstance, field: "password")}</td>
 					
 						<td>${fieldValue(bean: personInstance, field: "firstName")}</td>
 					

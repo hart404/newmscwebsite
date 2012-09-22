@@ -47,6 +47,11 @@ class CacheFilters {
 				noCache(response)
 			}
 		}
+		widget(uri : '/lightbox/**') {
+			before = {
+				noCache(response)
+			}
+		}
 	}
 	
 	void noCache(response) {

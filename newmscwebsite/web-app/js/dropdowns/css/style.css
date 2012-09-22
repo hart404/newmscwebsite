@@ -5,12 +5,12 @@ ul.dropdown.a						{ text-decoration: none; }
 /* 
 	LEVEL ONE
 */
-ul.dropdown                         { display: table; width: 100%; padding: 0; position: relative; margin: 0; z-index: 100; color: rgb(242, 227, 188); }
-ul.dropdown li                      { width: auto; font-size: 22px; font-weight: normal; color: white; display: table-cell; border-right: 1px solid rgb(206, 177, 136); zoom: 1; font-family: sans-serif; text-shadow: 3px 3px rgb(69, 66, 63); }
+ul.dropdown                         { height: 51px; display: table; width: 100%; padding: 0; position: relative; margin: 0; z-index: 100; background: rgb(96, 87, 82)\9; color: rgba(0, 31, 47, 0.9); background: rgb(96, 87, 82)\9; }
+ul.dropdown li                      { width: auto; font-size: 22px; font-weight: normal; color: white; display: table-cell; zoom: 1; font-family: sans-serif; }
 ul.dropdown a:hover		            { color: rgb(242, 227, 188); }
 ul.dropdown a:active                { color: white; }
-ul.dropdown li a                    { display: block; color: white; text-align: center; text-decoration: none; padding: 4px 8px; }
-ul.dropdown li:last-child           { border-right: none; } /* Doesn't work in IE */
+ul.dropdown li a                    { border-right: 1px solid rgb(206, 177, 136); display: block; color: white; text-align: center; text-decoration: none; padding: 4px 8px; }
+ul.dropdown li:last-child a         { border-right: none; } 
 ul.dropdown li.hover,
 ul.dropdown li:hover                { color: rgb(242, 227, 188); }
 ul.dropdown li.hover a              { color: rgb(242, 227, 188); }
@@ -18,16 +18,17 @@ ul.dropdown li.hover a              { color: rgb(242, 227, 188); }
 /* 
 	LEVEL TWO
 */
-ul.dropdown ul 						{ width: 100%; padding-left: 0; position: absolute; visibility: hidden; top: 100%; z-index: 100; background: rgb(96, 87, 82); }
-ul.dropdown ul li 					{ padding-left: 20px; display: block; list-style: none; font-weight: normal; z-index: 100; color: white; border-right: none; }
+ul.dropdown ul 						{ padding-right: 10px; padding-left: 0; position: absolute; visibility: hidden; top: 17px; z-index: 100; background: rgb(96, 87, 82)\9; background: rgba(0, 31, 47, 0.9); background: rgb(96, 87, 82)\9;}
+ul.dropdown ul li 					{ padding-left: 20px; display: block; list-style: none; font-weight: normal; z-index: 100; color: white; border-right: none; position: relative; }
 									  
                                     /* IE 6 & 7 Needs Inline Block */
-ul.dropdown ul li a					{ border-right: none; display: inline-block;  text-decoration: none; z-index: 100; text-align: left; } 
+ul.dropdown ul li a					{ width: 100%; border-right: none; display: inline-block;  text-decoration: none; z-index: 100; text-align: left; white-space: nowrap; } 
 ul.dropdown ul li a:hover           { color: white; } 
-ul.dropdown ul li:last-child        { border-right: none; } /* Doesn't work in IE */
+/* ul.dropdown ul li:last-child        { border-right: none; } */
 
 /* 
 	LEVEL THREE
 */
-ul.dropdown ul ul 					{ left: 100%; top: 0; padding: 0; }
+ul.dropdown ul ul.notLastItem		{ left: 100%; top: 0; padding: 0; }
+ul.dropdown ul ul.lastItem          { right: 100%; top: 0; padding: 0; }
 ul.dropdown li:hover > ul 			{ visibility: visible; }

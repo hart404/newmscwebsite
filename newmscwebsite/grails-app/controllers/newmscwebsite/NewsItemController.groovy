@@ -2,6 +2,8 @@ package newmscwebsite
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import simple.cms.SCMSPhoto
+
 class NewsItemController {
 	
 	def newsItemService
@@ -9,7 +11,6 @@ class NewsItemController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-		println "New Items: ${newsItemService.countAllCurrentNewsItems()}"
         [newsItems: newsItemService.getAllCurrentNewsItems(params), newsItemCount: newsItemService.countAllCurrentNewsItems()]
     }
 
@@ -23,7 +24,9 @@ class NewsItemController {
     }
 
     def save() {
+		def photo = SCMSPhoto.get(params.photoId)
         def newsItemInstance = new NewsItem(params)
+		newsItemInstance.photo = photo
         if (!newsItemInstance.save(flush: true)) {
             render(view: "create", model: [newsItemInstance: newsItemInstance])
             return
@@ -57,7 +60,11 @@ class NewsItemController {
 
     def update() {
         def newsItemInstance = NewsItem.get(params.id)
-        if (!newsItemInstance) {
+  		if (params.photoId != newsItemInstance.photo?.id) {
+			def photo = SCMSPhoto.get(params.photoId)
+			newsItemInstance.photo = photo
+		}
+		if (!newsItemInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'newsItem.label', default: 'NewsItem'), params.id])
             redirect(action: "list")
             return

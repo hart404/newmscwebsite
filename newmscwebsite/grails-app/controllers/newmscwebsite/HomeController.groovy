@@ -33,4 +33,8 @@ class HomeController {
 		}
 	} 
 	
+	def search() {
+		params
+	}
+	
 }

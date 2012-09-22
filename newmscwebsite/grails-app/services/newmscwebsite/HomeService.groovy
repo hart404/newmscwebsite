@@ -25,7 +25,7 @@ Your support will ensure that the Preserve continues to be a natural open space 
 	}
 	
 	def generateDonatePhotoWidget(page) {
-		def serverURL = "http://newmscwebsite.cloudfoundry.com"
+		def serverURL = "http://mcdowellsonoran.org"
 		def donatePhoto = new SCMSPhoto(description: "Donate", source: serverURL, path: "images/layout", originalFileName: "img_hike-105x104.png", fileName: "img_hike-105x104.png", width: 105, height: 104, keywords: ["donate"], allKeywords: "donate", artist: "Phil", copyright: "None")
 		donatePhoto.save(failOnError: true, flush: true)		
 		def donatePhotoWidget = new SCMSPhotoWidget(photo: donatePhoto, widgetId: "donatePhoto")

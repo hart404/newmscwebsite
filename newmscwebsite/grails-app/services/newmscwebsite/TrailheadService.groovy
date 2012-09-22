@@ -1,5 +1,8 @@
 package newmscwebsite
 
+import simple.cms.SCMSHTMLWidget
+import simple.cms.SCMSStaticPage
+
 class TrailheadService {
 
     def brownsRanch() {
@@ -20,6 +23,18 @@ class TrailheadService {
 	
 	def ringtail() {
 		Trailhead.findByNameLike("Ringtail%")
+	}
+	
+	def generateWidgetForTrailheadPage() {
+		def page = new SCMSStaticPage(link: 'trailheadsMap')
+		generateTrailheadTextWidget(page)
+		page.save(failOnError: true)
+		page
+	}
+	
+	def generateTrailheadTextWidget(page) {
+		def htmlWidget = new SCMSHTMLWidget(htmlText: "<h1>Trailheads</h1>", widgetId: "trailheadsMap")
+		page.addToWidgets(htmlWidget)
 	}
 	
 }

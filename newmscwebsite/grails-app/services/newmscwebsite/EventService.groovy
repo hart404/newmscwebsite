@@ -1,8 +1,11 @@
 package newmscwebsite
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.joda.time.LocalDate
 
 class EventService {
+	
+	def springSecurityService
 
 	def findAll() {
 		Event.findAll()
@@ -14,6 +17,9 @@ class EventService {
 		criteria {
 			'in'("startDate", dateList)
 			order("startDate", "asc")
+			if (!SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+				eq("stewardOnly", false)
+			}
 		}
 	}
 
@@ -30,6 +36,9 @@ class EventService {
 			ge("startDate", today)
 			order("startDate", "asc")
 			maxResults(5)
+			if (!SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+				eq("stewardOnly", false)
+			}
 		}
 	}
 	
@@ -39,6 +48,9 @@ class EventService {
 		criteria {
 			ge("startDate", today)
 			order("startDate", "asc")
+			if (!SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+				eq("stewardOnly", false)
+			}
 		}
 	}
 
@@ -47,6 +59,9 @@ class EventService {
 		def criteria = Event.createCriteria()
 		criteria.count {
 			ge("startDate", today)
+			if (!SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+				eq("stewardOnly", false)
+			}
 		}
 	}
 	
@@ -61,6 +76,9 @@ class EventService {
 		criteria {
 			'in'("startDate", dateRange)
 			order("startDate", "asc")
+			if (!SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+				eq("stewardOnly", false)
+			}
 		}
 	}
 	
@@ -71,6 +89,9 @@ class EventService {
 			and {
 				ge("startDate", today)
 				eq("showOnHomePage", true)
+			}
+			if (!SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+				eq("stewardOnly", false)
 			}
 			order("startDate", "asc")
 		}

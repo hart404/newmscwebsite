@@ -6,12 +6,12 @@ import org.jets3t.service.model.*
 import org.jets3t.service.security.*
 
 class AmazonS3Service {
+	
+	def grailsApplication
 
-	static String accessKey="AKIAJOBKCYNV42347HUA"
-	static String secretKey="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"
-	static RestS3Service s3 = new RestS3Service(new AWSCredentials(accessKey, secretKey))
+	RestS3Service s3
 	boolean transactional = false
-	String rootBucketPath="conservancyImages"
+	String rootBucketPath="McDowellSonoranConservancyImages"
 	String defaultBucketLocation=S3Bucket.LOCATION_US
 
 	Map mimeExtensionMap = [
@@ -31,7 +31,7 @@ class AmazonS3Service {
 	]
 
 	S3Bucket makeBucket(uid) {
-		S3Bucket bucket = s3.getOrCreateBucket((rootBucketPath + uid), defaultBucketLocation)
+		S3Bucket bucket = getS3Service().getOrCreateBucket((rootBucketPath + uid), defaultBucketLocation)
 		bucket.setAcl AccessControlList.REST_CANNED_PUBLIC_READ
 		return bucket
 	}
@@ -55,7 +55,7 @@ class AmazonS3Service {
 			up.setDataInputStream inputstream
 			up.setKey name
 			up.setBucketName bucket.getName()
-			s3.putObject bucket, up
+			getS3Service().putObject(bucket, up)
 		}
 	}
 	
@@ -66,7 +66,14 @@ class AmazonS3Service {
 		up.setAcl AccessControlList.REST_CANNED_PUBLIC_READ
 		up.setContentLength text.length()
 		up.setContentType mime
-		s3.putObject bucket, up
+		getS3Service().putObject(bucket, up)
+	}
+	
+	RestS3Service getS3Service() {
+		if (s3 == null) {
+			s3 = new RestS3Service(new AWSCredentials(grailsApplication.config.aws.accessKey, grailsApplication.config.aws.secretKey))
+		}
+		s3
 	}
 }
 

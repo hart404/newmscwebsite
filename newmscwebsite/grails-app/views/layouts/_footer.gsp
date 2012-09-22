@@ -1,11 +1,12 @@
 
 <div class="bottomMenu">
 	<ul class="bottomMenuList">
-        <li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'termsOfService')}" class="parent"><span>Terms Of Service</span></a></li>
-        <li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'privacyPolicy')}" class="parent"><span>Privacy Policy</span></a></li>
-        <li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'photoCredits')}" class="parent"><span>Photo Credits</span></a></li>
-		<li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'contactUs')}" class="parent"><span>Contact Us</span></a></li>
-		<li class="bottomMenuListItem"><a href="${createLink(controller: 'home', action: 'sitemap')}" class="parent"><span>Sitemap</span></a></li>
+        <li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'termsOfService'])}" class="parent"><span>Terms Of Service</span></a></li>
+        <li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'privacyPolicy'])}" class="parent"><span>Privacy Policy</span></a></li>
+        <li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'photoCredits'])}" class="parent"><span>Photo Credits</span></a></li>
+		<li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'contactUs'])}" class="parent"><span>Contact Us</span></a></li>
+		<li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'sitemap'])}" class="parent"><span>Sitemap</span></a></li>
+        <li class="bottomMenuListItem"><a href="http://162.42.231.11/Conservancy/" class="parent" target="_blank"><span>Steward Reporting</span></a></li>
 		<sec:ifNotLoggedIn>
 			<li class="bottomMenuListItem"><a href="${createLink(controller: 'login')}" class="parent"><span>Login</span></a></li>
 		</sec:ifNotLoggedIn>	

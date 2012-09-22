@@ -1,21 +1,11 @@
 <%@ page import="newmscwebsite.Person" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'username', 'error')} required">
 	<label for="username">
 		<g:message code="person.username.label" default="Username" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field type="email" name="username" required="" value="${personInstance?.username}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'password', 'error')} required">
-	<label for="password">
-		<g:message code="person.password.label" default="Password" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="password" required="" value="${personInstance?.password}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'firstName', 'error')} ">
@@ -41,21 +31,27 @@
 	</label>
 	<g:textField name="lastName" maxlength="50" value="${personInstance?.lastName}"/>
 </div>
-<fieldset class="embedded"><legend><g:message code="person.address.label" default="Address" /></legend>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.street', 'error')} ">
+    <label for="address.street">
+        <g:message code="person.address.street.label" default="Street" />        
+    </label>
+    <g:textField name="street" maxlength="70" value="${personInstance?.address?.street}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.apartment', 'error')} ">
+    <label for="address.apartment">
+        <g:message code="person.address.apartment.label" default="Apartment" />        
+    </label>
+    <g:textField name="apartment" maxlength="10" value="${personInstance?.address?.apartment}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.city', 'error')} ">
 	<label for="address.city">
 		<g:message code="person.address.city.label" default="City" />
 		
 	</label>
-	<g:textField name="city" maxlength="30" value="${streetAddressInstance?.city}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.id', 'error')} required">
-	<label for="address.id">
-		<g:message code="person.address.id.label" default="Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="id" required="" value="${fieldValue(bean: streetAddressInstance, field: 'id')}"/>
+	<g:textField name="city" maxlength="30" value="${personInstance?.address?.city}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.state', 'error')} ">
@@ -63,23 +59,7 @@
 		<g:message code="person.address.state.label" default="State" />
 		
 	</label>
-	<g:textField name="state" maxlength="2" value="${streetAddressInstance?.state}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.street', 'error')} ">
-	<label for="address.street">
-		<g:message code="person.address.street.label" default="Street" />
-		
-	</label>
-	<g:textField name="street" maxlength="70" value="${streetAddressInstance?.street}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.version', 'error')} required">
-	<label for="address.version">
-		<g:message code="person.address.version.label" default="Version" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="version" required="" value="${fieldValue(bean: streetAddressInstance, field: 'version')}"/>
+	<g:textField name="state" maxlength="2" value="${personInstance?.address?.state}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'address.zip', 'error')} ">
@@ -87,63 +67,32 @@
 		<g:message code="person.address.zip.label" default="Zip" />
 		
 	</label>
-	<g:textField name="zip" maxlength="10" value="${streetAddressInstance?.zip}"/>
-</div>
-</fieldset><fieldset class="embedded"><legend><g:message code="person.homePhone.label" default="Home Phone" /></legend>
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'homePhone.id', 'error')} required">
-	<label for="homePhone.id">
-		<g:message code="person.homePhone.id.label" default="Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="id" required="" value="${fieldValue(bean: phoneInstance, field: 'id')}"/>
+	<g:textField name="zip" maxlength="10" value="${personInstance?.address?.zip}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'homePhone.number', 'error')} ">
 	<label for="homePhone.number">
-		<g:message code="person.homePhone.number.label" default="Number" />
+		<g:message code="person.homePhone.number.label" default="Home Phone" />
 		
 	</label>
-	<g:textField name="number" maxlength="12" value="${phoneInstance?.number}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'homePhone.version', 'error')} required">
-	<label for="homePhone.version">
-		<g:message code="person.homePhone.version.label" default="Version" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="version" required="" value="${fieldValue(bean: phoneInstance, field: 'version')}"/>
-</div>
-</fieldset><fieldset class="embedded"><legend><g:message code="person.cellPhone.label" default="Cell Phone" /></legend>
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'cellPhone.id', 'error')} required">
-	<label for="cellPhone.id">
-		<g:message code="person.cellPhone.id.label" default="Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="id" required="" value="${fieldValue(bean: phoneInstance, field: 'id')}"/>
+	<g:textField name="homePhone" maxlength="20" value="${personInstance?.homePhone?.number}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'cellPhone.number', 'error')} ">
 	<label for="cellPhone.number">
-		<g:message code="person.cellPhone.number.label" default="Number" />
+		<g:message code="person.cellPhone.number.label" default="Cell Phone" />
 		
 	</label>
-	<g:textField name="number" maxlength="12" value="${phoneInstance?.number}"/>
+	<g:textField name="cellPhone" maxlength="20" value="${personInstance?.cellPhone?.number}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'cellPhone.version', 'error')} required">
-	<label for="cellPhone.version">
-		<g:message code="person.cellPhone.version.label" default="Version" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="version" required="" value="${fieldValue(bean: phoneInstance, field: 'version')}"/>
-</div>
-</fieldset>
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'photo', 'error')} ">
 	<label for="photo">
-		<g:message code="person.photo.label" default="Photo" />
-		
+		<g:message code="person.photo.label" default="Photo" />		
 	</label>
-	<g:select id="photo" name="photo.id" from="${simple.cms.SCMSPhoto.list()}" optionKey="id" value="${personInstance?.photo?.id}" class="many-to-one" noSelection="['null': '']"/>
+    <span id="photoFileName"><g:if test="${personInstance?.photo == null}">-None Selected-</g:if><g:else>${personInstance?.photo.originalFileName}</g:else></span>
+    <button id="search">Search for Photo</button>
+    <input type="hidden" name="photoId" id="photoId" value="${personInstance?.photo?.id}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'tshirtSize', 'error')} ">
@@ -156,34 +105,18 @@
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'position', 'error')} ">
 	<label for="position">
-		<g:message code="person.position.label" default="Position" />
+		<g:message code="person.position.label" default="Leadership" />
 		
 	</label>
 	<g:select name="position" from="${newmscwebsite.CLTPosition?.values()}" keys="${newmscwebsite.CLTPosition.values()*.name()}" value="${personInstance?.position?.name()}" noSelection="['': '']"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'classNumber', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'classNumber', 'error')} ">
 	<label for="classNumber">
 		<g:message code="person.classNumber.label" default="Class Number" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="classNumber" from="${personInstance.constraints.classNumber.inList}" required="" value="${fieldValue(bean: personInstance, field: 'classNumber')}" valueMessagePrefix="person.classNumber"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'accountExpired', 'error')} ">
-	<label for="accountExpired">
-		<g:message code="person.accountExpired.label" default="Account Expired" />
 		
 	</label>
-	<g:checkBox name="accountExpired" value="${personInstance?.accountExpired}" />
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'accountLocked', 'error')} ">
-	<label for="accountLocked">
-		<g:message code="person.accountLocked.label" default="Account Locked" />
-		
-	</label>
-	<g:checkBox name="accountLocked" value="${personInstance?.accountLocked}" />
+	<g:textField name="classNumber" value="${personInstance?.classNumber}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'emergencyContact', 'error')} ">
@@ -210,27 +143,144 @@
 	<g:textField name="emergencyRelationship" value="${personInstance?.emergencyRelationship}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'enabled', 'error')} ">
-	<label for="enabled">
-		<g:message code="person.enabled.label" default="Enabled" />
-		
-	</label>
-	<g:checkBox name="enabled" value="${personInstance?.enabled}" />
-</div>
-
+<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'masterSteward', 'error')} ">
 	<label for="masterSteward">
-		<g:message code="person.masterSteward.label" default="Master Steward" />
-		
+		<g:message code="person.masterSteward.label" default="Master Steward" />		
 	</label>
 	<g:checkBox name="masterSteward" value="${personInstance?.masterSteward}" />
 </div>
+</sec:ifAnyGranted>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'passwordExpired', 'error')} ">
-	<label for="passwordExpired">
-		<g:message code="person.passwordExpired.label" default="Password Expired" />
-		
-	</label>
-	<g:checkBox name="passwordExpired" value="${personInstance?.passwordExpired}" />
+<sec:ifNotGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'masterSteward', 'error')} ">
+    <label for="masterSteward">
+        <g:message code="person.masterSteward.label" default="Master Steward" />        
+    </label>
+    <g:if test="${person.masterSteward}">Yes</g:if><g:else>No</g:else>
 </div>
+</sec:ifNotGranted>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'wantsWeeklyEmail', 'error')} ">
+	<label for="wantsWeeklyEmail">
+		<g:message code="person.wantsWeeklyEmail.label" default="Wants Weekly Email" />		
+	</label>
+	<g:checkBox name="wantsWeeklyEmail" value="${personInstance?.wantsWeeklyEmail}" />
+</div>
+
+<sec:ifAnyGranted roles="ROLE_ADMIN">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'passwordExpired', 'error')} ">
+    <label for="passwordExpired">
+        <g:message code="person.passwordExpired.label" default="Password Expired" />        
+    </label>
+    <g:checkBox name="passwordExpired" value="${personInstance?.passwordExpired}" />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'enabled', 'error')} ">
+    <label for="enabled">
+        <g:message code="person.enabled.label" default="Enabled" />
+        
+    </label>
+    <g:checkBox name="enabled" value="${personInstance?.enabled}" />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'accountLocked', 'error')} ">
+    <label for="accountLocked">
+        <g:message code="person.accountLocked.label" default="Account Locked" />
+        
+    </label>
+    <g:checkBox name="accountLocked" value="${personInstance?.accountLocked}" />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'accountExpired', 'error')} ">
+    <label for="accountExpired">
+        <g:message code="person.accountExpired.label" default="Account Expired" />
+        
+    </label>
+    <g:checkBox name="accountExpired" value="${personInstance?.accountExpired}" />
+</div>
+
+<div>
+<label>Admin</label>
+<g:if test="${personInstance.hasAuthority('ROLE_ADMIN')}">
+    <g:checkBox name="role_admin" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_admin" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>Guest</label>
+<g:if test="${personInstance.hasAuthority('ROLE_GUEST')}">
+    <g:checkBox name="role_guest" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_guest" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>User</label>
+<g:if test="${personInstance.hasAuthority('ROLE_USER')}">
+    <g:checkBox name="role_user" value="${true }" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_user" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>Steward</label>
+<g:if test="${personInstance.hasAuthority('ROLE_STEWARD')}">
+    <g:checkBox name="role_steward" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_steward" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>Leader</label>
+<g:if test="${personInstance.hasAuthority('ROLE_LEADER')}">
+    <g:checkBox name="role_leader" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_leader" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>Board</label>
+<g:if test="${personInstance.hasAuthority('ROLE_BOARD')}">
+    <g:checkBox name="role_board" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_board" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>Staff</label>
+<g:if test="${personInstance.hasAuthority('ROLE_STAFF')}">
+    <g:checkBox name="role_staff" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_staff" value="${false}" />
+</g:else>
+</div>
+
+<div>
+<label>Web</label>
+<g:if test="${personInstance.hasAuthority('ROLE_WEB')}">
+    <g:checkBox name="role_web" value="${true}" />
+</g:if>
+<g:else>
+    <g:checkBox name="role_web" value="${false}" />
+</g:else>
+</div>
+
+</sec:ifAnyGranted>
+
+
 
