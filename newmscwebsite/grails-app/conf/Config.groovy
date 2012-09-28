@@ -55,12 +55,16 @@ grails.exceptionresolver.params.exclude = ['password']
 environments {
 	development {
 		grails.serverURL = "http://localhost:8080/${appName}"
+		grails.plugins.springsecurity.portMapper.httpPort = "8080"
+		grails.plugins.springsecurity.portMapper.httpsPort = "8443"
 	}
 	test {
 		grails.serverURL = "http://localhost:8080/${appName}"
 	}
 	production {
 		grails.serverURL = "http://www.mcdowellsonoran.org"
+		grails.plugins.springsecurity.portMapper.httpPort = "80"
+		grails.plugins.springsecurity.portMapper.httpsPort = "443"
 	}
 }
 
@@ -89,7 +93,7 @@ log4j = {
 	
 	error	'org.codehaus.groovy.grails.plugins.springsecurity'
 	
-	error 	'org.springframework.security'
+	info 	'org.springframework.security'
 	
 	debug 	'newmscwebsite'
 
@@ -107,8 +111,9 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/login/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/denied':							['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/register/forgotPassword/**':		['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/register/index/**':				['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/register/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/person/registerUser/**':			['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/person/registerForEmail/**':		['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*.html':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*.xml':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*.gsp':							['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -144,11 +149,13 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/**':								['IS_AUTHENTICATED_REMEMBERED'],
 ]
 
-/* Disable until GoDaddy situation is sorted out.
 grails.plugins.springsecurity.secureChannel.definition = [
-	'/donate/**':         'REQUIRES_SECURE_CHANNEL'
+	'/donate/**':       				'REQUIRES_SECURE_CHANNEL',
+	'/login/**':						'REQUIRES_SECURE_CHANNEL',
+	'/register/**':						'REQUIRES_SECURE_CHANNEL',
+	'/person/registerUser/**':			'REQUIRES_SECURE_CHANNEL',
+	'/person/registerForEmail/**':		'REQUIRES_SECURE_CHANNEL'
 ]
-*/
 
 grails.plugins.springsecurity.ui.forgotPassword.emailFrom = 'info@mcdowellsonoran.org'
 grails.plugins.springsecurity.ui.register.emailFrom = 'info@mcdowellsonoran.org'

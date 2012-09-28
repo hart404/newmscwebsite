@@ -86,6 +86,7 @@
 	<g:textField name="cellPhone" maxlength="20" value="${personInstance?.cellPhone?.number}"/>
 </div>
 
+<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'photo', 'error')} ">
 	<label for="photo">
 		<g:message code="person.photo.label" default="Photo" />		
@@ -94,6 +95,7 @@
     <button id="search">Search for Photo</button>
     <input type="hidden" name="photoId" id="photoId" value="${personInstance?.photo?.id}" />
 </div>
+</sec:ifAnyGranted>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'tshirtSize', 'error')} ">
 	<label for="tshirtSize">
@@ -103,6 +105,7 @@
 	<g:select name="tshirtSize" from="${personInstance.constraints.tshirtSize.inList}" value="${personInstance?.tshirtSize}" valueMessagePrefix="person.tshirtSize" noSelection="['': '']"/>
 </div>
 
+<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'position', 'error')} ">
 	<label for="position">
 		<g:message code="person.position.label" default="Leadership" />
@@ -110,6 +113,16 @@
 	</label>
 	<g:select name="position" from="${newmscwebsite.CLTPosition?.values()}" keys="${newmscwebsite.CLTPosition.values()*.name()}" value="${personInstance?.position?.name()}" noSelection="['': '']"/>
 </div>
+</sec:ifAnyGranted>
+
+<sec:ifNotGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'position', 'error')} ">
+    <label for="position">
+        <g:message code="person.position.label" default="Leadership" />        
+    </label>
+    <em>${personInstance?.position}</em>
+</div>
+</sec:ifNotGranted>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'classNumber', 'error')} ">
 	<label for="classNumber">
@@ -157,7 +170,7 @@
     <label for="masterSteward">
         <g:message code="person.masterSteward.label" default="Master Steward" />        
     </label>
-    <g:if test="${person.masterSteward}">Yes</g:if><g:else>No</g:else>
+    <em><g:if test="${personInstance.masterSteward}">Yes</g:if><g:else>No</g:else></em>
 </div>
 </sec:ifNotGranted>
 

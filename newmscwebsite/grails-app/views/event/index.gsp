@@ -53,7 +53,7 @@
 			var requestedDates = getRequestedDates();
 			var requestedCategories = getRequestedCategories();
 			jQuery.ajax({type:'POST',data:{'dates': requestedDates, 'categories': requestedCategories, 'offset': 0, 'max': ${max}}, url:"<g:createLink
-			controller='event' action='getEventsForDates' />",success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+			controller='event' action='getEventsForDates' />",success:function(data,textStatus){setEvents(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
 		}
 		
         function getRequestedDates() {
@@ -107,7 +107,7 @@
 			clearSelections();
 			var requestedCategories = getRequestedCategories();
 			jQuery.ajax({type:'POST',url:"<g:createLink controller='event'
-			action='getEventsAfterToday' />", data: {'categories': requestedCategories, 'offset': 0, 'max': ${max}}, success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+			action='getEventsAfterToday' />", data: {'categories': requestedCategories, 'offset': 0, 'max': ${max}}, success:function(data,textStatus){setEvents(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
 		}
 		
 		function findEvents(offset, max) {
@@ -115,11 +115,19 @@
             var requestedCategories = getRequestedCategories();
 		    if (ajaxMode == "afterToday") {
 		        jQuery.ajax({type:'POST',url:"<g:createLink controller='event'
-                action='getEventsAfterToday' />", data: {'categories': requestedCategories, 'offset': offset, 'max': max}, success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+                action='getEventsAfterToday' />", data: {'categories': requestedCategories, 'offset': offset, 'max': max}, success:function(data,textStatus){setEvents(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
             } else {
 	            jQuery.ajax({type:'POST',data:{'dates': requestedDates, 'categories': requestedCategories, 'offset': offset, 'max': max}, url:"<g:createLink
-	            controller='event' action='getEventsForDates' />",success:function(data,textStatus){jQuery('#eventList').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});                
+	            controller='event' action='getEventsForDates' />",success:function(data,textStatus){setEvents(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});                
             }
+		}
+		
+		function setEvents(data) {
+		  $('#eventList').html(data);
+		  var height = $('#eventSelection').height();
+		  if (height < 791) {
+		      $('#eventSelection').height(791);
+		  }
 		}
 		
 		function clearSelections() {
@@ -148,8 +156,8 @@
   			}
 		}
 	</g:javascript>
-	<div class="relativeContainer">
-		<div class="eventSelection">
+	<div class="relativeContainer"  id="eventSelection">
+		<div class="eventSelection" >
 			<div id="calendar">
 				<div id="innerCalendar">
 					<g:render template="/event/calendarTemplate"></g:render>

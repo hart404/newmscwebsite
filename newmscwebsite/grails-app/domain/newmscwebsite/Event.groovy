@@ -22,6 +22,7 @@ class Event {
 	SCMSPhoto mainPhoto
 	boolean stewardOnly = false;
 	String otherLocation = ""
+	String stewardOnlyInformation
 	
 	static transients = ['calendarIcon']
 	
@@ -52,6 +53,7 @@ class Event {
 		categories validator: { list ->
 			if (list.isEmpty()) return false
 		}
+		stewardOnlyInformation(nullable: true, size: 0..2000)
     }
 	
 	public String formattedStartTime() {

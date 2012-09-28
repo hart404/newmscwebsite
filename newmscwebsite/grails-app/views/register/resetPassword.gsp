@@ -27,10 +27,16 @@
                              labelCodeDefault='Password (again)' value="${command?.password2}"/>
 	</table>
 
-	<s2ui:submitButton elementId='reset' form='resetPasswordForm' messageCode='spring.security.ui.resetPassword.submit'/>
-
+	<input type="submit" value="Update My Password">
+	
 	</div>
 	</g:form>
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+    <g:if test="${flash.error}">
+        <div class="error" role="status">${flash.error}</div>
+    </g:if>
 
 </s2ui:form>
 

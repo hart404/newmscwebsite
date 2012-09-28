@@ -9,7 +9,7 @@
 
 <p/>
 
-<s2ui:form width='350' height='220' elementId='forgotPasswordFormContainer'
+<s2ui:form width='350' height='240' elementId='forgotPasswordFormContainer'
            titleCode='spring.security.ui.forgotPassword.header' center='true'>
 
 	<g:form action='forgotPassword' name="forgotPasswordForm" autocomplete='off'>
@@ -31,13 +31,20 @@
 		</tr>
 	</table>
 
-	<s2ui:submitButton elementId='reset' form='forgotPasswordForm' messageCode='spring.security.ui.forgotPassword.submit'/>
+	<input type="submit" value="Reset my Password">
 
 	</g:else>
 
 	</g:form>
+	<g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+    <g:if test="${flash.error}">
+        <div class="error" role="status">${flash.error}</div>
+    </g:if>
+	
 </s2ui:form>
-
+   
 <script>
 $(document).ready(function() {
 	$('#username').focus();

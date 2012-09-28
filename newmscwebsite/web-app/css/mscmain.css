@@ -95,6 +95,29 @@ body {
     color: rgb(84, 83, 74);
 }
 
+.donateTable {
+	border: none;
+}
+
+table.donateTable tr td:first-child {
+	width: 120px;
+}
+
+table.donateTable tr td {
+    border: none;
+}
+.donateColumn1 {
+	width: 120px;
+}
+
+.securityButton {	
+	border-color: gray;
+	border-width: 1px;
+	border-style: solid;
+	padding: 5px;
+	border-radius: 4px;
+}
+
 .eventPhoto {
 	width: 200px;
 	height: 200px;
@@ -532,6 +555,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	margin: 0;
 	height: 100%;
 	position: relative;
+	overflow: hidden;
 }
 
 .trailheadContainer {
@@ -697,7 +721,8 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	height: 100%;
 	width: 20%;
 	float: left;
-	position: absolute;
+	position: relative;
+	overflow: hidden;
 }
 
 .sidebarNavigationNarrow {
@@ -759,15 +784,6 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
     padding: 0;
 }
 
-.trailheadMap {
-	width: 400px;
-	height: 500px;
-	margin-top: 10px;
-    box-shadow: 2px 2px 8px #888;
-    -moz-box-shadow: 2px 2px 8px #888;
-    -webkit-box-shadow: 2px 2px 8px #888;
-}
-
 .hikeMap {
     width: 480px;
     height: 600px;
@@ -821,6 +837,11 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 .hikeList {
 	list-style-type: none;
 	display: block;
+}
+
+.hikeList a {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 20px;	
 }
 
 .mscTimeline {

@@ -42,11 +42,9 @@
 					
 						<td>${fieldValue(bean: personInstance, field: "firstName")}</td>
 					
-						<td>${fieldValue(bean: personInstance, field: "middleInitial")}</td>
-					
 						<td>${fieldValue(bean: personInstance, field: "lastName")}</td>
 					
-						<td>${fieldValue(bean: personInstance, field: "address")}</td>
+						<td><g:if test="${person?.address}">${person?.address?.street}, <g:if test="${person?.address?.apartment}">${person?.address?.apartment}, </g:if>${person?.address?.city}, ${person?.address?.state}, ${person?.address?.zip}</g:if></td>
 					
 					</tr>
 				</g:each>

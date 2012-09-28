@@ -9,7 +9,9 @@ class DonateController {
 
     def index = { }
 	
+	def newIndex = {}
+	
 	def takeDonation() {
-		
+		[donation: new Donation()]
 	}
 }

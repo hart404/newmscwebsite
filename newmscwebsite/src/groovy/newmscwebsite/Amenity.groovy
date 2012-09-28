@@ -3,6 +3,8 @@ package newmscwebsite;
 public enum Amenity {
 	DIRECTORY, HORSE_TRAILS, INFORMATION, RESTROOM, SEATING, SHELTER, WATER
 	
+	def titles = ['Directory', 'Horse Trails', 'Information', 'Restrooms', 'Seating', 'Shelter', 'Water']
+	
 	def icon() {
 		switch(this) {
 			case DIRECTORY:
@@ -20,6 +22,10 @@ public enum Amenity {
 			case WATER:
 				return "img_water-97x96.png"
 		}
+	}
+	
+	def title() {
+		titles[this.ordinal()]
 	}
 
 }

@@ -3,6 +3,8 @@ package newmscwebsite;
 public enum Activity {
 	BIKING, DOGS, HORSES, FAMILY, HANDICAP, HIKING, CLIMBING
 	
+	def titles = ['Biking', 'Dogs', 'Horses', 'Family', 'Handicap', 'Hiking', 'Climbing']
+	
 	def icon() {
 		switch(this) {
 			case BIKING:
@@ -20,5 +22,9 @@ public enum Activity {
 			case CLIMBING:
 				return "img_climbing-97x96.png"			
 		}
+	}
+	
+	def title() {
+		titles[this.ordinal()]
 	}
 }

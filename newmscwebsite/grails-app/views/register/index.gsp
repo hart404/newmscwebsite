@@ -26,7 +26,7 @@
 	<tbody>
 
 		<s2ui:textFieldRow name='username' labelCode='user.username.label' bean="${command}"
-                         size='40' labelCodeDefault='Username' value="${command.username}"/>
+                         size='40' labelCodeDefault='Username (email)' value="${command.username}"/>
 
 		<s2ui:textFieldRow name='email' bean="${command}" value="${command.email}"
 		                   size='40' labelCode='user.email.label' labelCodeDefault='E-mail'/>
@@ -45,6 +45,12 @@
 	</g:else>
 
 </g:form>
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+    <g:if test="${flash.error}">
+        <div class="error" role="status">${flash.error}</div>
+    </g:if>
 
 </s2ui:form>
 

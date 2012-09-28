@@ -32,6 +32,7 @@
 						${event.otherLocation}
 					</span>
 				</g:else>
+				<g:if test="${event.stewardOnly}"> &nbsp; - <span class="highlight2">Steward Only</span></g:if>
 			</p>
 			<p class="bigp grayEventText">
 				${event.shortDescription}
@@ -39,6 +40,14 @@
 			<p class="bigp grayEventText">
 				${event.moreInformation}
 			</p>
+			<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_STEWARD,ROLE_STAFF">
+                <g:if test="${event.stewardOnlyInformation}">
+	                <h2>Steward Only Information</h2>
+	                <p class="bigp grayEventText">
+	                    ${event.stewardOnlyInformation}
+	                </p>
+	            </g:if>
+            </sec:ifAnyGranted>
 		</div>
 	</div>
 </body>

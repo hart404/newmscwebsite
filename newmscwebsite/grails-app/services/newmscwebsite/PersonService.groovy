@@ -3,7 +3,6 @@ package newmscwebsite
 class PersonService {
 	
 	def getStewards(params) {
-		println params
 		if (params.sort == "email") {
 			params.sort = "username"
 		}
@@ -15,6 +14,9 @@ class PersonService {
 			}
 			if (params.lastName) {
 				ilike("lastName", "${params.lastName}%")
+			}
+			if (params.classNumber) {
+				eq("classNumber", "${params.classNumber}")
 			}
 			eq("hasStewardRole", true)
 			firstResult(params.offset as Integer ?: 0)
@@ -33,18 +35,12 @@ class PersonService {
 			if (params.lastName) {
 				ilike("lastName", "${params.lastName}%")
 			}
+			if (params.classNumber) {
+				eq("classNumber", "${params.classNumber}")
+			}
 			eq("hasStewardRole", true)
 		}
 		stewardList.size()
 	}
 	
-	def updateStewards() {
-		def stewardRole = SecRole.findByAuthority("ROLE_STEWARD")
-		def stewards = SecUserSecRole.findAllBySecRole(stewardRole).collect {it.secUser}
-		stewards.each { steward ->
-			steward.hasStewardRole = true
-			steward.save(failOnError: true)
-		}
-	}
-
 }

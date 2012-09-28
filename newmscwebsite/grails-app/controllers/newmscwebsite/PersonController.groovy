@@ -10,6 +10,7 @@ class PersonController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	def personService
+	def springSecurityService
 
     def index() {
         redirect(action: "list", params: params)
@@ -56,7 +57,7 @@ class PersonController {
 		
 		updateAuthorities(personInstance, params)
 		personInstance.save(flush: true)
-		flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
+		flash.message = "${personInstance} Updated"
         redirect(action: "show", id: personInstance.id)
     }
 
@@ -110,7 +111,10 @@ class PersonController {
 		updateAuthorities(personInstance, params)
 		
 		def address = new StreetAddress(params)
-		personInstance.address = address
+		if (address != personInstance.address) {
+			personInstance.address = address
+		}
+		
 		if (!params.homePhone.isEmpty() && params.homePhone != personInstance.homePhone.number) {
 			def homePhone = new Phone(number: params.homePhone)
 			personInstance.homePhone = homePhone
@@ -141,7 +145,6 @@ class PersonController {
 	def updateAuthorities(person, params) {
 		def rolesMap = createRolesMap()
 		rolesMap.each { entry ->
-			println "Updating: ${person} - ${params[entry.key]} - ${entry.value}"
 			updateAuthority(person, params[entry.key], entry.value)
 		}
 	}
@@ -155,7 +158,7 @@ class PersonController {
 				}
 			}
 		} 
-		if (onOff == "off") {
+		if (onOff == null) {
 			if (person.authorities.contains(role)) {
 				SecUserSecRole.remove(person, role, true)
 				if (role.authority == "ROLE_STEWARD") {
@@ -197,33 +200,118 @@ class PersonController {
 		params
 	}
 	
+	def registerForEmail() {
+		params
+	}
+	
 	def stewardList() {
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
 		params.sort = params.sort ?: "firstName"
+		[stewards: personService.getStewards(params), stewardCount: personService.countAllStewards(params), menu: obtainStewardMenu()]
+	}
+	
+	def obtainStewardMenu() {
 		def stewardMenu = SCMSMenu.findByTitle("Steward")
 		if (stewardMenu == null) {
 			stewardMenu = new SCMSMenu(title: "Steward")
 		}
-		[stewards: personService.getStewards(params), stewardCount: personService.countAllStewards(params), menu: stewardMenu]
+		stewardMenu
 	}
 	
 	def changePassword() {
 		[personInstance: Person.get(params.id)]
 	}
 	
+	def stewardChangePassword() {
+		[menu: obtainStewardMenu()]
+	}
+	
+	def stewardUpdateDetails() {
+		[personInstance: (Person)springSecurityService.currentUser, menu: obtainStewardMenu()]
+	}
+	
+	def updateStewardPassword() {
+		def person = (Person)springSecurityService.currentUser
+		basicUpdatePassword(person, "stewardChangePassword")
+		redirect(action: "stewardChangePassword")
+	}
+	
 	def updatePassword() {
+		def person = Person.get(params.id)
+		basicUpdatePassword(person, "changePassword")
+		redirect(action: 'show', id: person.id)
+	}
+	
+	def basicUpdatePassword(person, redirectTo) {
 		def newPassword = params.newPassword
 		def repeatNewPassword = params.repeatNewPassword
 		if (newPassword != repeatNewPassword) {
 			flash.message = "Passwords do not match"
-			redirect(action: "changePassword")
+			redirect(action: redirectTo)
 			return
 		}
-		def person = Person.get(params.id)
 		person.password = newPassword
 		person.save(failOnError: true, flush: true)
 		flash.message = "Password updated"
-		redirect(action: 'show', id: person.id)
 	}
+	
+	def updateStewardDetails() {
+		def personInstance = Person.get(params.id)
+		if (!personInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
+			redirect(action: "stewardList")
+			return
+		}
+
+		if (params.version) {
+			def version = params.version.toLong()
+			if (personInstance.version > version) {
+				personInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+						  [message(code: 'person.label', default: 'Person')] as Object[],
+						  "Another user has updated this Person while you were editing")
+				render(view: "stewardUpdateDetails", model: [personInstance: personInstance])
+				return
+			}
+		}
+		
+		if (params.photoId != personInstance?.photo?.id) {
+			def photo = SCMSPhoto.get(params.photoId)
+			personInstance.photo = photo
+		}
+		
+		updateAuthorities(personInstance, params)
+		
+		def address = new StreetAddress(params)
+		if (address != personInstance.address) {
+			personInstance.address = address
+		}
+		
+		if (!params.homePhone.isEmpty() && params.homePhone != personInstance?.homePhone?.number) {
+			def homePhone = new Phone(number: params.homePhone)
+			personInstance.homePhone = homePhone
+		}
+		if (!params.cellPhone.isEmpty() && params.cellPhone != personInstance?.cellPhone?.number) {
+			def cellPhone = new Phone(number: params.cellPhone)
+			personInstance.cellPhone = cellPhone
+		}
+		
+		def keysToRemove = ["street", "apartment", "city", "state", "zip", "homePhone", "cellPhone"]
+		def newParams = [:]
+		params.each {
+			if (!(it.key in keysToRemove)) {
+				newParams[it.key] = it.value
+			}
+		}
+		personInstance.properties = newParams
+
+		if (!personInstance.save(flush: true)) {
+			render(view: "stewardUpdateDetails", model: [personInstance: personInstance])
+			return
+		}
+
+		flash.message = "Steward ${personInstance.firstName} ${personInstance.lastName} updated."
+		redirect(action: "stewardUpdateDetails")
+	}
+
 
 }

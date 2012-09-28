@@ -6,6 +6,7 @@ import net.authorize.TransactionType
 import net.authorize.aim.Result
 import net.authorize.aim.Transaction
 import net.authorize.data.creditcard.CreditCard
+import net.authorize.data.Customer
 
 class DonateService {
 	
@@ -19,7 +20,9 @@ class DonateService {
 		creditCard.setCreditCardNumber("370000000000002")
 		creditCard.setExpirationMonth("12")
 		creditCard.setExpirationYear("2015")
-
+		
+		Customer customer
+		
 		// Create AUTH transaction
 		Transaction authCaptureTransaction = merchant.createAIMTransaction(TransactionType.AUTH_CAPTURE, new BigDecimal(1.99))
 		authCaptureTransaction.setCreditCard(creditCard)

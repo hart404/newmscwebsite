@@ -67,6 +67,16 @@
 							</td>
 						</tr>
 
+                        <tr class="prop">
+                            <td valign="top" class="name"><label for="stewardOnlyInformation"><g:message
+                                        code="event.stewardOnlyInformation.label" default="Steward Only Information" /></label>
+                            </td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: eventInstance, field: 'stewardOnlyInformation', 'errors')}">
+                                <g:textArea name="stewardOnlyInformation" cols="40" rows="5"
+                                    maxlength="2000" value="${eventInstance?.stewardOnlyInformation}" />
+                            </td>
+                        </tr>
 						<tr class="prop">
 							<td valign="top" class="name"><label for="location"><g:message
 										code="event.location.label" default="Location" /></label></td>

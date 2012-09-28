@@ -45,7 +45,7 @@ class Person extends SecUser {
 		sort lastName: "asc"
 	}
 	
-	String toString() {
+	public String toString() {
 		firstName + " " + lastName
 	}
 }

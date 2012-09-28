@@ -33,11 +33,9 @@ class BootStrap {
 	TrailheadService trailheadService
 	def springSecurityService
 	def grailsApplication
-	def personService
 
 	def init = { servletContext ->
 		println "Root directory: ${System.getProperty("user.home")}"
-		personService.updateStewards()
 		// updateSql()
 		createRoles()
 		createAdminUser()
@@ -47,8 +45,7 @@ class BootStrap {
 		createHikes()
 		createAdSpace()
 		createMenus()
-		// createStewards()
-		// websiteUpdates()
+		websiteUpdates()
 	}
 
 	void createRoles() {
@@ -536,54 +533,9 @@ class BootStrap {
 		def db = [url:'jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc', user:'root', password:'uni-dev01', driver:'com.mysql.jdbc.Driver']
 		def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
 		sql.execute(modifyCoordinatesColumns) */
-		try {
-			def phils = Person.findAllByUsernameLike("hart404%")
-			phils.each { phil ->
-				println "Deleting: ${phil.username}"
-				phil.delete(failOnError: true, flush: true)
-			}
-		} catch(e) {
-			println "Deleting phils failed: ${e}"
-		}
 	}
 	
 	def websiteUpdates() {
-		def brownsRanch = trailheadService.brownsRanch()
-		def coordinates = new GeographicCoordinates(latitude: 33.755755, longitude: -111.843926)
-		brownsRanch.description = "The Brown's Ranch Trailhead will be the first trailhead to provide access to the northern region of the McDowell Sonoran Preserve.  The Trailhead will be located approximately 1.25 miles north of the intersection of Alma School Parkway and Dynamite Boulevard. Brown's Ranch Trailhead is currently under construction, and expected to open in June 2013.  Please check back here for updates."
-		brownsRanch.coordinates = coordinates
-		if (brownsRanch != null) {
-			println "Saving Brown's Ranch"
-			brownsRanch.save(failOnError: true, flush: true)
-		}
-		def tomsThumb = trailheadService.tomsThumb()
-		coordinates = new GeographicCoordinates(latitude: 33.694258, longitude: -111.801881)
-		tomsThumb.coordinates = coordinates
-		def address = new StreetAddress(street: "23015 N 128th St", zip: "85255")
-		tomsThumb.address = address
-		if (tomsThumb != null) {
-			println "Saving Tom's Thumb"
-			tomsThumb.save(failOnError: true, flush: true)
-		}
-		address = new StreetAddress(street: "12601 N 124th St", zip: "85259")
-		def lostDog = trailheadService.lostDog()
-		coordinates = new GeographicCoordinates(latitude: 33.599552, longitude: -111.812910)
-		lostDog.address = address
-		lostDog.coordinates = coordinates
-		if (lostDog != null) {
-			println "Saving Lost Dog"
-			lostDog.save(failOnError: true, flush: true)
-		}
-		coordinates = new GeographicCoordinates(latitude: 33.699199, longitude: -111.887407)
-		address = new StreetAddress(street: "8950 E. Pinnacle Peak Road", zip: "85255")
-		def florenceElyNelson = Trailhead.findByInternalName("florenceElyNelson")
-		if (florenceElyNelson == null) {
-			florenceElyNelson = new Trailhead(name: "Florence Ely Nelson Center", internalName: "florenceElyNelson", description: "The Florence Ely Nelson Center is located on the north east corner of Pinnacle Peak and Pima Rd behind the small strip mall. From the junction of Pinnacle Peak and Pima, head east and take the third turn on your left.", address: address, coordinates: coordinates, "amenities": [], "activities": [])
-		}
-		florenceElyNelson.coordinates = coordinates
-		if (florenceElyNelson != null) {
-			florenceElyNelson.save(failOnError: true, flush:true)
-		}
 	}
 	
 	def destroy = {

@@ -36,15 +36,17 @@
 		</tr>
 		<tr>
 			<td colspan='2'>
-				<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>
-				<s2ui:submitButton elementId='loginButton' form='loginForm' messageCode='spring.security.ui.login.login'/>
+				<s2ui:linkButton elementId='register' controller='person' action='registerUser' messageCode='spring.security.ui.login.register'/>
+				<input type="submit" value="Login">
 			</td>
 		</tr>
 	</table>
 	<g:if test="${flash.message}">
-	           <div class="message" role="status">${flash.message}</div>
+	    <div class="message" role="status">${flash.message}</div>
     </g:if>
-
+    <g:if test="${flash.error}">
+        <div class="error" role="status">${flash.error}</div>
+    </g:if>
 	</div>
 	</form>
 	</div>

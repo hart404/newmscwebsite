@@ -44,12 +44,19 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="event.stewardOnlyInformation.label" default="Steward Only Information" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "stewardOnlyInformation")}</td>
+                            
+                        </tr>
+                    
+                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="event.moreInformation.label" default="More Information" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "moreInformation")}</td>
                             
                         </tr>
-                    
+ 
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="event.location.label" default="Location" /></td>
                             
