@@ -29,7 +29,7 @@
 			<p class="bigp grayEventText">
 				${event.moreInformation}
 			</p>
-			<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_STEWARD,ROLE_STAFF">
+			<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_STEWARD,ROLE_STAFF,ROLE_WEB">
 			    <g:if test="${event.stewardOnlyInformation}">
 	                <h2>Steward Only Information</h2>
 				    <p class="bigp grayEventText">
@@ -37,6 +37,11 @@
 				    </p>
 			    </g:if>
 			</sec:ifAnyGranted>
+			<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_STAFF,ROLE_WEB">
+                <div class="bigp">
+                    <a href="<g:createLink controller='event' action='edit' id='${event.id}'/> ">Edit Event</a>
+                </div>
+            </sec:ifAnyGranted>
 		</div>
 	</div>
 </g:each>
