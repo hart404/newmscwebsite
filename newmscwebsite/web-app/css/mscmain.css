@@ -95,8 +95,15 @@ body {
     color: rgb(84, 83, 74);
 }
 
+.eCardImage {
+	display: inline-block;
+}
+
 .donateTable {
 	border: none;
+	font-family: arial, helvetica, sans-serif;
+    font-size: 20px;
+    color: rgb(84, 83, 74);
 }
 
 table.donateTable tr td:first-child {
@@ -105,9 +112,6 @@ table.donateTable tr td:first-child {
 
 table.donateTable tr td {
     border: none;
-}
-.donateColumn1 {
-	width: 120px;
 }
 
 .securityButton {	
@@ -475,6 +479,13 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	-webkit-box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.9);
     -moz-box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.9);
     box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.9);
+}
+
+.innerGlowSmall {
+    background-repeat: no-repeat;
+    -webkit-box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.9);
 }
 
 .imageText {

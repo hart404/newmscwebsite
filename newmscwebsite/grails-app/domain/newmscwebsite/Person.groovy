@@ -21,6 +21,7 @@ class Person extends SecUser {
 	String classNumber
 	boolean wantsWeeklyEmail
 	Boolean hasStewardRole = false
+	Date dateOfBirth
 	
 	static embedded = ['address', 'homePhone', 'cellPhone']
 
@@ -39,10 +40,12 @@ class Person extends SecUser {
 		emergencyPhone(nullable: true)
 		emergencyRelationship(nullable: true)
 		hasStewardRole(nullable: false)
+		dateOfBirth(nullable: true)
 	}
 	
 	static mapping = {
 		sort lastName: "asc"
+		photo cascade: "all"
 	}
 	
 	public String toString() {

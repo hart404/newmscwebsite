@@ -263,5 +263,6 @@
 				</fieldset>
 			</g:form>
 		</div>
+		<g:render template="/photo/searchPhotoDialog" plugin="simple-cms" />
 	</body>
 </html>

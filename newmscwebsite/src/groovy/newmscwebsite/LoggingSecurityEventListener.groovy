@@ -23,9 +23,11 @@ class LoggingSecurityEventListener implements
     void logout(HttpServletRequest request, HttpServletResponse response, 
         Authentication authentication) {
         authentication.with {
-            def username = principal.hasProperty('username')?.getProperty(principal) ?: principal
-            log.info "event=Logout username=${username} " +
+			if (principal) {
+				def username = principal?.hasProperty('username')?.getProperty(principal) ?: principal
+				log.info "event=Logout username=${username} " +
                 "remoteAddress=${details?.remoteAddress} sessionId=${details?.sessionId}"
+			}
         }
     }
 }

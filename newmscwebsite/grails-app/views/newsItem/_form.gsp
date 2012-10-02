@@ -41,7 +41,7 @@
     </label>
     <span id="photoFileName">-None Selected-</span>
     <button id="search">Search for Photo</button>
-    <input type="hidden" name="photoId" id= "photoId" value="${newsItemInstance.photo.id}"/>
+    <input type="hidden" name="photoId" id= "photoId" value="${newsItemInstance?.photo?.id}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: newsItemInstance, field: 'displayStartDate', 'error')} required">

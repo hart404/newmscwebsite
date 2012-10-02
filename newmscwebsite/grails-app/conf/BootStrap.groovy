@@ -36,16 +36,32 @@ class BootStrap {
 
 	def init = { servletContext ->
 		println "Root directory: ${System.getProperty("user.home")}"
-		// updateSql()
+		updateSql()
 		createRoles()
 		createAdminUser()
+		createECards()
 		createLocations()
-		createEvents()
-		createNews()
 		createHikes()
-		createAdSpace()
-		createMenus()
 		websiteUpdates()
+	}
+	
+	def createECards() {
+		def eCards = SCMSPhoto.findAllByDescription("eCard")
+		if (eCards.isEmpty()) {
+			def serverURL = "http://mcdowellsonoran.org"
+			def imagePath = "images/eCards"
+			def eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "javalina.jpg", fileName: "javalina.jpg", width: 432, height: 288, keywords: ["eCard javalina"], allKeywords: "eCard javalina", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
+			eCard.save(failOnError: true, flush: true)
+			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "sympathy_bird.jpg", fileName: "sympathy_bird.jpg", width: 432, height: 288, keywords: ["eCard sympathy bird"], allKeywords: "eCard sympathy bird", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
+			eCard.save(failOnError: true, flush: true)
+			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "sympathy_mtnsunset.jpg", fileName: "sympathy_mtnsunset.jpg", width: 432, height: 288, keywords: ["eCard sympathy mountain sunset"], allKeywords: "eCard sympathy mountain sunset", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
+			eCard.save(failOnError: true, flush: true)
+			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "trail.jpg", fileName: "trail.jpg", width: 432, height: 288, keywords: ["eCard trail"], allKeywords: "eCard trail", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
+			eCard.save(failOnError: true, flush: true)
+			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "yellow_flower.jpg", fileName: "yellow_flower.jpg", width: 432, height: 288, keywords: ["eCard yellow flower"], allKeywords: "eCard yellow flower", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
+			eCard.save(failOnError: true, flush: true)
+			println "Created 5 eCards."
+		}
 	}
 
 	void createRoles() {
@@ -75,105 +91,6 @@ class BootStrap {
 		}
 	}
 	
-	def createMenus() {
-		SCMSMenuBar menuBar = SCMSMenuBar.findByWidgetId("mainNavigationBar")
-		if (menuBar == null) {
-			menuBar = new SCMSMenuBar(widgetId: "mainNavigationBar")
-			addHome(menuBar)
-			addVisitThePreserve(menuBar)
-			addAboutUs(menuBar)
-			addEducationAndResearch(menuBar)
-			addVolunteer(menuBar)
-			addSupportUs(menuBar)
-			addAdministration(menuBar)
-			menuBar.save(failOnError: true) 
-		}
-	}
-	
-	def addHome(menuBar) {
-		SCMSMenu home = new SCMSMenu(title: "Home", link: "/home")
-		menuBar.addToMenus(home)
-	}
-	
-	def addVisitThePreserve(menuBar) {
-		// Plan Your Visit, Trailheads and Directions, Recreation, Photo Gallery
-		SCMSMenu visitThePreserve = new SCMSMenu(title: "Visit the Preserve")
-		SCMSMenu planYourVisit = new SCMSMenu(title: "Plan Your Visit")
-		addPlanYourVisitSubItems(planYourVisit)
-		visitThePreserve.addToMenuItems(planYourVisit)
-		visitThePreserve.addToMenuItems(new SCMSMenu(title: "Trailheads & Directions", link: "trailhead/mapOfThePreserve"))
-		visitThePreserve.addToMenuItems(new SCMSMenu(title: "Recreation", link: "content/pages/recreation"))
-		visitThePreserve.addToMenuItems(new SCMSMenu(title: "PhotoGallery", link: "photoGallery"))
-		menuBar.addToMenus(visitThePreserve)
-	}
-	
-	def addPlanYourVisitSubItems(planYourVisit) {
-		// Pathfinders, Nature Guides, Family Passport, Know Before You Go
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Pathfinders", link: "content/pages/pathfinders"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Nature Guides", link: "content/pages/natureGuides"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Family Passport", link: "content/pages/familyPassport"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Know Before You Go", link: "content/pages/knowBeforeYouGo"))
-		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "FAQs", link: "content/pages/faqs"))
-	}
-	
-	def addAboutUs(menuBar) {
-		def aboutUs = new SCMSMenu(title: "About Us", link: "aboutUs")
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mission and Vision", link: "content/pages/missionAndVision"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "History", link: "content/pages/history"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "People", link: "content/pages/people"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Gift Shop", link: "content/pages/giftShop"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mountain Lines Magazine", link: "content/pages/mountainLines"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Press Kit", link: "content/pages/pressKit"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Contact", link: "content/pages/contact"))
-		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Annual Reports", link: "content/pages/annualReports"))
-		menuBar.addToMenus(aboutUs)
-	}
-	
-	def addEducationAndResearch(menuBar) {
-		SCMSMenu educationAndResearch = new SCMSMenu(title: "Education & Research")
-		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Adult Learning", link: "#"))
-		educationAndResearch.addToMenuItems(new SCMSMenu(title: "School Groups & Youth", link: "#"))
-		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Online Learning", link: "#"))
-		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Field Institute", link: "#"))
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Conservation", link: "content/pages/herpatology"))
-		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Publications & News", link: "content/pages/herpatology"))
-		menuBar.addToMenus(educationAndResearch)
-	}
-	
-	def addVolunteer(menuBar) {
-		menuBar.addToMenus(new SCMSMenu(title: "Volunteer", link: "content/pages/volunteer"))
-	}
-	
-	def addSupportUs(menuBar) {
-		menuBar.addToMenus(new SCMSMenu(title: "Support Us", link: "supportUs"))
-	}
-	
-	def addAdministration(menuBar) {
-		// Manage Users, Photos, Manage Events, Manage AdSpace, Manage News Items
-		def administration = new SCMSMenu(title: "Administration")
-		administration.addToRoles("ROLE_ADMIN")
-		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Users", link: "person/list"))
-		SCMSMenu photoMenu = new SCMSMenu(title: "Photos")
-		addPhotoMenuItems(photoMenu)
-		administration.addToMenuItems(photoMenu)
-		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Ad Space", link: "adSpacePhoto/list"))
-		administration.addToMenuItems(new SCMSMenuItem(title: "Manage News Items", link: "newsItem/list"))
-		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Events", link: "event/list"))
-		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Pages", link: "page/list"))
-		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Menus", link: "menuBar/list"))
-		administration.addToMenuItems(new SCMSMenuItem(title: "Search", link: "searchable"))
-		menuBar.addToMenus(administration)
-	}
-	
-	def addPhotoMenuItems(photoMenu) {
-		// Photo list, upload photos
-		photoMenu.addToMenuItems(new SCMSMenuItem(title: "Manage Photos", link: "photo/list"))
-		photoMenu.addToMenuItems(new SCMSMenuItem(title: "Upload Photos", link: "photo/uploadPhotos"))
-	}
-
-	void createEvents() {
-	}
-
 	void createLocations() {
 		println "Locations: ${Trailhead.count()}"
 		if (!Trailhead.count()) {
@@ -468,76 +385,19 @@ class BootStrap {
 	 
 	def createAdSpace() {
 	}
-	
-	def createStewards() {
-		def resource = new ClassPathResource("MC_Steward_Data.csv")
-		File stewardFile = resource.getFile()
-		stewardFile.eachCsvLine { tokens ->
-			// Ignore the header line
-			if (tokens[0] != "FirstName") {
-				// First Name, Last Name, Home Phone, Cell Phone, Email, Class Number
-				createSteward(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5])
-			}
-		}
-	}
-	
-	def createSteward(firstName, lastName, homePhone, cellPhone, email, classNumber) {
-		def stewardRole = SecRole.findByAuthority("ROLE_STEWARD")
-		def person = Person.findByUsername(email)
-		if (person == null) {
-			def steward = new Person()
-			steward.firstName = firstName
-			steward.lastName = lastName
-			steward.username = email
-			steward.password = 'conservancy'
-			def home = new Phone(number: homePhone)
-			def cell = new Phone(number: cellPhone)
-			steward.homePhone = home
-			steward.cellPhone = cell
-			steward.classNumber = classNumber
-			steward.enabled = true
-			steward.accountExpired = false
-			steward.accountLocked = false
-			steward.passwordExpired = false
-			if (steward.validate()) {
-				steward.save(failOnError: true, flush: true)
-				SecUserSecRole.create(steward, stewardRole, true)
-				println "Created steward account for ${firstName} ${lastName}"
-			} else {
-				println "Failed to create account for ${firstName} ${lastName}"
-				steward.errors.allErrors.each {
-					println it
-				}
-			}
-		} else {
-			person.classNumber = classNumber
-			person.homePhone = new Phone(number: homePhone)
-			person.cellPhone = new Phone(number: cellPhone)
-			person.enabled = true
-			person.accountExpired = false
-			person.accountLocked = false
-			person.passwordExpired = false
-			if (person.validate()) {
-				person.save(failOnError: true, flush: true)
-			} else {
-				println "Failed to modify account for ${firstName} ${lastName}"
-				person.errors.allErrors.each {
-					println it
-				}
-			}
-		}
-	}
-	
+		
 	def updateSql() {
-/*		def modifyCoordinatesColumns = "ALTER TABLE `mscmsc`.`trailhead` CHANGE COLUMN `coordinates_latitude` `coordinates_latitude` DECIMAL(19,6) NOT NULL  , CHANGE COLUMN `coordinates_longitude` `coordinates_longitude` DECIMAL(19,6) NOT NULL  ;"
+	/*
+		def updateSQL = "ALTER TABLE `mscmsc`.`scmsstatic_page` CHANGE COLUMN `keywords_metadata` `keywords_metadata` VARCHAR(2048) NULL DEFAULT NULL  ;"
 		def db = [url:'jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc', user:'root', password:'uni-dev01', driver:'com.mysql.jdbc.Driver']
 		def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
-		sql.execute(modifyCoordinatesColumns) */
+		sql.execute(updateSQL) 
+	*/
 	}
 	
 	def websiteUpdates() {
 	}
-	
+		
 	def destroy = {
 	}
 

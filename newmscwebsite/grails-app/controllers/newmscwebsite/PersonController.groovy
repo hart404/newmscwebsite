@@ -40,8 +40,10 @@ class PersonController {
 		}
 
         def personInstance = new Person(newParams)
+		
 		def address = new StreetAddress(params)
 		personInstance.address = address
+		
 		if (!params.homePhone.isEmpty()) {
 			def homePhone = new Phone(number: params.homePhone)
 			personInstance.homePhone = homePhone
@@ -50,13 +52,22 @@ class PersonController {
 			def cellPhone = new Phone(number: params.cellPhone)
 			personInstance.cellPhone = cellPhone
 		}
+		
+		if (params.photoId) {
+			def photo = SCMSPhoto.get(params.photoId)
+			personInstance.photo = photo
+		}
+		
+		// The person needs to be be saved before you can update authorities
+		// because creation of the role relationship requires an ID!
+		personInstance.save(flush: true)
+		updateAuthorities(personInstance, params)
+		
         if (!personInstance.save(flush: true)) {
             render(view: "create", model: [personInstance: personInstance])
             return
         }
 		
-		updateAuthorities(personInstance, params)
-		personInstance.save(flush: true)
 		flash.message = "${personInstance} Updated"
         redirect(action: "show", id: personInstance.id)
     }
@@ -85,6 +96,13 @@ class PersonController {
 
     def update() {
 		println params
+		
+		if (params.username == null || params.username.trim().isEmpty()) {
+			flash.error = "Username (your email address) is required."
+			redirect(action: "stewardUpdateDetails")
+			return
+		}
+		
         def personInstance = Person.get(params.id)
         if (!personInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
@@ -102,6 +120,8 @@ class PersonController {
                 return
             }
         }
+		
+		def emailChanged = params.username != personInstance.username
 		
 		if (params.photoId != personInstance?.photo?.id) {
 			def photo = SCMSPhoto.get(params.photoId)
@@ -137,6 +157,12 @@ class PersonController {
             render(view: "edit", model: [personInstance: personInstance])
             return
         }
+		
+		if (emailChanged) {
+			flash.message = "If you change your email address, you must also change your password."
+			redirect(action: "changePassword", id: params.id)
+			return
+		}
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
         redirect(action: "show", id: personInstance.id)
@@ -159,10 +185,14 @@ class PersonController {
 			}
 		} 
 		if (onOff == null) {
-			if (person.authorities.contains(role)) {
-				SecUserSecRole.remove(person, role, true)
-				if (role.authority == "ROLE_STEWARD") {
-					person.hasStewardRole = false
+			// The presence of the field _role_admin (or whatever) is an indication that the 
+			// corresponding checkbox was on the form
+			if (params.containsKey('_' + role.authority.toLowerCase())) {
+				if (person.authorities.contains(role)) {
+					SecUserSecRole.remove(person, role, true)
+					if (role.authority == "ROLE_STEWARD") {
+						person.hasStewardRole = false
+					}
 				}
 			}
 		}
@@ -210,6 +240,12 @@ class PersonController {
 		[stewards: personService.getStewards(params), stewardCount: personService.countAllStewards(params), menu: obtainStewardMenu()]
 	}
 	
+	def nonStewardList() {
+		params.max = Math.min(params.max ? params.int('max') : 50, 100)
+		params.sort = params.sort ?: "firstName"
+		[stewards: personService.getNonStewards(params), stewardCount: personService.countAllNonStewards(params), menu: obtainStewardMenu()]
+	}
+	
 	def obtainStewardMenu() {
 		def stewardMenu = SCMSMenu.findByTitle("Steward")
 		if (stewardMenu == null) {
@@ -219,6 +255,8 @@ class PersonController {
 	}
 	
 	def changePassword() {
+		def person = Person.get(params.id)
+		println "Changing password of ${person.username}"
 		[personInstance: Person.get(params.id)]
 	}
 	
@@ -232,8 +270,11 @@ class PersonController {
 	
 	def updateStewardPassword() {
 		def person = (Person)springSecurityService.currentUser
-		basicUpdatePassword(person, "stewardChangePassword")
-		redirect(action: "stewardChangePassword")
+		if (basicUpdatePassword(person, "stewardChangePassword")) {
+			redirect(action: "stewardChangePassword")
+		} else {
+			redirect(action: "stewardChangePassword")
+		}		
 	}
 	
 	def updatePassword() {
@@ -247,12 +288,12 @@ class PersonController {
 		def repeatNewPassword = params.repeatNewPassword
 		if (newPassword != repeatNewPassword) {
 			flash.message = "Passwords do not match"
-			redirect(action: redirectTo)
-			return
+			return false
 		}
 		person.password = newPassword
 		person.save(failOnError: true, flush: true)
 		flash.message = "Password updated"
+		return true
 	}
 	
 	def updateStewardDetails() {
@@ -274,12 +315,12 @@ class PersonController {
 			}
 		}
 		
+		def emailChanged = params.username != personInstance.username
+		
 		if (params.photoId != personInstance?.photo?.id) {
 			def photo = SCMSPhoto.get(params.photoId)
 			personInstance.photo = photo
 		}
-		
-		updateAuthorities(personInstance, params)
 		
 		def address = new StreetAddress(params)
 		if (address != personInstance.address) {
@@ -306,6 +347,12 @@ class PersonController {
 
 		if (!personInstance.save(flush: true)) {
 			render(view: "stewardUpdateDetails", model: [personInstance: personInstance])
+			return
+		}
+		
+		if (emailChanged) {
+			flash.message = "If you change your email address, you must also change your password."
+			redirect(action: "changePassword", id: params.id)
 			return
 		}
 

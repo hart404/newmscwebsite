@@ -1,7 +1,6 @@
 package newmscwebsite
 
-import net.authorize.Environment
-import net.authorize.Merchant
+import simple.cms.SCMSPhoto
 
 class DonateController {
 	
@@ -9,9 +8,7 @@ class DonateController {
 
     def index = { }
 	
-	def newIndex = {}
-	
-	def takeDonation() {
-		[donation: new Donation()]
+	def mainDonate = {
+		[donation: new Donation(), eCards: SCMSPhoto.findAllByDescription("eCard")]
 	}
 }
