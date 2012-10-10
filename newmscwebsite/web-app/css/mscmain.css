@@ -548,9 +548,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .eventOrNews {
-	padding-top: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 10px;
 	overflow: hidden;
 }
 

@@ -1,10 +1,10 @@
 package newmscwebsite
 
+import simple.cms.SCMSMenu
+import simple.cms.SCMSPhoto
 import groovy.json.JsonSlurper
-
 import org.joda.time.LocalDate
 
-import simple.cms.SCMSPhoto
 
 class EventController {
 
@@ -23,14 +23,6 @@ class EventController {
 			offset: 0,
 			max: 5,
 			eventCount: eventService.countAllAfterToday()]
-	}
-	
-	def challenge = {
-		
-	}
-	
-	def wildflowers = {
-		
 	}
 	
 	def calendarPreviousMonth = {
@@ -225,4 +217,27 @@ class EventController {
 	def displayEvent = {
 		[event : Event.findById(params.id)]
 	}
+	
+	def stewardOnlyEvents() {
+		if (!params.max) {
+			params.max = 20
+		} else {
+			params.max = params.max as Integer
+		}
+		if (!params.offset) {
+			params.offset = 0
+		} else {
+			params.offset = params.offset as Integer
+		}
+		[stewardOnlyEvents: eventService.stewardOnlyEvents(params), countStewardOnlyEvents: eventService.countStewardOnlyEvents(), menu: obtainStewardMenu()]
+	}
+	
+	def obtainStewardMenu() {
+		def stewardMenu = SCMSMenu.findByTitle("Steward")
+		if (stewardMenu == null) {
+			stewardMenu = new SCMSMenu(title: "Steward")
+		}
+		stewardMenu
+	}
+	
 }

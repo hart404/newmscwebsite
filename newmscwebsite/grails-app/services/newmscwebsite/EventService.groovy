@@ -96,4 +96,42 @@ class EventService {
 			order("startDate", "asc")
 		}
 	}
+	
+	def stewardOnlyEvents(params) {
+		LocalDate today = LocalDate.now()
+		if (SpringSecurityUtils.ifNotGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+			// Return empty list of no access allowed
+			return []
+		}
+		def criteria = Event.createCriteria()
+		criteria {
+			and {
+				ge("startDate", today)
+				or {
+					eq("stewardOnly", true)
+					isNotNull("stewardOnlyInformation")
+				}
+			}
+			maxResults(params.max)
+			firstResult(params.offset)
+			order("startDate", "asc")
+		}
+	}
+	
+	def countStewardOnlyEvents() {
+		LocalDate today = LocalDate.now()
+		if (SpringSecurityUtils.ifNotGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+			return 0
+		}
+		def criteria = Event.createCriteria()
+		criteria.count {
+			and {
+				ge("startDate", today)
+				or {
+					eq("stewardOnly", true)
+					isNotNull("stewardOnlyInformation")
+				}
+			}
+		}
+	}
 }

@@ -16,7 +16,7 @@ class Donation {
 	Date recurringDate
 	String country
 	String phone
-	BigDecimal donationAmount
+	BigDecimal actualDonationAmount
 	// Note that no credit card information is stored
 	boolean tributeDonation = false
 	String recipientName

@@ -77,6 +77,13 @@
                             <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "endTime")}</td>
                             
                         </tr>
+                        
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="event.stewardOnly.label" default="Steward Only" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "stewardOnly")}</td>
+                            
+                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="event.showOnHomePage.label" default="Show on Home Page" /></td>

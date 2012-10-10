@@ -336,6 +336,8 @@ class PersonController {
 			personInstance.cellPhone = cellPhone
 		}
 		
+		updateAuthorities(personInstance, params)
+		
 		def keysToRemove = ["street", "apartment", "city", "state", "zip", "homePhone", "cellPhone"]
 		def newParams = [:]
 		params.each {

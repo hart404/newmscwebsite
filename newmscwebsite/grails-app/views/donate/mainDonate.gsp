@@ -8,7 +8,7 @@
         <h1 class="redEventText">Donate Now</h1>
         <p class="bigp grayEventText">Help us care for the McDowell Sonoran Preserve. Your support will ensure that the Preserve continues to be a pristine open space to visit and enjoy, as well as a permanent sanctuary for wildlife.</p>
         <h2 class="redEventText">Donation Details</h2>
-        <g:form name="donateForm" controller="donate" action="donateNow">
+        <g:form name="donateForm" controller="donate" action="takeDonation">
         <p class="bigp grayEventText">Choose the gift level you wish to support:</p>
         <g:radioGroup values="[1, 2, 3, 4, 5, 6, 7]" onclick="donationSelected(this)" id="donationSelection" value="1" name="giftLevel" labels="['$1500 McDowell Sonoran Society', '$1000 Steward Circle', '$500 Trailbuilder Circle', '$250 Caretaker Circle', '$100 Pathfinder Circle', '$50 Hiker Circle', 'Other']">
         <g:if test="${it.label == 'Other'}">
@@ -31,15 +31,15 @@
         </tr>        
         <tr>
             <td><label for="firstName"><g:message code="donation.firstName.label" default="First Name" /></label></td>
-            <td><g:textField name="firstName" maxlength="30" size="20" required="true"/></td>
+            <td><g:textField name="firstName" maxlength="30" size="20" required="" /></td>
         </tr>        
         <tr>
             <td><label for="lastName"><g:message code="donation.lastName.label" default="Last Name" /></label></td>
-            <td><g:textField name="lastName" maxlength="40" size="30" required="true"/></td>
+            <td><g:textField name="lastName" maxlength="40" size="30" required="${true}"/></td>
         </tr>        
         <tr>
             <td><label for="street"><g:message code="donation.street.label" default="Street" /></label></td>
-            <td><g:textField name="street" maxlength="40" size="40" required="true"/></td>
+            <td><g:textField name="street" maxlength="40" size="40" required="${true}"/></td>
         </tr>        
         <tr>
             <td><label for="apartment"><g:message code="donation.apartment.label" default="Apartment" /></label></td>
@@ -47,23 +47,23 @@
         </tr>        
         <tr>
             <td><label for="city"><g:message code="donation.city.label" default="City" /></label></td>
-            <td><g:textField name="city" maxlength="30" size="25" required="true"/></td>
+            <td><g:textField name="city" maxlength="30" size="25" required="${true}"/></td>
         </tr>        
         <tr>
             <td><label for="state"><g:message code="donation.state.label" default="State" /></label></td>
-            <td><g:textField name="state" maxlength="15" size="15" required="true"/></td>
+            <td><g:textField name="state" maxlength="15" size="15" required="${true}"/></td>
         </tr>        
         <tr>
             <td><label for="country"><g:message code="donation.country.label" default="Country" /></label></td>
-            <td><g:textField name="country" maxlength="20" size="15" required="true" value="USA"/></td>
+            <td><g:textField name="country" maxlength="20" size="15" required="${true}" value="USA"/></td>
         </tr>        
         <tr>
             <td><label for="phone"><g:message code="donation.phone.label" default="Phone" /></label></td>
-            <td><g:textField name="phone" maxlength="20" size="12" required="true" /></td>
+            <td><g:textField name="phone" maxlength="20" size="12" required="${true}" /></td>
         </tr>        
         <tr>
             <td><label for="email"><g:message code="donation.email.label" default="Email" /></label></td>
-            <td><g:textField name="email" maxlength="40" size="30" required="true" /></td>
+            <td><g:textField name="email" maxlength="40" size="30" required="${true}" /></td>
         </tr>        
         </table>
         <h2>Payment Information</h2>
@@ -74,7 +74,7 @@
         </tr>        
         <tr>
             <td><label for="cardNumber"><g:message code="donation.cardNumber.label" default="Card Number" /></label></td>
-            <td><g:textField name="cardNumber" maxlength="40" size="16" required="true" /></td>
+            <td><g:textField name="cardNumber" maxlength="40" size="16" required="${true}" /></td>
         </tr>        
         <tr>
             <td><label for="expirationDate"><g:message code="donation.expirationDate.label" default="Expiration Date" /></label></td>
@@ -85,7 +85,7 @@
         </tr>        
         <tr>
             <td><label for="ccv"><g:message code="donation.ccv.label" default="CCV" /></label></td>
-            <td><g:textField name="ccv" maxlength="6" size="6" required="true" /></td>
+            <td><g:textField name="ccv" maxlength="6" size="6" required="${true}" /></td>
         </tr>        
         </table>
         <p class="bigp grayEventText">
@@ -97,19 +97,19 @@
 	        <table class="donateTable">
 	        <tr>
 	            <td><label for="recipientName"><g:message code="donation.recipientName.label" default="Recipient Name" /></label></td>
-	            <td><g:textField name="recipientName" maxlength="40" size="30" required="true" /></td>
+	            <td><g:textField name="recipientName" maxlength="40" size="30" /></td>
 	        </tr>        
             <tr>
                 <td><label for="recipientEmail"><g:message code="donation.recipientEmail.label" default="Recipient Email" /></label></td>
-                <td><g:textField name="recipientEmail" maxlength="40" size="30" required="true" /></td>
+                <td><g:textField name="recipientEmail" maxlength="40" size="30" /></td>
             </tr>        
             <tr>
                 <td><label for="tributeSubject"><g:message code="donation.tributeSubject.label" default="eCard Subject" /></label></td>
-                <td><g:textField name="tributeSubject" maxlength="40" size="30" required="true" /></td>
+                <td><g:textField name="tributeSubject" maxlength="40" size="30" /></td>
             </tr>        
             <tr>
                 <td><label for="tributeBody"><g:message code="donation.tributeBody.label" default="eCard Message" /></label></td>
-                <td><g:textArea name="tributeBody" cols="100" rows="8" required="true" /></td>
+                <td><g:textArea name="tributeBody" cols="100" rows="8" /></td>
             </tr>        
 	        </table>
 	        <g:each var="eCard" in="${eCards}" status="index">
@@ -118,30 +118,46 @@
 	           </div>  
 	        </g:each>
         </div>
-        <input type="button" value="Donate" onclick="donateNow()">
+        <input type="hidden" id="selectedECard" name="selectedECard" value="1">
+        <input type="hidden" id="actualDonationAmount" name="actualDonationAmount">
+        <input type="button" id="donateSubmit" value="Donate" onclick="donateNow()">
+        <input type="submit" style="display:none" name="submitButton">
         </g:form>
     </div>
     <script>
+    
+        var selectedAmountButton = 1;
+
+        var amounts = [1500, 1000, 500, 250, 100, 50, 0]
+    
         function donationSelected(radioButton) {
+            selectedAmountButton = radioButton.value;
             if (radioButton.value == 7) {
-                $("#otherDonationAmount").focus()
+                $("#otherDonationAmount").focus();
             }
         }
     
         function selectDeselectTributeDonation(checkbox) {
             if (checkbox.checked) {
-                $('#tributeDonationDiv').css("visibility", "visible")
-                $('#tributeDonationDiv').css("height", "auto")
+                $('#tributeDonationDiv').css("visibility", "visible");
+                $('#tributeDonationDiv').css("height", "auto");
             } else {
-                $('#tributeDonationDiv').css("visibility", "collapse")
-                $('#tributeDonationDiv').css("height", "0")
+                $('#tributeDonationDiv').css("visibility", "collapse");
+                $('#tributeDonationDiv').css("height", "0");
             }
         }
 
         function donateNow() {
+            $('#actualDonationAmount').val(amounts[selectedAmountButton - 1]);
+            if (selectedAmountButton == 7) {
+                // Other amount selected
+            	$('#actualDonationAmount').val($("#otherDonationAmount").val());
+            }
+            $('input[type=submit]').click();
         }
 
         function eCardSelect(radioButton) {
+            $('#selectedECard').val(radioButton.value);
         }
     </script>
 </body>

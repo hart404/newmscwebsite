@@ -124,6 +124,7 @@
 		
 		function setEvents(data) {
 		  $('#eventList').html(data);
+		  $('#eventSelection').height("auto");
 		  var height = $('#eventSelection').height();
 		  if (height < 791) {
 		      $('#eventSelection').height(791);

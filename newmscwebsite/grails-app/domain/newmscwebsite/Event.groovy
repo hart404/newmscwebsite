@@ -20,7 +20,7 @@ class Event {
 	boolean showOnHomePage = false
 	Trailhead location
 	SCMSPhoto mainPhoto
-	boolean stewardOnly = false;
+	boolean stewardOnly = true;
 	String otherLocation = ""
 	String stewardOnlyInformation
 	
@@ -58,6 +58,11 @@ class Event {
 	
 	public String formattedStartTime() {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMM dd, yyyy h:mm aa")
+		formatter.print(startTime)
+	}
+	
+	public String shortFormattedStartTime() {
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd hh:mmaa")
 		formatter.print(startTime)
 	}
 	

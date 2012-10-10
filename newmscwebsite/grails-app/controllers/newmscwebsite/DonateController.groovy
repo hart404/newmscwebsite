@@ -11,4 +11,13 @@ class DonateController {
 	def mainDonate = {
 		[donation: new Donation(), eCards: SCMSPhoto.findAllByDescription("eCard")]
 	}
+	
+	def takeDonation() {
+		println params
+		redirect(action: "thankYouForYourDonation")
+	}
+	
+	def thankYouForYourDonation() {
+		
+	}
 }

@@ -139,7 +139,7 @@
                             </td>
                             <td valign="top"
                                 class="value ${hasErrors(bean: eventInstance, field: 'stewardOnly', 'errors')}">
-                                <g:checkBox name="stewardOnly" value="${false}" />
+                                <g:checkBox name="stewardOnly" value="${true}" />
                             </td>
                         </tr>
  						<tr class="prop">
