@@ -162,6 +162,8 @@ class RegisterController extends AbstractS2UiController {
 			subject conf.ui.forgotPassword.emailSubject
 			html body.toString()
 		}
+		
+		println "Forgot password email sent from ${conf.ui.forgotPassword.emailFrom} to ${user.email} on ${new Date()}"
 
 		[emailSent: true]
 	}

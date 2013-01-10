@@ -11,6 +11,9 @@ class Trailhead {
 	List<Activity> activities
 	List<Amenity> amenities
 	def photoGallery = []
+	String mapName
+	String descriptionMetadata
+	String keywordsMetadata
 	
 	static embedded = ['address', 'coordinates']
 	
@@ -27,6 +30,9 @@ class Trailhead {
 		coordinates(nullable: false)
 		internalName(nullable: false, size: 1..20)
 		hikes(nullable: true)
+		mapName(nullable: true)
+		descriptionMetadata(nullable: true, size: 0..156)
+		keywordsMetadata(nullable: true, size: 0..2048)
 	}
 	
 	public String toString() {

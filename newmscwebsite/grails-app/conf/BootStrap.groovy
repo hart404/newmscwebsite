@@ -309,7 +309,7 @@ class BootStrap {
 			def taliesinOverlook = new Hike(
 				name: "Taliesin Overlook",
 				description: "Gentle out-and-back trail that crosses several small washes; rocky in places.",
-				noteworthyFeatures: "Taliesin Overlook has extensive views northwest and looks down onto Frank Lloyd Wright’s Taliesin West, his winter home and school. Taliesin is still active as a school of architecture.",
+				noteworthyFeatures: "Taliesin Overlook has extensive views northwest and looks down onto Frank Lloyd Wright's Taliesin West, his winter home and school. Taliesin is still active as a school of architecture.",
 				directions: "Follow the trail to the...",
 				kmlFileName: "TaliesinOverlook.kml",
 				elevationGain: 350,

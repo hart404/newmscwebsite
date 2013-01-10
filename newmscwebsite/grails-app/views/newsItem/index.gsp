@@ -19,11 +19,8 @@
 						</h2>
 						<p class="bigp grayEventText">
 							<span class="highlight2">Summary: </span>
-							${newsItem.summary}
-						</p>
-						<p class="bigp grayEventText">
-							<span class="highlight2">More Information: </span>
-							${newsItem.moreInformation}
+							${newsItem.summary}&nbsp;
+							<g:link controller="newsItem" action="displayNewsItem" id="${newsItem.id}">Read more...</g:link>
 						</p>
 					</div>
 				</div>

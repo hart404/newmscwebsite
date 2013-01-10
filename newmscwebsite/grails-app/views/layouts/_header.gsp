@@ -24,7 +24,7 @@
 	</div>
 	<div class="topMenu">
 		<ul class="topMenuList">
-			<li class="topMenuListItem"><a href="<g:createLink controller='donate' action='index' />" class="parent"><span>DONATE NOW</span></a></li>
+			<li class="topMenuListItem"><a href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=860674350" target="_blank" class="parent"><span>DONATE NOW</span></a></li>
 			<li class="topMenuListItem"><a href="<g:createLink controller='newsItem' action='index' />" class="parent"><span>NEWS</span></a></li>
 			<li class="topMenuListItem"><a href="<g:createLink controller='event' action='index' />" class="parent"><span>EVENTS</span></a></li>
 		</ul>

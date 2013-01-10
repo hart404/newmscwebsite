@@ -134,4 +134,27 @@ class EventService {
 			}
 		}
 	}
+	
+	def findAllInCategoryAfterToday(category, params) {
+		LocalDate today = LocalDate.now()
+		def stewardOnlyQuery = " and stewardOnly = false "
+		if (SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+			stewardOnlyQuery = ""
+		}
+		def events = Event.findAll("from Event e where :category in elements(e.categories) and e.startDate >= :today ${stewardOnlyQuery} order by e.startDate asc", [category: category as String, today: today, max: (params.max as Integer), offset: (params.offset as Integer)])
+		events
+	}
+	
+	def countAllInCategoryAfterToday(category) {
+		LocalDate today = LocalDate.now()
+		def stewardOnlyQuery = " and stewardOnly = false "
+		if (SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
+			stewardOnlyQuery = ""
+		}
+		Event.findAll("from Event e where :category in elements(e.categories) and startDate >= :today ${stewardOnlyQuery}", [category: category as String, today: today]).size()
+	}
+	
 }
+
+
+

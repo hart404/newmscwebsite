@@ -24,6 +24,9 @@ class Person extends SecUser {
 	Date dateOfBirth
 	
 	static embedded = ['address', 'homePhone', 'cellPhone']
+	
+	static hasMany = [
+		volunteerSessions: VolunteerSession]
 
 	static constraints = {
 		firstName(nullable: false, size: 1..30)
@@ -41,6 +44,7 @@ class Person extends SecUser {
 		emergencyRelationship(nullable: true)
 		hasStewardRole(nullable: false)
 		dateOfBirth(nullable: true)
+		volunteerSessions(size: 0..100000)
 	}
 	
 	static mapping = {
@@ -51,4 +55,20 @@ class Person extends SecUser {
 	public String toString() {
 		firstName + " " + lastName
 	}
+	
+	def leadershipPosition() {
+		def leadershipPosition = null
+		if (hasAuthority("ROLE_BOARD")) {
+			leadershipPosition = "Director"
+		}
+		if (position) {
+			if (leadershipPosition) {
+				leadershipPosition += "/" + position
+			} else {
+				leadershipPosition = position
+			}
+		}
+		leadershipPosition
+	}
+	
 }

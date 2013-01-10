@@ -1,9 +1,7 @@
 <html>
 <head>
 <meta name="layout" content="trailheadSidebarLayout" />
-<title>Trailhead</title>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false">
-</script>
+<title>${location.name}</title>
 <style type="text/css">
 html {
 	height: 100%
@@ -32,6 +30,10 @@ body {
                 map: map,
                 position: itemLocation
             });
+            <g:if test="${mapName}">
+            var georssLayer = new google.maps.KmlLayer("http://mcdowellsonoran.org/maps/${mapName}");
+            georssLayer.setMap(map);  
+            </g:if>                  
  		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
@@ -75,10 +77,12 @@ body {
 				<span class="redEventText">Address: </span>
 				${location.address}
 			</p>
+			<g:if test="${location.internalName != 'tomsThumb'}">
 			<p class="bigp grayEventText">
 				<span class="redEventText">Location: </span>
 				<g:link url="http://maps.google.com/maps?ll=${location.coordinates}" target="_blank">click here</g:link>
 			</p>
+			</g:if>
 			<p>
 				<g:each var="amenity" in="${location.amenities}" status="index">
 				    <g:set var="cssid" value="${'amenity' + index}"/>
@@ -93,7 +97,8 @@ body {
 			</p>
 			<g:if test="${location.hikes != null && (!location.hikes.isEmpty())}" >
 		        <p class="bigp">
-	                <span class="redEventText">Hikes: </span>
+	                <span class="redEventText">Hikes: </span><br/>
+	                <span class="bigp grayEventText">Click on a link below to see a map of the hike</span>
 	                <ul class="hikeList">
 		                <g:each var="hike" in="${location.getHikesInOrder()}">
 		                    <li><g:link controller='trailhead' action='displayHike' id='${hike.id}'>${hike.name}</g:link></li>
@@ -101,8 +106,15 @@ body {
 	                </ul>
 	            </p>
             </g:if>
-    		
 		</div>
+		<div class="sharethistrailhead">
+            <span class='st_facebook_hcount' displayText='Facebook'></span>
+            <span class='st_twitter_hcount' displayText='Tweet'></span>
+            <span class='st_pinterest_hcount' displayText='Pinterest'></span>
+            <span class='st_googleplus_hcount' displayText='Google +'></span>
+            <span class='st_email_hcount' displayText='Email'></span>
+            <span class='st_sharethis_hcount' displayText='ShareThis'></span>
+        </div>                  		
 	</div>
 </body>
 </html>

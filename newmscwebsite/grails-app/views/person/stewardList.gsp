@@ -48,7 +48,7 @@
                         <td>Home: ${steward?.homePhone?.number}<br/>Cell: ${steward?.cellPhone?.number}</td>                    
                         <td><g:if test="${steward.classNumber == 'Unspecified'}"></g:if><g:else>${steward.classNumber}</g:else></td>                    
                         <td><g:if test="${steward.masterSteward}">Yes</g:if></td>                    
-                        <td>${fieldValue(bean: steward, field: "position")}</td>                    
+                        <td>${steward.leadershipPosition()}</td>                    
                     </tr>
                 </g:each>
                 </tbody>

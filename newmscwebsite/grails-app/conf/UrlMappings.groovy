@@ -6,6 +6,8 @@ class UrlMappings {
 				// apply constraints here
 			}
 		}
+		
+		"/event/displayEventCategory/$categoryString?"(controller: "event", action: "displayEventCategory")
 
 		"/"(controller: "home", action: "index")
 		"500"(view: '/error')

@@ -11,7 +11,9 @@ class Hike {
 	BigDecimal roundTripDistance	// from the designated trailhead
 	String elevationProfile			// file name assumed to be in the folder DEFAULT_MAP_URI
 	def photoGallery = []
-	
+	String descriptionMetadata
+	String keywordsMetadata
+
 	static DEFAULT_MAP_URI = "/maps/"
 
     static constraints = {
@@ -24,5 +26,7 @@ class Hike {
 		roundTripDistance(min: 0.1, max: 25.0)
 		elevationProfile(nullable: true)
 		photoGallery(size: 0..30)
+		descriptionMetadata(nullable: true, size: 0..156)
+		keywordsMetadata(nullable: true, size: 0..2048)
     }
 }

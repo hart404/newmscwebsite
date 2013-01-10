@@ -240,4 +240,25 @@ class EventController {
 		stewardMenu
 	}
 	
+	def displayEventCategory() {
+		def categoryString = params.categoryString
+		println "Category: ${categoryString}"
+		def category = Category.fromString(categoryString)
+		params.max = 5
+		params.offset = 0
+		def events = eventService.findAllInCategoryAfterToday(category, params)
+		[events: events,
+			category: category,
+			offset: 0,
+			max: 5,
+			eventCount: eventService.countAllInCategoryAfterToday(category)]
+	}
+	
+	def getEventsForCategory() {
+		def category = Category.fromString(params.category)
+		def events = eventService.findAllInCategoryAfterToday(category, params)
+		def eventCount = eventService.countAllInCategoryAfterToday(category)
+		render(template:"/event/eventsCategoryTemplate", model:[events: events, "eventCount": eventCount, category: category, offset: (params.offset as Integer), max: (params.max as Integer)])
+	}
+	
 }

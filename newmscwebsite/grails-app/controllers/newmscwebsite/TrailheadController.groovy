@@ -48,7 +48,7 @@ class TrailheadController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [locationInstanceList: Trailhead.list(params), locationInstanceTotal: Trailhead.count()]
+        [trailheadInstanceList: Trailhead.list(params), trailheadInstanceTotal: Trailhead.count()]
     }
 
     def create = {
@@ -60,7 +60,7 @@ class TrailheadController {
         locationInstance.properties = params
 		addressInstance.properties = params
 		coordinatesInstance.properties = params
-        return [locationInstance: locationInstance]
+        return [trailheadInstance: locationInstance]
     }
 
     def save = {
@@ -74,7 +74,7 @@ class TrailheadController {
             redirect(action: "show", id: locationInstance.id)
         }
         else {
-            render(view: "create", model: [locationInstance: locationInstance])
+            render(view: "create", model: [trailheadInstance: locationInstance])
         }
     }
 
@@ -85,7 +85,7 @@ class TrailheadController {
             redirect(action: "list")
         }
         else {
-            [locationInstance: locationInstance]
+            [trailheadInstance: locationInstance]
         }
     }
 
@@ -96,7 +96,7 @@ class TrailheadController {
             redirect(action: "list")
         }
         else {
-            return [locationInstance: locationInstance]
+            return [trailheadInstance: locationInstance]
         }
     }
 
@@ -122,7 +122,7 @@ class TrailheadController {
                 redirect(action: "show", id: locationInstance.id)
             }
             else {
-                render(view: "edit", model: [locationInstance: locationInstance])
+                render(view: "edit", model: [trailheadInstance: locationInstance])
             }
         }
         else {
@@ -152,11 +152,11 @@ class TrailheadController {
 	
 	def displayLocation = {
 		def trailhead = Trailhead.findById(params.id)
-		["location": trailhead, currentView: trailhead.internalName]
+		[location: trailhead, currentView: trailhead.internalName, mapName: trailhead.mapName]
 	}
 	
 	def displayHike = {
 		def hike = Hike.findById(params.id)
-		["hike": hike]
+		[hike: hike]
 	}
 }

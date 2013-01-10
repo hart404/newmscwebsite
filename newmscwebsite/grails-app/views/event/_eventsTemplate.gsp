@@ -24,10 +24,8 @@
 				<g:if test="${event.stewardOnly}"> &nbsp; - <span class="highlight2">Steward Only</span></g:if>
 			</p>
 			<p class="bigp grayEventText">
-				${event.shortDescription}
-			</p>
-			<p class="bigp grayEventText">
-				${event.moreInformation}
+				${event.shortDescription}&nbsp;
+                <g:link controller="event" action="displayEvent" id="${event.id}">Read more...</g:link>
 			</p>
 			<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_STEWARD,ROLE_STAFF,ROLE_WEB">
 			    <g:if test="${event.stewardOnlyInformation}">
@@ -48,7 +46,7 @@
 <g:set var="totalPages" value="${Math.ceil(eventCount / max) as Integer}" />
 <g:set var="page" value="${(offset / max) + 1}" />
 <g:if test="${totalPages < 1}">
-<p class="bigp grayEventText">No events found for for your selection.</p>
+<p class="bigp grayEventText">No events found for your selection.</p>
 </g:if>
 <g:else>
 	<g:if test="${totalPages == 1}">

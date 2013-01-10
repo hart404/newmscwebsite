@@ -95,6 +95,10 @@ body {
     color: rgb(84, 83, 74);
 }
 
+.wideBackground {
+	background-color: rgb(186, 139, 0);
+}
+
 .eCardImage {
 	display: inline-block;
 }
@@ -107,7 +111,7 @@ body {
 }
 
 table.donateTable tr td:first-child {
-	width: 120px;
+	width: 150px;
 }
 
 table.donateTable tr td {
@@ -133,6 +137,11 @@ table.donateTable tr td {
 .eventBody {
     float: right;
     width: 600px;
+}
+
+.eventBodyForCategory {
+    float: right;
+    width: 920px;
 }
 
 .individualEventBody {
@@ -571,9 +580,24 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	float: right;
 	width: 900px;
 	padding-left: 4px;
-	height: 687px;
 	background-color: rgb(255, 242, 212);
     margin: 0;
+}
+
+.sharethistrailhead {
+    padding-left: 4px;
+    padding-top: 5px;
+    background-color: rgb(255, 242, 212);
+	padding-left: 20px;
+	clear: both;
+	height: 40px;
+}
+
+.sharethisnewsitem {
+	clear: right;
+	background-color: rgb(148, 158, 80);
+	height: 40px;
+	padding-left: 260px;
 }
 
 .generalContainer {
@@ -582,6 +606,14 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
     overflow: hidden;
     background-color: rgb(255, 242, 212);
     margin: 0;
+}
+
+.formContainer {
+    padding: 10px;
+    overflow: hidden;
+    margin: 5px;
+    border-style: solid;
+    border-color: rgb(84, 83, 74);
 }
 
 .contentContainer {
@@ -601,6 +633,14 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
     background-color: rgb(255, 242, 212);
     margin: 0;
 }
+
+.eventCategoryContainer {
+    padding-left: 4px;
+    height: 100%;
+    background-color: rgb(255, 242, 212);
+    margin: 0;
+}
+
 
 .newsContainer {
     width: 100%;
@@ -737,7 +777,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 .sidebarNavigationNarrow {
 	width: 290px;
 	float: left;
-	height: 687px;
+	height: 720px;
 }
 
 .sidebarHeading {
@@ -803,7 +843,6 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .mapSurround {
-	height: 657px;
 	width: 500px;
 	float: right;
 }

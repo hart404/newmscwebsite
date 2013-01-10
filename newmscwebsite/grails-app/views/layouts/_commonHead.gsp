@@ -16,4 +16,7 @@
 <script type="text/javascript" src="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/js' file='jquery-ui-1.8.21.custom.min.js'/>"></script> 
 <script type="text/javascript" src="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/js' file='dialog-patch.js'/>"></script>
 <link rel="stylesheet" type="text/css" href="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/css/custom-theme' file='jquery-ui-1.8.21.custom.css'/>"/>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "f8717137-e60f-422c-9166-c5389ac6f847", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
 <g:layoutHead />

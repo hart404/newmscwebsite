@@ -23,7 +23,9 @@ class Event {
 	boolean stewardOnly = true;
 	String otherLocation = ""
 	String stewardOnlyInformation
-	
+	String descriptionMetadata
+	String keywordsMetadata
+
 	static transients = ['calendarIcon']
 	
 	List<Category> categories = []
@@ -54,7 +56,13 @@ class Event {
 			if (list.isEmpty()) return false
 		}
 		stewardOnlyInformation(nullable: true, size: 0..2000)
+		descriptionMetadata(nullable: true, size: 0..156)
+		keywordsMetadata(nullable: true, size: 0..2048)
     }
+	
+	static mapping = {
+		sort startDate: "asc"
+	}
 	
 	public String formattedStartTime() {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMM dd, yyyy h:mm aa")

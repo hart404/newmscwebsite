@@ -5,7 +5,7 @@ public enum CLTPosition {
 	NATURE_GUIDES, PARTNERSHIP_DEVELOPMENT, VOLUNTEER_SUPPORT, PATROL, PATHFINDERS, 
 	STEWARD_EDUCATION, ASSISTANT
 	
-	def titles = ["Chair", "Hike", "IT", "Community Relations", "Research", 
+	def titles = ["CLT Chair", "Hike", "IT", "Community Relations", "Research", 
 		"Construction and Maintenance", "Nature Guides", "Partnership Development",
 		"Volunteer Support", "Patrol", "Pathfinders", "Steward Education", "Assistant"]
 	

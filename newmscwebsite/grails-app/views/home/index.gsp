@@ -1,6 +1,8 @@
 <html>
 <head>
 <meta name="layout" content="homeLayout" />
+<meta name="description" content="The volunteer group that assists the City of Scottsdale in maintaining the McDowell Sonoran Preserve" />
+<meta name="keywords" content="mcdowell mountains hiking" />
 <title>McDowell Sonoran Conservancy</title>
 </head>
 <body>
@@ -43,7 +45,7 @@
 						<p><scms:htmlWidget widget="${donateText}" /></p>
 					</div>
 					<div class="imageButton">
-						<a href="<g:createLink controller='donate'/>"><img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/></a>
+						<a href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=860674350" target="_blank"><img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/></a>
 					</div>
 				</div>
 				<div class="imageText bodyBlue">
@@ -59,7 +61,7 @@
 				</div>
 			</div>
 			<div class="blockFooter headerBlue">
-                <a href="<g:createLink controller='donate'/>">Support us &raquo</a>
+                <a href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=860674350" target="_blank">Support us &raquo</a>
             </div>          
 		</div>
 		<div class="homePageItem marginRight">

@@ -73,8 +73,10 @@ log4j = {
 	
     appenders {
         console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+		console name:'stacktrace', layout:pattern(conversionPattern: '%c{2} %m%n')
+		console name:'errors', layout:pattern(conversionPattern: '%c{2} %m%n')
     }
-
+	
     error  	'org.codehaus.groovy.grails.web.servlet',  //  controllers
            	'org.codehaus.groovy.grails.web.pages', //  GSP
 			'org.codehaus.groovy.grails.web.sitemesh', //  layouts
@@ -96,7 +98,7 @@ log4j = {
 	info 	'org.springframework.security'
 	
 	debug 	'newmscwebsite'
-
+	
 }
 
 // Added by the Spring Security Core plugin:
@@ -164,8 +166,8 @@ grails.plugins.springsecurity.ui.register.emailFrom = 'info@mcdowellsonoran.org'
 grails.plugins.springsecurity.useSecurityEventListener = true
 grails.plugins.springsecurity.logout.handlerNames =
 	['rememberMeServices',
-	 'securityContextLogoutHandler',
-	 'securityEventListener']
+	 'securityContextLogoutHandler'
+	 ]
 
 breadcrumbs.selector="title"
 

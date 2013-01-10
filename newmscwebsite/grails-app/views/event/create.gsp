@@ -115,7 +115,7 @@
 
 						<tr class="prop">
 							<td valign="top" class="name"><label for="startTime"><g:message
-										code="event.startTime.label" default="Start Time" /></label></td>
+										code="event.startTime.label" default="Start Date/Time" /></label></td>
 							<td valign="top"
 								class="value ${hasErrors(bean: eventInstance, field: 'startTime', 'errors')}">
 								<richui:dateChooser name="startTime" format="MM-dd-yyyy"
@@ -125,7 +125,7 @@
 
 						<tr class="prop">
 							<td valign="top" class="name"><label for="endTime"><g:message
-										code="event.endTime.label" default="End Time" /></label></td>
+										code="event.endTime.label" default="End Date/Time" /></label></td>
 							<td valign="top"
 								class="value ${hasErrors(bean: eventInstance, field: 'endTime', 'errors')}">
 								<richui:dateChooser name="endTime" format="MM-dd-yyyy"

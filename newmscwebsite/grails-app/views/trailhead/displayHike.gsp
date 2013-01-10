@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta name="layout" content="trailheadSidebarLayout" />
-<title>Trailhead</title>
+<title>${hike.name}</title>
 <style type="text/css">
 html {
 	height: 100%
@@ -75,13 +75,21 @@ body {
 			</p>
             <p class="bigp grayEventText">
                 <span class="redEventText">Roundtrip Distance: </span>
-                <g:formatNumber number="${hike.roundTripDistance}" format="#.#" /> miles
+                <g:formatNumber number="${hike.roundTripDistance}" format="##.#" /> miles
             </p>			
             <p class="bigp grayEventText">
                 <span class="redEventText">Elevation Gain: </span>
                 <g:formatNumber number="${hike.elevationGain}" format="#,##0" /> feet
             </p>
 		</div>
+        <div class="sharethistrailhead">
+            <span class='st_facebook_hcount' displayText='Facebook'></span>
+            <span class='st_twitter_hcount' displayText='Tweet'></span>
+            <span class='st_pinterest_hcount' displayText='Pinterest'></span>
+            <span class='st_googleplus_hcount' displayText='Google +'></span>
+            <span class='st_email_hcount' displayText='Email'></span>
+            <span class='st_sharethis_hcount' displayText='ShareThis'></span>
+        </div>                          
 	</div>
 </body>
 </html>
