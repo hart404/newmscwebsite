@@ -23,6 +23,10 @@ class HomeController {
 		map
 	}
 	
+	def search() {
+		params
+	}
+	
 	def addWidgetsToMap(map) {
 		def page = SCMSStaticPage.findByLink('home')
 		if (page == null) {
@@ -31,10 +35,7 @@ class HomeController {
 		page.widgets.each { widget ->
 			map[widget.widgetId] = widget
 		}
-	} 
-	
-	def search() {
-		params
+		SCMSStaticPage.currentPage = page
 	}
 	
 }

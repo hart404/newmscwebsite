@@ -21,7 +21,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list person">
+			<ul class="property-list person">
 			
 				<g:if test="${personInstance?.username}">
 				<li class="fieldcontain">
@@ -215,13 +215,17 @@
                     <span id="authorities-label" class="property-label"><g:message code="person.authorities.label" default="Authorities" /></span>
                         <span class="property-value" aria-labelledby="authorities-label"><g:fieldValue bean="${personInstance}" field="authorities" /></span>
                 </li>
+                <li class="fieldcontain">
+                    <span id="interests-label" class="property-label"><g:message code="person.interests.label" default="Interests" /></span>
+                        <span class="property-value" aria-labelledby="interests-label"><g:fieldValue bean="${personInstance}" field="interests" /></span>
+                </li>
 			
-			</ol>
+			</ul>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${personInstance?.id}" />
-					<g:link class="edit" action="edit" id="${personInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <g:link class="changePassword" action="changePassword" id="${personInstance?.id}"><g:message code="default.button.changepassword.label" default="Change Password" /></g:link>
+					<g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"  />
+                    <g:actionSubmit class="edit" action="changePassword" value="${message(code: 'default.button.changepassword.label', default: 'Change Password')}" />
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

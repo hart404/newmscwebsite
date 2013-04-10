@@ -86,7 +86,7 @@
 		</div>
 		<div class="homePageItem">
 			<div class="blockHeader headerYellow">
-				<h1>Highlighted Events</h1>
+				<h1>Highlighted Events &amp; Hikes</h1>
 			</div>
 			<div class="homePageSubItem bodyYellow">
 				<g:each var="event" in="${events}">

@@ -52,6 +52,11 @@ class CacheFilters {
 				noCache(response)
 			}
 		}
+		widget(uri : '/document/**') {
+			before = {
+				noCache(response)
+			}
+		}
 	}
 	
 	void noCache(response) {

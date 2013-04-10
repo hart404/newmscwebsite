@@ -180,6 +180,13 @@
     <g:checkBox name="masterSteward" value="${personInstance?.masterSteward}" />
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'leadSteward', 'error')} ">
+    <label for="leadSteward">
+        <g:message code="person.leadSteward.label" default="Lead Steward" />        
+    </label>
+    <g:checkBox name="leadSteward" value="${personInstance?.leadSteward}" />
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'wantsWeeklyEmail', 'error')} ">
     <label for="wantsWeeklyEmail">
         <g:message code="person.wantsWeeklyEmail.label" default="Wants Weekly Email" />     

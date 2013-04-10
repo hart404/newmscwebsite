@@ -22,7 +22,7 @@ class PersonController {
     }
 
     def create() {
-        [personInstance: new Person(params)]
+        [personInstance: new Person(params), years: yearRange()]
     }
 
     def save() {
@@ -91,7 +91,7 @@ class PersonController {
             return
         }
 
-        [personInstance: personInstance]
+        [personInstance: personInstance, years: yearRange()]
     }
 
     def update() {
@@ -129,6 +129,7 @@ class PersonController {
 		}
 		
 		updateAuthorities(personInstance, params)
+		updateInterests(personInstance, params)
 		
 		def address = new StreetAddress(params)
 		if (address != personInstance.address) {
@@ -167,6 +168,25 @@ class PersonController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
         redirect(action: "show", id: personInstance.id)
     }
+	
+	def updateInterests(person, params) {
+		Interest.interestMap.each { entry ->
+			updateInterest(person, params[entry.key], entry.value)
+		}
+	}
+	
+	def updateInterest(person, onOff, interest) {
+		if (onOff == "on") {
+			if (!person.interests.contains(interest)) {
+				person.addToInterests(interest)
+			}
+		}
+		if (onOff == null) {
+			if (person.interests.contains(interest)) {
+				person.removeFromInterests(interest)
+			}
+		}
+	}
 	
 	def updateAuthorities(person, params) {
 		def rolesMap = createRolesMap()
@@ -337,6 +357,7 @@ class PersonController {
 		}
 		
 		updateAuthorities(personInstance, params)
+		updateInterests(personInstance, params)
 		
 		def keysToRemove = ["street", "apartment", "city", "state", "zip", "homePhone", "cellPhone"]
 		def newParams = [:]
@@ -361,6 +382,14 @@ class PersonController {
 		flash.message = "Steward ${personInstance.firstName} ${personInstance.lastName} updated."
 		redirect(action: "stewardUpdateDetails")
 	}
-
+	
+	def yearRange() {
+		def thisYear = (new Date()).getAt(Calendar.YEAR)
+		// The minimum age for a steward is 12 
+		def startYear = thisYear - 12
+		// Allow a steward to be 100 years old...
+		def endYear = thisYear - 100
+		startYear..endYear
+	}
 
 }

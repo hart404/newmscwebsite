@@ -387,12 +387,12 @@ class BootStrap {
 	}
 		
 	def updateSql() {
-	/*
-		def updateSQL = "ALTER TABLE `mscmsc`.`scmsstatic_page` CHANGE COLUMN `keywords_metadata` `keywords_metadata` VARCHAR(2048) NULL DEFAULT NULL  ;"
+		/*
+		def updateSQL = "update mscmsc.sec_user set lead_steward = 0"
 		def db = [url:'jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc', user:'root', password:'uni-dev01', driver:'com.mysql.jdbc.Driver']
 		def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
-		sql.execute(updateSQL) 
-	*/
+		sql.execute(updateSQL)
+		*/ 
 	}
 	
 	def websiteUpdates() {

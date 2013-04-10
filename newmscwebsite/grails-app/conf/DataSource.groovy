@@ -45,4 +45,24 @@ environments {
 			}
 		}
 	}
+	phil {
+		dataSource {
+			pooled = true
+			dbCreate = "update"
+			driverClassName = "com.mysql.jdbc.Driver"
+			url = "jdbc:mysql://phildbinstanceii.cpd15dx3jnok.us-west-1.rds.amazonaws.com/phildbII"
+			username = "admin"
+			password = "toolz001"
+			dialect = org.hibernate.dialect.MySQLDialect
+			properties {
+				validationQuery = "SELECT 1"
+				testOnBorrow = true
+				testOnReturn = true
+				testWhileIdle = true
+				timeBetweenEvictionRunsMillis = 1000 * 60 * 30
+				numTestsPerEvictionRun = 3
+				minEvictableIdleTimeMillis = 1000 * 60 * 30
+			}
+		}
+	}
 }

@@ -17,16 +17,20 @@ class Person extends SecUser {
 	String emergencyPhone
 	SCMSPhoto photo
 	boolean masterSteward = false
+	boolean leadSteward = false
 	CLTPosition position
 	String classNumber
 	boolean wantsWeeklyEmail
 	Boolean hasStewardRole = false
 	Date dateOfBirth
+	Person mentor
 	
 	static embedded = ['address', 'homePhone', 'cellPhone']
 	
 	static hasMany = [
-		volunteerSessions: VolunteerSession]
+		volunteerSessions: VolunteerSession,
+		interests: Interest
+	]
 
 	static constraints = {
 		firstName(nullable: false, size: 1..30)
@@ -45,6 +49,9 @@ class Person extends SecUser {
 		hasStewardRole(nullable: false)
 		dateOfBirth(nullable: true)
 		volunteerSessions(size: 0..100000)
+		mentor(nullable: true)
+		leadSteward(nullable: true)
+		interests(nullable: true)
 	}
 	
 	static mapping = {
@@ -69,6 +76,11 @@ class Person extends SecUser {
 			}
 		}
 		leadershipPosition
+	}
+	
+	def hasInterest(String interestName) {
+		if (!interests) return false
+		interests.contains(Interest.fromString(interestName))
 	}
 	
 }

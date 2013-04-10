@@ -1,7 +1,7 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
-grails.config.locations = ["classpath:SecretConfig.properties"]
+grails.config.locations = []
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
@@ -9,6 +9,21 @@ grails.config.locations = ["classpath:SecretConfig.properties"]
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+
+ResourceLoader resourceLoader = new DefaultResourceLoader()
+def addConfig = { path->
+	Resource resource = resourceLoader.getResource(path)
+	if (resource.exists()) {
+		// There is no log at this point so just print a message on the console that the CSO
+		// CONFIG path was found/not found but without specifying the actual path.
+		println "CONFIG found ${path}"
+		grails.config.locations << path
+	} else {
+		println "CONFIG did not find ${path}!"
+	}
+}
+addConfig("classpath:SecretConfig.properties")
+
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
@@ -66,6 +81,12 @@ environments {
 		grails.plugins.springsecurity.portMapper.httpPort = "80"
 		grails.plugins.springsecurity.portMapper.httpsPort = "443"
 	}
+	phil {
+		grails.serverURL = "http://www.mcdowellsonoran.org"
+		grails.plugins.springsecurity.portMapper.httpPort = "80"
+		grails.plugins.springsecurity.portMapper.httpsPort = "443"
+	}
+
 }
 
 // log4j configuration
@@ -108,6 +129,11 @@ grails.plugins.springsecurity.authority.className = 'newmscwebsite.SecRole'
 
 import grails.plugins.springsecurity.SecurityConfigType
 
+import org.springframework.core.io.DefaultResourceLoader
+import org.springframework.core.io.Resource
+import org.springframework.core.io.ResourceLoader
+import grails.plugins.springsecurity.SecurityConfigType
+
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
 	'/login/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -128,6 +154,18 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/docs/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/home/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/content/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/ranch':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/paws':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/visit':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/hikes':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/photocontest':					['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/steward':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/volunteer':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/freefamilyfun':					['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/kids':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/women':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/partners':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/legacy':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*/list/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/*/create/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/*/save/**':						['IS_AUTHENTICATED_REMEMBERED'],
@@ -192,6 +230,10 @@ grails {
 			   "mail.smtp.socketFactory.fallback":"false"]
 	}
 }
+
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
+
+
 
 
 

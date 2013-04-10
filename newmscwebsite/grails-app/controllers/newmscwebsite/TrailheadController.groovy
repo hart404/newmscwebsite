@@ -23,6 +23,7 @@ class TrailheadController {
 		page.widgets.each { widget ->
 			map[widget.widgetId] = widget
 		}
+		SCMSStaticPage.currentPage = page
 	}
 
 	

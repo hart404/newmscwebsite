@@ -97,6 +97,15 @@
 </div>
 </sec:ifAnyGranted>
 
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'dateOfBirth', 'error')} ">
+    <label for="tshirtSize">
+        <g:message code="person.dateOfBirth.label" default="Date of Birth" />
+        
+    </label>
+    <g:datePicker name="dateOfBirth" value="${personInstance?.dateOfBirth}" precision="day" years="${years}"/>
+</div>
+
+
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'tshirtSize', 'error')} ">
 	<label for="tshirtSize">
 		<g:message code="person.tshirtSize.label" default="Tshirt Size" />
@@ -174,11 +183,82 @@
 </div>
 </sec:ifNotGranted>
 
+<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'leadSteward', 'error')} ">
+    <label for="leadSteward">
+        <g:message code="person.leadSteward.label" default="Lead Steward" />        
+    </label>
+    <g:checkBox name="leadSteward" value="${personInstance?.leadSteward}" />
+</div>
+</sec:ifAnyGranted>
+
+<sec:ifNotGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'leadSteward', 'error')} ">
+    <label for="leadSteward">
+        <g:message code="person.leadSteward.label" default="Lead Steward" />        
+    </label>
+    <em><g:if test="${personInstance.leadSteward}">Yes</g:if><g:else>No</g:else></em>
+</div>
+</sec:ifNotGranted>
+
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'wantsWeeklyEmail', 'error')} ">
 	<label for="wantsWeeklyEmail">
 		<g:message code="person.wantsWeeklyEmail.label" default="Wants Weekly Email" />		
 	</label>
 	<g:checkBox name="wantsWeeklyEmail" value="${personInstance?.wantsWeeklyEmail}" />
+</div>
+
+<div>
+<h2>Interests</h2>
+	<div>
+	    <g:checkBox name="bikePatrol" value="${personInstance?.hasInterest('bikePatrol')}" />
+	    Bike Patrol
+	</div>
+	<div>
+	    <g:checkBox name="communityRelations" value="${personInstance?.hasInterest('communityRelations')}" onclick='getEvents()' />
+	    Community Relations
+	</div>
+	<div>
+	    <g:checkBox name="constructionAndMaintenance" value="${personInstance?.hasInterest('constructionAndMaintenance')}" onclick='getEvents()' />
+	    Construction and Maintenance
+	</div>
+	<div>
+	    <g:checkBox name="hike" value="${personInstance?.hasInterest('hike')}" />
+	    Hike
+	</div>
+	<div>
+	    <g:checkBox name="natureGuides" value="${personInstance?.hasInterest('natureGuides')}" />
+	    Nature Guides
+	</div>
+	<div>
+	    <g:checkBox name="informationTechnology" value="${personInstance?.hasInterest('informationTechnology')}" />
+	    Information Technology
+	</div>
+    <div>
+        <g:checkBox name="partnershipDevelopment" value="${personInstance?.hasInterest('partnershipDevelopment')}" />
+        Partnership Development
+    </div>
+    <div>
+        <g:checkBox name="pathfinders" value="${personInstance?.hasInterest('pathfinders')}" />
+        Pathfinders
+    </div>
+    <div>
+        <g:checkBox name="patrol" value="${personInstance?.hasInterest('patrol')}" />
+        Patrol
+    </div>
+    <div>
+        <g:checkBox name="research" value="${personInstance?.hasInterest('research')}" />
+        Research
+    </div>
+    <div>
+        <g:checkBox name="stewardEducation" value="${personInstance?.hasInterest('stewardEducation')}" />
+        Steward Education
+    </div>
+    <div>
+        <g:checkBox name="volunteerSupport" value="${personInstance?.hasInterest('volunteerSupport')}" />
+        Volunteer Support
+    </div>
+    <br/>
 </div>
 
 <sec:ifAnyGranted roles="ROLE_ADMIN">

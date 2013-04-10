@@ -27,7 +27,17 @@ class AmazonS3Service {
 		"html": "text/html",
 		"xml": "text/xml",
 		"mp3": "audio/mpeg",
-		"flv": "application/octet-stream"
+		"flv": "application/octet-stream",
+		"doc": "application/msword",
+		"docx": "application/msword",
+		"xls": "application/vnd.msexcel",
+		"xlsx": "application/vnd.msexcel",
+		"ppt": "application/vnd.mspowerpoint",
+		"pptx": "application/vnd.mspowerpoint",
+		"pdf": "application/pdf",
+		"kml": "application/vnd.google-earth.kml+xml",
+		"kmz": "application/vnd.google-earth.kmz"
+		
 	]
 
 	S3Bucket makeBucket(uid) {
@@ -40,7 +50,7 @@ class AmazonS3Service {
 		def inputStream = file.newInputStream()
 		def fileName = file.name
 		def parts = fileName.tokenize('.')
-		def extension = parts[1]
+		def extension = parts[-1]
 		put(inputStream, file.name, "", extension, file.size())
 	}
 
@@ -56,6 +66,8 @@ class AmazonS3Service {
 			up.setKey name
 			up.setBucketName bucket.getName()
 			getS3Service().putObject(bucket, up)
+		} else {
+			log.error "File extension \"${ext}\" rejected"
 		}
 	}
 	

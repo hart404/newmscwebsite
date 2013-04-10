@@ -24,7 +24,7 @@
                         <g:sortableColumn property="email" title="${message(code: 'steward.email.label', default: 'Email')}" />                   
                         <th>Phone</th>
                         <g:sortableColumn property="classNumber" title="${message(code: 'steward.classnumber.label', default: 'Class<br/>Number')}" />
-                        <th>Master<br/>Steward</th>
+                        <th>Master/Lead<br/>Steward</th>
                         <th>Leadership</th>
                     </tr>
                 </thead>
@@ -45,9 +45,9 @@
                         <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
                             <td>${fieldValue(bean: steward, field: "email")}</td> 
                         </sec:ifNotGranted>                   
-                        <td>Home: ${steward?.homePhone?.number}<br/>Cell: ${steward?.cellPhone?.number}</td>                    
+                        <td><g:if test="${steward?.homePhone?.number}"><p style="font-size: 10px">${steward?.homePhone?.number} (H)</p></g:if><g:if test="${steward?.cellPhone?.number}"><p style="font-size: 10px">${steward?.cellPhone?.number} (M)</p></g:if></td>                    
                         <td><g:if test="${steward.classNumber == 'Unspecified'}"></g:if><g:else>${steward.classNumber}</g:else></td>                    
-                        <td><g:if test="${steward.masterSteward}">Yes</g:if></td>                    
+                        <td><g:if test="${steward.masterSteward}">Master</g:if><g:if test="${steward.leadSteward}">Lead</g:if></td>                    
                         <td>${steward.leadershipPosition()}</td>                    
                     </tr>
                 </g:each>

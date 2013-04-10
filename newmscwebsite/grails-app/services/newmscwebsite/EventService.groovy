@@ -100,7 +100,7 @@ class EventService {
 	def stewardOnlyEvents(params) {
 		LocalDate today = LocalDate.now()
 		if (SpringSecurityUtils.ifNotGranted("ROLE_WEB,ROLE_ADMIN,ROLE_STEWARD")) {
-			// Return empty list of no access allowed
+			// Return empty list if no access allowed
 			return []
 		}
 		def criteria = Event.createCriteria()
