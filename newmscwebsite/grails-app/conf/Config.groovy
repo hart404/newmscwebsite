@@ -120,6 +120,11 @@ log4j = {
 	
 	debug 	'newmscwebsite'
 	
+ /*	debug 'org.hibernate.SQL'
+	trace 'org.hibernate.type.descriptor.sql.BasicBinder' 
+	
+	com.linkedin.grails = "info" */
+	
 }
 
 // Added by the Spring Security Core plugin:

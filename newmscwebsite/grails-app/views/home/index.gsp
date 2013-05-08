@@ -117,5 +117,5 @@
     <g:render template="/widget/updateHtmlWidgetDialog" plugin="simple-cms" />
     <g:render template="/widget/updatePhotoWidget" plugin="simple-cms" />
     <g:render template="/photo/searchPhotoDialog" plugin="simple-cms" />
-</body>
+ </body>
 </html>

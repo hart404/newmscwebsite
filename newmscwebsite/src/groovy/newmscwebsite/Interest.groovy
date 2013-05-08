@@ -2,9 +2,9 @@ package newmscwebsite
 
 public enum Interest {
 	BIKE_PATROL, COMMUNITY_RELATIONS, CONSTRUCTION_AND_MAINTENANCE, HIKE, 
-	NATURE_GUIDES, INFORMATION_TECHNOLOGY, PARTNERSHIP_DEVELOPMENT, 
+	NATURE_GUIDES, INFORMATION_TECHNOLOGY, FUNDRAISING, 
 	PATHFINDERS, PATROL, RESEARCH, STEWARD_EDUCATION,  
-	VOLUNTEER_SUPPORT
+	VOLUNTEER_SUPPORT, PARTNERSHIP_DEVELOPMENT
 	
 	static Map<String, Interest> interestMap = [
 		bikePatrol: BIKE_PATROL,
@@ -13,12 +13,13 @@ public enum Interest {
 		hike: HIKE,
 		natureGuides: NATURE_GUIDES,
 		informationTechnology: INFORMATION_TECHNOLOGY,
-		partnershipDevelopment: PARTNERSHIP_DEVELOPMENT,
+		fundraising: FUNDRAISING,
 		pathfinders: PATHFINDERS,
 		patrol: PATROL,
 		research: RESEARCH,
 		stewardEducation: STEWARD_EDUCATION,
-		volunteerSupport: VOLUNTEER_SUPPORT
+		volunteerSupport: VOLUNTEER_SUPPORT,
+		partnershipDevelopment: PARTNERSHIP_DEVELOPMENT
 	]
 	
 	static Interest fromString(String interestString) {
@@ -35,8 +36,8 @@ public enum Interest {
 				return NATURE_GUIDES
 			case "informationtechnology":
 				return INFORMATION_TECHNOLOGY
-			case "partnershipdevelopment":
-				return PARTNERSHIP_DEVELOPMENT
+			case "fundraising":
+				return FUNDRAISING
 			case "pathfinders":
 				return PATHFINDERS
 			case "patrol":
@@ -55,9 +56,9 @@ public enum Interest {
 
 	def titles = [
 		"Bike Patrol", "Community Relations", "Construction and Maintenance", "Hike", 
-		"Nature Guides", "Information Technology", "Partnership Development", 
+		"Nature Guides", "Information Technology", "Fundraising", 
 		"Pathfinders", "Patrol",  "Research", "Steward Education", 
-		"Volunteer Support"
+		"Volunteer Support", "Partnership Development"
 	]
 	
 	def title() {

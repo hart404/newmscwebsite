@@ -215,7 +215,7 @@ class EventController {
     }
 	
 	def displayEvent = {
-		[event : Event.findById(params.id)]
+		[event : Event.get(params.id)]
 	}
 	
 	def stewardOnlyEvents() {

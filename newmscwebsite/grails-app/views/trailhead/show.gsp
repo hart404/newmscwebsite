@@ -125,6 +125,7 @@
 				</g:if>
 			
 			</ol>
+			<br/>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${trailheadInstance?.id}" />

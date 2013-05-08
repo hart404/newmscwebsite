@@ -92,12 +92,14 @@ class TrailheadController {
 
     def edit = {
         def locationInstance = Trailhead.get(params.id)
+		def addressInstance = locationInstance.address
+		def coordinatesInstance = locationInstance.coordinates
         if (!locationInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), params.id])}"
             redirect(action: "list")
         }
         else {
-            return [trailheadInstance: locationInstance]
+            return [trailheadInstance: locationInstance, geographicCoordinatesInstance: coordinatesInstance, streetAddressInstance: addressInstance]
         }
     }
 
@@ -111,7 +113,7 @@ class TrailheadController {
                 if (locationInstance.version > version) {
                     
                     locationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'location.label', default: 'Location')] as Object[], "Another user has updated this Location while you were editing")
-                    render(view: "edit", model: [locationInstance: locationInstance])
+                    render(view: "edit", model: [locationInstance: locationInstance, geographicCoordinatesInstance: coordinatesInstance, streetAddressInstance: addressInstance])
                     return
                 }
             }
@@ -123,7 +125,7 @@ class TrailheadController {
                 redirect(action: "show", id: locationInstance.id)
             }
             else {
-                render(view: "edit", model: [trailheadInstance: locationInstance])
+                render(view: "edit", model: [trailheadInstance: locationInstance, geographicCoordinatesInstance: coordinatesInstance, streetAddressInstance: addressInstance])
             }
         }
         else {
@@ -152,12 +154,12 @@ class TrailheadController {
     }
 	
 	def displayLocation = {
-		def trailhead = Trailhead.findById(params.id)
+		def trailhead = Trailhead.get(params.id)
 		[location: trailhead, currentView: trailhead.internalName, mapName: trailhead.mapName]
 	}
 	
 	def displayHike = {
-		def hike = Hike.findById(params.id)
+		def hike = Hike.get(params.id)
 		[hike: hike]
 	}
 }

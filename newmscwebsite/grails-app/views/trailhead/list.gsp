@@ -42,7 +42,7 @@
 				<g:each in="${trailheadInstanceList}" status="i" var="trailheadInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${trailheadInstance.id}">${fieldValue(bean: trailheadInstance, field: "name")}</g:link></td>
+						<td><g:link action="edit" id="${trailheadInstance.id}">${fieldValue(bean: trailheadInstance, field: "name")}</g:link></td>
 					
 						<td>${fieldValue(bean: trailheadInstance, field: "description")}</td>
 					

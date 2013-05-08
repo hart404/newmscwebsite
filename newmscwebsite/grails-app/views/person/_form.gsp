@@ -235,8 +235,8 @@
 	    Information Technology
 	</div>
     <div>
-        <g:checkBox name="partnershipDevelopment" value="${personInstance?.hasInterest('partnershipDevelopment')}" />
-        Partnership Development
+        <g:checkBox name="fundraising" value="${personInstance?.hasInterest('fundraising')}" />
+        Fundraising
     </div>
     <div>
         <g:checkBox name="pathfinders" value="${personInstance?.hasInterest('pathfinders')}" />
@@ -253,10 +253,6 @@
     <div>
         <g:checkBox name="stewardEducation" value="${personInstance?.hasInterest('stewardEducation')}" />
         Steward Education
-    </div>
-    <div>
-        <g:checkBox name="volunteerSupport" value="${personInstance?.hasInterest('volunteerSupport')}" />
-        Volunteer Support
     </div>
     <br/>
 </div>

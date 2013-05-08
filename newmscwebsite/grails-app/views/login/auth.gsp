@@ -19,7 +19,7 @@
 	<table style="width: 400px; ">
 		<tr>
 			<td><label for="username"><g:message code='spring.security.ui.login.username'/> (your email address)</label></td>
-			<td><input name="j_username" id="username" size="40" /></td>
+			<td><input name="j_username" id="username" size="40" autofocus/></td>
 		</tr>
 		<tr>
 			<td><label for="password"><g:message code='spring.security.ui.login.password'/></label></td>

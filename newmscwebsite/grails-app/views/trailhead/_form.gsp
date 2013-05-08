@@ -15,15 +15,15 @@
 		<g:message code="trailhead.description.label" default="Description" />
 		
 	</label>
-	<g:textArea name="description" cols="40" rows="5" maxlength="1000" value="${trailheadInstance?.description}"/>
+	<g:textArea name="description" cols="160" rows="20" maxlength="1000" value="${trailheadInstance?.description}"/>
 </div>
 <fieldset class="embedded"><legend><g:message code="trailhead.address.label" default="Address" /></legend>
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.apartment', 'error')} ">
-	<label for="address.apartment">
-		<g:message code="trailhead.address.apartment.label" default="Apartment" />
-		
-	</label>
-	<g:textField name="apartment" value="${streetAddressInstance?.apartment}"/>
+<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.street', 'error')} ">
+    <label for="address.street">
+        <g:message code="trailhead.address.street.label" default="Street" />
+        
+    </label>
+    <g:textArea name="street" value="${streetAddressInstance?.street}" rows="1" cols="50"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.city', 'error')} ">
@@ -34,36 +34,12 @@
 	<g:textField name="city" value="${streetAddressInstance?.city}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.id', 'error')} required">
-	<label for="address.id">
-		<g:message code="trailhead.address.id.label" default="Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="id" required="" value="${fieldValue(bean: streetAddressInstance, field: 'id')}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.state', 'error')} ">
 	<label for="address.state">
 		<g:message code="trailhead.address.state.label" default="State" />
 		
 	</label>
 	<g:textField name="state" value="${streetAddressInstance?.state}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.street', 'error')} ">
-	<label for="address.street">
-		<g:message code="trailhead.address.street.label" default="Street" />
-		
-	</label>
-	<g:textField name="street" value="${streetAddressInstance?.street}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.version', 'error')} required">
-	<label for="address.version">
-		<g:message code="trailhead.address.version.label" default="Version" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="version" required="" value="${fieldValue(bean: streetAddressInstance, field: 'version')}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'address.zip', 'error')} ">
@@ -74,37 +50,21 @@
 	<g:textField name="zip" value="${streetAddressInstance?.zip}"/>
 </div>
 </fieldset><fieldset class="embedded"><legend><g:message code="trailhead.coordinates.label" default="Coordinates" /></legend>
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'coordinates.id', 'error')} required">
-	<label for="coordinates.id">
-		<g:message code="trailhead.coordinates.id.label" default="Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="id" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'id')}"/>
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'coordinates.latitude', 'error')} required">
 	<label for="coordinates.latitude">
 		<g:message code="trailhead.coordinates.latitude.label" default="Latitude" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="latitude" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'latitude')}"/>
+	<g:field type="number decimal" name="latitude" id="latitude" value="${formatNumber(number: geographicCoordinatesInstance.latitude, format: "####.######")}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'coordinates.longitude', 'error')} required">
 	<label for="coordinates.longitude">
 		<g:message code="trailhead.coordinates.longitude.label" default="Longitude" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="longitude" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'longitude')}"/>
+	<g:field type="number decimal" name="longitude" id="longitude" value="${formatNumber(number: geographicCoordinatesInstance.longitude, format: "####.######")}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'coordinates.version', 'error')} required">
-	<label for="coordinates.version">
-		<g:message code="trailhead.coordinates.version.label" default="Version" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="version" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'version')}"/>
-</div>
 </fieldset>
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'internalName', 'error')} ">
 	<label for="internalName">
@@ -122,6 +82,22 @@
 	<g:select name="hikes" from="${newmscwebsite.Hike.list()}" multiple="multiple" optionKey="id" size="5" value="${trailheadInstance?.hikes*.id}" class="many-to-many"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'amenities', 'error')} ">
+    <label for="amenities">
+        <g:message code="trailhead.amenities.label" default="Amenities" />
+        <g:select name="amenities" from="${newmscwebsite.Amenity.values()}" multiple="multiple" size="5" value="${trailheadInstance?.amenities}" class="many-to-many"/>
+    </label>
+    
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'activities', 'error')} ">
+    <label for="activities">
+        <g:message code="trailhead.activities.label" default="Activities" />
+        <g:select name="activities" from="${newmscwebsite.Activity.values()}" multiple="multiple" size="5" value="${trailheadInstance?.activities}" class="many-to-many"/>
+    </label>
+    
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'mapName', 'error')} ">
 	<label for="mapName">
 		<g:message code="trailhead.mapName.label" default="Map Name" />
@@ -135,7 +111,7 @@
 		<g:message code="trailhead.descriptionMetadata.label" default="Description Metadata" />
 		
 	</label>
-	<g:textField name="descriptionMetadata" value="${trailheadInstance?.descriptionMetadata}"/>
+	<g:textArea cols="160" rows="3" name="descriptionMetadata" value="${trailheadInstance?.descriptionMetadata}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'keywordsMetadata', 'error')} ">
@@ -143,7 +119,7 @@
 		<g:message code="trailhead.keywordsMetadata.label" default="Keywords Metadata" />
 		
 	</label>
-	<g:textField name="keywordsMetadata" value="${trailheadInstance?.keywordsMetadata}"/>
+	<g:textArea cols="160" rows="3" name="keywordsMetadata" value="${trailheadInstance?.keywordsMetadata}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'activities', 'error')} ">
@@ -154,11 +130,4 @@
 	
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: trailheadInstance, field: 'amenities', 'error')} ">
-	<label for="amenities">
-		<g:message code="trailhead.amenities.label" default="Amenities" />
-		
-	</label>
-	
-</div>
 

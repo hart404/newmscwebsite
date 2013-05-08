@@ -2,6 +2,8 @@
 <head>
 <meta name="layout" content="trailheadSidebarLayout" />
 <title>${location.name}</title>
+<meta name="description" content="${location.descriptionMetadata}" />
+<meta name="keywords" content="${location.keywordsMetadata}" />
 <style type="text/css">
 html {
 	height: 100%
@@ -31,7 +33,7 @@ body {
                 position: itemLocation
             });
             <g:if test="${mapName}">
-            var georssLayer = new google.maps.KmlLayer("http://mcdowellsonoran.org/maps/${mapName}");
+            var georssLayer = new google.maps.KmlLayer("${mapName}");
             georssLayer.setMap(map);  
             </g:if>                  
  		}

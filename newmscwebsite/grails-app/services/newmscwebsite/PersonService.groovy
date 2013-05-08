@@ -84,4 +84,16 @@ class PersonService {
 		stewardList.size()
 	}
 	
+	def getStewardsWithInterest(interest, offset, max) {
+		Person.executeQuery(
+			'select p from Person p where :myInterest in elements(p.interests)',
+			[myInterest: interest as String], [offset: offset, max: max])
+	}
+	
+	def countPeopleWithInterest(interest) {
+		Person.executeQuery(
+			'select count(*) from Person p where :myInterest in elements(p.interests)',
+			[myInterest: interest as String])[0]
+	}
+	
 }

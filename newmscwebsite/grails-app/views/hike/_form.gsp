@@ -28,10 +28,10 @@
 
 <div class="fieldcontain ${hasErrors(bean: hikeInstance, field: 'directions', 'error')} required">
 	<label for="directions">
-		<g:message code="hike.directions.label" default="Directions" />
+		<g:message code="hike.directions.label" default="Hike Directions" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textArea name="directions" cols="40" rows="5" maxlength="2000" required="" value="${hikeInstance?.directions}"/>
+	<g:textArea name="directions" cols="120" rows="5" maxlength="2000" required="" value="${hikeInstance?.directions}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: hikeInstance, field: 'kmlFileName', 'error')} ">
@@ -55,7 +55,7 @@
 		<g:message code="hike.roundTripDistance.label" default="Round Trip Distance" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="roundTripDistance" min="0.1" max="25.0" required="" value="${fieldValue(bean: hikeInstance, field: 'roundTripDistance')}"/>
+	<g:field type="number" name="roundTripDistance" min="0.1" max="25.0" step= "0.1" required="" value="${fieldValue(bean: hikeInstance, field: 'roundTripDistance')}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: hikeInstance, field: 'elevationProfile', 'error')} ">
@@ -71,7 +71,7 @@
 		<g:message code="hike.descriptionMetadata.label" default="Description Metadata" />
 		
 	</label>
-	<g:textField name="descriptionMetadata" value="${hikeInstance?.descriptionMetadata}"/>
+	<g:textArea name="descriptionMetadata" cols="120" rows="2" value="${hikeInstance?.descriptionMetadata}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: hikeInstance, field: 'keywordsMetadata', 'error')} ">
@@ -79,6 +79,6 @@
 		<g:message code="hike.keywordsMetadata.label" default="Keywords Metadata" />
 		
 	</label>
-	<g:textField name="keywordsMetadata" value="${hikeInstance?.keywordsMetadata}"/>
+	<g:textArea name="keywordsMetadata" cols="120" rows="2" value="${hikeInstance?.keywordsMetadata}"/>
 </div>
 

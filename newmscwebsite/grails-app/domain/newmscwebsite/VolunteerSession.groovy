@@ -6,8 +6,12 @@ class VolunteerSession {
 	BigDecimal hours
 	LocalDate date
 	LocalTime time
-	List<TrailSection> trailSections
 	Program program
+	
+	List<TrailSection> trailSections
+	static hasMany = [
+		trailsSections: TrailSection	
+	]
 
     static constraints = {
 		trailSections(size: 0..100)

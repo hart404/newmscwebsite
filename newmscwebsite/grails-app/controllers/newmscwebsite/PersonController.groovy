@@ -391,5 +391,53 @@ class PersonController {
 		def endYear = thisYear - 100
 		startYear..endYear
 	}
+	
+	def showInterests() {
+		def people = []
+		def stewardCount = 0
+		def selection = null
+		if (params.interest) {
+			def offset = params.offset
+			def max = params.max
+			if (offset) {
+				offset = offset as Integer
+			} else {
+				offset = 0
+			}
+			if (max) {
+				max = max as Integer
+			} else {
+				max = 50
+			}
+			selection = params.interest
+			def interest = Interest.fromString(params.interest)
+			people = personService.getStewardsWithInterest(interest, offset, max)
+			stewardCount = personService.countPeopleWithInterest(interest)
+		}
+		[stewards: people, stewardCount: stewardCount, selection: selection]
+	}
+	
+	def downloadAsCSV() {
+		if (params.interest) {
+			response.setHeader "Content-disposition", "attachment; filename=${params.interest}.csv"
+			response.contentType = 'text/csv'
+			def interest = Interest.fromString(params.interest)
+			createCSVFileForInterest(interest, response.outputStream)
+			response.outputStream.flush()
+		} else {
+			flash.message = "Please specify an interest"
+			redirect(controller: 'person', action: 'showInterests')
+		}
+	}
+	
+	def createCSVFileForInterest(interest, outputStream) {
+		def people = personService.getStewardsWithInterest(interest, 0, 100000)
+		people.each { Person person ->
+			outputStream << "'${person.firstName}',"
+			outputStream << "'${person.lastName}',"
+			outputStream << "'${person.username}'"
+			outputStream << "\n"
+		}
+	}
 
 }

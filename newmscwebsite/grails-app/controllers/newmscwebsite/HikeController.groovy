@@ -78,7 +78,7 @@ class HikeController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'hike.label', default: 'Hike'), hikeInstance.id])
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'hike.label', default: 'Hike'), hikeInstance.name])
         redirect(action: "show", id: hikeInstance.id)
     }
 

@@ -29,4 +29,8 @@ class Hike {
 		descriptionMetadata(nullable: true, size: 0..156)
 		keywordsMetadata(nullable: true, size: 0..2048)
     }
+	
+	public String toString() {
+		name
+	}
 }
