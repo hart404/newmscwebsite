@@ -24,7 +24,7 @@ class DonateService {
 		Customer customer
 		
 		// Create AUTH transaction
-		Transaction authCaptureTransaction = merchant.createAIMTransaction(TransactionType.AUTH_CAPTURE, new BigDecimal(1.99))
+		Transaction authCaptureTransaction = merchant.createAIMTransaction(TransactionType.AUTH_CAPTURE, new BigDecimal("1.99"))
 		authCaptureTransaction.setCreditCard(creditCard)
 
 		Result<Transaction> result = (Result<Transaction>) merchant.postTransaction(authCaptureTransaction)

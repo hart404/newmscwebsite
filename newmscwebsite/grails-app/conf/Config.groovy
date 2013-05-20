@@ -183,7 +183,6 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/person/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/photo/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/adSpacePhoto/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/trailhead/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/gallery/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/lightbox/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/plugins/*/js/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],

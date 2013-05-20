@@ -41,6 +41,7 @@ grails.project.dependency.resolution = {
 		}
 		runtime ':profiler:0.4'
 		runtime ':miniprofiler:0.1'
+		compile ':codenarc:0.18.1'
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

@@ -219,16 +219,8 @@ class EventController {
 	}
 	
 	def stewardOnlyEvents() {
-		if (!params.max) {
-			params.max = 20
-		} else {
-			params.max = params.max as Integer
-		}
-		if (!params.offset) {
-			params.offset = 0
-		} else {
-			params.offset = params.offset as Integer
-		}
+		params.max = params.int('max', 20)
+		params.offset = params.int('offset', 0)
 		[stewardOnlyEvents: eventService.stewardOnlyEvents(params), countStewardOnlyEvents: eventService.countStewardOnlyEvents(), menu: obtainStewardMenu()]
 	}
 	

@@ -15,28 +15,27 @@ class AmazonS3Service {
 	String defaultBucketLocation=S3Bucket.LOCATION_US
 
 	Map mimeExtensionMap = [
-		"png" : "image/png",
-		"jpg": "image/jpeg",
-		"gif": "image/gif",
-		"tiff": "image/tiff",
-		"pdf": "application/pdf",
-		"mpeg": "video/mpeg",
-		"mp4": "video/mp4",
-		"mov": "video/quicktime",
-		"wmv": "video/x-ms-wmv",
-		"html": "text/html",
-		"xml": "text/xml",
-		"mp3": "audio/mpeg",
-		"flv": "application/octet-stream",
-		"doc": "application/msword",
-		"docx": "application/msword",
-		"xls": "application/vnd.msexcel",
-		"xlsx": "application/vnd.msexcel",
-		"ppt": "application/vnd.mspowerpoint",
-		"pptx": "application/vnd.mspowerpoint",
-		"pdf": "application/pdf",
-		"kml": "application/vnd.google-earth.kml+xml",
-		"kmz": "application/vnd.google-earth.kmz"
+		'png' : 'image/png',
+		'jpg': 'image/jpeg',
+		'gif': 'image/gif',
+		'tiff': 'image/tiff',
+		'pdf': 'application/pdf',
+		'mpeg': 'video/mpeg',
+		'mp4': 'video/mp4',
+		'mov': 'video/quicktime',
+		'wmv': 'video/x-ms-wmv',
+		'html': 'text/html',
+		'xml': 'text/xml',
+		'mp3': 'audio/mpeg',
+		'flv': 'application/octet-stream',
+		'doc': 'application/msword',
+		'docx': 'application/msword',
+		'xls': 'application/vnd.msexcel',
+		'xlsx': 'application/vnd.msexcel',
+		'ppt': 'application/vnd.mspowerpoint',
+		'pptx': 'application/vnd.mspowerpoint',
+		'kml': 'application/vnd.google-earth.kml+xml',
+		'kmz': 'application/vnd.google-earth.kmz'
 		
 	]
 
@@ -51,7 +50,7 @@ class AmazonS3Service {
 		def fileName = file.name
 		def parts = fileName.tokenize('.')
 		def extension = parts[-1]
-		put(inputStream, file.name, "", extension, file.size())
+		put(inputStream, file.name, '', extension, file.size())
 	}
 
 	void put(inputstream, name, uid, ext, length) {
