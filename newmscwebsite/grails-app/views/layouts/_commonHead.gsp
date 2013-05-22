@@ -11,6 +11,7 @@
 <r:layoutResources/>
 <ckeditor:resources/>
 <resource:include components="dateChooser" />
+<script type="text/javascript" src="<g:createLinkTo dir='/js/jquery' file='jquery-1.7.1.min.js'/>"></script>
 <script type="text/javascript" src="<g:createLinkTo dir='/js/dropdowns/js' file='jquery.dropdownPlain.js'/>"></script>
 <script type="text/javascript" src="<g:createLinkTo dir='/js/galleria' file='galleria-1.2.6.min.js'/>"></script>
 <script type="text/javascript" src="<g:createLinkTo dir='/js/jquery-ui-1.8.21.custom/js' file='jquery-ui-1.8.21.custom.min.js'/>"></script> 
