@@ -39,8 +39,8 @@ grails.project.dependency.resolution = {
 			  ":release:1.0.0") {
 			export = false
 		}
-		runtime ':profiler:0.4'
-		runtime ':miniprofiler:0.1'
+		//runtime ':profiler:0.4'
+		//runtime ':miniprofiler:0.1'
 		compile ':codenarc:0.18.1'
 	}
 }
