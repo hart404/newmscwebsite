@@ -16,6 +16,8 @@ class NewsItem {
 	LocalDate displayEndDate
 	String descriptionMetadata
 	String keywordsMetadata
+	String authorName
+	String blogURL
 
     static constraints = {
 		title(blank: false, nullable: false, size: 1..100)
@@ -27,6 +29,8 @@ class NewsItem {
 		displayEndDate(nullable: false)
 		descriptionMetadata(nullable: true, size: 0..156)
 		keywordsMetadata(nullable: true, size: 0..2048)
+		authorName(nullable: true, size: 0..100)
+		blogURL(nullable: true, size: 0..100)
     }
 	
 	public String toString() {

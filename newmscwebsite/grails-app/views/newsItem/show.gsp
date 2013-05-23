@@ -50,6 +50,24 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${newsItemInstance?.authorName}">
+				<li class="fieldcontain">
+					<span id="authorName-label" class="property-label"><g:message code="newsItem.authorName.label" default="Author Name" /></span>
+					
+						<span class="property-value" aria-labelledby="authorName-label"><g:fieldValue bean="${newsItemInstance}" field="authorName"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${newsItemInstance?.blogURL}">
+				<li class="fieldcontain">
+					<span id="blogURL-label" class="property-label"><g:message code="newsItem.blogURL.label" default="Blog URL" /></span>
+					
+						<span class="property-value" aria-labelledby="blogURL-label"><g:fieldValue bean="${newsItemInstance}" field="blogURL"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${newsItemInstance?.important}">
 				<li class="fieldcontain">
 					<span id="important-label" class="property-label"><g:message code="newsItem.important.label" default="Important" /></span>

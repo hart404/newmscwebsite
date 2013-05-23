@@ -26,6 +26,20 @@
 	<g:textArea name="moreInformation" cols="40" rows="5" maxlength="10000" required="" value="${newsItemInstance?.moreInformation}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: newsItemInstance, field: 'authorName', 'error')}">
+	<label for="authorName">
+		<g:message code="newsItem.authorName.label" default="Author Name" />
+	</label>
+	<g:textField name="authorName" maxlength="100" value="${newsItemInstance?.authorName}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: newsItemInstance, field: 'blogURL', 'error')}">
+	<label for="blogURL">
+		<g:message code="newsItem.blogURL.label" default="Blog URL" />
+	</label>
+	<g:textField name="blogURL" maxlength="100" value="${newsItemInstance?.blogURL}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: newsItemInstance, field: 'important', 'error')} ">
 	<label for="important">
 		<g:message code="newsItem.important.label" default="Important" />
