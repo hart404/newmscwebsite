@@ -1,8 +1,9 @@
 import newmscwebsite.HttpUtils
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
 // The approach we have for this filter is to make sure URLs that the following
 // pages are NOT cached:
-// * authenticated pages in the admin/teacher/student areas
 // * REST api responses
 // Everything else, can be cached (images/css/less/bootstrap assets)
 class CacheFilters {
@@ -55,6 +56,14 @@ class CacheFilters {
 		widget(uri : '/document/**') {
 			before = {
 				noCache(response)
+			}
+		}
+		content(uri : '/content/pages') {
+			before = {
+				// Ensure that pages that can possibly be edited are not cached
+				if (SpringSecurityUtils.ifAnyGranted("ROLE_WEB,ROLE_ADMIN,ROLE_LEADER")) {
+					noCache(response)
+				}
 			}
 		}
 	}
