@@ -20,6 +20,10 @@ class UrlMappings {
 		"/women"(controller: "redirector", action: "women")
 		"/partners"(controller: "redirector", action: "partners")
 		"/legacy"(controller: "redirector", action: "legacy")
+		"/preserve"(controller: "redirector", action: "preserve")
+		"/opening"(controller: "redirector", action: "opening")
+		"/maps"(controller: "redirector", action: "maps")
+		"/shop"(controller: "redirector", action: "shop")
 		
 		"/event/displayEventCategory/$categoryString?"(controller: "event", action: "displayEventCategory")
 

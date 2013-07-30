@@ -218,7 +218,7 @@ class BootStrap {
 				Activity.HORSES,
 				Activity.HIKING
 			]
-			addressInstance = new StreetAddress(street: "11300 N Alma School Pkwy", zip: "85262")
+			addressInstance = new StreetAddress(street: "30301 N Alma School Pkwy", zip: "85262")
 			coordinatesInstance = new GeographicCoordinates(latitude: 33.755755, longitude: -111.843926)
 			locationInstance = new Trailhead(name: "Brown's Ranch", internalName: "brownsRanch", description: "The Brown's Ranch Trailhead will be the first trailhead to provide access to the northern region of the McDowell Sonoran Preserve.  The Trailhead will be located approximately 1.25 miles north of the intersection of Alma School Parkway and Dynamite Boulevard.", address: addressInstance, coordinates: coordinatesInstance, "amenities": amenities, "activities": activities)
 			locationInstance.save(failOnError: true)
@@ -327,7 +327,7 @@ class BootStrap {
 			def ringtailLoop = new Hike(
 				name: "Ringtail Trail",
 				description: "Gentle semi-loop trail with a few moderate sections, several wash crossings; rocky in places.",
-				noteworthyFeatures: "Follows a major wash; Lost Dog Overlook has excellent views south and is an ancient tool-making siteÑsome of the rock flakes are from prehistoric tool-making work; great wildflower trail in spring.",
+				noteworthyFeatures: "Follows a major wash; Lost Dog Overlook has excellent views south and is an ancient tool-making siteï¿½some of the rock flakes are from prehistoric tool-making work; great wildflower trail in spring.",
 				directions: "Follow the trail to the...",
 				kmlFileName: "RingtailLoop.kml",
 				elevationGain: 250,

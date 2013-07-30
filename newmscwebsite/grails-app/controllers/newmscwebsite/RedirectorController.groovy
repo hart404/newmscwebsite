@@ -49,4 +49,20 @@ class RedirectorController {
 		redirect(uri: "/content/pages/leaveALegacy")
 	}
 
+	def preserve() {
+		redirect(uri: "/content/pages/visitThePreserve")
+	}
+	
+	def opening() {		
+		redirect(uri: "/content/pages/eventInThePreserve")
+	}
+	
+	def maps() {
+		redirect(uri: "/content/pages/visitThePreserve")
+	}
+
+	def shop() {
+		redirect(uri: "/content/pages/visitThePreserve")
+	}
+	
 }

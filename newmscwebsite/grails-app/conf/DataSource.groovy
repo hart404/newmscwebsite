@@ -15,7 +15,6 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "update" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://localhost/mscmsc"
 			username = "root"
 			password = "uni-dev"
@@ -25,13 +24,12 @@ environments {
 		dataSource {
 			dialect = "org.hibernate.dialect.H2Dialect"
 			dbCreate = "create-drop"
-			url = "jdbc:h2:mem:testDb;MVCC=TRUE"
+			url = "jdbc:h2:testDb;MVCC=TRUE"
 		}
 	}
 	production {
 		dataSource {
 			pooled = true
-			dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc"
 			username = "root"

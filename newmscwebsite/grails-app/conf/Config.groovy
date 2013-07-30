@@ -171,6 +171,10 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/women':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/partners':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/legacy':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/preserve':						['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/opening':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/maps':							['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/shop':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*/list/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/*/create/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/*/save/**':						['IS_AUTHENTICATED_REMEMBERED'],
@@ -201,6 +205,9 @@ grails.plugins.springsecurity.secureChannel.definition = [
 	'/person/registerUser/**':			'REQUIRES_SECURE_CHANNEL',
 	'/person/registerForEmail/**':		'REQUIRES_SECURE_CHANNEL'
 ]
+
+// Set remember me timeout to 2 years
+grails.plugins.springsecurity.rememberMe.tokenValiditySeconds=60*60*24*365*2
 
 grails.plugins.springsecurity.ui.forgotPassword.emailFrom = 'info@mcdowellsonoran.org'
 grails.plugins.springsecurity.ui.register.emailFrom = 'info@mcdowellsonoran.org'
@@ -236,6 +243,9 @@ grails {
 }
 
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
+
+grails.plugin.databasemigration.updateOnStart = true
+grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 
 
 
