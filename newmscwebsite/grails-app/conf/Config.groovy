@@ -244,7 +244,7 @@ grails {
 
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
 
-grails.plugin.databasemigration.updateOnStart = true
+grails.plugin.databasemigration.updateOnStart = false
 grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 
 

@@ -39,6 +39,7 @@ class BootStrap {
 		updateSql()
 		createRoles()
 		createAdminUser()
+		createMenus()
 		createECards()
 		createLocations()
 		createHikes()
@@ -91,6 +92,101 @@ class BootStrap {
 		}
 	}
 	
+	def createMenus() {
+		SCMSMenuBar menuBar = SCMSMenuBar.findByWidgetId("mainNavigationBar")
+		if (menuBar == null) {
+			menuBar = new SCMSMenuBar(widgetId: "mainNavigationBar")
+			addHome(menuBar)
+			addVisitThePreserve(menuBar)
+			addAboutUs(menuBar)
+			addEducationAndResearch(menuBar)
+			addVolunteer(menuBar)
+			addSupportUs(menuBar)
+			addAdministration(menuBar)
+			menuBar.save(failOnError: true)
+		}
+	}
+	
+	def addHome(menuBar) {
+		SCMSMenu home = new SCMSMenu(title: "Home", link: "/home")
+		menuBar.addToMenus(home)
+	}
+	
+	def addVisitThePreserve(menuBar) {
+		// Plan Your Visit, Trailheads and Directions, Recreation, Photo Gallery
+		SCMSMenu visitThePreserve = new SCMSMenu(title: "Visit the Preserve")
+		SCMSMenu planYourVisit = new SCMSMenu(title: "Plan Your Visit")
+		addPlanYourVisitSubItems(planYourVisit)
+		visitThePreserve.addToMenuItems(planYourVisit)
+		visitThePreserve.addToMenuItems(new SCMSMenu(title: "Trailheads & Directions", link: "trailhead/mapOfThePreserve"))
+		visitThePreserve.addToMenuItems(new SCMSMenu(title: "Recreation", link: "content/pages/recreation"))
+		visitThePreserve.addToMenuItems(new SCMSMenu(title: "PhotoGallery", link: "photoGallery"))
+		menuBar.addToMenus(visitThePreserve)
+	}
+	
+	def addPlanYourVisitSubItems(planYourVisit) {
+		// Pathfinders, Nature Guides, Family Passport, Know Before You Go
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Pathfinders", link: "content/pages/pathfinders"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Nature Guides", link: "content/pages/natureGuides"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Family Passport", link: "content/pages/familyPassport"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Know Before You Go", link: "content/pages/knowBeforeYouGo"))
+		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "FAQs", link: "content/pages/faqs"))
+	}
+	
+	def addAboutUs(menuBar) {
+		def aboutUs = new SCMSMenu(title: "About Us", link: "aboutUs")
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mission and Vision", link: "content/pages/missionAndVision"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "History", link: "content/pages/history"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "People", link: "content/pages/people"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Gift Shop", link: "content/pages/giftShop"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mountain Lines Magazine", link: "content/pages/mountainLines"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Press Kit", link: "content/pages/pressKit"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Contact", link: "content/pages/contact"))
+		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Annual Reports", link: "content/pages/annualReports"))
+		menuBar.addToMenus(aboutUs)
+	}
+	
+	def addEducationAndResearch(menuBar) {
+		SCMSMenu educationAndResearch = new SCMSMenu(title: "Education & Research")
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Adult Learning", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "School Groups & Youth", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Online Learning", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Field Institute", link: "#"))
+		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Conservation", link: "content/pages/herpatology"))
+		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Publications & News", link: "content/pages/herpatology"))
+		menuBar.addToMenus(educationAndResearch)
+	}
+	
+	def addVolunteer(menuBar) {
+		menuBar.addToMenus(new SCMSMenu(title: "Volunteer", link: "content/pages/volunteer"))
+	}
+	
+	def addSupportUs(menuBar) {
+		menuBar.addToMenus(new SCMSMenu(title: "Support Us", link: "supportUs"))
+	}
+	
+	def addAdministration(menuBar) {
+		// Manage Users, Photos, Manage Events, Manage AdSpace, Manage News Items
+		def administration = new SCMSMenu(title: "Administration")
+		administration.addToRoles("ROLE_ADMIN")
+		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Users", link: "person/list"))
+		SCMSMenu photoMenu = new SCMSMenu(title: "Photos")
+		addPhotoMenuItems(photoMenu)
+		administration.addToMenuItems(photoMenu)
+		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Ad Space", link: "adSpacePhoto/list"))
+		administration.addToMenuItems(new SCMSMenuItem(title: "Manage News Items", link: "newsItem/list"))
+		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Events", link: "event/list"))
+		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Pages", link: "page/list"))
+		administration.addToMenuItems(new SCMSMenuItem(title: "Manage Menus", link: "menuBar/list"))
+		administration.addToMenuItems(new SCMSMenuItem(title: "Search", link: "searchable"))
+		menuBar.addToMenus(administration)
+	}
+	
+	def addPhotoMenuItems(photoMenu) {
+		// Photo list, upload photos
+		photoMenu.addToMenuItems(new SCMSMenuItem(title: "Manage Photos", link: "photo/list"))
+		photoMenu.addToMenuItems(new SCMSMenuItem(title: "Upload Photos", link: "photo/uploadPhotos"))
+	}
 	void createLocations() {
 		println "Locations: ${Trailhead.count()}"
 		if (!Trailhead.count()) {

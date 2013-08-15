@@ -12,7 +12,7 @@ class StreetAddress {
 
     static constraints = {
 		street(blank: true)
-		apartment(blank: true)
+		apartment(blank: true, nullable: true)
 		city(blank: true)
 		state(blank: true)
 		zip(blank: true)

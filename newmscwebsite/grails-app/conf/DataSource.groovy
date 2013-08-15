@@ -18,6 +18,7 @@ environments {
 			url = "jdbc:mysql://localhost/mscmsc"
 			username = "root"
 			password = "uni-dev"
+			dbCreate = "update"
 		}
 	}
 	test {
