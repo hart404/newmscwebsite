@@ -24,6 +24,7 @@ class UrlMappings {
 		"/opening"(controller: "redirector", action: "opening")
 		"/maps"(controller: "redirector", action: "maps")
 		"/shop"(controller: "redirector", action: "shop")
+		"/msfi"(controller: "redirector", action: "msfi")
 		
 		"/event/displayEventCategory/$categoryString?"(controller: "event", action: "displayEventCategory")
 
