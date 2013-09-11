@@ -13,6 +13,7 @@ class Donation {
 	String state
 	String zip
 	boolean recurring = false
+	String recurringType
 	Date recurringDate
 	String country
 	String phone
@@ -25,22 +26,26 @@ class Donation {
 	String tributeBody
 	SCMSPhoto selectedECard
 	Date dateCreated
+	String transactionId
 	
 	static constraints = {
 		title(nullable: true)
-		firstName(nullable: false, blank: false)
-		lastName(nullable: false, blank: false)
-		street(nullable: false, blank: false)
+		zip(nullable:true)
+		firstName(nullable: true, blank: true)
+		lastName(nullable: true, blank: true)
+		street(nullable: true, blank: true)
 		apartment(nullable: true)
-		city(nullable: false, blank: false)
-		state(nullable: false, blank: false)
-		country(nullable: false, blank: false)
-		phone(nullable: false, blank: false)
+		city(nullable: true, blank: true)
+		state(nullable: true, blank: true)
+		country(nullable: true, blank: true)
+		phone(nullable: true, blank: true)
 		recipientName(nullable: true)
 		recipientEmail(nullable: true)
 		tributeSubject(nullable: true)
 		tributeBody(nullable: true)
 		selectedECard(nullable: true)
+		transactionId(nullable: true)
+		recurringType(nullable: true)
 	}
 
 }

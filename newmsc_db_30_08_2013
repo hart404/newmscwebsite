@@ -1,0 +1,1586 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.1.31-community
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema mscmsc
+--
+
+CREATE DATABASE IF NOT EXISTS mscmsc;
+USE mscmsc;
+
+--
+-- Definition of table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `billing_address1` varchar(255) DEFAULT NULL,
+  `billing_city` varchar(255) DEFAULT NULL,
+  `billing_country` varchar(255) DEFAULT NULL,
+  `billing_state` varchar(255) DEFAULT NULL,
+  `billing_street` varchar(255) DEFAULT NULL,
+  `billing_zip` varchar(255) DEFAULT NULL,
+  `cart_line_item_id` bigint(20) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `last_updated` datetime NOT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `session_id` varchar(255) NOT NULL,
+  `shipping_address1` varchar(255) DEFAULT NULL,
+  `shipping_city` varchar(255) DEFAULT NULL,
+  `shipping_country` varchar(255) DEFAULT NULL,
+  `shipping_state` varchar(255) DEFAULT NULL,
+  `shipping_street` varchar(255) DEFAULT NULL,
+  `shipping_zip` varchar(255) DEFAULT NULL,
+  `total_amount` varchar(255) NOT NULL,
+  `transation_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK2E7B2087BD5F92` (`cart_line_item_id`),
+  CONSTRAINT `FK2E7B2087BD5F92` FOREIGN KEY (`cart_line_item_id`) REFERENCES `cart_line_item` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` (`id`,`version`,`billing_address1`,`billing_city`,`billing_country`,`billing_state`,`billing_street`,`billing_zip`,`cart_line_item_id`,`date_created`,`email`,`first_name`,`last_name`,`last_updated`,`phone_number`,`session_id`,`shipping_address1`,`shipping_city`,`shipping_country`,`shipping_state`,`shipping_street`,`shipping_zip`,`total_amount`,`transation_id`) VALUES 
+ (3,0,'bbsr','bdk','ind','odisha','bbsr','12345',11,'2013-08-29 10:27:08','priyadarsinee.patra88@gmail.com','rita','rita','2013-08-29 10:27:08','1234567890','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'1970','2197704962'),
+ (4,0,'6645656','puri','afg','hhhh','hhhhh','12345',12,'2013-08-29 10:31:13','cobi2@fgf.jhh','hh','hh','2013-08-29 10:31:13','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'280','2197705041'),
+ (5,0,'99789','bdk','alb','odisha','fsdf','454',11,'2013-08-29 10:50:03','cobi2@fgf.jhh','hgfhfg','fffff','2013-08-29 10:50:03','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'240','2197705414'),
+ (6,0,'99789','bdk','alb','odisha','fsdf','454',12,'2013-08-29 10:50:03','cobi2@fgf.jhh','hgfhfg','fffff','2013-08-29 10:50:03','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'240','2197705414'),
+ (7,0,'99789','bdk','alb','odisha','fsdf','454',13,'2013-08-29 10:50:03','cobi2@fgf.jhh','hgfhfg','fffff','2013-08-29 10:50:03','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'240','2197705414'),
+ (11,0,'6645656','puri','afg','odisha','abakaslane','566',14,'2013-08-29 10:56:53','cobi2@fgf.jhh','aa','aa','2013-08-29 10:56:53','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'120','2197705477'),
+ (12,0,'6645656','puri','afg','aaaa','aaa','111111',15,'2013-08-29 11:05:57','cobi2@fgf.jhh','niki','nano','2013-08-29 11:05:57','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'200','2197705607'),
+ (13,0,'6645656','puri','alb','ffff','fff','12345',16,'2013-08-29 11:09:08','cobi2@fgf.jhh','fdhfg','fdgfdgfd','2013-08-29 11:09:08','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'160','2197705718'),
+ (14,0,'6645656','puri','afg','aaa','aa','12345',17,'2013-08-29 11:36:50','cobi2@fgf.jhh','aa','aa','2013-08-29 11:36:50','917876989789','92C5762BF327107D7457CABABE579607',NULL,NULL,NULL,NULL,NULL,NULL,'140','2197706231'),
+ (15,0,'6645656','puri','afg','odisha','odisha','12345',19,'2013-08-29 18:24:07','cobi2@fgf.jhh','ggg','aaaa','2013-08-29 18:24:07','9178769896','3C3FFB763392A74B3CAF511F484D1F87',NULL,NULL,NULL,NULL,NULL,NULL,'60','2197724820'),
+ (16,0,'6645656','puri','alb','odisha','odisha','56612',20,'2013-08-29 18:31:32','cobi2@fgf.jhh','hh','hh','2013-08-29 18:31:32','9178769897','3C3FFB763392A74B3CAF511F484D1F87',NULL,NULL,NULL,NULL,NULL,NULL,'400','2197724978'),
+ (17,0,'rter','rwerwertertrer','afg','werwerw','wrwer','12345',24,'2013-08-30 19:10:26','aa@aa.aa','ertet','etert','2013-08-30 19:10:26','1234567890','5BE2A386D9DAD22A1C3D3E7F0C681846',NULL,NULL,NULL,NULL,NULL,NULL,'160','2197775033');
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+
+
+--
+-- Definition of table `cart_line_item`
+--
+
+DROP TABLE IF EXISTS `cart_line_item`;
+CREATE TABLE `cart_line_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `total_line_item_price` varchar(255) NOT NULL,
+  `unit_price` varchar(255) NOT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKD9556A1FDADDA56A` (`product_id`),
+  CONSTRAINT `FKD9556A1FDADDA56A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart_line_item`
+--
+
+/*!40000 ALTER TABLE `cart_line_item` DISABLE KEYS */;
+INSERT INTO `cart_line_item` (`id`,`version`,`product_id`,`quantity`,`total_line_item_price`,`unit_price`,`session_id`) VALUES 
+ (9,1,6,'6','$240','$ 40','6F2C1956ED7D6B1D5EF704943FB2D1AB'),
+ (10,1,4,'4','$240','$ 60','6F2C1956ED7D6B1D5EF704943FB2D1AB'),
+ (11,0,5,'2','$80','$ 40','92C5762BF327107D7457CABABE579607'),
+ (12,0,17,'5','$200','$ 40','92C5762BF327107D7457CABABE579607'),
+ (13,0,13,'6','$240','$ 40','92C5762BF327107D7457CABABE579607'),
+ (14,0,16,'3','$120','$ 40','92C5762BF327107D7457CABABE579607'),
+ (15,0,12,'5','$200','$ 40','92C5762BF327107D7457CABABE579607'),
+ (16,0,10,'4','$160','$ 40','92C5762BF327107D7457CABABE579607'),
+ (17,7,2,'26','$1820','$ 70','92C5762BF327107D7457CABABE579607'),
+ (18,0,3,'5','$400','$ 80','92C5762BF327107D7457CABABE579607'),
+ (19,0,21,'5','$60','$12','3C3FFB763392A74B3CAF511F484D1F87'),
+ (20,0,3,'5','$400','$ 80','3C3FFB763392A74B3CAF511F484D1F87'),
+ (21,0,4,'3','$180','$ 60','2DE5060AA47B573CC3E44660C33699AF'),
+ (22,0,3,'1','$80','$ 80','698783BD3AE41223DB25370022FE61FA'),
+ (23,0,30,'3','$210','$ 70','698783BD3AE41223DB25370022FE61FA'),
+ (24,0,11,'4','$160','$ 40','5BE2A386D9DAD22A1C3D3E7F0C681846');
+/*!40000 ALTER TABLE `cart_line_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `donation`
+--
+
+DROP TABLE IF EXISTS `donation`;
+CREATE TABLE `donation` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `actual_donation_amount` decimal(19,2) NOT NULL,
+  `apartment` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `recipient_email` varchar(255) DEFAULT NULL,
+  `recipient_name` varchar(255) DEFAULT NULL,
+  `recurring` bit(1) NOT NULL,
+  `recurring_date` datetime NOT NULL,
+  `selectedecard_id` bigint(20) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `tribute_body` varchar(255) DEFAULT NULL,
+  `tribute_donation` bit(1) NOT NULL,
+  `tribute_subject` varchar(255) DEFAULT NULL,
+  `zip` varchar(255) DEFAULT NULL,
+  `recurring_type` varchar(255) DEFAULT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK450B8792A60D6A7B` (`selectedecard_id`),
+  CONSTRAINT `FK450B8792A60D6A7B` FOREIGN KEY (`selectedecard_id`) REFERENCES `scmsphoto` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `donation`
+--
+
+/*!40000 ALTER TABLE `donation` DISABLE KEYS */;
+INSERT INTO `donation` (`id`,`version`,`actual_donation_amount`,`apartment`,`city`,`country`,`date_created`,`first_name`,`last_name`,`phone`,`recipient_email`,`recipient_name`,`recurring`,`recurring_date`,`selectedecard_id`,`state`,`street`,`title`,`tribute_body`,`tribute_donation`,`tribute_subject`,`zip`,`recurring_type`,`transaction_id`) VALUES 
+ (1,0,'22.00',NULL,NULL,NULL,'2013-08-30 18:01:37','sibani',NULL,NULL,NULL,'McDowell Sonoran Land Conservancy',0x00,'2013-08-30 00:00:00',NULL,NULL,NULL,NULL,NULL,0x01,NULL,NULL,'one time donation','2197771019');
+/*!40000 ALTER TABLE `donation` ENABLE KEYS */;
+
+
+--
+-- Definition of table `event`
+--
+
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `description_metadata` varchar(156) DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `keywords_metadata` longtext,
+  `last_updated` datetime NOT NULL,
+  `location_id` bigint(20) DEFAULT NULL,
+  `main_photo_id` bigint(20) DEFAULT NULL,
+  `more_information` longtext,
+  `other_location` varchar(255) DEFAULT NULL,
+  `short_description` longtext NOT NULL,
+  `show_on_home_page` bit(1) NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `start_time` datetime NOT NULL,
+  `steward_only` bit(1) NOT NULL,
+  `steward_only_information` longtext,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK5C6729AF307D0DB` (`location_id`),
+  KEY `FK5C6729ADBB5EC49` (`main_photo_id`),
+  CONSTRAINT `FK5C6729ADBB5EC49` FOREIGN KEY (`main_photo_id`) REFERENCES `scmsphoto` (`id`),
+  CONSTRAINT `FK5C6729AF307D0DB` FOREIGN KEY (`location_id`) REFERENCES `trailhead` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+/*!40000 ALTER TABLE `event` DISABLE KEYS */;
+/*!40000 ALTER TABLE `event` ENABLE KEYS */;
+
+
+--
+-- Definition of table `event_categories`
+--
+
+DROP TABLE IF EXISTS `event_categories`;
+CREATE TABLE `event_categories` (
+  `event_id` bigint(20) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `categories_idx` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event_categories`
+--
+
+/*!40000 ALTER TABLE `event_categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `event_categories` ENABLE KEYS */;
+
+
+--
+-- Definition of table `event_person`
+--
+
+DROP TABLE IF EXISTS `event_person`;
+CREATE TABLE `event_person` (
+  `event_attendees_id` bigint(20) DEFAULT NULL,
+  `person_id` bigint(20) DEFAULT NULL,
+  `attendees_idx` int(11) DEFAULT NULL,
+  KEY `FK393DE49A449258A` (`person_id`),
+  CONSTRAINT `FK393DE49A449258A` FOREIGN KEY (`person_id`) REFERENCES `sec_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event_person`
+--
+
+/*!40000 ALTER TABLE `event_person` DISABLE KEYS */;
+/*!40000 ALTER TABLE `event_person` ENABLE KEYS */;
+
+
+--
+-- Definition of table `event_scmsphoto`
+--
+
+DROP TABLE IF EXISTS `event_scmsphoto`;
+CREATE TABLE `event_scmsphoto` (
+  `event_additional_photos_id` bigint(20) DEFAULT NULL,
+  `scmsphoto_id` bigint(20) DEFAULT NULL,
+  `additional_photos_idx` int(11) DEFAULT NULL,
+  `event_photos_id` bigint(20) DEFAULT NULL,
+  `photos_idx` int(11) DEFAULT NULL,
+  KEY `FK2E267497FC1CD279` (`scmsphoto_id`),
+  CONSTRAINT `FK2E267497FC1CD279` FOREIGN KEY (`scmsphoto_id`) REFERENCES `scmsphoto` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event_scmsphoto`
+--
+
+/*!40000 ALTER TABLE `event_scmsphoto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `event_scmsphoto` ENABLE KEYS */;
+
+
+--
+-- Definition of table `geographic_coordinates`
+--
+
+DROP TABLE IF EXISTS `geographic_coordinates`;
+CREATE TABLE `geographic_coordinates` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `latitude` decimal(19,6) NOT NULL,
+  `longitude` decimal(19,6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `geographic_coordinates`
+--
+
+/*!40000 ALTER TABLE `geographic_coordinates` DISABLE KEYS */;
+/*!40000 ALTER TABLE `geographic_coordinates` ENABLE KEYS */;
+
+
+--
+-- Definition of table `hike`
+--
+
+DROP TABLE IF EXISTS `hike`;
+CREATE TABLE `hike` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `description` longtext NOT NULL,
+  `description_metadata` varchar(156) DEFAULT NULL,
+  `directions` longtext NOT NULL,
+  `elevation_gain` int(11) NOT NULL,
+  `elevation_profile` varchar(255) DEFAULT NULL,
+  `keywords_metadata` longtext,
+  `kml_file_name` varchar(255) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `noteworthy_features` longtext NOT NULL,
+  `round_trip_distance` decimal(4,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hike`
+--
+
+/*!40000 ALTER TABLE `hike` DISABLE KEYS */;
+INSERT INTO `hike` (`id`,`version`,`description`,`description_metadata`,`directions`,`elevation_gain`,`elevation_profile`,`keywords_metadata`,`kml_file_name`,`name`,`noteworthy_features`,`round_trip_distance`) VALUES 
+ (1,0,'Wide, generally moderate out-and-back hike with a few steep sections; rocky',NULL,'Follow the trail to the...',1000,NULL,NULL,'InspirationPoint.kml','Inspiration Point','Viewpoint off the main trail with expansive views, stone benches.','5.80'),
+ (2,0,'Challenging semi-loop hike with two passes to climb and steep sections; rocky in places.',NULL,'Follow the trail to the...',1900,NULL,NULL,'BellPassWindgatePassLoop.kml','Bell Pass/Windgate Pass Loop','Exceptional views eastward from the passes; area east of the passes is little-used and feels remote; different vegetation at different elevations.','9.60'),
+ (3,0,'Wide, generally moderate semi-loop trail that climbs/descends steadily; rocky.',NULL,'Follow the trail to the...',650,NULL,NULL,'GatewayLoop.kml','Gateway Loop','Variety of vistas, parallels a major drainage, crosses a scenic saddle; one of the most popular trails in the Preserve; great wildflowers in spring.','4.50'),
+ (4,0,'Very gentle loop trail that crosses several small washes; rocky in places.',NULL,'Follow the trail to the...',100,NULL,NULL,'HorseshoeLoop.kml','Horseshoe Loop','Typical bajada vegetation, interesting desert wash crossings, great mountain views.','1.70'),
+ (5,0,'A barrier-free semi-loop trail with a smooth, solid surface; &frac14 and &frac12 mile loops available.',NULL,'Follow the trail to the...',0,NULL,NULL,'BajadaNatureTrail.kml','Bajada Nature Trail','Interpretive trail with signs explaining many aspects of the Sonoran Desert; beautiful mountain views.','0.50'),
+ (6,0,'Challenging out-and-back hike with many steep sections; rocky in places',NULL,'Follow the trail to the...',1150,NULL,NULL,'SunriseEast.kml','Sunrise Trail East (from Sunrise Trailhead)','Sunrise Peak is one of very few Preserve peaks with a trail to the top, from which there are expansive views in all directions; beautiful granite formations; lots of spring wildflowers; excellent for fast exercise without the crowds.','4.00'),
+ (7,0,'Gentle out-and-back trail that crosses several small washes; rocky in places.',NULL,'Follow the trail to the...',350,NULL,NULL,'TaliesinOverlook.kml','Taliesin Overlook','Taliesin Overlook has extensive views northwest and looks down onto Frank Lloyd Wright\'s Taliesin West, his winter home and school. Taliesin is still active as a school of architecture.','4.00'),
+ (8,0,'Gentle semi-loop trail with a few moderate sections, several wash crossings; rocky in places.',NULL,'Follow the trail to the...',250,NULL,NULL,'RingtailLoop.kml','Ringtail Trail','Follows a major wash; Lost Dog Overlook has excellent views south and is an ancient tool-making sitesome of the rock flakes are from prehistoric tool-making work; great wildflower trail in spring.','2.40'),
+ (9,0,'Moderate semi-loop trail with steeper sections; very rocky stretches.',NULL,'Follow the trail to the...',450,NULL,NULL,'OldJeepLoop.kml','Old Jeep Trail','The Old Jeep Trail portion is little-used and feels very remote; passes near several ancient tool-making sites and an WWII-era plane crash site.','4.10'),
+ (10,0,'Challenging out-and-back hike with many very steep and loose sections; spur trail to viewpoint is narrow and rocky.',NULL,'Follow the trail to the...',1100,NULL,NULL,'LookoutViewpoint.kml','Lookout Viewpoint','Best viewpoint in the McDowell Mountains, with extensive views east and west from top of a cliff; trail crosses boundary between granite and metamorphic rock, with obvious differences in trail composition and nearby rock; spectacular rock formations; unusual vegetation and flowers found only at high elevation.','5.70'),
+ (11,0,'Gentle out-and-back hike with optional small loop; a few moderate sections.',NULL,'Follow the trail to the...',300,NULL,NULL,'MarcusLandslide.kml','Marcus Landslide','Interpretive geology trail starting at trailhead and ending beside or on top of the second largest landslide in AZ; remote area with many beautiful rock formations; excellent wildflowers in spring.','3.70'),
+ (12,0,'Extremely challenging semi-loop hike with many very steep and loose sections; three major climbs.',NULL,'Follow the trail to the...',2500,NULL,NULL,'TomsThumbEastEndLoop.kml','Tom\'s Thumb/East End Loop','Exceptional views throughout the hike; dramatic rock formations and changes in rock/trail composition in transition between granitic and metamorphic rock; changes in vegetation and wildflowers as elevation changes; seldom-used sections offer great solitude; crosses one of the few springs in the Preserve.','11.10'),
+ (13,0,'Gentle out-and-back hike on a very wide trail with occasional sandy stretches; crosses one wash.',NULL,'Follow the trail to the...',100,NULL,NULL,'BrownsRanch.kml','Brown\'s Ranch','Ends at the location of Brown\'s Ranch, with many ranching structures still visible. This area was used for ranching from the later 1800s until the mid-1950s. Site of Scottsdale Community College Center for Native and Urban Wildlife experiments to determine how best to restore this grazed area. Excellent wildflowers in spring.','3.10');
+/*!40000 ALTER TABLE `hike` ENABLE KEYS */;
+
+
+--
+-- Definition of table `news_item`
+--
+
+DROP TABLE IF EXISTS `news_item`;
+CREATE TABLE `news_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `author_name` varchar(100) DEFAULT NULL,
+  `blogurl` varchar(100) DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  `description_metadata` varchar(156) DEFAULT NULL,
+  `display_end_date` date NOT NULL,
+  `display_start_date` date NOT NULL,
+  `important` bit(1) NOT NULL,
+  `keywords_metadata` longtext,
+  `last_updated` datetime NOT NULL,
+  `more_information` longtext NOT NULL,
+  `photo_id` bigint(20) DEFAULT NULL,
+  `summary` longtext NOT NULL,
+  `title` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK11ED74FF54DB6083` (`photo_id`),
+  CONSTRAINT `FK11ED74FF54DB6083` FOREIGN KEY (`photo_id`) REFERENCES `scmsphoto` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `news_item`
+--
+
+/*!40000 ALTER TABLE `news_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `news_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `note`
+--
+
+DROP TABLE IF EXISTS `note`;
+CREATE TABLE `note` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `note`
+--
+
+/*!40000 ALTER TABLE `note` DISABLE KEYS */;
+/*!40000 ALTER TABLE `note` ENABLE KEYS */;
+
+
+--
+-- Definition of table `person_interests`
+--
+
+DROP TABLE IF EXISTS `person_interests`;
+CREATE TABLE `person_interests` (
+  `person_id` bigint(20) DEFAULT NULL,
+  `interest` varchar(255) DEFAULT NULL,
+  KEY `FKF2836E1F449258A` (`person_id`),
+  CONSTRAINT `FKF2836E1F449258A` FOREIGN KEY (`person_id`) REFERENCES `sec_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `person_interests`
+--
+
+/*!40000 ALTER TABLE `person_interests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `person_interests` ENABLE KEYS */;
+
+
+--
+-- Definition of table `person_volunteer_session`
+--
+
+DROP TABLE IF EXISTS `person_volunteer_session`;
+CREATE TABLE `person_volunteer_session` (
+  `person_volunteer_sessions_id` bigint(20) DEFAULT NULL,
+  `volunteer_session_id` bigint(20) DEFAULT NULL,
+  KEY `FK17DB3477675264A3` (`person_volunteer_sessions_id`),
+  KEY `FK17DB347725DF32D5` (`volunteer_session_id`),
+  CONSTRAINT `FK17DB347725DF32D5` FOREIGN KEY (`volunteer_session_id`) REFERENCES `volunteer_session` (`id`),
+  CONSTRAINT `FK17DB3477675264A3` FOREIGN KEY (`person_volunteer_sessions_id`) REFERENCES `sec_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `person_volunteer_session`
+--
+
+/*!40000 ALTER TABLE `person_volunteer_session` DISABLE KEYS */;
+/*!40000 ALTER TABLE `person_volunteer_session` ENABLE KEYS */;
+
+
+--
+-- Definition of table `phone`
+--
+
+DROP TABLE IF EXISTS `phone`;
+CREATE TABLE `phone` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `number` varchar(24) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `phone`
+--
+
+/*!40000 ALTER TABLE `phone` DISABLE KEYS */;
+/*!40000 ALTER TABLE `phone` ENABLE KEYS */;
+
+
+--
+-- Definition of table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `product_description` varchar(255) NOT NULL,
+  `product_image_url` varchar(255) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `product_title` varchar(255) NOT NULL,
+  `promotional_price` varchar(255) NOT NULL,
+  `unit_price` varchar(255) NOT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` (`id`,`version`,`product_description`,`product_image_url`,`product_name`,`product_title`,`promotional_price`,`unit_price`,`quantity`) VALUES 
+ (2,5,'Lee brand product with best qulity','imageFile/00000140-cdc9-b4b3-1db0-69d3eea244cb.png','Shirt','Lee','$10','$ 70','5'),
+ (3,4,'comfortable clothings with high belief in product','imageFile/00000140-cdca-0a4a-1e86-eceec131ec11.png','Shirt','Levis','$10','$ 80','6'),
+ (4,1,'It makes u feel very special ','imageFile/00000140-c9ec-5fdb-6e34-ac46c5ac6750.png','Shirt','Park avenue','$10','$ 60','7'),
+ (5,3,'This is avery good product of lee having different colors and design','imageFile/00000140-cf38-808e-b4fd-cf5e22ae65ca.png','Shirt','Allen Solly','$10','$ 40','8'),
+ (6,1,'Looking for something to throw on with your jeans? Then these casual tees from Duke are perfect for you. This pack of two Johny collar tees is a grabber','imageFile/00000140-c9ee-fd44-74c2-52d0acff8fa4.png','shirt','duke','$10','$ 40','4'),
+ (9,1,'Exquisite design and a classic colour scheme allows you to pair this exquisite watch from Titan with formal and casual ensembles alike.','imageFile/00000140-c9f1-d9c9-7bee-22f967b87a26.png','watch','titan','$10','$ 40','8'),
+ (10,1,'Designed for men of all ages who are seeking a fashionable, affordable, casual watch that will stay in style for many seasons','imageFile/00000140-c9f3-21ba-7f24-02df1f8d9d29.png','watch','timex','$10','$ 40','9'),
+ (11,1,'Fastrack watches embody the psyche of the youth. Stand out from the crowd with this statement piece. The watch with an over-sized dial is an on-trend accessory that will grab all attention.','imageFile/00000140-c9f3-59bb-7fb0-5dbb1e75b006.png','watch','fastrack','$10','$ 40','2'),
+ (12,2,'Featuring a slim rectangular dial and a double criss crossed strap, with this watch Tommy Hilfiger manages to stay true to its design ideal & ndash that of timeless, understated and sleek style','imageFile/00000140-cdca-58e9-1f4b-f8d5989508b7.png','watch','TommyHilfiger','$10','$ 40','4'),
+ (13,1,'This digital watch from Sonata combines the best of digital styles and is perfect to lend a sporty edge to your casual attire.','imageFile/00000140-c9f4-087d-8166-5674789010f7.png','watch','sonata','$10','$ 40','5'),
+ (14,1,' Stylish overlays on the woodsy upper adds an aesthetic referenced from the outdoors.Round toed, textured, brown and black casual shoes with central lace-ups.','imageFile/00000140-c9f4-7541-8276-ec0fcb9c9f29.png','shoe','woodland','$10','$ 40','2'),
+ (15,1,'White shoes with black and silver accents.Reinforced heel collar, cushioned inner, soft footbed with branding','imageFile/00000140-c9f4-c11c-8335-073ea70b5da5.png','shoe','puma','$10','$ 40','1'),
+ (16,2,'Mesh upper with synthetic overlays for a good shoe structure.Has central lace-ups with mesh padding inside.Soft LiteRide insole with a cushioned feel','imageFile/00000140-cf3b-d009-bd49-dee81b34b931.png','shoe','reebok','$10','$ 40','4'),
+ (17,1,'White shoes with central lacing.Synthetic, mesh upper with Nike swoosh on side.','imageFile/00000140-c9f5-6033-84c3-bbc15bc46e20.png','shoe','nike','$10','$ 40','5'),
+ (21,0,'good quality with green stripes','imageFile/00000140-ca04-5dc3-aa55-4b8acc6f5114.png','Shirt','duke','$1','$12','12'),
+ (22,1,'Lee brand product with best qulity','imageFile/00000140-cdc9-b4b3-1db0-69d3eea244cb.png','Shirt','Lee','$10','$ 70','13'),
+ (23,1,'comfortable clothings with high belief in product','imageFile/00000140-cdca-0a4a-1e86-eceec131ec11.png','Shirt','Levis','$10','$ 70','14'),
+ (24,1,'This digital watch from Sonata combines the best of digital styles and is perfect to lend a sporty edge to your casual attire.','imageFile/00000140-c9f4-087d-8166-5674789010f7.png','watch','sonata','$10','$ 70','15'),
+ (25,0,' Stylish overlays on the woodsy upper adds an aesthetic referenced from the outdoors.Round toed, textured, brown and black casual shoes with central lace-ups.','imageFile/00000140-c9f4-7541-8276-ec0fcb9c9f29.png','shoe','woodland','$10','$ 40','16'),
+ (26,1,'White shoes with black and silver accents.Reinforced heel collar, cushioned inner, soft footbed with branding','imageFile/00000140-c9f4-c11c-8335-073ea70b5da5.png','shoe','puma','$10','$ 70','17'),
+ (27,0,'It makes u feel very special ','imageFile/00000140-c9ec-5fdb-6e34-ac46c5ac6750.png','Shirt','Park avenue','$10','$ 70','18'),
+ (28,2,'This is avery good product of lee having different colors and design','imageFile/00000140-cf3c-28eb-be28-a3cf3eb261cb.png','Shirt','Allen Solly','$10','$ 70','19'),
+ (29,1,'Designed for men of all ages who are seeking a fashionable, affordable, casual watch that will stay in style for many seasons','imageFile/00000140-c9f3-21ba-7f24-02df1f8d9d29.png','watch','timex','$10','$ 70','20'),
+ (30,1,'Featuring a slim rectangular dial and a double criss crossed strap, with this watch Tommy Hilfiger manages to stay true to its design ideal & ndash that of timeless, understated and sleek style','imageFile/00000140-cdca-58e9-1f4b-f8d5989508b7.png','watch','TommyHilfiger','$10','$ 70','21'),
+ (31,1,'Mesh upper with synthetic overlays for a good shoe structure.Has central lace-ups with mesh padding inside.Soft LiteRide insole with a cushioned feel','imageFile/00000140-cf3b-790f-bc6f-e117482932dd.png','shoe','reebok','$10','$ 70','22'),
+ (32,0,'The classic style is given a sleek touch with intricate detailing. Slip it on with your formals for an eventful evening.','imageFile/00000140-c9ef-911e-7634-dd1164470d78.png','watch','fcuk','$10','$ 70','23'),
+ (33,1,'good quality with green stripes','imageFile/00000140-c9ee-fd44-74c2-52d0acff8fa4.png','Shirt','duke','$10','$ 70','24'),
+ (34,2,'It makes u feel very special ','imageFile/00000140-c9ec-5fdb-6e34-ac46c5ac6750.png','Shirt','Park avenue','$10','$ 70','25'),
+ (35,2,'Fastrack watches embody the psyche of the youth. Stand out from the crowd with this statement piece. The watch with an over-sized dial is an on-trend accessory that will grab all attention.','imageFile/00000140-c9f3-59bb-7fb0-5dbb1e75b006.png','watch','fastrack','$10','$ 70','26'),
+ (36,3,'good quality with green stripes','imageFile/00000140-c9ee-fd44-74c2-52d0acff8fa4.png','Shirt','duke','$10','$ 70','27'),
+ (37,0,' it is a very good product','imageFile/00000140-cf3a-8aa4-ba1a-539855655323.png','shirt','Allen Soly','$1','$12','20');
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+
+
+--
+-- Definition of table `registration_code`
+--
+
+DROP TABLE IF EXISTS `registration_code`;
+CREATE TABLE `registration_code` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `date_created` datetime NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `registration_code`
+--
+
+/*!40000 ALTER TABLE `registration_code` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registration_code` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsad_space_photo`
+--
+
+DROP TABLE IF EXISTS `scmsad_space_photo`;
+CREATE TABLE `scmsad_space_photo` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `display_end_date` date NOT NULL,
+  `display_start_date` date NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `photo_id` bigint(20) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK2737251354DB6083` (`photo_id`),
+  CONSTRAINT `FK2737251354DB6083` FOREIGN KEY (`photo_id`) REFERENCES `scmsphoto` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsad_space_photo`
+--
+
+/*!40000 ALTER TABLE `scmsad_space_photo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scmsad_space_photo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsdocument`
+--
+
+DROP TABLE IF EXISTS `scmsdocument`;
+CREATE TABLE `scmsdocument` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `all_keywords` longtext,
+  `date_created` datetime NOT NULL,
+  `description` longtext,
+  `file_name` varchar(255) NOT NULL,
+  `last_updated` datetime NOT NULL,
+  `original_file_name` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `source` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsdocument`
+--
+
+/*!40000 ALTER TABLE `scmsdocument` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scmsdocument` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsdocument_widget_scmsdocument`
+--
+
+DROP TABLE IF EXISTS `scmsdocument_widget_scmsdocument`;
+CREATE TABLE `scmsdocument_widget_scmsdocument` (
+  `scmsdocument_widget_documents_id` bigint(20) DEFAULT NULL,
+  `scmsdocument_id` bigint(20) DEFAULT NULL,
+  KEY `FKDA77BEFEE6187D7B` (`scmsdocument_id`),
+  KEY `FKDA77BEFE18DC1D45` (`scmsdocument_widget_documents_id`),
+  CONSTRAINT `FKDA77BEFE18DC1D45` FOREIGN KEY (`scmsdocument_widget_documents_id`) REFERENCES `scmswidget` (`id`),
+  CONSTRAINT `FKDA77BEFEE6187D7B` FOREIGN KEY (`scmsdocument_id`) REFERENCES `scmsdocument` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsdocument_widget_scmsdocument`
+--
+
+/*!40000 ALTER TABLE `scmsdocument_widget_scmsdocument` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scmsdocument_widget_scmsdocument` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsgallery_widget_scmsphoto_widget`
+--
+
+DROP TABLE IF EXISTS `scmsgallery_widget_scmsphoto_widget`;
+CREATE TABLE `scmsgallery_widget_scmsphoto_widget` (
+  `scmsgallery_widget_photo_widgets_id` bigint(20) DEFAULT NULL,
+  `scmsphoto_widget_id` bigint(20) DEFAULT NULL,
+  `photo_widgets_idx` int(11) DEFAULT NULL,
+  KEY `FK7DB4DBDF77E090D2` (`scmsphoto_widget_id`),
+  CONSTRAINT `FK7DB4DBDF77E090D2` FOREIGN KEY (`scmsphoto_widget_id`) REFERENCES `scmswidget` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsgallery_widget_scmsphoto_widget`
+--
+
+/*!40000 ALTER TABLE `scmsgallery_widget_scmsphoto_widget` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scmsgallery_widget_scmsphoto_widget` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmslightbox_widget_scmsphoto_widget`
+--
+
+DROP TABLE IF EXISTS `scmslightbox_widget_scmsphoto_widget`;
+CREATE TABLE `scmslightbox_widget_scmsphoto_widget` (
+  `scmslightbox_widget_photo_widgets_id` bigint(20) DEFAULT NULL,
+  `scmsphoto_widget_id` bigint(20) DEFAULT NULL,
+  `photo_widgets_idx` int(11) DEFAULT NULL,
+  KEY `FKBF004B2E77E090D2` (`scmsphoto_widget_id`),
+  CONSTRAINT `FKBF004B2E77E090D2` FOREIGN KEY (`scmsphoto_widget_id`) REFERENCES `scmswidget` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmslightbox_widget_scmsphoto_widget`
+--
+
+/*!40000 ALTER TABLE `scmslightbox_widget_scmsphoto_widget` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scmslightbox_widget_scmsphoto_widget` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsmenu_bar`
+--
+
+DROP TABLE IF EXISTS `scmsmenu_bar`;
+CREATE TABLE `scmsmenu_bar` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `widget_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `widget_id` (`widget_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsmenu_bar`
+--
+
+/*!40000 ALTER TABLE `scmsmenu_bar` DISABLE KEYS */;
+INSERT INTO `scmsmenu_bar` (`id`,`version`,`widget_id`) VALUES 
+ (1,0,'mainNavigationBar');
+/*!40000 ALTER TABLE `scmsmenu_bar` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsmenu_bar_scmsmenu`
+--
+
+DROP TABLE IF EXISTS `scmsmenu_bar_scmsmenu`;
+CREATE TABLE `scmsmenu_bar_scmsmenu` (
+  `scmsmenu_bar_menus_id` bigint(20) NOT NULL,
+  `scmsmenu_id` bigint(20) DEFAULT NULL,
+  `menus_idx` int(11) DEFAULT NULL,
+  KEY `FKD5FF36AB19EEDF7B` (`scmsmenu_id`),
+  CONSTRAINT `FKD5FF36AB19EEDF7B` FOREIGN KEY (`scmsmenu_id`) REFERENCES `scmsmenu_item` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsmenu_bar_scmsmenu`
+--
+
+/*!40000 ALTER TABLE `scmsmenu_bar_scmsmenu` DISABLE KEYS */;
+INSERT INTO `scmsmenu_bar_scmsmenu` (`scmsmenu_bar_menus_id`,`scmsmenu_id`,`menus_idx`) VALUES 
+ (1,1,0),
+ (1,2,1),
+ (1,12,2),
+ (1,21,3),
+ (1,28,4),
+ (1,29,5),
+ (1,30,6);
+/*!40000 ALTER TABLE `scmsmenu_bar_scmsmenu` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsmenu_item`
+--
+
+DROP TABLE IF EXISTS `scmsmenu_item`;
+CREATE TABLE `scmsmenu_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsmenu_item`
+--
+
+/*!40000 ALTER TABLE `scmsmenu_item` DISABLE KEYS */;
+INSERT INTO `scmsmenu_item` (`id`,`version`,`link`,`title`,`class`) VALUES 
+ (1,0,'/home','Home','simple.cms.SCMSMenu'),
+ (2,0,'#','Visit the Preserve','simple.cms.SCMSMenu'),
+ (3,0,'#','Plan Your Visit','simple.cms.SCMSMenu'),
+ (4,0,'content/pages/pathfinders','Pathfinders','simple.cms.SCMSMenuItem'),
+ (5,0,'content/pages/natureGuides','Nature Guides','simple.cms.SCMSMenuItem'),
+ (6,0,'content/pages/familyPassport','Family Passport','simple.cms.SCMSMenuItem'),
+ (7,0,'content/pages/knowBeforeYouGo','Know Before You Go','simple.cms.SCMSMenuItem'),
+ (8,0,'content/pages/faqs','FAQs','simple.cms.SCMSMenuItem'),
+ (9,0,'trailhead/mapOfThePreserve','Trailheads & Directions','simple.cms.SCMSMenu'),
+ (10,0,'content/pages/recreation','Recreation','simple.cms.SCMSMenu'),
+ (11,0,'photoGallery','PhotoGallery','simple.cms.SCMSMenu'),
+ (12,11,'content/pages/missionAndVision,content/pages/history,content/pages/people,home/giftShop,content/pages/mountainLines,content/pages/pressKit,content/pages/contact,content/pages/annualReports,','About Us','simple.cms.SCMSMenu'),
+ (13,0,'content/pages/missionAndVision','Mission and Vision','simple.cms.SCMSMenuItem'),
+ (14,0,'content/pages/history','History','simple.cms.SCMSMenuItem'),
+ (15,0,'content/pages/people','People','simple.cms.SCMSMenuItem'),
+ (16,3,'home/shoppingCart','Gift Shop','simple.cms.SCMSMenuItem'),
+ (17,0,'content/pages/mountainLines','Mountain Lines Magazine','simple.cms.SCMSMenuItem'),
+ (18,0,'content/pages/pressKit','Press Kit','simple.cms.SCMSMenuItem'),
+ (19,0,'content/pages/contact','Contact','simple.cms.SCMSMenuItem'),
+ (20,0,'content/pages/annualReports','Annual Reports','simple.cms.SCMSMenuItem'),
+ (21,0,'#','Education & Research','simple.cms.SCMSMenu'),
+ (22,0,'#','Adult Learning','simple.cms.SCMSMenu'),
+ (23,0,'#','School Groups & Youth','simple.cms.SCMSMenu'),
+ (24,0,'#','Online Learning','simple.cms.SCMSMenu'),
+ (25,0,'#','Field Institute','simple.cms.SCMSMenu'),
+ (26,0,'content/pages/herpatology','Conservation','simple.cms.SCMSMenuItem'),
+ (27,0,'content/pages/herpatology','Publications & News','simple.cms.SCMSMenuItem'),
+ (28,0,'content/pages/volunteer','Volunteer','simple.cms.SCMSMenu'),
+ (29,0,'supportUs','Support Us','simple.cms.SCMSMenu'),
+ (30,1,'#','Administration','simple.cms.SCMSMenu'),
+ (31,0,'person/list','Manage Users','simple.cms.SCMSMenuItem'),
+ (32,0,'#','Photos','simple.cms.SCMSMenu'),
+ (33,0,'photo/list','Manage Photos','simple.cms.SCMSMenuItem'),
+ (34,0,'photo/uploadPhotos','Upload Photos','simple.cms.SCMSMenuItem'),
+ (35,0,'adSpacePhoto/list','Manage Ad Space','simple.cms.SCMSMenuItem'),
+ (36,0,'newsItem/list','Manage News Items','simple.cms.SCMSMenuItem'),
+ (37,0,'event/list','Manage Events','simple.cms.SCMSMenuItem'),
+ (38,0,'page/list','Manage Pages','simple.cms.SCMSMenuItem'),
+ (39,0,'menuBar/list','Manage Menus','simple.cms.SCMSMenuItem'),
+ (40,0,'searchable','Search','simple.cms.SCMSMenuItem'),
+ (41,1,'product/productList','Product List','simple.cms.SCMSMenu'),
+ (42,0,'product/productList','Manage Product','simple.cms.SCMSMenu');
+/*!40000 ALTER TABLE `scmsmenu_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsmenu_item_roles`
+--
+
+DROP TABLE IF EXISTS `scmsmenu_item_roles`;
+CREATE TABLE `scmsmenu_item_roles` (
+  `scmsmenu_item_id` bigint(20) DEFAULT NULL,
+  `roles_string` varchar(255) DEFAULT NULL,
+  `roles_idx` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsmenu_item_roles`
+--
+
+/*!40000 ALTER TABLE `scmsmenu_item_roles` DISABLE KEYS */;
+INSERT INTO `scmsmenu_item_roles` (`scmsmenu_item_id`,`roles_string`,`roles_idx`) VALUES 
+ (30,'ROLE_ADMIN',0),
+ (12,'ROLE_ADMIN',0),
+ (12,'ROLE_USER',1),
+ (16,'ROLE_ADMIN',0),
+ (16,'ROLE_USER',1),
+ (41,'ROLE_ADMIN',0),
+ (41,'ROLE_STEWARD',1),
+ (42,'ROLE_ADMIN',0);
+/*!40000 ALTER TABLE `scmsmenu_item_roles` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsmenu_link`
+--
+
+DROP TABLE IF EXISTS `scmsmenu_link`;
+CREATE TABLE `scmsmenu_link` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `menu_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKE5E8A3A4F3816831` (`menu_id`),
+  CONSTRAINT `FKE5E8A3A4F3816831` FOREIGN KEY (`menu_id`) REFERENCES `scmsmenu_item` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsmenu_link`
+--
+
+/*!40000 ALTER TABLE `scmsmenu_link` DISABLE KEYS */;
+INSERT INTO `scmsmenu_link` (`id`,`version`,`link`,`menu_id`) VALUES 
+ (1,0,'/home/giftShop',12),
+ (2,0,'/content/pages/missionAndVision,content/pages/history,content/pages/people,home/giftShop,content/pages/mountainLines,content/pages/pressKit,content/pages/contact,content/pages/annualReports,',12),
+ (3,0,'/home/shoppingCart',12),
+ (4,0,'/product/addProduct',41),
+ (5,0,'/product/productList',41);
+/*!40000 ALTER TABLE `scmsmenu_link` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsmenu_scmsmenu_item`
+--
+
+DROP TABLE IF EXISTS `scmsmenu_scmsmenu_item`;
+CREATE TABLE `scmsmenu_scmsmenu_item` (
+  `scmsmenu_menu_items_id` bigint(20) DEFAULT NULL,
+  `scmsmenu_item_id` bigint(20) DEFAULT NULL,
+  `menu_items_idx` int(11) DEFAULT NULL,
+  KEY `FK8AF7FA53E6AB0E46` (`scmsmenu_item_id`),
+  CONSTRAINT `FK8AF7FA53E6AB0E46` FOREIGN KEY (`scmsmenu_item_id`) REFERENCES `scmsmenu_item` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsmenu_scmsmenu_item`
+--
+
+/*!40000 ALTER TABLE `scmsmenu_scmsmenu_item` DISABLE KEYS */;
+INSERT INTO `scmsmenu_scmsmenu_item` (`scmsmenu_menu_items_id`,`scmsmenu_item_id`,`menu_items_idx`) VALUES 
+ (2,3,0),
+ (2,9,1),
+ (2,10,2),
+ (2,11,3),
+ (3,4,0),
+ (3,5,1),
+ (3,6,2),
+ (3,7,3),
+ (3,8,4),
+ (12,13,0),
+ (12,14,1),
+ (12,15,2),
+ (12,16,3),
+ (12,17,4),
+ (12,18,5),
+ (12,19,6),
+ (12,20,7),
+ (21,22,0),
+ (21,23,1),
+ (21,24,2),
+ (21,25,3),
+ (21,26,4),
+ (21,27,5),
+ (30,31,0),
+ (30,32,1),
+ (30,35,2),
+ (30,36,3),
+ (30,37,4),
+ (30,38,5),
+ (30,39,6),
+ (30,40,7),
+ (32,33,0),
+ (32,34,1),
+ (30,42,8);
+/*!40000 ALTER TABLE `scmsmenu_scmsmenu_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmspage_template`
+--
+
+DROP TABLE IF EXISTS `scmspage_template`;
+CREATE TABLE `scmspage_template` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `associatedgsp` varchar(40) NOT NULL,
+  `description` longtext,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmspage_template`
+--
+
+/*!40000 ALTER TABLE `scmspage_template` DISABLE KEYS */;
+INSERT INTO `scmspage_template` (`id`,`version`,`associatedgsp`,`description`,`name`) VALUES 
+ (1,0,'standard.gsp','\nStandard internal page. Has one text area that floats to the left and two photos with captions\nthat float to the right.\n','Standard'),
+ (2,0,'lightbox.gsp','\nSame as standard but with an additional lightbox widget.\n','Lightbox'),
+ (3,0,'gallery.gsp','\nIntended for the \'People\' page. Contains an HTML widget, 2 photo widgets and 2 gallery widgets.\n','Gallery'),
+ (4,0,'nosidebar.gsp','\nHas no sidebar navigation and contains only one HTML widget.\n','No Sidebar Navigation'),
+ (5,0,'plain.gsp','\nContains only one HTML widget.\n','Plain'),
+ (6,0,'document.gsp','\nContains only one HTML widget and a Document widget.\n','Document'),
+ (7,0,'documentPhoto.gsp','\nContains only one HTML widget, a Document widget and two Photo widgets.\n','Document Photo');
+/*!40000 ALTER TABLE `scmspage_template` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmspage_template_scmswidget_creator`
+--
+
+DROP TABLE IF EXISTS `scmspage_template_scmswidget_creator`;
+CREATE TABLE `scmspage_template_scmswidget_creator` (
+  `scmspage_template_widget_creators_id` bigint(20) NOT NULL,
+  `scmswidget_creator_id` bigint(20) DEFAULT NULL,
+  KEY `FKE73AF4D27D54BF43` (`scmspage_template_widget_creators_id`),
+  KEY `FKE73AF4D2D5404204` (`scmswidget_creator_id`),
+  CONSTRAINT `FKE73AF4D27D54BF43` FOREIGN KEY (`scmspage_template_widget_creators_id`) REFERENCES `scmspage_template` (`id`),
+  CONSTRAINT `FKE73AF4D2D5404204` FOREIGN KEY (`scmswidget_creator_id`) REFERENCES `scmswidget_creator` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmspage_template_scmswidget_creator`
+--
+
+/*!40000 ALTER TABLE `scmspage_template_scmswidget_creator` DISABLE KEYS */;
+INSERT INTO `scmspage_template_scmswidget_creator` (`scmspage_template_widget_creators_id`,`scmswidget_creator_id`) VALUES 
+ (1,1),
+ (1,2),
+ (1,3),
+ (2,4),
+ (2,5),
+ (2,6),
+ (2,7),
+ (3,8),
+ (3,9),
+ (3,10),
+ (3,11),
+ (3,12),
+ (4,13),
+ (5,14),
+ (6,15),
+ (6,16),
+ (7,17),
+ (7,18),
+ (7,19),
+ (7,20);
+/*!40000 ALTER TABLE `scmspage_template_scmswidget_creator` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsphoto`
+--
+
+DROP TABLE IF EXISTS `scmsphoto`;
+CREATE TABLE `scmsphoto` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `all_keywords` longtext NOT NULL,
+  `artist` varchar(255) DEFAULT NULL,
+  `copyright` varchar(255) DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  `description` longtext,
+  `file_name` varchar(255) NOT NULL,
+  `height` int(11) NOT NULL,
+  `original_file_name` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `source` varchar(255) NOT NULL,
+  `usage_rights` varchar(255) DEFAULT NULL,
+  `width` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsphoto`
+--
+
+/*!40000 ALTER TABLE `scmsphoto` DISABLE KEYS */;
+INSERT INTO `scmsphoto` (`id`,`version`,`all_keywords`,`artist`,`copyright`,`date_created`,`description`,`file_name`,`height`,`original_file_name`,`path`,`source`,`usage_rights`,`width`) VALUES 
+ (1,0,'default','Phil','None','2013-08-27 11:52:13','Gateway Building','Gateway Building.jpg',3744,'Gateway Building.jpg','images/default','http://mcdowellsonoran.org',NULL,5616),
+ (2,0,'eCard javalina','Debra Doss','McDowell Sonoran Preserve','2013-08-27 11:52:21','eCard','javalina.jpg',288,'javalina.jpg','images/eCards','http://mcdowellsonoran.org',NULL,432),
+ (3,0,'eCard sympathy bird','Debra Doss','McDowell Sonoran Preserve','2013-08-27 11:52:25','eCard','sympathy_bird.jpg',288,'sympathy_bird.jpg','images/eCards','http://mcdowellsonoran.org',NULL,432),
+ (4,0,'eCard sympathy mountain sunset','Debra Doss','McDowell Sonoran Preserve','2013-08-27 11:52:25','eCard','sympathy_mtnsunset.jpg',288,'sympathy_mtnsunset.jpg','images/eCards','http://mcdowellsonoran.org',NULL,432),
+ (5,0,'eCard trail','Debra Doss','McDowell Sonoran Preserve','2013-08-27 11:52:25','eCard','trail.jpg',288,'trail.jpg','images/eCards','http://mcdowellsonoran.org',NULL,432),
+ (6,0,'eCard yellow flower','Debra Doss','McDowell Sonoran Preserve','2013-08-27 11:52:25','eCard','yellow_flower.jpg',288,'yellow_flower.jpg','images/eCards','http://mcdowellsonoran.org',NULL,432),
+ (7,0,'donate','Phil','None','2013-08-27 11:52:54','Donate','img_hike-105x104.png',104,'img_hike-105x104.png','images/layout','http://mcdowellsonoran.org',NULL,105);
+/*!40000 ALTER TABLE `scmsphoto` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsstatic_page`
+--
+
+DROP TABLE IF EXISTS `scmsstatic_page`;
+CREATE TABLE `scmsstatic_page` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `can_be_edited_by_leader` bit(1) NOT NULL,
+  `link` varchar(40) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `description_metadata` varchar(156) DEFAULT NULL,
+  `keywords_metadata` longtext,
+  `template_id` bigint(20) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `link` (`link`),
+  KEY `FKEDB3E40A43584F00` (`template_id`),
+  CONSTRAINT `FKEDB3E40A43584F00` FOREIGN KEY (`template_id`) REFERENCES `scmspage_template` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsstatic_page`
+--
+
+/*!40000 ALTER TABLE `scmsstatic_page` DISABLE KEYS */;
+INSERT INTO `scmsstatic_page` (`id`,`version`,`can_be_edited_by_leader`,`link`,`class`,`description_metadata`,`keywords_metadata`,`template_id`,`title`) VALUES 
+ (1,0,0x00,'home','simple.cms.SCMSStaticPage',NULL,NULL,NULL,NULL),
+ (2,0,0x00,'trailheadsMap','simple.cms.SCMSStaticPage',NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `scmsstatic_page` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmsstatic_page_scmswidget`
+--
+
+DROP TABLE IF EXISTS `scmsstatic_page_scmswidget`;
+CREATE TABLE `scmsstatic_page_scmswidget` (
+  `scmsstatic_page_widgets_id` bigint(20) NOT NULL,
+  `scmswidget_id` bigint(20) DEFAULT NULL,
+  `widgets_idx` int(11) DEFAULT NULL,
+  KEY `FK3C4D390FACA1751B` (`scmswidget_id`),
+  CONSTRAINT `FK3C4D390FACA1751B` FOREIGN KEY (`scmswidget_id`) REFERENCES `scmswidget` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmsstatic_page_scmswidget`
+--
+
+/*!40000 ALTER TABLE `scmsstatic_page_scmswidget` DISABLE KEYS */;
+INSERT INTO `scmsstatic_page_scmswidget` (`scmsstatic_page_widgets_id`,`scmswidget_id`,`widgets_idx`) VALUES 
+ (1,1,0),
+ (1,2,1),
+ (2,3,0);
+/*!40000 ALTER TABLE `scmsstatic_page_scmswidget` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmswidget`
+--
+
+DROP TABLE IF EXISTS `scmswidget`;
+CREATE TABLE `scmswidget` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `css_class` varchar(255) DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  `last_updated` datetime NOT NULL,
+  `widget_id` varchar(30) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `caption` varchar(255) DEFAULT NULL,
+  `photo_id` bigint(20) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `html_text` longtext,
+  `link_photo_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKE2C8D1BA365B3B28` (`link_photo_id`),
+  KEY `FKE2C8D1BA54DB6083` (`photo_id`),
+  CONSTRAINT `FKE2C8D1BA365B3B28` FOREIGN KEY (`link_photo_id`) REFERENCES `scmsphoto` (`id`),
+  CONSTRAINT `FKE2C8D1BA54DB6083` FOREIGN KEY (`photo_id`) REFERENCES `scmsphoto` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmswidget`
+--
+
+/*!40000 ALTER TABLE `scmswidget` DISABLE KEYS */;
+INSERT INTO `scmswidget` (`id`,`version`,`css_class`,`date_created`,`last_updated`,`widget_id`,`class`,`caption`,`photo_id`,`title`,`html_text`,`link_photo_id`) VALUES 
+ (1,0,NULL,'2013-08-27 11:52:54','2013-08-27 11:52:54','donateText','simple.cms.SCMSHTMLWidget',NULL,NULL,NULL,'\n<p>The McDowell Sonoran Conservancy is a non-profit conservation organization that engages the community to protect the McDowell Sonoran Preserve.  \nYour support will ensure that the Preserve continues to be a natural open space to visit and enjoy, as well as a permanent sanctuary for wildlife.</p>',NULL),
+ (2,0,NULL,'2013-08-27 11:52:54','2013-08-27 11:52:54','donatePhoto','simple.cms.SCMSPhotoWidget',NULL,7,NULL,NULL,NULL),
+ (3,0,NULL,'2013-08-27 11:54:04','2013-08-27 11:54:04','trailheadsMap','simple.cms.SCMSHTMLWidget',NULL,NULL,NULL,'<h1>Trailheads</h1>',NULL);
+/*!40000 ALTER TABLE `scmswidget` ENABLE KEYS */;
+
+
+--
+-- Definition of table `scmswidget_creator`
+--
+
+DROP TABLE IF EXISTS `scmswidget_creator`;
+CREATE TABLE `scmswidget_creator` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `widget_id` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scmswidget_creator`
+--
+
+/*!40000 ALTER TABLE `scmswidget_creator` DISABLE KEYS */;
+INSERT INTO `scmswidget_creator` (`id`,`version`,`widget_id`,`class`) VALUES 
+ (1,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (2,0,'photo1','simple.cms.SCMSPhotoWidgetCreator'),
+ (3,0,'photo2','simple.cms.SCMSPhotoWidgetCreator'),
+ (4,0,'lightbox1','simple.cms.SCMSLightboxWidgetCreator'),
+ (5,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (6,0,'photo1','simple.cms.SCMSPhotoWidgetCreator'),
+ (7,0,'photo2','simple.cms.SCMSPhotoWidgetCreator'),
+ (8,0,'gallery1','simple.cms.SCMSGalleryWidgetCreator'),
+ (9,0,'photo2','simple.cms.SCMSPhotoWidgetCreator'),
+ (10,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (11,0,'gallery2','simple.cms.SCMSGalleryWidgetCreator'),
+ (12,0,'photo1','simple.cms.SCMSPhotoWidgetCreator'),
+ (13,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (14,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (15,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (16,0,'document1','simple.cms.SCMSDocumentWidgetCreator'),
+ (17,0,'photo1','simple.cms.SCMSPhotoWidgetCreator'),
+ (18,0,'document1','simple.cms.SCMSDocumentWidgetCreator'),
+ (19,0,'html1','simple.cms.SCMSHTMLWidgetCreator'),
+ (20,0,'photo2','simple.cms.SCMSPhotoWidgetCreator');
+/*!40000 ALTER TABLE `scmswidget_creator` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sec_role`
+--
+
+DROP TABLE IF EXISTS `sec_role`;
+CREATE TABLE `sec_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `authority` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `authority` (`authority`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sec_role`
+--
+
+/*!40000 ALTER TABLE `sec_role` DISABLE KEYS */;
+INSERT INTO `sec_role` (`id`,`version`,`authority`) VALUES 
+ (1,0,'ROLE_ADMIN'),
+ (2,0,'ROLE_GUEST'),
+ (3,0,'ROLE_USER'),
+ (4,0,'ROLE_STEWARD'),
+ (5,0,'ROLE_LEADER'),
+ (6,0,'ROLE_BOARD'),
+ (7,0,'ROLE_STAFF'),
+ (8,0,'ROLE_WEB');
+/*!40000 ALTER TABLE `sec_role` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sec_user`
+--
+
+DROP TABLE IF EXISTS `sec_user`;
+CREATE TABLE `sec_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `account_expired` bit(1) NOT NULL,
+  `account_locked` bit(1) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `enabled` bit(1) NOT NULL,
+  `last_updated` datetime NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `password_expired` bit(1) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `address_apartment` varchar(255) DEFAULT NULL,
+  `address_city` varchar(255) DEFAULT NULL,
+  `address_state` varchar(255) DEFAULT NULL,
+  `address_street` varchar(255) DEFAULT NULL,
+  `address_zip` varchar(255) DEFAULT NULL,
+  `cell_phone_number` varchar(24) DEFAULT NULL,
+  `class_number` varchar(255) DEFAULT NULL,
+  `date_of_birth` datetime DEFAULT NULL,
+  `emergency_contact` varchar(255) DEFAULT NULL,
+  `emergency_phone` varchar(255) DEFAULT NULL,
+  `emergency_relationship` varchar(255) DEFAULT NULL,
+  `first_name` varchar(30) DEFAULT NULL,
+  `has_steward_role` bit(1) DEFAULT NULL,
+  `home_phone_number` varchar(24) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `lead_steward` bit(1) DEFAULT NULL,
+  `master_steward` bit(1) DEFAULT NULL,
+  `mentor_id` bigint(20) DEFAULT NULL,
+  `middle_initial` varchar(4) DEFAULT NULL,
+  `photo_id` bigint(20) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
+  `tshirt_size` varchar(3) DEFAULT NULL,
+  `wants_weekly_email` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  KEY `FK375DF2F97599959E` (`mentor_id`),
+  KEY `FK375DF2F954DB6083` (`photo_id`),
+  CONSTRAINT `FK375DF2F954DB6083` FOREIGN KEY (`photo_id`) REFERENCES `scmsphoto` (`id`),
+  CONSTRAINT `FK375DF2F97599959E` FOREIGN KEY (`mentor_id`) REFERENCES `sec_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sec_user`
+--
+
+/*!40000 ALTER TABLE `sec_user` DISABLE KEYS */;
+INSERT INTO `sec_user` (`id`,`version`,`account_expired`,`account_locked`,`date_created`,`enabled`,`last_updated`,`password`,`password_expired`,`username`,`class`,`address_apartment`,`address_city`,`address_state`,`address_street`,`address_zip`,`cell_phone_number`,`class_number`,`date_of_birth`,`emergency_contact`,`emergency_phone`,`emergency_relationship`,`first_name`,`has_steward_role`,`home_phone_number`,`last_name`,`lead_steward`,`master_steward`,`mentor_id`,`middle_initial`,`photo_id`,`position`,`tshirt_size`,`wants_weekly_email`) VALUES 
+ (1,0,0x00,0x00,'2013-08-27 11:52:18',0x01,'2013-08-27 11:52:18','6f1ba36f8f046e93512970ee14fdfb0933aa75a264552f3deb6efe9d1d56dc9c',0x00,'admin@mcdowellsonoran.org','newmscwebsite.SecUser',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `sec_user` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sec_user_sec_role`
+--
+
+DROP TABLE IF EXISTS `sec_user_sec_role`;
+CREATE TABLE `sec_user_sec_role` (
+  `sec_role_id` bigint(20) NOT NULL,
+  `sec_user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`sec_role_id`,`sec_user_id`),
+  KEY `FK6630E2A182C09ED` (`sec_user_id`),
+  KEY `FK6630E2A7301460D` (`sec_role_id`),
+  CONSTRAINT `FK6630E2A182C09ED` FOREIGN KEY (`sec_user_id`) REFERENCES `sec_user` (`id`),
+  CONSTRAINT `FK6630E2A7301460D` FOREIGN KEY (`sec_role_id`) REFERENCES `sec_role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sec_user_sec_role`
+--
+
+/*!40000 ALTER TABLE `sec_user_sec_role` DISABLE KEYS */;
+INSERT INTO `sec_user_sec_role` (`sec_role_id`,`sec_user_id`) VALUES 
+ (1,1),
+ (8,1);
+/*!40000 ALTER TABLE `sec_user_sec_role` ENABLE KEYS */;
+
+
+--
+-- Definition of table `street_address`
+--
+
+DROP TABLE IF EXISTS `street_address`;
+CREATE TABLE `street_address` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `apartment` varchar(255) DEFAULT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `zip` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `street_address`
+--
+
+/*!40000 ALTER TABLE `street_address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `street_address` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tag_links`
+--
+
+DROP TABLE IF EXISTS `tag_links`;
+CREATE TABLE `tag_links` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `tag_id` bigint(20) NOT NULL,
+  `tag_ref` bigint(20) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK7C35D6D45A3B441D` (`tag_id`),
+  CONSTRAINT `FK7C35D6D45A3B441D` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tag_links`
+--
+
+/*!40000 ALTER TABLE `tag_links` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tag_links` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE `tags` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tags`
+--
+
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trail_report`
+--
+
+DROP TABLE IF EXISTS `trail_report`;
+CREATE TABLE `trail_report` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `comment` longtext NOT NULL,
+  `trail_section_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK66F72D8D985C7E7D` (`trail_section_id`),
+  CONSTRAINT `FK66F72D8D985C7E7D` FOREIGN KEY (`trail_section_id`) REFERENCES `trail_section` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trail_report`
+--
+
+/*!40000 ALTER TABLE `trail_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trail_report` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trail_section`
+--
+
+DROP TABLE IF EXISTS `trail_section`;
+CREATE TABLE `trail_section` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `notes` varchar(255) NOT NULL,
+  `pin_location_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKAC1FB1ACEF9ACF4F` (`pin_location_id`),
+  CONSTRAINT `FKAC1FB1ACEF9ACF4F` FOREIGN KEY (`pin_location_id`) REFERENCES `geographic_coordinates` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trail_section`
+--
+
+/*!40000 ALTER TABLE `trail_section` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trail_section` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trailhead`
+--
+
+DROP TABLE IF EXISTS `trailhead`;
+CREATE TABLE `trailhead` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `address_apartment` varchar(255) DEFAULT NULL,
+  `address_city` varchar(255) NOT NULL,
+  `address_state` varchar(255) NOT NULL,
+  `address_street` varchar(255) NOT NULL,
+  `address_zip` varchar(255) NOT NULL,
+  `coordinates_latitude` decimal(19,6) NOT NULL,
+  `coordinates_longitude` decimal(19,6) NOT NULL,
+  `description` longtext NOT NULL,
+  `description_metadata` varchar(156) DEFAULT NULL,
+  `internal_name` varchar(20) NOT NULL,
+  `keywords_metadata` longtext,
+  `map_name` varchar(255) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trailhead`
+--
+
+/*!40000 ALTER TABLE `trailhead` DISABLE KEYS */;
+INSERT INTO `trailhead` (`id`,`version`,`address_apartment`,`address_city`,`address_state`,`address_street`,`address_zip`,`coordinates_latitude`,`coordinates_longitude`,`description`,`description_metadata`,`internal_name`,`keywords_metadata`,`map_name`,`name`) VALUES 
+ (1,1,NULL,'Scottsdale','AZ','18333 N. Thompson Peak Rd','85255','33.647900','-111.862236','The Gateway Trailhead, located on the east side of Thompson Peak Rd. between Legacy Blvd. and Bell Rd., is fully barrier-free and has all the amenities an outdoor recreation enthusiast could want.',NULL,'gateway',NULL,NULL,'Gateway Trailhead'),
+ (2,0,NULL,'Scottsdale','AZ','North Side of Bell Rd at 104th St','85255','33.640318','-111.856613','This minor access point, located on Bell Rd. east of Thompson Peak, has very limited parking and no amenities. This trailhead provides direct access to the Levee Trail that connects to the Paradise Trail.',NULL,'bellRoad',NULL,NULL,'Bell Road Trailhead'),
+ (3,0,NULL,'Scottsdale','AZ','10440 East Via Linda','85258','33.596276','-111.768048','Sunrise Area is located at Via Linda and 145th Way.   There is an auxiliary lot just south of the entrance for equestrians.',NULL,'sunrise',NULL,NULL,'Sunrise Access Area'),
+ (4,0,NULL,'Scottsdale','AZ','12300 N. 128th St','85259','33.599343','-111.804630','',NULL,'ringtail',NULL,NULL,'Ringtail Trailhead'),
+ (5,1,NULL,'Scottsdale','AZ','North 124th Street','85259','33.599552','-111.812910','The Lost Dog Wash Access Area, Located at the north end of 124th Street just beyond Anasazi Elementary School, is one of the major access points for the Preserve. This award winning trailhead provides extensive vehicle and equestrian parking along with a gathering area and and other amenities.',NULL,'lostDog',NULL,NULL,'Lost Dog Wash Trailhead'),
+ (6,0,NULL,'Scottsdale','AZ','104th St and McDowell Mountain Ranch Rd','85255','33.626447','-111.856962','About 5-miles round trip to and from a quartz outcropping on the western edge of the McDowells. A steady but not steep climb much of the way.',NULL,'quartz',NULL,NULL,'Quartz Trailhead'),
+ (7,0,NULL,'Scottsdale','AZ','9809 E McDowell Mountain Ranch Rd','85260','33.630748','-111.869698','The trailhead includes separate parking areas for equestrians and other trail users. Amenities include a water trough and lighting. Riders must fill the water trough.',NULL,'westworld',NULL,NULL,'Westworld Trailhead'),
+ (8,1,NULL,'Scottsdale','AZ','128th St and Paraiso','85255','33.689148','-111.801306','Offers access to many important features such as Tom\'s Thumb, Windgate Overlook, Gardener\'s Wall, Sven Slab, Mesquite Canyon and the Windmill Trail.',NULL,'tomsThumb',NULL,NULL,'Tom\'s Thumb Trailhead'),
+ (9,1,NULL,'Scottsdale','AZ','30301 N Alma School Pkwy','85262','33.755755','-111.843926','The Brown\'s Ranch Trailhead will be the first trailhead to provide access to the northern region of the McDowell Sonoran Preserve.  The Trailhead will be located approximately 1.25 miles north of the intersection of Alma School Parkway and Dynamite Boulevard.',NULL,'brownsRanch',NULL,NULL,'Brown\'s Ranch'),
+ (10,0,NULL,'Scottsdale','AZ','136th St North of Via Linda','85259','33.595192','-111.786597','The 136th Street spur is a less traveled and rugged trail that eventually joins the Sunrise Peak Trail. For the suburban hiker, this is a quick way to transition from the safety and sanctity of the gated community to the hot, wild, and deserted desert. Driving through the gates of the entrance brings an immediate change from community to nature as if walking onto a movie set. ',NULL,'136thSt',NULL,NULL,'136th St Access');
+/*!40000 ALTER TABLE `trailhead` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trailhead_activities`
+--
+
+DROP TABLE IF EXISTS `trailhead_activities`;
+CREATE TABLE `trailhead_activities` (
+  `trailhead_id` bigint(20) DEFAULT NULL,
+  `activity` varchar(255) DEFAULT NULL,
+  `activities_idx` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trailhead_activities`
+--
+
+/*!40000 ALTER TABLE `trailhead_activities` DISABLE KEYS */;
+INSERT INTO `trailhead_activities` (`trailhead_id`,`activity`,`activities_idx`) VALUES 
+ (1,'BIKING',0),
+ (1,'DOGS',1),
+ (1,'HORSES',2),
+ (1,'FAMILY',3),
+ (1,'HANDICAP',4),
+ (1,'HIKING',5),
+ (2,'BIKING',0),
+ (2,'DOGS',1),
+ (2,'HORSES',2),
+ (2,'HIKING',3),
+ (3,'BIKING',0),
+ (3,'DOGS',1),
+ (3,'HORSES',2),
+ (3,'HIKING',3),
+ (5,'BIKING',0),
+ (5,'DOGS',1),
+ (5,'HORSES',2),
+ (5,'HIKING',3),
+ (6,'BIKING',0),
+ (6,'DOGS',1),
+ (6,'HIKING',2),
+ (7,'BIKING',0),
+ (7,'DOGS',1),
+ (7,'HORSES',2),
+ (7,'FAMILY',3),
+ (7,'HIKING',4),
+ (8,'BIKING',0),
+ (8,'DOGS',1),
+ (8,'HORSES',2),
+ (8,'HIKING',3),
+ (8,'CLIMBING',4),
+ (9,'BIKING',0),
+ (9,'DOGS',1),
+ (9,'HORSES',2),
+ (9,'HIKING',3),
+ (10,'BIKING',0),
+ (10,'DOGS',1),
+ (10,'HIKING',2);
+/*!40000 ALTER TABLE `trailhead_activities` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trailhead_amenities`
+--
+
+DROP TABLE IF EXISTS `trailhead_amenities`;
+CREATE TABLE `trailhead_amenities` (
+  `trailhead_id` bigint(20) DEFAULT NULL,
+  `amenity` varchar(255) DEFAULT NULL,
+  `amenities_idx` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trailhead_amenities`
+--
+
+/*!40000 ALTER TABLE `trailhead_amenities` DISABLE KEYS */;
+INSERT INTO `trailhead_amenities` (`trailhead_id`,`amenity`,`amenities_idx`) VALUES 
+ (1,'DIRECTORY',0),
+ (1,'HORSE_TRAILS',1),
+ (1,'INFORMATION',2),
+ (1,'RESTROOM',3),
+ (1,'SEATING',4),
+ (1,'SHELTER',5),
+ (1,'WATER',6),
+ (3,'DIRECTORY',0),
+ (3,'HORSE_TRAILS',1),
+ (3,'SEATING',2),
+ (5,'DIRECTORY',0),
+ (5,'HORSE_TRAILS',1),
+ (5,'RESTROOM',2),
+ (5,'SEATING',3),
+ (5,'SHELTER',4),
+ (5,'WATER',5),
+ (6,'DIRECTORY',0),
+ (7,'DIRECTORY',0),
+ (7,'HORSE_TRAILS',1),
+ (7,'INFORMATION',2),
+ (7,'RESTROOM',3),
+ (7,'SHELTER',4),
+ (7,'WATER',5);
+/*!40000 ALTER TABLE `trailhead_amenities` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trailhead_hike`
+--
+
+DROP TABLE IF EXISTS `trailhead_hike`;
+CREATE TABLE `trailhead_hike` (
+  `trailhead_hikes_id` bigint(20) DEFAULT NULL,
+  `hike_id` bigint(20) DEFAULT NULL,
+  KEY `FK8CE169D4DA022F31` (`trailhead_hikes_id`),
+  KEY `FK8CE169D445F23CA` (`hike_id`),
+  CONSTRAINT `FK8CE169D445F23CA` FOREIGN KEY (`hike_id`) REFERENCES `hike` (`id`),
+  CONSTRAINT `FK8CE169D4DA022F31` FOREIGN KEY (`trailhead_hikes_id`) REFERENCES `trailhead` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trailhead_hike`
+--
+
+/*!40000 ALTER TABLE `trailhead_hike` DISABLE KEYS */;
+INSERT INTO `trailhead_hike` (`trailhead_hikes_id`,`hike_id`) VALUES 
+ (1,1),
+ (1,2),
+ (1,3),
+ (1,4),
+ (1,5),
+ (5,6),
+ (5,7),
+ (5,8),
+ (5,9),
+ (8,10),
+ (8,11),
+ (8,12),
+ (9,13);
+/*!40000 ALTER TABLE `trailhead_hike` ENABLE KEYS */;
+
+
+--
+-- Definition of table `volunteer_session`
+--
+
+DROP TABLE IF EXISTS `volunteer_session`;
+CREATE TABLE `volunteer_session` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `date` date NOT NULL,
+  `hours` decimal(19,2) NOT NULL,
+  `program` varchar(255) NOT NULL,
+  `time` tinyblob NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `volunteer_session`
+--
+
+/*!40000 ALTER TABLE `volunteer_session` DISABLE KEYS */;
+/*!40000 ALTER TABLE `volunteer_session` ENABLE KEYS */;
+
+
+--
+-- Definition of table `volunteer_session_trail_section`
+--
+
+DROP TABLE IF EXISTS `volunteer_session_trail_section`;
+CREATE TABLE `volunteer_session_trail_section` (
+  `volunteer_session_trails_sections_id` bigint(20) DEFAULT NULL,
+  `trail_section_id` bigint(20) DEFAULT NULL,
+  KEY `FK265B60CE985C7E7D` (`trail_section_id`),
+  KEY `FK265B60CEC750B874` (`volunteer_session_trails_sections_id`),
+  CONSTRAINT `FK265B60CE985C7E7D` FOREIGN KEY (`trail_section_id`) REFERENCES `trail_section` (`id`),
+  CONSTRAINT `FK265B60CEC750B874` FOREIGN KEY (`volunteer_session_trails_sections_id`) REFERENCES `volunteer_session` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `volunteer_session_trail_section`
+--
+
+/*!40000 ALTER TABLE `volunteer_session_trail_section` DISABLE KEYS */;
+/*!40000 ALTER TABLE `volunteer_session_trail_section` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
