@@ -15,9 +15,9 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			url = "jdbc:mysql://localhost/mscmsc"
+			url = "jdbc:mysql://192.168.1.4/mscmsc"
 			username = "root"
-			password = "uni-dev"
+			password = "toor"
 			dbCreate = "update"
 		}
 	}
@@ -36,7 +36,6 @@ environments {
 			username = "root"
 			password = "uni-dev01"
 			dialect = org.hibernate.dialect.MySQLDialect
-			dbCreate = "update"
 			properties {
 				validationQuery = "SELECT 1"
 				testOnBorrow = true

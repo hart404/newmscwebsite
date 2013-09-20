@@ -40,4 +40,4 @@ grails.project.dependency.resolution = {
 		//compile ':app-info-hibernate:0.2'
 	}
 }
-grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"
+grails.plugin.location.'simple-cms' = "../simple-cms/simple-cms"

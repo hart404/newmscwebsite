@@ -65,8 +65,4 @@ class RedirectorController {
 		redirect(uri: "/content/pages/visitThePreserve")
 	}
 	
-	def msfi() {
-		redirect(uri: "/content/pages/fieldInstitute")
-	}
-	
 }
