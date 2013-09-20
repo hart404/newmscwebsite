@@ -24,7 +24,6 @@ def addConfig = { path->
 }
 addConfig("classpath:SecretConfig.properties")
 
-
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -43,7 +42,7 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                     ]
 
 // URL Mapping Cache Max Size, defaults to 5000
-//grails.urlmapping.cache.maxsize = 1000
+// grails.urlmapping.cache.maxsize = 1000
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -133,7 +132,6 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'newmscwebsite
 grails.plugins.springsecurity.authority.className = 'newmscwebsite.SecRole'
 
 import grails.plugins.springsecurity.SecurityConfigType
-
 import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
@@ -229,8 +227,6 @@ grails.gorm.default.mapping = {
 	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
 	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentLocalDate, class: org.joda.time.LocalDate
 }
-
-grails.plugin.cloudfoundry.showStackTrace = true
 
 grails {
 	mail {
