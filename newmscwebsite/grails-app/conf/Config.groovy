@@ -24,6 +24,7 @@ def addConfig = { path->
 }
 addConfig("classpath:SecretConfig.properties")
 
+
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -42,7 +43,7 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                     ]
 
 // URL Mapping Cache Max Size, defaults to 5000
-// grails.urlmapping.cache.maxsize = 1000
+//grails.urlmapping.cache.maxsize = 1000
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -126,12 +127,51 @@ log4j = {
 	
 }
 
+
+grails.config.constant_contact = "D:/Newcms_workspace/newmscwebsite/target-eclipse/classes/constant_contact.properties"
+grails.config.filesUpload = "D:/Newcms_workspace/newmscwebsite/web-app/imageFile/"
+try {
+	
+	
+	String []tempapikey
+	String []tempaccessToken
+	File file = new File(grails.config.constant_contact)
+	String _apiKey
+	String _accessToken
+	
+	constant_contact.apikey =""
+	constant_contact.accesstoken =""
+	
+	file.eachLine {line->
+		
+		if(line.contains("apikey")) {
+		
+			tempapikey = line.split("=")
+			constant_contact.apikey = tempapikey[1]
+			println("apikey "+constant_contact.apikey)
+		
+		}
+		if(line.contains("accesstoken")){
+			tempaccessToken= line.split("=")
+			constant_contact.accesstoken = tempaccessToken[1]
+			println("accesstoken "+constant_contact.accesstoken)
+		}
+		
+		
+	}
+	
+}
+catch (Exception e) {
+	println("Error in config file :: " + e)
+}
+
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'newmscwebsite.SecUser'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'newmscwebsite.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'newmscwebsite.SecRole'
 
 import grails.plugins.springsecurity.SecurityConfigType
+
 import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
@@ -144,6 +184,7 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/denied':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/register/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/person/registerUser/**':			['IS_AUTHENTICATED_ANONYMOUSLY'],
+//	'/person/donateInfo/**':			['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/person/registerForEmail/**':		['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*.html':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*.xml':							['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -173,7 +214,6 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/opening':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/maps':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/shop':							['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/msfi':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/*/list/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/*/create/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/*/save/**':						['IS_AUTHENTICATED_REMEMBERED'],
@@ -183,7 +223,7 @@ grails.plugins.springsecurity.interceptUrlMap = [
 	'/donate/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/newsItem/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/trailhead/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/person/**':						['IS_AUTHENTICATED_REMEMBERED'],
+//	'/person/**':						['IS_AUTHENTICATED_REMEMBERED'],
 	'/photo/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/adSpacePhoto/**':					['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/gallery/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -201,7 +241,7 @@ grails.plugins.springsecurity.secureChannel.definition = [
 	'/donate/**':       				'REQUIRES_SECURE_CHANNEL',
 	'/login/**':						'REQUIRES_SECURE_CHANNEL',
 	'/register/**':						'REQUIRES_SECURE_CHANNEL',
-	'/person/registerUser/**':			'REQUIRES_SECURE_CHANNEL',
+//	'/person/registerUser/**':			'REQUIRES_SECURE_CHANNEL',
 	'/person/registerForEmail/**':		'REQUIRES_SECURE_CHANNEL'
 ]
 
@@ -227,6 +267,8 @@ grails.gorm.default.mapping = {
 	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
 	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentLocalDate, class: org.joda.time.LocalDate
 }
+
+grails.plugin.cloudfoundry.showStackTrace = true
 
 grails {
 	mail {
