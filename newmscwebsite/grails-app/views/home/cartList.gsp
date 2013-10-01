@@ -193,21 +193,26 @@
 	function deleteData(id){
 
 		  var response;
-		   $.ajax({ type: "GET",                 
-	 	         url: '${createLink(controller:'home', action:'deleteCartItem')}',	 	        
-               async: false,
-               data:{"product_id":id},		                
-               success : function(text)
-                 {
-      	         response = text;
-      	            if(response){
-
-          	            window.location.href="../home/cartList"
-          	         
+                  var productid = id;
+                  var dataString = 'product_id='+ productid;
+          $.ajax({ 
+                    type: "GET",                 
+                    url: '${createLink(controller:'home', action:'deleteCartItem')}',
+                          //async: false,
+                    data : dataString,
+                    cache : false,
+                    success : function(text)
+                    {
+                             //alert("Removed Successfully");
+                      location.reload();
+     //                        response = text;
+     //                        if(response){
+     //                       window.location.href="cartList"
+     //               
+     //                    }
                     }
-                 }
 
-         });
+              });
            
     }
 
@@ -638,7 +643,7 @@
 			  
 			   <div style="background:;">
 				   <button onclick="checkoutTransation()"  class="saveBtn">Proceed To Checkout</button>
-			 			
+			 			<a href ="/newmscwebsite/home/shoppingCart">Continue Shopping</a>
 			  </div> 
 				
 			</div>

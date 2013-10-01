@@ -18,6 +18,7 @@ class HomeController {
 	def homeService
 	def eventService
 	def dataSource
+        def springSecurityService
 	
 	static navigation = [
 		group:'navigationBar',
@@ -33,9 +34,32 @@ class HomeController {
 		map
 	}
 	
-	
+	def storeReport(){        
+            def dmydate = params.date.split('/')
+            def date_inst = dmydate[2]+"-"+dmydate[0]+"-"+dmydate[1]
+            def program_inst = params.program
+            def hours_inst = params.hours
+            def time_inst = params.time
+            
+            def report_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst)
+            report_inst.save(failOnError:true)
+          
+            render "true"
+        }
+        
+        def saveReportProblem(){
+            def code_inst = params.code
+            def comments_inst = params.comments
+            def userid_inst = springSecurityService.currentUser.id
+            
+            def reportprb_inst = new ReportComment(code:code_inst,comments:comments_inst,userId:userid_inst)
+            reportprb_inst.save(failOnError:true)
+          
+            render "true"
+        }
+        
 	def testPopup(){
-		
+            
 	}
 	
 	def search() {
@@ -52,6 +76,10 @@ class HomeController {
 		}
 		SCMSStaticPage.currentPage = page
 	}
+        
+    def reportInfo(){
+        println("params::::::::::::::inside reportInfo :::::::::::"+params)
+    }
 	
 	def donateInfo (){
 		
@@ -434,20 +462,23 @@ class HomeController {
 	
 	def deleteCartItem(){
 		
-		
-		 def product_inst = Product.get(params.product_id)
-		def cart_item_list_inst = CartLineItem.findWhere(product:product_inst)
-		
-		def delete_inst = cart_item_list_inst.delete()
-		
-		if(!cart_item_list_inst){
-			
-			render "success"
-		}else{
-		
-		   render "failure"
-		
-		}
+		def currentsessionId = request.getSession().id
+                //                def query = "DELETE FROM cart_item_list WHERE product_id= '"+params.product_id+"' AND session_id='"+sessionId+"';"
+                //                db.executeQuery(query)
+                  def product_inst = Product.get(params.product_id)
+                  def cart_item_list_inst = CartLineItem.findWhere(product:product_inst , sessionId:currentsessionId)
+                //  
+                  def delete_inst = cart_item_list_inst.delete()
+                //  
+                //  if(!cart_item_list_inst){
+                //   
+                //   render "success"
+                //  }else{
+                //  
+                //     render "failure"
+                //  
+                //  }
+                render "true"
 	}
 	
 	def productPrevData = {

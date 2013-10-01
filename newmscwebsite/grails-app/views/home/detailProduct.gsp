@@ -295,7 +295,7 @@
 							             		 '<img alt="" src="../images/shoppingCart/minus1.png" style="cursor: pointer;margin-top:;float:left;margin-left: 1%; " onclick="minusVal()">'+
 							             		 '<input type="text" value="1" id="quantity_id" style="height:24px;width:10%;text-align: center;float:left;margin-left: 1%; ">'+
 							             		 '<img alt="" src="../images/shoppingCart/plus1.png" style="cursor: pointer;margin-top:;float:left;margin-left: 1%; " onclick="plusVal()">'+
-							             		 '<button type="button" style="margin-left: 1%;float:left;margin-top: -2px;" class="saveBtn" onclick="addToCart('+response[i].prod_id+')">Add To Cart</button>'+
+							             		 '<button type="button" style="margin-left: 1%;float:left;margin-top: -2px;" class="saveBtn" onclick="addToCart('+response[i].prod_id+');cartList();">Add To Cart</button>'+
 							             		
 							             		 '<img alt="" src="../images/shoppingCart/shoppingcart.png" style="cursor: pointer;margin-left: 1%;" onclick="cartList()">'+
 							          	
