@@ -117,7 +117,8 @@ jQuery(function($) {
 /*******************Java Script For View Map***********************/
 
                     var map;
-                    var src = 'https://sites.google.com/site/ionerakml/home/doc.kml?attredirects=0&d=1';                    
+                    var src = 'https://mcdowellsonoran.org/maps/ReportingPins.kml';
+                    var activeWindow;
                    
                     function initialize(x,y)
                       {   
@@ -140,7 +141,7 @@ jQuery(function($) {
                         });                    
                       }
                       
-                      function showInContentWindow(position) {
+                      function showInContentWindow(position) {                          
                         var content = '<div id="infoMap">'+
                                           '<div>'+
                                           '<div>Trail Segment Problem</div>'+
@@ -196,8 +197,13 @@ jQuery(function($) {
                         var infowindow = new google.maps.InfoWindow({
                         content: content, 
                         position: position
-                       });
-                       infowindow.close();
-                        infowindow.open(map);
+                       });     
+                       //Close active window if exists 
+                        if(activeWindow != null)
+                           activeWindow.close();
+                        //Open new window 
+                        infowindow.open(map); 
+                         //Store new window in global variable 
+                        activeWindow = infowindow;
                     }
                     
