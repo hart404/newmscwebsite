@@ -8,8 +8,8 @@ import com.vinomis.authnet.AuthorizeNet
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import javax.net.ssl.HttpsURLConnection
-import org.json.simple.JSONArray
-import org.json.simple.JSONObject
+import org.codehaus.groovy.grails.web.json.JSONArray
+import org.codehaus.groovy.grails.web.json.JSONObject
 import grails.converters.JSON
 
 class PersonController {
@@ -264,11 +264,11 @@ class PersonController {
 		def jsonObj = JSON.parse(params.data)
 		
 		
-		///println("jsonObj.email_address ::::::::::::::"+jsonObj.email_address)
-		//println("jsonObj.lastname ::::::::::::::"+jsonObj.lastname)
-		//println("jsonObj.firstname ::::::::::::::"+jsonObj.firstname)
-		//println("jsonObj.companyname ::::::::::::::"+jsonObj.companyname)
-		
+		println("jsonObj.email_address ::::::::::::::"+jsonObj.email_address)
+		println("jsonObj.lastname ::::::::::::::"+jsonObj.lastname)
+		println("jsonObj.firstname ::::::::::::::"+jsonObj.firstname)
+		println("jsonObj.companyname ::::::::::::::"+jsonObj.companyname)
+		println("json obj::"+jsonObj.toString())
 		  try {
 			//println("apikey"+grailsApplication.config.constant_contact.apikey)
 			//println("accesstoken"+grailsApplication.config.constant_contact.accesstoken)
@@ -280,6 +280,7 @@ class PersonController {
 			String url = "https://api.constantcontact.com/v2/contacts?api_key="+grailsApplication.config.constant_contact.apikey+"&access_token="+grailsApplication.config.constant_contact.accesstoken;
 			URL obj = new URL(url);
 			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+                        println("Hello:::::: Making API call")
 //			String headerAcessToken="Bearer 426c3d83-db35-4cd4-8aff-11dd1efa5983";
 			//add reuqest header
 			con.setRequestMethod("POST");
@@ -292,14 +293,16 @@ class PersonController {
 			// Send post request
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-			wr.writeBytes(getJSONObject("2","VISITOR","ACTION_BY_OWNER",nowAsISO,jsonObj.email_address,jsonObj.firstname,jsonObj.lastname,jsonObj.companyname));
+			String finalJson = getJSONObject("2","VISITOR","ACTION_BY_OWNER",nowAsISO,jsonObj.email_address,jsonObj.firstname,jsonObj.lastname,jsonObj.companyname);
+                        println("The final Json is"+finalJson)
+                        wr.writeBytes(finalJson);
 			wr.flush();
 			wr.close();
 	 
 			int responseCode = con.getResponseCode();
-			//println("\nSending 'POST' request to URL : " + url);
-			//println("Post parameters : " + getJSONObject("1","VISITOR","ACTION_BY_OWNER",nowAsISO,params.emailId));
-			//println("Response Code : " + responseCode);
+			println("\nSending 'POST' request to URL : " + url);
+			println("Post parameters : " + getJSONObject("1","VISITOR","ACTION_BY_OWNER",nowAsISO,params.emailId));
+			println("Response Code : " + responseCode);
 			
 			if(responseCode == 201){
 				

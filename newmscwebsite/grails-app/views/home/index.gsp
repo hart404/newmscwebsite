@@ -15,6 +15,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"> </script>
 <script src="js/galleria/galleria-1.2.6.min.js"></script>
 <script src="js/script.js"></script>
+<script src="js/donate.js"></script>
 </head>
 
 <body >
@@ -230,7 +231,7 @@ success:function(json, textStatus){loadAdSpace(json);}, error:function(XMLHttpRe
                                                  <label>Description:</label>
                                                  </div>
                                                 
-                                                   <input type="button" value="SUBSCRIBE" class="saveBtn" onclick="return validateForm();">
+                                                   <input type="button" value="SUBSCRIBE" class="saveBtn" onclick="validateForm();">
                                               </div>
                                               
                                              

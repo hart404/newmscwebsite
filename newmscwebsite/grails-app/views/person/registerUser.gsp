@@ -4,13 +4,13 @@
     <title>Register User</title>
     <script>
 		$(document).ready(function() {
-			alert("jjjjjjjjjjjjjjjjjjjjjjj")
+			alert("Thank You for subscribing. Your request is being processed.")
 		    $('#username').focus();
 		});
     </script>
 </head>
 <body>
-<h1 style="">Coming Soon!</h1>
+<h1 style="">Newsletter</h1>
 <g:if test="${flash.message}">
     
      <h1>&nbsp;${flash.message}</h1>
