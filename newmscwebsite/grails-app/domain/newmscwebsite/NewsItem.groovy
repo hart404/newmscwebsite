@@ -36,4 +36,10 @@ class NewsItem {
 	public String toString() {
 		return "${title}: ${summary}"
 	}
+	
+	def fullyFormedBlogURL() {
+		def urlPattern = /^(http|https):\/\/?/
+		if (!blogURL) return ""
+		if (blogURL =~ urlPattern) return blogURL else return "http://${blogURL}"
+	}
 }

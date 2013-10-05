@@ -18,6 +18,11 @@
 				<p class="bigp"><span class="highlight2">Summary: </span>${newsItem.summary}</p>
 				<p class="bigp"><span class="highlight2">More Information: </span>${newsItem.moreInformation}</p>
 		    </div>
+		    <g:if test="${newsItem.authorName}">
+		     <p>
+		     	${newsItem.authorName} - <a href="${newsItem.fullyFormedBlogURL()}" target="_blank">Click here to access this author's blog</a>
+		     </p>
+		    </g:if>
 		    <div class="sharethisnewsitem">
 				<span class='st_facebook_hcount' displayText='Facebook'></span>
 				<span class='st_twitter_hcount' displayText='Tweet'></span>
