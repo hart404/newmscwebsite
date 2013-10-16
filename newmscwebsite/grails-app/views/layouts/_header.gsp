@@ -21,6 +21,8 @@
      var hours = document.getElementById('hours'+id).value;
      var starttime = document.getElementById('starttime'+id).value;
      
+
+     
      var dataString = 'date='+date+'&hours='+hours+'&program='+program+'&time='+starttime;
      $.ajax({
                       type: "GET",
@@ -29,10 +31,20 @@
                       cache : false,
                       success : function(text)
                        {                         
-                         location.reload();                            
+                        // location.reload();    
+                        alert("Your entry has been added");
+                        document.getElementById('date'+id).value = "";
+                        document.getElementById('program'+id).value = "";
+                        document.getElementById('hours'+id).value = "";
+                        document.getElementById('starttime'+id).value = "";
+                        $("#northarea"+id).attr("disabled", "disabled");
+                        $("#southarea"+id).attr("disabled", "disabled");
                        }
  
-          });
+          }) .fail(function() {
+            alert( "Sorry, there was an error. Please try again" );
+            });
+     
             
 }
 </script>
@@ -44,7 +56,6 @@
   function reportProblem(){
      var code = document.getElementById('code').value;
      var comment = document.getElementById('comment').value;
-     
      var dataString = 'code='+code+'&comments='+comment;
      $.ajax({
                       type: "GET",
@@ -53,11 +64,16 @@
                       cache : false,
                       success : function(text)
                        {                         
-                         location.reload();
+                        // location.reload();
+                        alert("Your entry has been added");
+                        document.getElementById('code').value = "";
+                        document.getElementById('comment').value = ""; 
                        }
  
-          });
-            
+          }).fail(function() {
+            alert( "Sorry, there was an error. Please try again" );
+            });
+           
 }
 </script>
 

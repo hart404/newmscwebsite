@@ -4,7 +4,6 @@
  */
 
 //Stores our opened window 
-
 function selectedValue(selectid){
       if($( "select#program"+selectid+" option:selected").val() == "Patrol Program - Bike" || 
               $( "select#program"+selectid+" option:selected").val() == "Patrol Program - Horse" ||
@@ -86,8 +85,8 @@ jQuery(function($) {
 		if(popupStatus == 0) { // if value is 0, show popup
 			closeloading(); // fadeout loading
 			$("#toPopup").fadeIn(0500); // fadein popup div
-                        initialize(33.756172,-111.84391);
-			$("#backGroundPopup").css("opacity", "0.7"); // css opacity, supports IE7, IE8
+                        initialize(33.756083,-111.843862);
+			$("#backGroundPopup").css("opacity", "0.0"); // css opacity, supports IE7, IE8
 			$("#backGroundPopup").fadeIn(0001);               
 			popupStatus = 1; // and set value to 1
 		}	
@@ -98,7 +97,7 @@ jQuery(function($) {
 			closeloading(); // fadeout loading
 			$("#toPopup").fadeIn(0500); // fadein popup div
                         initialize(33.64944,-111.858416);
-			$("#backGroundPopup").css("opacity", "0.7"); // css opacity, supports IE7, IE8
+			$("#backGroundPopup").css("opacity", "0.0"); // css opacity, supports IE7, IE8
 			$("#backGroundPopup").fadeIn(0001);               
 			popupStatus = 1; // and set value to 1
 		}	
@@ -116,14 +115,14 @@ jQuery(function($) {
 
 /*******************Java Script For View Map***********************/
 
-                    var map;
-                    var src = 'https://mcdowellsonoran.org/maps/ReportingPins.kml';
                     var activeWindow;
+                    var map;
+                    var src = 'https://sites.google.com/site/ionerakml/home/doc.kml';                    
                    
                     function initialize(x,y)
                       {   
                           map = new google.maps.Map(document.getElementById('popup_content'), {
-                          center: new google.maps.LatLng(x,y),
+                          center: new google.maps.LatLng(x, y),
                           zoom: 14,
                           mapTypeId: google.maps.MapTypeId.TERRAIN
                           });
@@ -137,11 +136,13 @@ jQuery(function($) {
                           map: map
                         });
                         google.maps.event.addListener(kmlLayer, 'click', function(event) {
+                            //alert("Calling info window");
                             showInContentWindow(event.latLng);
                         });                    
                       }
                       
-                      function showInContentWindow(position) {                          
+                      function showInContentWindow(position) {
+                         // alert("Calling info window");
                         var content = '<div id="infoMap">'+
                                           '<div>'+
                                           '<div>Trail Segment Problem</div>'+
@@ -197,13 +198,54 @@ jQuery(function($) {
                         var infowindow = new google.maps.InfoWindow({
                         content: content, 
                         position: position
-                       });     
-                       //Close active window if exists 
-                        if(activeWindow != null)
-                           activeWindow.close();
-                        //Open new window 
-                        infowindow.open(map); 
-                         //Store new window in global variable 
-                        activeWindow = infowindow;
+                       });
+//                       infowindow.close();
+//                        infowindow.open(map);
+
+                    if(activeWindow != null)
+                    activeWindow.close(); 
+                    //Open new window 
+                    infowindow.open(map); 
+                     //Store new window in global variable 
+                    activeWindow = infowindow; 
                     }
                     
+//code for javascript dropdown generation
+var idarray = new Array();
+function addOption(selectbox,text,value )
+{	
+	var optn = document.createElement("OPTION");
+	optn.text = text;
+	optn.value = value;
+	selectbox.options.add(optn);
+}
+
+function addOption_listtime(id){
+	var timings = new Array("5:00am","5:30am","6:00am","6:30am","7:00am","7:30am","8:00am","8:30am","9:00am","9:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm", "1:00pm", "1:30pm", "2:00pm", "2:30pm", "3:00pm", "3:30pm", "4:00pm", "4:30pm", "5:00pm", "5:30pm", "6:00pm", "6:30pm", "7:00pm", "7:30pm", "8:00pm", "8:30pm","9:00pm","9:30pm","10:00pm","10:30pm","11:00pm","11:30pm");
+	
+	var timingvalues = new Array("50000" ,"53000","60000","63000","70000","73000","80000","83000","90000","93000","100000","103000","110000","113000","120000","123000","130000","133000","140000","143000","150000","153000","160000","163000","170000","173000","180000","183000","190000","193000","200000","203000","210000","213000","220000","223000","230000","233000");
+	if(idarray.indexOf(id) == -1)
+{
+for (var i=0; i < timings.length;++i){
+
+//addOption(document.drop_list.Month_list, month[i], month[i]);
+addOption(document.getElementById(id), timings[i], timingvalues[i]);
+idarray.push(id);
+
+		}
+	}
+}
+function addOption_listprogram(id){
+var program = new Array("Patrol Program - Bike","Patrol Program - Foot","Patrol Program - Horse","Steward Education Program","Hike Program","Board of Directors","Research - field/analysis","MSC Challenge","Volunteer Support Program","Tour de Scottsdale","Research Program Support","Core Leadership Team","Construction/Maintenance Program","Office and Web Work","Pathfinder Program","Nature Guides Program","Partnership Development Program","Community Relations Program");
+//alert("Id is"+id);
+if(idarray.indexOf(id) == -1)
+	{
+for (var i=0; i < program.length;++i)	{
+
+//addOption(document.drop_list.Month_list, month[i], month[i]);
+addOption(document.getElementById(id), program[i], program[i]);
+idarray.push(id);
+		}
+	}
+
+}

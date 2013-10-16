@@ -101,3 +101,12 @@ div#popup_content {
 td, th {
     padding: 0;
 }
+
+
+     .cdiui-input.cdiui-select {
+    width: 80px;
+}
+
+#stewardreporting{
+    background: #FFF2D4;
+}
