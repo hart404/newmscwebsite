@@ -4,6 +4,13 @@ import org.springframework.dao.DataIntegrityViolationException
 
 import simple.cms.SCMSMenu
 import simple.cms.SCMSPhoto
+import com.vinomis.authnet.AuthorizeNet
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import javax.net.ssl.HttpsURLConnection
+import org.codehaus.groovy.grails.web.json.JSONArray
+import org.codehaus.groovy.grails.web.json.JSONObject
+import grails.converters.JSON
 
 class PersonController {
 
@@ -11,7 +18,8 @@ class PersonController {
 	
 	def personService
 	def springSecurityService
-
+	
+	
     def index() {
         redirect(action: "list", params: params)
     }
@@ -247,7 +255,146 @@ class PersonController {
     }
 	
 	def registerUser() {
-		params
+		//params
+		
+		//println("params.emailId::::::::::::::" +params)
+		//println("params.emailId::::::::::::::" +params.emailId)
+		
+		//println("params::::::::::::::::::::"+params)
+		def jsonObj = JSON.parse(params.data)
+		
+		
+		println("jsonObj.email_address ::::::::::::::"+jsonObj.email_address)
+		println("jsonObj.lastname ::::::::::::::"+jsonObj.lastname)
+		println("jsonObj.firstname ::::::::::::::"+jsonObj.firstname)
+		println("jsonObj.companyname ::::::::::::::"+jsonObj.companyname)
+		println("json obj::"+jsonObj.toString())
+		  try {
+			//println("apikey"+grailsApplication.config.constant_contact.apikey)
+			//println("accesstoken"+grailsApplication.config.constant_contact.accesstoken)
+			TimeZone tz = TimeZone.getTimeZone("UTC");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			df.setTimeZone(tz);
+			String nowAsISO = df.format(new Date());
+			//System.out.println("nowAsISO"+nowAsISO);
+			String url = "https://api.constantcontact.com/v2/contacts?api_key="+grailsApplication.config.constant_contact.apikey+"&access_token="+grailsApplication.config.constant_contact.accesstoken;
+			URL obj = new URL(url);
+			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+                        println("Hello:::::: Making API call")
+//			String headerAcessToken="Bearer 426c3d83-db35-4cd4-8aff-11dd1efa5983";
+			//add reuqest header
+			con.setRequestMethod("POST");
+//			con.setRequestProperty("Authorization", headerAcessToken);
+			con.setRequestProperty("Action-By", "ACTION_BY_OWNER");
+			con.setRequestProperty("Content-Type", "application/json");
+//			String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+			
+	 
+			// Send post request
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			String finalJson = getJSONObject("2","VISITOR","ACTION_BY_OWNER",nowAsISO,jsonObj.email_address,jsonObj.firstname,jsonObj.lastname,jsonObj.companyname);
+                        println("The final Json is"+finalJson)
+                        wr.writeBytes(finalJson);
+			wr.flush();
+			wr.close();
+	 
+			int responseCode = con.getResponseCode();
+			println("\nSending 'POST' request to URL : " + url);
+			println("Post parameters : " + getJSONObject("1","VISITOR","ACTION_BY_OWNER",nowAsISO,params.emailId));
+			println("Response Code : " + responseCode);
+			
+			if(responseCode == 201){
+				
+				//String success = "Your successfully subscribed "
+				//println("inside iffffffffffffffff33333333333333333333333")
+				
+				//flash.message = "Your successfully subscribed "
+				
+				def message = "Your successfully subscribed "
+				
+				//redirect(controller:"home" ,action: "index")
+				
+				chain(controller:"home" ,action: "index", model: [message:message])
+			}
+	 
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+	 
+			while ((inputLine = bufferedReader.readLine()) != null) {
+				response.append(inputLine);
+			}
+			bufferedReader.close();
+	 
+			
+		   println(response.toString());
+		   
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(e.getMessage().contains("Server returned HTTP response code: 409")){
+				//println("Email Address already Registered");
+				
+				
+				def message = "Your are already subscribed "
+				
+				//redirect(controller:"home" ,action: "index")
+				
+				chain(controller:"home" ,action: "index", model: [message:message])
+			}
+		}  
+		
+		
+		
+	}
+	
+	
+	String getJSONObject(String listid,String status,String optSource,String optDate,String emailAddress ,String first_name ,String last_name ,String company_name ){
+		JSONObject _mainjsonObject = new JSONObject();
+		JSONObject idjsonObject = new JSONObject();
+		idjsonObject.put("id", listid);
+		
+		JSONArray jsonArray =new JSONArray();
+		jsonArray.add(0, idjsonObject);
+		
+		_mainjsonObject.put("lists", jsonArray);
+		
+		
+		JSONArray emailjsonArray =new JSONArray();
+		
+		
+		JSONObject emailjsonObject = new JSONObject();
+		emailjsonObject.put("status", status);
+		emailjsonObject.put("opt_in_source", optSource);
+		emailjsonObject.put("opt_in_date", optDate);
+		emailjsonObject.put("email_address", emailAddress);
+		
+		emailjsonArray.add(0, emailjsonObject);
+		
+		_mainjsonObject.put("email_addresses", emailjsonArray);
+		_mainjsonObject.put("first_name", first_name);
+		_mainjsonObject.put("last_name", last_name);
+		_mainjsonObject.put("company_name", company_name);
+		System.out.println("jsonObject"+_mainjsonObject.toString());
+		return _mainjsonObject.toString();
+		
+	}
+	
+	def test(){
+		
+		def s = new AuthorizeNet()
+		s.authorizeAndCapture {
+			amount '100.00'
+			ccNumber '370000000000002'
+			cvv '122'
+			ccExpDate '012011'
+			email 'john@acme.com'
+			invoiceId '123'
+		}
+	   def anr = s.submit()
+	   println("authoooooooooooooo::::"+ anr)
+		
 	}
 	
 	def registerForEmail() {

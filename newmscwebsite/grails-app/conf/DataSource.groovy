@@ -36,7 +36,6 @@ environments {
 			username = "root"
 			password = "uni-dev01"
 			dialect = org.hibernate.dialect.MySQLDialect
-			dbCreate = "update"
 			properties {
 				validationQuery = "SELECT 1"
 				testOnBorrow = true

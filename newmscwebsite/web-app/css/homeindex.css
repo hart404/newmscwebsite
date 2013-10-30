@@ -1,0 +1,48 @@
+/* 
+    Document   : homeindex
+    Created on : Sep 27, 2013, 12:53:22 PM
+    Author     : Pritam
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#myDivPopupBoxClose6{
+		    font-size:20px;  
+		    line-height:15px;  
+		    right:-15px;  
+		    top:-15px;  
+		    position:absolute;  
+		    color:#6fa5e2;  
+		    font-weight:500;      
+		}
+		
+		
+	.saveBtn {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+    color:#664809; 
+   
+     background:#f49d2f; 
+    padding: 8px 25px;
+    border:solid 1px #e7af37;
+    font:Arial;
+    
+    cursor: pointer;
+    
+}
+
+.saveBtn:hover{
+
+   -moz-border-radius: 2px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+    color:#704109; 
+    background:#fcbe28; 
+     padding: 8px 25px;
+    border:solid 1px #e39d3d;
+    font:Arial;
+	
+}

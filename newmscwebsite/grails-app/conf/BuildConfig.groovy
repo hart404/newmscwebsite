@@ -38,6 +38,7 @@ grails.project.dependency.resolution = {
 		build ":tomcat:$grailsVersion"
 		build ':release:2.2.1'
 		//compile ':app-info-hibernate:0.2'
+		compile ":authorize-net:0.12"
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"
