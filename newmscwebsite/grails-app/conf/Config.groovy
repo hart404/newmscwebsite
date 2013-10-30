@@ -93,9 +93,9 @@ environments {
 log4j = {
 	
     appenders {
-        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-		console name:'stacktrace', layout:pattern(conversionPattern: '%c{2} %m%n')
-		console name:'errors', layout:pattern(conversionPattern: '%c{2} %m%n')
+        console name:'stdout', layout: pattern(conversionPattern: '%c{2} %m%n')
+		console name:'stacktrace', layout: pattern(conversionPattern: '%c{2} %m%n')
+		console name:'errors', layout: pattern(conversionPattern: '%c{2} %m%n')
     }
 	
     error  	'org.codehaus.groovy.grails.web.servlet',  //  controllers
@@ -283,8 +283,8 @@ grails {
 
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
 
-grails.plugin.databasemigration.updateOnStart = false
-grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+// grails.plugin.databasemigration.updateOnStart = false
+// grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 
 
 

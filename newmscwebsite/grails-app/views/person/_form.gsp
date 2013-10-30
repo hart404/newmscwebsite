@@ -248,7 +248,7 @@
     </div>
     <div>
         <g:checkBox name="research" value="${personInstance?.hasInterest('research')}" />
-        Research
+        Citizen Science
     </div>
     <div>
         <g:checkBox name="stewardEducation" value="${personInstance?.hasInterest('stewardEducation')}" />

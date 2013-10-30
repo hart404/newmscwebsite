@@ -57,7 +57,7 @@ public enum Interest {
 	def titles = [
 		"Bike Patrol", "Community Relations", "Construction and Maintenance", "Hike", 
 		"Nature Guides", "Information Technology", "Fundraising", 
-		"Pathfinders", "Patrol",  "Research", "Steward Education", 
+		"Pathfinders", "Patrol",  "Citizen Science", "Steward Education", 
 		"Volunteer Support", "Partnership Development"
 	]
 	
@@ -65,3 +65,4 @@ public enum Interest {
 		titles[this.ordinal()]
 	}
 }
+
