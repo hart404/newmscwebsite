@@ -66,6 +66,7 @@ grails.project.dependency.resolution = {
 		compile ":google-analytics:2.0"
 		compile ":searchable:0.6.4"
 		compile ":joda-time:1.4"
+		compile ":authorize-net:0.12"
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

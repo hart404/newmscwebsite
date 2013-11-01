@@ -26,8 +26,6 @@ import simple.cms.SCMSPhoto
 
 import groovy.sql.Sql
 
-
-
 class BootStrap {
 
 	TrailheadService trailheadService
@@ -35,6 +33,7 @@ class BootStrap {
 	def grailsApplication
 
 	def init = { servletContext ->
+		println "Running bootstrap..."
 		println "Root directory: ${System.getProperty("user.home")}"
 		updateSql()
 		createRoles()
