@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>~GEA01D.kmz</name>
+	<StyleMap id="msn_placemark_circle69">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_placemark_circle693</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_triangle</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_placemark_circle_highlight188">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="msn_placemark_circle162">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_placemark_circle692</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_placemark_circle_highlight1880</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_placemark_circle69">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sh_placemark_circle_highlight3">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_placemark_circle38">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_placemark_circle690">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="msn_placemark_circle1620">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_placemark_circle690</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_placemark_circle_highlight188</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_placemark_circle_highlight1880">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_placemark_circle691">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sn_placemark_circle692">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="msn_placemark_circle154">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_placemark_circle38</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_placemark_circle_highlight3</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_triangle">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.709091</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="sh_placemark_circle_highlight1881">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<StyleMap id="msn_placemark_circle1621">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_placemark_circle691</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_placemark_circle_highlight1882</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_placemark_circle1622">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_placemark_circle69</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_placemark_circle_highlight1881</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_placemark_circle693">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Style id="sh_placemark_circle_highlight1882">
+		<IconStyle>
+			<color>ff00ffff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href>
+			</Icon>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+			<scale>0.7</scale>
+		</LabelStyle>
+	</Style>
+	<Folder>
+		<name>Other Points of Interest Sep 2013</name>
+		<Placemark>
+			<name>Scenic View</name>
+			<LookAt>
+				<longitude>-111.7939577073709</longitude>
+				<latitude>33.78443247614513</latitude>
+				<altitude>0</altitude>
+				<heading>0.02250270561873973</heading>
+				<tilt>0</tilt>
+				<range>735.5047575882603</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_placemark_circle154</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-111.7955155397899,33.78420934683231,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Brown&apos;s Mountain</name>
+			<LookAt>
+				<longitude>-111.8483243367588</longitude>
+				<latitude>33.77657505453787</latitude>
+				<altitude>0</altitude>
+				<heading>-0.009824967916140775</heading>
+				<tilt>0</tilt>
+				<range>1667.287082827133</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_placemark_circle162</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-111.8460548556766,33.77512961320848,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Granite Mountain</name>
+			<LookAt>
+				<longitude>-111.8048516922876</longitude>
+				<latitude>33.78486356463316</latitude>
+				<altitude>0</altitude>
+				<heading>0.01825800231777809</heading>
+				<tilt>0</tilt>
+				<range>860.8106362291076</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_placemark_circle69</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-111.8043086846118,33.78347247055316,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Cholla Mountain</name>
+			<LookAt>
+				<longitude>-111.821608494718</longitude>
+				<latitude>33.78376451381207</latitude>
+				<altitude>0</altitude>
+				<heading>0.01310832232849461</heading>
+				<tilt>0</tilt>
+				<range>1523.580136095696</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_placemark_circle1622</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-111.8229741093497,33.787139370934,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Cone Mountain</name>
+			<LookAt>
+				<longitude>-111.8562280595811</longitude>
+				<latitude>33.7680313029288</latitude>
+				<altitude>0</altitude>
+				<heading>-0.006140611072266554</heading>
+				<tilt>0</tilt>
+				<range>1150.353362001509</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_placemark_circle1620</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-111.8546111678592,33.76957278199256,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Fraesfield Mountain</name>
+			<LookAt>
+				<longitude>-111.8130989034719</longitude>
+				<latitude>33.75111148161658</latitude>
+				<altitude>0</altitude>
+				<heading>0.01782588075891908</heading>
+				<tilt>0</tilt>
+				<range>1588.571794048959</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_placemark_circle1621</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-111.8093338561297,33.75174075200336,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

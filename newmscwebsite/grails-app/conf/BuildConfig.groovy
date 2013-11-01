@@ -69,3 +69,4 @@ grails.project.dependency.resolution = {
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"
+

@@ -51,8 +51,7 @@ public enum Interest {
 			default:
 				return null
 		}
-	}
-	
+	}	
 
 	def titles = [
 		"Bike Patrol", "Community Relations", "Construction and Maintenance", "Hike", 
