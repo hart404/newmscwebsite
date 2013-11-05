@@ -131,44 +131,6 @@ log4j = {
 	
 }
 
-
-grails.config.constant_contact = "D:/Newcms_workspace/newmscwebsite/target-eclipse/classes/constant_contact.properties"
-grails.config.filesUpload = "D:/Newcms_workspace/newmscwebsite/web-app/imageFile/"
-try {
-	
-	
-	String []tempapikey
-	String []tempaccessToken
-	File file = new File(grails.config.constant_contact)
-	String _apiKey
-	String _accessToken
-	
-	constant_contact.apikey =""
-	constant_contact.accesstoken =""
-	
-	file.eachLine {line->
-		
-		if(line.contains("apikey")) {
-		
-			tempapikey = line.split("=")
-			constant_contact.apikey = tempapikey[1]
-			println("apikey "+constant_contact.apikey)
-		
-		}
-		if(line.contains("accesstoken")){
-			tempaccessToken= line.split("=")
-			constant_contact.accesstoken = tempaccessToken[1]
-			println("accesstoken "+constant_contact.accesstoken)
-		}
-		
-		
-	}
-	
-}
-catch (Exception e) {
-	println("Error in config file :: " + e)
-}
-
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'newmscwebsite.SecUser'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'newmscwebsite.SecUserSecRole'

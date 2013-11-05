@@ -358,7 +358,7 @@ class PersonController {
 		_mainjsonObject.put("lists", jsonArray);
 		
 		
-		JSONArray emailjsonArray =new JSONArray();
+		JSONArray emailjsonArray = new JSONArray();
 		
 		
 		JSONObject emailjsonObject = new JSONObject();
@@ -373,13 +373,11 @@ class PersonController {
 		_mainjsonObject.put("first_name", first_name);
 		_mainjsonObject.put("last_name", last_name);
 		_mainjsonObject.put("company_name", company_name);
-		System.out.println("jsonObject"+_mainjsonObject.toString());
 		return _mainjsonObject.toString();
 		
 	}
 	
-	def test(){
-		
+	def test() {
 		def s = new AuthorizeNet()
 		s.authorizeAndCapture {
 			amount '100.00'
@@ -390,18 +388,15 @@ class PersonController {
 			invoiceId '123'
 		}
 	   def anr = s.submit()
-	   println("authoooooooooooooo::::"+ anr)
-		
 	}
 	
 	def registerForEmail() {
 		params
 	}
         
-	def stewardreportingnew(){
-            println("Calling steward Reporting");
-            
-        }
+	def stewardReporting() {
+    }
+	
 	def stewardList() {
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
 		params.sort = params.sort ?: "firstName"
