@@ -211,7 +211,7 @@ jQuery(function($) {
                     }
                     
 //code for javascript dropdown generation
-var idarray = new Array();
+/*var idarray = new Array();
 function addOption(selectbox,text,value )
 {	
 	var optn = document.createElement("OPTION");
@@ -248,4 +248,4 @@ idarray.push(id);
 		}
 	}
 
-}
+}*/
