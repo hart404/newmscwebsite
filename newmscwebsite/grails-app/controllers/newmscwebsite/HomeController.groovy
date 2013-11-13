@@ -15,6 +15,7 @@ import com.vinomis.authnet.AuthorizeNet
 
 class HomeController {
 
+	def donateService
 	def homeService
 	def eventService
 	def dataSource
@@ -77,24 +78,16 @@ class HomeController {
 	}
 
 	def reportInfo(){
-		println("params::::::::::::::inside reportInfo :::::::::::"+params)
 	}
 
 	def donateInfo (){
-
-		println("params::::::::::::::inside donateInfo :::::::::::"+params)
 	}
 
 	def cartInfo = {
-
-		println("params::::::::::::::"+params)
 		def amount = params.donationamount
 		boolean status = checkInteger(params.donationamount)
-		if(status == false){
-
+		if (!status) {
 			flash.message = "You must enter a valid dollar amount"
-
-			//redirect(controller:"home" ,action: "index" , messge:flash.message)
 		}
 	}
 
@@ -107,40 +100,19 @@ class HomeController {
 		}
 		return true
 	}
-	def donateService
+
 	def saveFullinfoData = {
-
 		def jsonObj = JSON.parse(params.data)
-
-		//
 		String date = jsonObj.month+jsonObj.year
-
-		//println("date ::::::::::::"+date)
-
 		DateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
-
 		def currentdate =  dfDate.format(new Date());
-
-		//println("currentdate ::::::::::::::"+currentdate)
-		//if(jsonObj.from_date){
 		java.util.Date parsedUtilDate = dfDate.parse(currentdate);
-
 		java.sql.Timestamp  from_d= new java.sql.Timestamp(parsedUtilDate.getTime());
-
-		//println("from_d:::::::::::::::hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh::::"+from_d)
-
-		//from_date = from_d
-		//println("jsonObj.description ::::::::::::::::"+jsonObj.description)
-
-		//}
-
 
 		def s = new AuthorizeNet()
 		//NOTE:  If you need to override the login and transaction keys from the configuration, you can do it here:
 		s.login = '6pKhTc8S9PC'
 		s.transactionKey = '8W3jsZ8U8k7b3ZhY'
-
-
 		s.authorizeAndCapture {
 
 			description jsonObj.description
@@ -158,99 +130,45 @@ class HomeController {
 			ccExpDate date
 			email jsonObj.email
 			invoiceId jsonObj.invoiceid
-
 		}
 		def anr = s.submit()
-		println ("anr:::::::::"+anr)
-		//println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
-		//println ("anr.transactionId:::::::::"+anr.transactionId)
+		println ("anr:::::::::" + anr)
+		println ("anr.responseReasonText:::::::::" + anr.responseReasonText)
+		println ("anr.transactionId:::::::::" + anr.transactionId)
 
 		boolean recuringType
-
-		if(jsonObj.recuringType == "One-time"){
-
+		if (jsonObj.recuringType == "One-time") {
 			recuringType = false
-
-		}else{
-
+		} else {
 			recuringType = true
 		}
 
-		if(anr.responseReasonText == "This transaction has been approved."){
-
-			//println("inside ifffffffffffffffffffffffffff"+Double.parseDouble(jsonObj.amount))
-
-
-
-
-			//var myJSONText = "{'firstName':'"+firstName+
-			//		"','lastName':'"+lastName+"','email':'"+email+"','address':'"+address+"','city':'"+city+
-			//		"','state':'"+state+"','country':'"+country+"','zip':'"+zip+"','phone':'"+phone+"','cardnumber':'"+cardnumber+"','cvc':'"+cvc+
-			//		"','invoiceid':'"+invoiceid+"','month':'"+month+"' ,'year':'"+year+"','amount':'"+amount+"'}"
-
+		if (anr.responseReasonText == "This transaction has been approved.") {
 			def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,city:jsonObj.city,state:jsonObj.state,
 			zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
 			phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,
 			street:jsonObj.street,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
-
-			if(donateinst.save(flush:true)){
+			if (donateinst.save(flush:true)) {
 				flash.message = "This transaction has been approved."
-
-
-
 				redirect(controller:"home" ,action: "index")
-			}else{
-
-				// println("njhhhhhhhhhhhhhhhhhhhhhhh")
+			} else {
 				redirect(controller:"home" ,action: "index")
 			}
-
 			donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
-
-		}else{
-
+		} else {
 			flash.message = anr.responseReasonText
-
 			redirect(controller:"home" ,action: "index")
 		}
-
 	}
 
 
 	def saveNameEmail = {
-
-		println("inside saveNameEmail ::::::::::::::"+saveNameEmail)
-		//var myJSONText = "{'name':'"+name+
-		//"','email_id':'"+email_id+"','cvc_2':'"+cvc_2+"','invoiceid_2':'"+invoiceid_2+"'}"
-
 		def jsonObj = JSON.parse(params.data)
-
-		//println("jsonObj.name :::::::::::::"+jsonObj.name)
-
-		//println("jsonObj.email_id :::::::::::::"+jsonObj.email_id)
-
-		//println("jsonObj.cvc_2 :::::::::::::"+jsonObj.cvc_2)
-
-		//println("jsonObj.invoiceid_2 :::::::::::::"+jsonObj.invoiceid_2)
-
 		String date = jsonObj.month+jsonObj.year
-
-		//println("date ::::::::::::"+date)
-
 		DateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
-
 		def currentdate =  dfDate.format(new Date());
-
-		//println("currentdate ::::::::::::::"+currentdate)
-		//if(jsonObj.from_date){
 		java.util.Date parsedUtilDate = dfDate.parse(currentdate);
-
 		java.sql.Timestamp  from_d= new java.sql.Timestamp(parsedUtilDate.getTime());
-
-		//println("from_d:::::::::::::::hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh::::"+from_d)
-
-		///println("jsonObj.cardnumber ::::::::::::::"+jsonObj.cardnumber)
-
 		def s = new AuthorizeNet()
 		s.authorizeAndCapture {
 			firstName jsonObj.name
@@ -263,42 +181,23 @@ class HomeController {
 		}
 		def anr = s.submit();
 		println ("anr  :::::::::::::::::::::::  "+anr)
-
-
-		//println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
-		//println ("anr.transactionId:::::::::"+anr.transactionId)
+		println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
+		println ("anr.transactionId:::::::::"+anr.transactionId)
 
 		boolean recuringType
 
-		if(jsonObj.recuringType == "one time donation"){
-
+		if (jsonObj.recuringType == "one time donation") {
 			recuringType = false
-
-		}else{
-
+		} else {
 			recuringType = true
 		}
-
-		if(anr.responseReasonText == "This transaction has been approved."){
-
-			//println("inside ifffffffffffffffffffffffffff"+Double.parseDouble(jsonObj.amount))
-
-
-
-
-
+		if (anr.responseReasonText == "This transaction has been approved.") {
 			def donateinst = new Donation(firstName:jsonObj.name,recurring:recuringType,recurringDate:from_d,
 			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
-
-			if(donateinst.save(flush:true)){
+			if (donateinst.save(flush:true)) {
 				flash.message = "This transaction has been approved."
-
-
-
 				redirect(controller:"home" ,action: "index")
 			}else{
-
-				// println("njhhhhhhhhhhhhhhhhhhhhhhh")
 				redirect(controller:"home" ,action: "index")
 			}
 
@@ -315,41 +214,12 @@ class HomeController {
 	}
 
 	def saveNonData = {
-
-
-		//println("inside saveNonData ::::::::::")
-
 		def jsonObj = JSON.parse(params.data)
-
-
-		//var myJSONText = "{'cvc_3':'"+cvc_3+"','invoiceid_3':'"+invoiceid_3+
-		//"','month':'"+month_3+"' ,'year':'"+year_3+"','amount':'"+amount+"','cardnumber':'"+cardnumber_3+"','recuringType':'"+recuringType+"'}"
-
-		//println("jsonObj.cvc_3 :::::::::::::"+jsonObj.cvc_3)
-		//println("jsonObj.invoiceid_3 :::::::::::::"+jsonObj.invoiceid_3)
-		//println("jsonObj.month :::::::::::::"+jsonObj.month)
-		///println("jsonObj.year :::::::::::::"+jsonObj.year)
-		//println("jsonObj.amount :::::::::::::"+jsonObj.amount)
-		//println("jsonObj.cardnumber :::::::::::::"+jsonObj.cardnumber)
-		//println("jsonObj.recuringType :::::::::::::"+jsonObj.recuringType)
-
 		String date = jsonObj.month+jsonObj.year
-
-		//println("date ::::::::::::"+date)
-
 		DateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
-
 		def currentdate =  dfDate.format(new Date());
-
-		//println("currentdate ::::::::::::::"+currentdate)
-		//if(jsonObj.from_date){
 		java.util.Date parsedUtilDate = dfDate.parse(currentdate);
-
 		java.sql.Timestamp  from_d= new java.sql.Timestamp(parsedUtilDate.getTime());
-
-		//println("from_d:::::::::::::::hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh::::"+from_d)
-
-
 		def s = new AuthorizeNet()
 		s.authorizeAndCapture {
 			amount jsonObj.amount
@@ -360,53 +230,28 @@ class HomeController {
 		}
 		def anr = s.submit();
 		println ("anr  :::::::::::::::::::::::  "+anr)
-
-
-
-		//println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
-		// println ("anr.transactionId:::::::::"+anr.transactionId)
+		println ("anr.responseReasonText:::::::::" + anr.responseReasonText)
+		println ("anr.transactionId:::::::::" + anr.transactionId)
 
 		boolean recuringType
 
-		if(jsonObj.recuringType == "one time donation"){
-
+		if (jsonObj.recuringType == "one time donation") {
 			recuringType = false
-
-		}else{
-
+		} else {
 			recuringType = true
 		}
-
-		if(anr.responseReasonText == "This transaction has been approved."){
-
-			//println("inside ifffffffffffffffffffffffffff"+Double.parseDouble(jsonObj.amount))
-
-
-
-
-
-
+		if (anr.responseReasonText == "This transaction has been approved.") {
 			def donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
 			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
-
-			if(donateinst.save(flush:true)){
+			if (donateinst.save(flush:true)) {
 				flash.message = "This transaction has been approved."
-
-
-
 				redirect(controller:"home" ,action: "index")
-			}else{
-
-				// println("njhhhhhhhhhhhhhhhhhhhhhhh")
+			} else {
 				redirect(controller:"home" ,action: "index")
 			}
-
 			donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
-
-		}else{
-
+		} else {
 			flash.message = anr.responseReasonText
-
 			redirect(controller:"home" ,action: "index")
 		}
 	}
@@ -419,14 +264,12 @@ class HomeController {
 		def main_list_data = []
 
 		def sessionId = request.getSession().id
-		//println("sessionId   "+sessionId)
-
 		def query ="SELECT clt.product_id as prod_id,p.product_image_url as image,clt.id, "+
 				"p.product_title as product,clt.unit_price as price,clt.quantity as quantity, "+
 				"clt.total_line_item_price as total_price "+
 				"FROM `cart_line_item` clt ,product p "+
 				"where p.id = clt.product_id "+
-				"and session_id='"+sessionId+"' and clt.id not in(SELECT cart_line_item_id FROM `cart` where session_id='"+sessionId+"') "
+				"and session_id='" + sessionId + "' and clt.id not in(SELECT cart_line_item_id FROM `cart` where session_id='" + sessionId + "') "
 
 
 
@@ -465,21 +308,10 @@ class HomeController {
 		def cart_item_list_inst = CartLineItem.findWhere(product:product_inst , sessionId:currentsessionId)
 		//
 		def delete_inst = cart_item_list_inst.delete()
-		//
-		//  if(!cart_item_list_inst){
-		//
-		//   render "success"
-		//  }else{
-		//
-		//     render "failure"
-		//
-		//  }
 		render "true"
 	}
 
 	def productPrevData = {
-
-		println("println productNextData :::::::::;"+params )
 		def prod_map = [:]
 
 		def db = new Sql(dataSource)
