@@ -143,7 +143,7 @@ jQuery(function($) {
                       
                       function showInContentWindow(position) {
                          // alert("Calling info window");
-                        var content = '<div id="infoMap">'+
+                         var content = '<div id="infoMap">'+
                                           '<div>'+
                                           '<div>Trail Segment Problem</div>'+
                                           '<table width="299" style="margin-top: 5px; table-layout: auto;">'+
@@ -196,14 +196,13 @@ jQuery(function($) {
                                           '</div>'+
                                           '</div>';
                         var infowindow = new google.maps.InfoWindow({
-                        content: content, 
-                        position: position
-                       });
-//                       infowindow.close();
-//                        infowindow.open(map);
+                        	content: content, 
+                        	position: position
+                        });
+//                      infowindow.close();
+//                      infowindow.open(map);
 
-                    if(activeWindow != null)
-                    activeWindow.close(); 
+                    if (activeWindow != null) activeWindow.close(); 
                     //Open new window 
                     infowindow.open(map); 
                      //Store new window in global variable 

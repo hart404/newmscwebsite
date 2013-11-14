@@ -342,12 +342,12 @@ class PersonController {
 		}
 	}
 
-	String getJSONObject(String listid, String status, String optSource, String optDate,String emailAddress, String first_name, String last_name, String company_name ){
+	String getJSONObject(String listid, String status, String optSource, String optDate, String emailAddress, String first_name, String last_name, String company_name ){
 		JSONObject _mainjsonObject = new JSONObject();
 		JSONObject idjsonObject = new JSONObject();
 		idjsonObject.put("id", listid);
 
-		JSONArray jsonArray =new JSONArray();
+		JSONArray jsonArray = new JSONArray();
 		jsonArray.add(0, idjsonObject);
 
 		_mainjsonObject.put("lists", jsonArray);
@@ -385,7 +385,7 @@ class PersonController {
 		params
 	}
 
-	def stewardReportingOld() {
+	def stewardReporting() {
 	}
 
 	def stewardList() {

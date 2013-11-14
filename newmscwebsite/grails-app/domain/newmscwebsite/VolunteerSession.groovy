@@ -3,8 +3,7 @@ import org.joda.time.LocalDate
 import org.joda.time.LocalTime
 
 class VolunteerSession {
-	Integer version = 0
-	BigDecimal hours
+	BigDecimal hours = 0
 	LocalDate date
 	Integer time
 	String program
@@ -16,7 +15,6 @@ class VolunteerSession {
 
 	static constraints = {
 		//		trailSections(size: 0..100)
-		version(nullable: false)
 		hours(nullable: false)
 		date(nullable: false)
 		time(nullable: false)

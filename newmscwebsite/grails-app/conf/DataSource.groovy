@@ -15,9 +15,9 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			url = "jdbc:mysql://192.168.1.4/mscmsc"
+			url = "jdbc:mysql://localhost/mscmsc"
 			username = "root"
-			password = "toor"
+			password = "uni-dev"
 			dbCreate = "update"
 		}
 	}
