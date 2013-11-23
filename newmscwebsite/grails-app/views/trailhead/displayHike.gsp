@@ -2,8 +2,13 @@
 <head>
 <meta name="layout" content="trailheadSidebarLayout" />
 <title>${hike.name}</title>
+<g:if test="${hike.descriptionMetadata}">
 <meta name="description" content="${hike.descriptionMetadata}" />
+</g:if>
+<g:if test="${hike.keywordsMetadata}">
 <meta name="keywords" content="${hike.keywordsMetadata}" />
+</g:if>
+
 <style type="text/css">
 html {
 	height: 100%

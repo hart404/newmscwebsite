@@ -61,7 +61,7 @@ class TrailheadController {
         locationInstance.properties = params
 		addressInstance.properties = params
 		coordinatesInstance.properties = params
-        return [trailheadInstance: locationInstance]
+        return [trailheadInstance: locationInstance, geographicCoordinatesInstance: coordinatesInstance, streetAddressInstance: addressInstance]
     }
 
     def save = {
@@ -75,7 +75,7 @@ class TrailheadController {
             redirect(action: "show", id: locationInstance.id)
         }
         else {
-            render(view: "create", model: [trailheadInstance: locationInstance])
+            render(view: "create", model: [trailheadInstance: locationInstance, geographicCoordinatesInstance: coordinatesInstance, streetAddressInstance: addressInstance])
         }
     }
 

@@ -46,10 +46,10 @@ grails.project.dependency.resolution = {
 	}
 
 	plugins {
-		build ":tomcat:$grailsVersion"
+		build ":tomcat:7.0.47"
 		// build ':release:2.2.1'
 		// compile ':app-info-hibernate:0.2'
-        runtime ":hibernate:$grailsVersion"
+        runtime ":hibernate:3.6.10.4"
         runtime ":jquery:1.10.2"
 		compile ":jquery-ui:1.8.24"
         runtime ":resources:1.2.RC2"
@@ -61,10 +61,10 @@ grails.project.dependency.resolution = {
 		}
 		compile ":ckeditor:3.6.3.0"
 		compile ":csv:0.3.1"
-		// runtime ":database-migration:1.3.6"
+		// runtime ":database-migration:1.3.y"
 		compile ":richui:0.8"
 		compile ":google-analytics:2.0"
-		compile ":searchable:0.6.4"
+		compile ":searchable:0.6.5"
 		compile ":joda-time:1.4"
 		compile ":authorize-net:0.12"
 	}

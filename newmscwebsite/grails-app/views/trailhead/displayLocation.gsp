@@ -2,8 +2,12 @@
 <head>
 <meta name="layout" content="trailheadSidebarLayout" />
 <title>${location.name}</title>
+<g:if test="${location.descriptionMetadata}">
 <meta name="description" content="${location.descriptionMetadata}" />
+</g:if>
+<g:if test="${location.keywordsMetadata}">
 <meta name="keywords" content="${location.keywordsMetadata}" />
+</g:if>
 <style type="text/css">
 html {
 	height: 100%

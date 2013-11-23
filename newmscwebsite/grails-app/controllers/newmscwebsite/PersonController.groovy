@@ -5,11 +5,12 @@ import org.springframework.dao.DataIntegrityViolationException
 import simple.cms.SCMSMenu
 import simple.cms.SCMSPhoto
 import com.vinomis.authnet.AuthorizeNet
+
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+
 import javax.net.ssl.HttpsURLConnection
-import org.json.simple.JSONArray
-import org.json.simple.JSONObject
+
 import grails.converters.JSON
 
 class PersonController {
@@ -343,29 +344,29 @@ class PersonController {
 	}
 
 	String getJSONObject(String listid, String status, String optSource, String optDate, String emailAddress, String first_name, String last_name, String company_name ){
-		JSONObject _mainjsonObject = new JSONObject();
-		JSONObject idjsonObject = new JSONObject();
-		idjsonObject.put("id", listid);
+		def _mainjsonObject = [:]
+		def idjsonObject = [:]
+		idjsonObject.id = listid
 
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.add(0, idjsonObject);
+		def jsonArray = []
+		jsonArray << idjsonObject
 
-		_mainjsonObject.put("lists", jsonArray);
+		_mainjsonObject.lists = jsonArray
 
-		JSONArray emailjsonArray = new JSONArray();
-		JSONObject emailjsonObject = new JSONObject();
-		emailjsonObject.put("status", status);
-		emailjsonObject.put("opt_in_source", optSource);
-		emailjsonObject.put("opt_in_date", optDate);
-		emailjsonObject.put("email_address", emailAddress);
+		def emailjsonArray = []
+		def emailjsonObject = [:]
+		emailjsonObject.status = status
+		emailjsonObject.opt_in_source = optSource
+		emailjsonObject.opt_in_date = optDate
+		emailjsonObject.email_address = emailAddress
 
-		emailjsonArray.add(0, emailjsonObject);
+		emailjsonArray << emailjsonObject
 
-		_mainjsonObject.put("email_addresses", emailjsonArray);
-		_mainjsonObject.put("first_name", first_name);
-		_mainjsonObject.put("last_name", last_name);
-		_mainjsonObject.put("company_name", company_name);
-		return _mainjsonObject.toString();
+		_mainjsonObject.email_addresses = emailjsonArray
+		_mainjsonObject.first_name = first_name
+		_mainjsonObject.last_name = last_name
+		_mainjsonObject.company_name = company_name
+		return _mainjsonObject as JSON
 	}
 
 	def test() {

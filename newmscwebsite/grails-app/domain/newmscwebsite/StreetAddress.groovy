@@ -5,14 +5,14 @@ import groovy.transform.EqualsAndHashCode
 @EqualsAndHashCode
 class StreetAddress {
 	String street
-	String apartment
+	String apartment = " "
 	String city = "Scottsdale"
 	String state = "AZ"
 	String zip
 
     static constraints = {
 		street(blank: true)
-		apartment(blank: true, nullable: true)
+		apartment(nullable: true)
 		city(blank: true)
 		state(blank: true)
 		zip(blank: true)

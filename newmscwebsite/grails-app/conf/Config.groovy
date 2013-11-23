@@ -108,7 +108,7 @@ log4j = {
 				file name: 'file', file: '/Users/hart404/mylog.log'
 			}
 			root {
-				debug 'stdout', 'file'
+				error 'stdout', 'file'
 			}
 		}
 	}
