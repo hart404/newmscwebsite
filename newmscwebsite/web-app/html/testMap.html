@@ -25,9 +25,20 @@
 			var mapOptions = {
 				zoom: 14,
 				center: new google.maps.LatLng(33.647900, -111.862236),
-				mapTypeId: google.maps.MapTypeId.HYBRID
+				mapTypeId: google.maps.MapTypeId.TERRAIN
 		  	}
 			var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			var marker = new google.maps.Marker({
+			    position: new google.maps.LatLng(33.647900, -111.862236),
+			    icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|FFFFFF",
+			    map: map,
+			    title: 'Gateway'
+			});
+			marker.set("id", 1);
+			
+			google.maps.event.addListener(marker, 'click', function() {
+			    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + marker.get("id") + "|00FF00");
+			});
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>	

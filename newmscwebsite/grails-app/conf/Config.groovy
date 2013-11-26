@@ -156,6 +156,7 @@ import grails.plugins.springsecurity.SecurityConfigType
 
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
+	'/html/**':							['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/login/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/**':						['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/denied':							['IS_AUTHENTICATED_ANONYMOUSLY'],
