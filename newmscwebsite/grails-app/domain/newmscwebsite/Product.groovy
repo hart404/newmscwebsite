@@ -1,7 +1,6 @@
 package newmscwebsite
 
-class Product {
-	
+class Product {	
 	String productName
 	String productTitle
 	String productDescription
@@ -9,9 +8,6 @@ class Product {
 	String promotionalPrice
 	String productImageUrl
 	String quantity
-	
-	
-	
 
     static constraints = {
 		
@@ -19,5 +15,5 @@ class Product {
 		promotionalPrice(nullable:true)
     }
 	
-	
 }
+

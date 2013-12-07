@@ -34,7 +34,7 @@ class ProductController {
 		 //println("file ::::::::::"+file)
 		 
 		 def imageurl = grailsApplication.config.grails.config.filesUpload
-		 //println("imageurl :::::::::::::::"+imageurl)
+		 println("imageurl :::::::::::::::"+imageurl)
 		 new File(imageurl).mkdirs()
 		 
 		 def bathRoomFacility = ""
@@ -97,7 +97,7 @@ class ProductController {
 	
 	def updateProduct(){
 		
-		 // println("params inside update_product ::::::::::::"+params)
+		  println("params inside update_product ::::::::::::"+params)
 		  
 		 // [product_title:Allen Solly, product_name:Shirt, promotional_price:$10, 
 		  //quantity:2, product_description:This is avery good product of lee having different colors and design,
@@ -110,7 +110,7 @@ class ProductController {
 		  
 		  def image_name = product_inst.productImageUrl.replace("imageFile/","")
 		  
-		  if(params.product_name  && params.product_title && params.product_description && params.unit_price && params.quantity){
+//		  if(params.product_name  && params.product_title && params.product_description && params.unit_price && params.quantity){
 			  
 			  
 			 
@@ -167,21 +167,16 @@ class ProductController {
 					   }
 					  def image_url = "imageFile/"+key
 					  product_inst.setProductImageUrl(image_url)
+			}
 					  
-					  product_inst.setProductDescription(params.product_description)
-					  product_inst.setProductName(params.product_name)
-					  product_inst.setProductTitle(params.product_title)
-					  
-					  product_inst.setQuantity(params.quantity)
-					  product_inst.setUnitPrice(params.unit_price)
-					 
+			product_inst.setProductDescription(params.product_description)
+			product_inst.setProductName(params.product_name)
+			product_inst.setProductTitle(params.product_title)					  
+			product_inst.setPromotionalPrice(params.promotional_price)		  
+			product_inst.setUnitPrice(params.unit_price)	  		  		  
+			product_inst.setQuantity(params.quantity)		 
 					  //println("property_image_inst   after saveeeeeeeeeeeeeeeeeeeee "+params.property_id)
-			  }
 			  
-			  if(params.promotional_price){
-				  
-				  product_inst.setPromotionalPrice(params.promotional_price)
-			  }
 			  
 			  if(product_inst.save(flush:true)){
 				  
@@ -191,15 +186,7 @@ class ProductController {
 			  
 				redirect(controller:"product",action:"productList")
 			  }
-		  }else{
-		      //flash.message = "All fields are required."
-			  
-		       //chain(controller:"product",action:"editProduct", model: [product_inst:product_inst])
-		       
 		  
-			  redirect(controller:"product",action:"productList")
-		  
-		  }
 		  
 		
 		
@@ -219,32 +206,53 @@ class ProductController {
 		def list_data = []
 		def main_list_data = []
 		
-		def query = "SELECT id as prod_id,product_name,product_title,promotional_price,unit_price,quantity,product_image_url FROM `product`"
+//		def query = "SELECT id as prod_id,product_name,product_title,promotional_price,unit_price,quantity,product_image_url FROM `product`"
+//		
+//		try {
+//			
+//			db.eachRow(query) {
+//			
+//			prod_list<< it.toRowResult()
+//			}
+//			}catch (Exception e) {
+//			
+//			}
+			
+//			def results = prod_list?.collect {
+//				
+//							list_data.add("<a href='#'><img src='../"+it.product_image_url+"'  height='40' width='40' ></a>")
+//							
+//							list_data.add(it.product_name)
+//							list_data.add(it.product_title)
+//							list_data.add(it.unit_price)
+//							list_data.add(it.promotional_price)
+//							list_data.add(it.quantity)
+//							list_data.add("<a href='#'><img src='../images/editicon.png' alt=''  height='20' width='20' onclick='updateData("+it.prod_id+")'></a>")
+//							list_data.add("<a href='#'><img src='../images/delete_icon.png' alt=''  height='20' width='20' onclick='deleteData("+it.prod_id+")'></a>")
+//							main_list_data.add(list_data)
+//							list_data = []
+//						}
+		def prod_listnew = Product.list();
 		
-		try {
+		
+			prod_listnew?.collect {
 			
-			db.eachRow(query) {
-			
-			prod_list<< it.toRowResult()
-			}
-			}catch (Exception e) {
-			
-			}
-			
-			def results = prod_list?.collect {
 				
-							list_data.add("<a href='#'><img src='../"+it.product_image_url+"'  height='40' width='40' ></a>")
+							list_data.add("<a href='#'><img src='../"+it.productImageUrl+"'  height='40' width='40' ></a>")
 							
-							list_data.add(it.product_name)
-							list_data.add(it.product_title)
-							list_data.add(it.unit_price)
-							list_data.add(it.promotional_price)
+							list_data.add(it.productName)
+							list_data.add(it.productTitle)
+							list_data.add(it.unitPrice)
+							list_data.add(it.promotionalPrice)
 							list_data.add(it.quantity)
-							list_data.add("<a href='#'><img src='../images/editicon.png' alt=''  height='20' width='20' onclick='updateData("+it.prod_id+")'></a>")
-							list_data.add("<a href='#'><img src='../images/delete_icon.png' alt=''  height='20' width='20' onclick='deleteData("+it.prod_id+")'></a>")
+							list_data.add("<a href='#'><img src='../images/editicon.png' alt=''  height='20' width='20' onclick='updateData("+it.id+")'></a>")
+							list_data.add("<a href='#'><img src='../images/delete_icon.png' alt=''  height='20' width='20' onclick='deleteData("+it.id+")'></a>")
 							main_list_data.add(list_data)
 							list_data = []
-						}
+							//println("Adding data for "+it+" th time");
+						
+							
+		}
 			render main_list_data as JSON
 		
 	}

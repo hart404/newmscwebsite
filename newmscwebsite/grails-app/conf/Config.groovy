@@ -14,7 +14,7 @@ ResourceLoader resourceLoader = new DefaultResourceLoader()
 def addConfig = { path->
 	Resource resource = resourceLoader.getResource(path)
 	if (resource.exists()) {
-		// There is no log at this point so just print a message on the console that the CSO
+		// There is no log at this point so just print a message on the console that the 
 		// CONFIG path was found/not found but without specifying the actual path.
 		println "CONFIG found ${path}"
 		grails.config.locations << path

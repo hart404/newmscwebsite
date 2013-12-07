@@ -1,5 +1,3 @@
-
-<html>
 <head>
 <meta name="layout" content="homeLayout" />
 <meta name="description" content="The volunteer group that assists the City of Scottsdale in maintaining the McDowell Sonoran Preserve" />
@@ -153,7 +151,6 @@
                 {
      	         response = text;
 
-     	         
      	        
                }
 
@@ -181,9 +178,9 @@
      	     if(_count == i){
 
      	    	  var html = '<div  style="background: ;width:20%;float:left;">'+
-							 				'<img src="../'+product_list[i].product_image_url+'" height="200px;" width="200px;" id="'+product_list[i].prod_id+'" onclick="showProductDetail('+product_list[i].prod_id+')">'+
-										    '<div>'+product_list[i].product_title+'</div>'+
-						                  '<div>'+product_list[i].prod_price+'</div>'+
+							 				'<img src="../'+product_list[i].productImageUrl+'" height="200px;" width="200px;" id="'+product_list[i].id+'" onclick="showProductDetail('+product_list[i].id+')">'+
+										    '<div>'+product_list[i].productTitle+'</div>'+
+						                  '<div>'+product_list[i].unitPrice+'</div>'+
 									   '</div>'+
 									 '<div  style="background: pink;width:6.5%;float:left;visibility:hidden;">b</div>'+
      						       ' <div  style="background: pink;width:100%;visibility:hidden;">b</div>'
@@ -193,9 +190,9 @@
      	     }else{
 
      	    	 var html = '<div  style="background: ;width:20%;float:left;">'+
-					     	    	'<img src="../'+product_list[i].product_image_url+'" height="200px;" width="200px;" id="'+product_list[i].prod_id+'"  onclick="showProductDetail('+product_list[i].prod_id+')">'+
-								    '<div>'+product_list[i].product_title+'</div>'+
-					              '<div>'+product_list[i].prod_price+'</div>'+
+					     	    	'<img src="../'+product_list[i].productImageUrl+'" height="200px;" width="200px;" id="'+product_list[i].id+'"  onclick="showProductDetail('+product_list[i].id+')">'+
+								    '<div>'+product_list[i].productTitle+'</div>'+
+					              '<div>'+product_list[i].unitPrice+'</div>'+
 								'</div>'+
 								'<div  style="background: pink;width:6.5%;float:left;visibility:hidden;">b</div>'
 
@@ -253,8 +250,6 @@
             success : function(text)
             {
  	         response = text;
-
- 	         
  	        
            }
 
@@ -284,9 +279,9 @@
 	    	     if(_count == i){
 
 	    	    	  var html = '<div  style="background:;width:20%;float:left;">'+
-								 				'<img src="../'+product_list[i].product_image_url+'" height="200px;" width="200px;" id="'+product_list[i].prod_id+'" onclick="showProductDetail('+product_list[i].prod_id+')">'+
-											    '<div>'+product_list[i].product_title+'</div>'+
-							                  '<div>'+product_list[i].prod_price+'</div>'+
+								 				'<img src="../'+product_list[i].productImageUrl+'" height="200px;" width="200px;" id="'+product_list[i].id+'" onclick="showProductDetail('+product_list[i].id+')">'+
+											    '<div>'+product_list[i].productTitle+'</div>'+
+							                  '<div>'+product_list[i].unitPrice+'</div>'+
 										   '</div>'+
 										 '<div  style="background: ;width:6.5%;float:left;visibility:hidden;">b</div>'+
 	    						       ' <div  style="background:;width:100%;visibility:hidden;">b</div>'
@@ -296,9 +291,9 @@
 	    	     }else{
 
 	    	    	 var html = '<div  style="background: ;width:20%;float:left;">'+
-						     	    	'<img src="../'+product_list[i].product_image_url+'" height="200px;" width="200px;" id="'+product_list[i].prod_id+'" onclick="showProductDetail('+product_list[i].prod_id+')">'+
-									    '<div>'+product_list[i].product_title+'</div>'+
-						              '<div>'+product_list[i].prod_price+'</div>'+
+						     	    	'<img src="../'+product_list[i].productImageUrl+'" height="200px;" width="200px;" id="'+product_list[i].id+'" onclick="showProductDetail('+product_list[i].id+')">'+
+									    '<div>'+product_list[i].productTitle+'</div>'+
+						              '<div>'+product_list[i].unitPrice+'</div>'+
 									'</div>'+
 									'<div  style="background: ;width:6.5%;float:left;visibility:hidden;">b</div>'
 
@@ -380,7 +375,6 @@
                 {
      	         response = text;
 
-     	         
      	        
                }
 
@@ -410,9 +404,9 @@
     	     if(_count == i){
 
     	    	  var html = '<div  style="background:;width:20%;float:left;">'+
-							 				'<img src="../'+product_list[i].product_image_url+'" height="200px;" width="200px;"  id="'+product_list[i].prod_id+'" onclick="showProductDetail('+product_list[i].prod_id+')">'+
-										    '<div>'+product_list[i].product_title+'</div>'+
-						                  '<div>'+product_list[i].prod_price+'</div>'+
+							 				'<img src="../'+product_list[i].productImageUrl+'" height="200px;" width="200px;"  id="'+product_list[i].id+'" onclick="showProductDetail('+product_list[i].id+')">'+
+										    '<div>'+product_list[i].productTitle+'</div>'+
+						                  '<div>'+product_list[i].unitPrice+'</div>'+
 									   '</div>'+
 									 '<div  style="background: ;width:6.5%;float:left;visibility:hidden;">b</div>'+
     						       ' <div  style="background:;width:100%;visibility:hidden;">b</div>'
@@ -422,9 +416,9 @@
     	     }else{
 
     	    	 var html = '<div  style="background: ;width:20%;float:left;">'+
-					     	    	'<img src="../'+product_list[i].product_image_url+'" height="200px;" width="200px;" id="'+product_list[i].prod_id+'" onclick="showProductDetail('+product_list[i].prod_id+')">'+
-								    '<div>'+product_list[i].product_title+'</div>'+
-					              '<div>'+product_list[i].prod_price+'</div>'+
+					     	    	'<img src="../'+product_list[i].productImageUrl+'" height="200px;" width="200px;" id="'+product_list[i].id+'" onclick="showProductDetail('+product_list[i].id+')">'+
+								    '<div>'+product_list[i].productTitle+'</div>'+
+					              '<div>'+product_list[i].unitPrice+'</div>'+
 								'</div>'+
 								'<div  style="background:;width:6.5%;float:left;visibility:hidden;">b</div>'
 
@@ -553,4 +547,3 @@
                               
   
  </body>
-</html>

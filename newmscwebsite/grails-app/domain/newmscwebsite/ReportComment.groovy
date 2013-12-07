@@ -4,6 +4,9 @@ class ReportComment {
     Integer version = 0
     String code
     String comments
+	String placeName
+	String latitude
+	String longitude
     BigInteger userId
     
     static belongsTo = [

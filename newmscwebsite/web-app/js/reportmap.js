@@ -85,7 +85,7 @@ jQuery(function($) {
 		if(popupStatus == 0) { // if value is 0, show popup
 			closeloading(); // fadeout loading
 			$("#toPopup").fadeIn(0500); // fadein popup div
-                        initialize(33.756083,-111.843862);
+            initializeNorth(33.756083,-111.843862);
 			$("#backGroundPopup").css("opacity", "0.0"); // css opacity, supports IE7, IE8
 			$("#backGroundPopup").fadeIn(0001);               
 			popupStatus = 1; // and set value to 1
@@ -96,7 +96,7 @@ jQuery(function($) {
 		if(popupStatus == 0) { // if value is 0, show popup
 			closeloading(); // fadeout loading
 			$("#toPopup").fadeIn(0500); // fadein popup div
-                        initialize(33.64944,-111.858416);
+                        initializeSouth(33.64944,-111.858416);
 			$("#backGroundPopup").css("opacity", "0.0"); // css opacity, supports IE7, IE8
 			$("#backGroundPopup").fadeIn(0001);               
 			popupStatus = 1; // and set value to 1
@@ -117,16 +117,32 @@ jQuery(function($) {
 
                     var activeWindow;
                     var map;
-                    var src = 'https://sites.google.com/site/ionerakml/home/doc.kml';                    
-                   
-                    function initialize(x,y)
+                    var src_north = 'https://s3.amazonaws.com/McDowellSonoranConservancyImages/e6688bfd-75d6-4b27-ba1a-918bf4c988474425061581201191729.kmz';                    
+                    var src_south = 'https://s3.amazonaws.com/McDowellSonoranConservancyImages/cfd5418f-5077-4820-8bed-f2f2fdf3b3bd5477062407157352893.kmz';
+                    var click_count=0;
+                    var click_pos = 0;
+                    var latitude;
+                    var longitude;
+                    var marker_name;
+                    
+                    function initializeNorth(x,y)
                       {   
                           map = new google.maps.Map(document.getElementById('popup_content'), {
                           center: new google.maps.LatLng(x, y),
                           zoom: 14,
                           mapTypeId: google.maps.MapTypeId.TERRAIN
                           });
-                          loadKmlLayer(src, map);      
+                          loadKmlLayer(src_north, map);      
+                      }
+                      
+                      function initializeSouth(x,y)
+                      {   
+                          map = new google.maps.Map(document.getElementById('popup_content'), {
+                          center: new google.maps.LatLng(x, y),
+                          zoom: 14,
+                          mapTypeId: google.maps.MapTypeId.TERRAIN
+                          });
+                          loadKmlLayer(src_south, map);      
                       }
                      
                       function loadKmlLayer(src, map) {                        
@@ -135,15 +151,36 @@ jQuery(function($) {
                           preserveViewport: true,
                           map: map
                         });
+                                                
                         google.maps.event.addListener(kmlLayer, 'click', function(event) {
-                            //alert("Calling info window");
-                            showInContentWindow(event.latLng);
+//                            alert(event.latLng);
+//                            var text = event.featureData.name;
+//                            alert(text);                            
+                            click_count++;
+                            if(click_count === 1)
+                            {
+                                    click_pos = event.latLng;
+                            }
+                            
+                            if(click_count === 2)
+                            {
+                                if(event.latLng.equals(click_pos))
+                                    {
+                                        showInContentWindow(event.latLng,event.featureData.name);                                        
+                                    }
+                                click_count = 0;
+                                click_pos = 0;
+                            }
                         });                    
                       }
                       
-                      function showInContentWindow(position) {
+                      function showInContentWindow(position,name) {
+                    	latitude = position.lat();
+                    	longitude = position.lng(); 
+                    	marker_name = name;
+                    	
                          // alert("Calling info window");
-                         var content = '<div id="infoMap">'+
+                        var content = '<div id="infoMap">'+
                                           '<div>'+
                                           '<div>Trail Segment Problem</div>'+
                                           '<table width="299" style="margin-top: 5px; table-layout: auto;">'+
@@ -186,7 +223,7 @@ jQuery(function($) {
                                           '</td>'+
                                           '<tr>'+
                                           '<td colspan="2">'+
-                                          '<input id="reportbutton" onclick="reportProblem();" type="button" value="Report Problem" title="save" >'+
+                                          '<input id="reportbutton" onclick="submitReportProblem();" type="button" value="Report Problem" title="save" >'+
                                           '</td>'+
                                           '</tr>'+
                                           '</tr>'+
@@ -196,13 +233,14 @@ jQuery(function($) {
                                           '</div>'+
                                           '</div>';
                         var infowindow = new google.maps.InfoWindow({
-                        	content: content, 
-                        	position: position
-                        });
-//                      infowindow.close();
-//                      infowindow.open(map);
+                        content: content, 
+                        position: position
+                       });
+//                       infowindow.close();
+//                        infowindow.open(map);
 
-                    if (activeWindow != null) activeWindow.close(); 
+                    if(activeWindow != null)
+                    activeWindow.close(); 
                     //Open new window 
                     infowindow.open(map); 
                      //Store new window in global variable 

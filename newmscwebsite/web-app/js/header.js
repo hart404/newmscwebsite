@@ -288,25 +288,25 @@ function showcredicardInfo(){
 	 }
 
 	 
-	var invoiceid = document.getElementById("invoiceid").value
+//	var invoiceid = document.getElementById("invoiceid").value
 
-	if( invoiceid == "" || isNaN( invoiceid ) || invoiceid.length != 3 )
-	{
-	  if(invoiceid == ""){
-
-		  $("#invoiceError").html("Please enter the InvoiceId.")
-		  
-	  }else if(isNaN( invoiceid )){
-
-		  $("#invoiceError").html("")
-		  $("#invoiceError").html("You must enter Number.")
-	   }else{
-
-		  $("#invoiceError").html("")
-	 	  $("#invoiceError").html("You must enter the format ###.")
-	    }
-	  
-	}
+//	if( invoiceid == "" || isNaN( invoiceid ) || invoiceid.length != 3 )
+//	{
+//	  if(invoiceid == ""){
+//
+//		  $("#invoiceError").html("Please enter the InvoiceId.")
+//		  
+//	  }else if(isNaN( invoiceid )){
+//
+//		  $("#invoiceError").html("")
+//		  $("#invoiceError").html("You must enter Number.")
+//	   }else{
+//
+//		  $("#invoiceError").html("")
+//	 	  $("#invoiceError").html("You must enter the format ###.")
+//	    }
+//	  
+//	}
 
 		var street = document.getElementById("street").value
 		if(street == ""){
@@ -326,16 +326,15 @@ function showcredicardInfo(){
 
 	
 	
-	if(firstName !="" && lastName != "" && email != "" && address != "" && city != "" && state != "" && country != "" && zip != "" && phone != "" && cardnumber != "" && cvc != "" && invoiceid != "" && street != ""){
+	if(firstName !="" && lastName != "" && email != "" && address != "" && city != "" && state != "" && country != "" && zip != "" && phone != "" && cardnumber != "" && cvc != ""  && street != ""){
 
 
 		var myJSONText = "{'firstName':'"+firstName+
 		"','lastName':'"+lastName+"','email':'"+email+"','address':'"+address+"','city':'"+city+
 		"','state':'"+state+"','country':'"+country+"','zip':'"+zip+"','phone':'"+phone+"','cardnumber':'"+cardnumber+"','cvc':'"+cvc+
-		"','invoiceid':'"+invoiceid+"','month':'"+month+"' ,'year':'"+year+"','amount':'"+amount+"','street':'"+street+"','recuringType':'"+recuringType+"','description':'"+description+"'}"
+		"','month':'"+month+"' ,'year':'"+year+"','amount':'"+amount+"','street':'"+street+"','recuringType':'"+recuringType+"','description':'"+description+"'}"
 
-	    
-	          
+	    	          
 		    var url = "./home/saveFullinfoData?data="+myJSONText;  
 		    //var url = "./home";    
 			$(location).attr('href',url);

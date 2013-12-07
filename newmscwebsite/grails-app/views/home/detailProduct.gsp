@@ -12,7 +12,6 @@
    
  %>
 
-<html>
 <head>
 <meta name="layout" content="homeLayout" />
 <meta name="description" content="The volunteer group that assists the City of Scottsdale in maintaining the McDowell Sonoran Preserve" />
@@ -263,7 +262,6 @@
                 {
      	         response = text;
      	        
-
      	         
      	        
                }
@@ -271,16 +269,16 @@
           });
 
           var main_html = $("#productContainingDiv").html()
-          for(var i=0;i<response.length;i++){
+          
           
             var html = '<div id="imageContainingDiv" style="background:;width: 40%;float:left;">'+
-            					 '<img src="../'+response[i].product_image_url+'" height="40%;" width="80%;">'+
+            					 '<img src="../'+response.productImageUrl+'" height="40%;" width="80%;">'+
 							       '</div>'+
 					    
 							      ' <div id="descContainingDiv" style="background:;width: 60%;float:left;">'+
 							      
 							           '<div style="width: 50%;background: ;height:40%;word-wrap: break-word;">'+
-							              ' '+response[i].product_description+' '+
+							              ' '+response.productDescription+' '+
 							           '</div>'+
 							          
 							            '<div style="width: 50%; height:1%;visibility:hidden;">.</div>'+
@@ -295,7 +293,7 @@
 							             		 '<img alt="" src="../images/shoppingCart/minus1.png" style="cursor: pointer;margin-top:;float:left;margin-left: 1%; " onclick="minusVal()">'+
 							             		 '<input type="text" value="1" id="quantity_id" style="height:24px;width:10%;text-align: center;float:left;margin-left: 1%; ">'+
 							             		 '<img alt="" src="../images/shoppingCart/plus1.png" style="cursor: pointer;margin-top:;float:left;margin-left: 1%; " onclick="plusVal()">'+
-							             		 '<button type="button" style="margin-left: 1%;float:left;margin-top: -2px;" class="saveBtn" onclick="addToCart('+response[i].prod_id+');cartList();">Add To Cart</button>'+
+							             		 '<button type="button" style="margin-left: 1%;float:left;margin-top: -2px;" class="saveBtn" onclick="addToCart('+response.id+');cartList();">Add To Cart</button>'+
 							             		
 							             		 '<img alt="" src="../images/shoppingCart/shoppingcart.png" style="cursor: pointer;margin-left: 1%;" onclick="cartList()">'+
 							          	
@@ -313,10 +311,10 @@
         
      	    main_html = main_html + html
 
-     	   $("#name_of_product").html(response[i].product_title)
-     	    $("#price_of_product").html(response[i].prod_price)
+     	   $("#name_of_product").html(response.productTitle)
+     	    $("#price_of_product").html(response.unitPrice)
            
-          }
+          
      	
           $("#productContainingDiv").html(main_html)
          
@@ -364,4 +362,3 @@
                               
   
  </body>
-</html>

@@ -1,4 +1,3 @@
-<html>
 <head>
 <meta name="layout" content="homeLayout" />
 <meta name="description" content="The volunteer group that assists the City of Scottsdale in maintaining the McDowell Sonoran Preserve" />
@@ -269,4 +268,3 @@
      
   
  </body>
-</html>
