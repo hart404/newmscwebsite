@@ -37,14 +37,15 @@ class HomeController {
 		map
 	}
 	
-	def storeReport(){        
+	def storeReport() {        
             def dmydate = params.date.split('/')
             def date_inst = dmydate[2]+"-"+dmydate[0]+"-"+dmydate[1]
             def program_inst = params.program
             def hours_inst = params.hours
             def time_inst = params.time
+			def user = springSecurityService.currentUser
             
-            def report_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst)
+            def report_inst = new VolunteerSession(date: date_inst, hours:hours_inst, program: program_inst, time: time_inst, person: user)
             report_inst.save(failOnError:true)
           
             render "true"

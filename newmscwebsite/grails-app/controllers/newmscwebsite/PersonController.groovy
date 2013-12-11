@@ -36,7 +36,6 @@ class PersonController {
     }
 
     def save() {
-		println params
 		if (params.password == null) {
 			params.password = "conservancy"
 		}
@@ -349,7 +348,7 @@ class PersonController {
 	}
 	
 	
-	String getJSONObject(String listid, String status, String optSource, String optDate, String emailAddress, String first_name, String last_name, String company_name ){
+	String getJSONObject(String listid, String status, String optSource, String optDate, String emailAddress, String first_name, String last_name, String company_name ) {
 		def _mainjsonObject = [:]
 		def idjsonObject = [:]
 		idjsonObject.id = listid
@@ -375,7 +374,7 @@ class PersonController {
 		return _mainjsonObject as JSON
 	}
 	
-	def test(){
+	def test() {
 		
 		def s = new AuthorizeNet()
 		s.authorizeAndCapture {
@@ -395,10 +394,10 @@ class PersonController {
 		params
 	}
         
-	def stewardreportingnew(){
+	def stewardReporting() {
             println("Calling steward Reporting");
-            
-        }
+    }
+	
 	def stewardList() {
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
 		params.sort = params.sort ?: "firstName"

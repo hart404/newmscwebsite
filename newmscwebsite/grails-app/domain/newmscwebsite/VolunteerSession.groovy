@@ -7,6 +7,7 @@ class VolunteerSession {
     LocalDate date
 	Integer time
 	String program
+	Person person
 	
 	List<TrailSection> trailSections
 	static hasMany = [
