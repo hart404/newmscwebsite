@@ -147,33 +147,37 @@ class HomeController {
                 
                 java.util.Date parsedUtilDate = dfDate.parse(currentdate);
                                                                         
-                java.sql.Timestamp from_d= new java.sql.Timestamp(parsedUtilDate.getTime());                
+                java.sql.Timestamp from_d= new java.sql.Timestamp(parsedUtilDate.getTime());
+				
+				println date              
                 
                 def s = new AuthorizeNet()
                 //NOTE: If you need to override the login and transaction keys from the configuration, you can do it here:
-                 s.login = '6pKhTc8S9PC'
-         s.transactionKey = '8W3jsZ8U8k7b3ZhY'
+//                 s.login = '6pKhTc8S9PC'
+//         s.transactionKey = '8W3jsZ8U8k7b3ZhY'
         
         
                 s.authorizeAndCapture {
                         
-                        description jsonObj.description
-                        firstName jsonObj.firstName
-                        lastName jsonObj.lastName
-                        address jsonObj.address
-                        city jsonObj.city
-                        state jsonObj.state
-                        amount jsonObj.amount
-                        zip jsonObj.zip
-                        phone jsonObj.phone
-                        country jsonObj.country                        
-                        ccNumber ''+jsonObj.cardnumber+''
-                        cvv jsonObj.cvc
-                        ccExpDate date
-                        email jsonObj.email
+                        description jsonObj.description.toString()
+                        firstName jsonObj.firstName.toString()
+                        lastName jsonObj.lastName.toString()
+                        address jsonObj.address.toString()
+                        city jsonObj.city.toString()
+                        state jsonObj.state.toString()
+                        amount jsonObj.amount.toString()
+                        zip jsonObj.zip.toString()
+                        phone jsonObj.phone.toString()
+                        country jsonObj.country.toString()                        
+                        ccNumber jsonObj.cardnumber.toString()
+                        cvv jsonObj.cvc.toString()
+                        ccExpDate date.toString()
+                        email jsonObj.email.toString()
                         
         }
          def anr = s.submit()
+		 
+		 println anr
         
          boolean recuringType
         
@@ -186,12 +190,14 @@ class HomeController {
                  recuringType = true
          }
         
-                if(anr.responseReasonText == "This transaction has been approved."){                       
+                if(anr.responseReasonText.contains("This transaction has been approved.")){
+					
+						println "SUCCESS"                  
                                         
                         def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,city:jsonObj.city,state:jsonObj.state,
                                 zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
-                                phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,
-                                street:jsonObj.street,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+                                phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,
+                                street:jsonObj.address,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
                         
                         if(donateinst.save(flush:true)){
                                 flash.message = "This transaction has been approved."
@@ -203,8 +209,12 @@ class HomeController {
                         donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
                         
                 }else{
+				
+						println "FAIL"
                 
                         flash.message = anr.responseReasonText
+						
+						println flash.message
                         
                         redirect(controller:"home" ,action: "index")
                 }

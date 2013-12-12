@@ -329,7 +329,7 @@ function showcredicardInfo(){
 
                 
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: donate_url,
                     data : myJSONText,
                     cache : false,
