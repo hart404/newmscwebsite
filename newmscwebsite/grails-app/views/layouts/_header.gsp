@@ -254,7 +254,7 @@
                                                  <input type="text" class="" placeholder="address" name="address" id="address" style="width:200px;">
                                               </div>
                                               <span id="addressError" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                      
                                                 <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
@@ -263,16 +263,7 @@
                                                  <input type="text" class="" placeholder="city" name="city" id="city" style="width:200px;">
                                               </div>
                                               <span id="cityError" style="color:#F70000;margin-left:150px;"></span>
-                                              
-                                                <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Street:</label>
-                                                 </div>
-                                                 <input type="text" class="" placeholder="street" name="street" id="street" style="width:200px;">
-                                              </div>
-                                              <span id="streetError" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                                                                          
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
