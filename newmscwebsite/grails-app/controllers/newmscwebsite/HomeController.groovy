@@ -189,7 +189,7 @@ class HomeController {
 			def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,city:jsonObj.city,state:jsonObj.state,
 			zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
 			phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,
-			street:jsonObj.street,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+			street:jsonObj.street,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
 
 			if(donateinst.save(flush:true)){
 				flash.message = "This transaction has been approved."
@@ -281,7 +281,7 @@ class HomeController {
 
 
 			def donateinst = new Donation(firstName:jsonObj.name,recurring:recuringType,recurringDate:from_d,
-			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
 
 			if(donateinst.save(flush:true)){
 				flash.message = "This transaction has been approved."
@@ -380,7 +380,7 @@ class HomeController {
 
 
 			def donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
-			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
 
 			if(donateinst.save(flush:true)){
 				flash.message = "This transaction has been approved."
