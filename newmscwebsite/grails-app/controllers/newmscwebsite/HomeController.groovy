@@ -842,8 +842,8 @@ class HomeController {
                 
                 def s = new AuthorizeNet()
                 //NOTE: If you need to override the login and transaction keys from the configuration, you can do it here:
-                 s.login = '6pKhTc8S9PC'
-                 s.transactionKey = '8W3jsZ8U8k7b3ZhY'
+//                 s.login = '6pKhTc8S9PC'
+//                 s.transactionKey = '8W3jsZ8U8k7b3ZhY'
         
                 
                 if(jsonObj.billing_address){
@@ -852,29 +852,29 @@ class HomeController {
                                         s.authorizeAndCapture {
                                                 custId '20'
                                                 description 'orderDescription'
-                                                firstName jsonObj.firstName
-                                                lastName jsonObj.lastName
-                                                address jsonObj.address
-                                                city jsonObj.city
-                                                state jsonObj.state
-                                                amount total_data
-                                                zip jsonObj.zip
-                                                phone jsonObj.phone
-                                                country jsonObj.country
+                                                firstName jsonObj.firstName.toString()
+                                                lastName jsonObj.lastName.toString()
+                                                address jsonObj.address.toString()
+                                                city jsonObj.city.toString()
+                                                state jsonObj.state.toString()
+                                                amount total_data.toString()
+                                                zip jsonObj.zip.toString()
+                                                phone jsonObj.phone.toString()
+                                                country jsonObj.country.toString()
                                                 company 'Acme Inc.'
-                                                ccNumber ''+jsonObj.cardnumber+''
-                                                cvv jsonObj.cvc
-                                                ccExpDate date
-                                                email jsonObj.email
-                                                invoiceId jsonObj.invoiceid
+                                                ccNumber jsonObj.cardnumber.toString()
+                                                cvv jsonObj.cvc.toString()
+                                                ccExpDate date.toString()
+                                                email jsonObj.email.toString()
+                                                invoiceId jsonObj.invoiceid.toString()
                                                 shipToLastName 'Doe'
                                                 shipToFirstName 'John'
-                                                shipToAddress jsonObj.billing_address
-                                                shipToCity jsonObj.billing_city
-                                                shipToState jsonObj.billing_state
-                                                shipToZip jsonObj.billing_zip
+                                                shipToAddress jsonObj.billing_address.toString()
+                                                shipToCity jsonObj.billing_city.toString()
+                                                shipToState jsonObj.billing_state.toString()
+                                                shipToZip jsonObj.billing_zip.toString()
                                                 shipToPhone '7241112222'
-                                                shipToCountry jsonObj.billing_country
+                                                shipToCountry jsonObj.billing_country.toString()
                                                 
                                 }
                                         
@@ -886,29 +886,29 @@ class HomeController {
                                         s.authorizeAndCapture {
                                                 custId '20'
                                                 description 'orderDescription'
-                                                firstName jsonObj.firstName
-                                                lastName jsonObj.lastName
-                                                address jsonObj.address
-                                                city jsonObj.city
-                                                state jsonObj.state
-                                                amount total_data
-                                                zip jsonObj.zip
-                                                phone jsonObj.phone
-                                                country jsonObj.country
+                                                firstName jsonObj.firstName.toString()
+                                                lastName jsonObj.lastName.toString()
+                                                address jsonObj.address.toString()
+                                                city jsonObj.city.toString()
+                                                state jsonObj.state.toString()
+                                                amount total_data.toString()
+                                                zip jsonObj.zip.toString()
+                                                phone jsonObj.phone.toString()
+                                                country jsonObj.country.toString()
                                                 company 'Acme Inc.'
-                                                ccNumber ''+jsonObj.cardnumber+''
-                                                cvv jsonObj.cvc
-                                                ccExpDate date
-                                                email jsonObj.email
-                                                invoiceId jsonObj.invoiceid
+                                                ccNumber jsonObj.cardnumber.toString()
+                                                cvv jsonObj.cvc.toString()
+                                                ccExpDate date.toString()
+                                                email jsonObj.email.toString()
+                                                invoiceId jsonObj.invoiceid.toString()
                                                 shipToLastName 'Doe'
                                                 shipToFirstName 'John'
-                                                shipToAddress jsonObj.address
-                                                shipToCity jsonObj.city
-                                                shipToState jsonObj.state
-                                                shipToZip jsonObj.zip
+                                                shipToAddress jsonObj.address.toString()
+                                                shipToCity jsonObj.city.toString()
+                                                shipToState jsonObj.state.toString()
+                                                shipToZip jsonObj.zip.toString()
                                                 shipToPhone '7241112222'
-                                                shipToCountry jsonObj.country
+                                                shipToCountry jsonObj.country.toString()
                         
                 
                 
@@ -918,7 +918,7 @@ class HomeController {
                 
                  def anr = s.submit()
                  println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
-                 //println ("anr.transactionId:::::::::"+anr.transactionId)
+                 println ("anr.transactionId:::::::::"+anr.transactionId)
                 
                  def cart_inst
 				 
@@ -940,7 +940,7 @@ class HomeController {
                                                 
                 
         
-                if(anr.responseReasonText == "This transaction has been approved."){
+                if(anr.responseReasonText.contains("This transaction has been approved.")){
                         
                         def result = prod_listtest1?.collect {
                                 

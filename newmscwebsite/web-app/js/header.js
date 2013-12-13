@@ -334,7 +334,7 @@ function showcredicardInfo(){
                     data : myJSONText,
                     cache : false,
                     success : function(text)
-                     {                         
+                     {       
                        location.reload();
                      }
 

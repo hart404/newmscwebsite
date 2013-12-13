@@ -540,19 +540,19 @@
 				    	 // var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
 				    		//$(location).attr('href',url);
 				    	 $.ajax({
-			                    type: "GET",
+			                    type: "POST",
 			                    url: checkout_url,
 			                    data : myJSONText,
 			                    cache : false,
 			                    success : function(text)
-			                     {                         
+			                     { 
 			                       location.reload();
 			                     }
 
 			    		     }) .fail(function() {
 			    		      alert( "Sorry, there was an error. Please try again" );
 			    		     });
-				    } 
+				    }
 				}else{
 
 					 if(firstName !="" && lastName != "" && email != "" && address != "" && 
@@ -574,7 +574,7 @@
 				    	     
 							//window.location.href=url
 											 $.ajax({
-								                    type: "GET",
+								                    type: "POST",
 								                    url: checkout_url,
 								                    data : myJSONText,
 								                    cache : false,
@@ -586,7 +586,7 @@
 								    		     }) .fail(function() {
 								    		      alert( "Sorry, there was an error. Please try again" );
 								    		     });
-				     }           
+				     }
 
 				}    
     	
