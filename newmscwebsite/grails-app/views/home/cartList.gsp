@@ -1,3 +1,4 @@
+
 <head>
 <meta name="layout" content="homeLayout" />
 <meta name="description" content="The volunteer group that assists the City of Scottsdale in maintaining the McDowell Sonoran Preserve" />
@@ -12,7 +13,9 @@
 <link rel="stylesheet" href="${resource(dir:'css',file:'grid/style.css')}" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"> </script>
 <script src="../js/script.js"></script> 
-		
+<g:javascript>
+  var checkout_url="${createLink(controller:'home', action:'saveTransationForShoppingCart')}"
+</g:javascript>
   
 
 <style type="text/css">
@@ -246,7 +249,7 @@
 
     }
 
-    function fullformValidation(){
+    function checkoutformValidation(){
 
 
     	
@@ -523,20 +526,33 @@
 				
 				    	
 				
-				    	var myJSONText = "{'firstName':'"+firstName+
-				    	"','lastName':'"+lastName+"','email':'"+email+"','address':'"+address+"','city':'"+city+
-				    	"','state':'"+state+"','country':'"+country+"','zip':'"+zip+"','phone':'"+phone+"','cardnumber':'"+cardnumber+"','cvc':'"+cvc+
-				    	"','invoiceid':'"+invoiceid+"','month':'"+month+"' ,'year':'"+year+
-				    	"','street':'"+street+
-				    	"','billing_state':'"+billing_state+"','billing_country':'"+billing_country+"','billing_zip':'"+billing_zip+
-				    	"','billing_street':'"+billing_street+"','billing_address':'"+billing_address+"'}"
+				    	var myJSONText = "data={firstName:"+firstName+
+				    	",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
+				    	",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
+				    	",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+
+				    	",street:"+street+
+				    	",billing_state:"+billing_state+",billing_country:"+billing_country+",billing_zip:"+billing_zip+
+				    	",billing_street:"+billing_street+",billing_address:"+billing_address+"}"
 				
 				           
 				        
 				              
-				    	  var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
-				    		$(location).attr('href',url);
-				    } 
+				    	 // var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
+				    		//$(location).attr('href',url);
+				    	 $.ajax({
+			                    type: "POST",
+			                    url: checkout_url,
+			                    data : myJSONText,
+			                    cache : false,
+			                    success : function(text)
+			                     { 
+			                       location.reload();
+			                     }
+
+			    		     }) .fail(function() {
+			    		      alert( "Sorry, there was an error. Please try again" );
+			    		     });
+				    }
 				}else{
 
 					 if(firstName !="" && lastName != "" && email != "" && address != "" && 
@@ -548,16 +564,29 @@
 				    	
 				    	
 				
-				    	 var myJSONText = "{'firstName':'"+firstName+
-										"','lastName':'"+lastName+"','email':'"+email+"','address':'"+address+"','city':'"+city+
-										"','state':'"+state+"','country':'"+country+"','zip':'"+zip+"','phone':'"+phone+"','cardnumber':'"+cardnumber+"','cvc':'"+cvc+
-										"','invoiceid':'"+invoiceid+"','month':'"+month+"' ,'year':'"+year+"','street':'"+street+"'}"
+				    	 var myJSONText = "data={firstName:"+firstName+
+											",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
+											",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
+											",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+",street:"+street+"}"
 				        
 				              
-				    	   var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
+				    	   //var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
 				    	     
-							window.location.href=url
-				     }           
+							//window.location.href=url
+											 $.ajax({
+								                    type: "POST",
+								                    url: checkout_url,
+								                    data : myJSONText,
+								                    cache : false,
+								                    success : function(text)
+								                     {                         
+								                       location.reload();
+								                     }
+
+								    		     }) .fail(function() {
+								    		      alert( "Sorry, there was an error. Please try again" );
+								    		     });
+				     }
 
 				}    
     	
@@ -939,7 +968,7 @@
                                                  <label>Description:</label>
                                                  </div>
                                                 
-                                                  <input type="button"  class="saveBtn" value="Proceed" onclick="fullformValidation();">
+                                                  <input type="button"  class="saveBtn" value="Proceed" onclick="checkoutformValidation();">
                                                   
                                               </div>
                                               
@@ -971,4 +1000,3 @@
    <script src="../js/jquery.dataTables.min.js"></script>
 		<script src="../js/jquery.dataTables.bootstrap.js"></script> 
  </body>
-
