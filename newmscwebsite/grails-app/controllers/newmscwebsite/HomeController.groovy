@@ -29,6 +29,8 @@ class HomeController {
                 title: 'Home',
                 action: 'index'
         ]
+		
+		// Correct version
 
     def index = {
                 def events = eventService.findEventsForHomePage()
