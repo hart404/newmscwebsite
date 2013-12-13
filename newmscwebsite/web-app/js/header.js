@@ -308,13 +308,6 @@ function showcredicardInfo(){
 //        
 //        }
 
-                var street = document.getElementById("street").value
-                if(street == ""){
-                
-                        $("#streetError").html("You must enter Street.")
-                        //return false;
-                        
-                }
 
 
 
@@ -326,22 +319,22 @@ function showcredicardInfo(){
 
         
         
-        if(firstName !="" && lastName != "" && email != "" && address != "" && city != "" && state != "" && country != "" && zip != "" && phone != "" && cardnumber != "" && cvc != "" && street != ""){
+        if(firstName !="" && lastName != "" && email != "" && address != "" && city != "" && state != "" && country != "" && zip != "" && phone != "" && cardnumber != "" && cvc != ""){
 
 
                 var myJSONText = "data={firstName:"+firstName+
                 ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
                 ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-                ",month:"+month+",year:"+year+",amount:"+amount+",street:"+street+",recuringType:"+recuringType+",description:"+description+"}"
+                ",month:"+month+",year:"+year+",amount:"+amount+",recuringType:"+recuringType+",description:"+description+"}"
 
                 
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: donate_url,
                     data : myJSONText,
                     cache : false,
                     success : function(text)
-                     {                         
+                     {       
                        location.reload();
                      }
 
@@ -351,7 +344,7 @@ function showcredicardInfo(){
         }
         
                 
-        }
+    }
 
 
          function showEmailinfo(){

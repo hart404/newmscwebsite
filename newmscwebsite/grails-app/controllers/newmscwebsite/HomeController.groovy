@@ -30,6 +30,8 @@ class HomeController {
 		action: 'index'
 	]
 
+	// Correct version
+
 	def index = {
 		def events = eventService.findEventsForHomePage()
 		def map = [events: events, newsItems: NewsItem.findAllByImportant(true)]
@@ -37,9 +39,9 @@ class HomeController {
 		map
 	}
 
-	def storeReport() {
+	def storeReport(){
 		def dmydate = params.date.split('/')
-		def date_inst = dmydate[2] + "-" + dmydate[0] + "-" + dmydate[1]
+		def date_inst = dmydate[2]+"-"+dmydate[0]+"-"+dmydate[1]
 		def program_inst = params.program
 		def hours_inst = params.hours
 		def time_inst = params.time
@@ -48,11 +50,10 @@ class HomeController {
 		def report_inst = new VolunteerSession(date: date_inst, hours: hours_inst, program: program_inst, time: time_inst, person: person)
 		person.addToVolunteerSessions(report_inst)
 		report_inst.save(failOnError:true)
-
 		render "true"
 	}
 
-	def saveReportProblem() {
+	def saveReportProblem(){
 		def code_inst = params.code
 		def comments_inst = params.comments
 		def name_inst = params.name
@@ -83,7 +84,8 @@ class HomeController {
 		render "true"
 	}
 
-	def testPopup() {
+	def testPopup(){
+
 	}
 
 	def search() {
@@ -101,13 +103,15 @@ class HomeController {
 		SCMSStaticPage.currentPage = page
 	}
 
-	def reportInfo() {
+	def reportInfo(){
 		println("params::::::::::::::inside reportInfo :::::::::::"+params)
 	}
 
-	def donateInfo() {
+	def donateInfo (){
 
 		println("params::::::::::::::inside donateInfo :::::::::::"+params)
+
+
 	}
 
 	def cartInfo = {
@@ -121,9 +125,10 @@ class HomeController {
 
 			//redirect(controller:"home" ,action: "index" , messge:flash.message)
 		}
+
 	}
 
-	boolean checkInteger(String input) {
+	boolean checkInteger(String input){
 		try {
 			Integer.parseInt(input)
 		} catch (NumberFormatException e) {
@@ -132,9 +137,7 @@ class HomeController {
 		}
 		return true
 	}
-	
 	def donateService
-	
 	def saveFullinfoData = {
 
 		def jsonObj = JSON.parse(params.data)
@@ -149,31 +152,35 @@ class HomeController {
 
 		java.sql.Timestamp from_d= new java.sql.Timestamp(parsedUtilDate.getTime());
 
+		println date
+
 		def s = new AuthorizeNet()
 		//NOTE: If you need to override the login and transaction keys from the configuration, you can do it here:
-		s.login = '6pKhTc8S9PC'
-		s.transactionKey = '8W3jsZ8U8k7b3ZhY'
+		//                 s.login = '6pKhTc8S9PC'
+		//         s.transactionKey = '8W3jsZ8U8k7b3ZhY'
 
 
 		s.authorizeAndCapture {
 
-			description jsonObj.description
-			firstName jsonObj.firstName
-			lastName jsonObj.lastName
-			address jsonObj.address
-			city jsonObj.city
-			state jsonObj.state
-			amount jsonObj.amount
-			zip jsonObj.zip
-			phone jsonObj.phone
-			country jsonObj.country
-			ccNumber ''+jsonObj.cardnumber+''
-			cvv jsonObj.cvc
-			ccExpDate date
-			email jsonObj.email
+			description jsonObj.description.toString()
+			firstName jsonObj.firstName.toString()
+			lastName jsonObj.lastName.toString()
+			address jsonObj.address.toString()
+			city jsonObj.city.toString()
+			state jsonObj.state.toString()
+			amount jsonObj.amount.toString()
+			zip jsonObj.zip.toString()
+			phone jsonObj.phone.toString()
+			country jsonObj.country.toString()
+			ccNumber jsonObj.cardnumber.toString()
+			cvv jsonObj.cvc.toString()
+			ccExpDate date.toString()
+			email jsonObj.email.toString()
 
 		}
 		def anr = s.submit()
+
+		println anr
 
 		boolean recuringType
 
@@ -181,17 +188,19 @@ class HomeController {
 
 			recuringType = false
 
-		} else {
+		}else{
 
 			recuringType = true
 		}
 
-		if (anr.responseReasonText == "This transaction has been approved.") {
+		if(anr.responseReasonText.contains("This transaction has been approved.")){
+
+			println "SUCCESS"
 
 			def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,city:jsonObj.city,state:jsonObj.state,
 			zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
-			phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,
-			street:jsonObj.street,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
+			phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,
+			street:jsonObj.address,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
 
 			if(donateinst.save(flush:true)){
 				flash.message = "This transaction has been approved."
@@ -204,7 +213,11 @@ class HomeController {
 
 		}else{
 
+			println "FAIL"
+
 			flash.message = anr.responseReasonText
+
+			println flash.message
 
 			redirect(controller:"home" ,action: "index")
 		}
@@ -283,7 +296,7 @@ class HomeController {
 
 
 			def donateinst = new Donation(firstName:jsonObj.name,recurring:recuringType,recurringDate:from_d,
-			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
+			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
 
 			if(donateinst.save(flush:true)){
 				flash.message = "This transaction has been approved."
@@ -382,7 +395,7 @@ class HomeController {
 
 
 			def donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
-			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
+			actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
 
 			if(donateinst.save(flush:true)){
 				flash.message = "This transaction has been approved."
@@ -827,8 +840,8 @@ class HomeController {
 
 		def s = new AuthorizeNet()
 		//NOTE: If you need to override the login and transaction keys from the configuration, you can do it here:
-		s.login = '6pKhTc8S9PC'
-		s.transactionKey = '8W3jsZ8U8k7b3ZhY'
+		//                 s.login = '6pKhTc8S9PC'
+		//                 s.transactionKey = '8W3jsZ8U8k7b3ZhY'
 
 
 		if(jsonObj.billing_address){
@@ -837,29 +850,29 @@ class HomeController {
 			s.authorizeAndCapture {
 				custId '20'
 				description 'orderDescription'
-				firstName jsonObj.firstName
-				lastName jsonObj.lastName
-				address jsonObj.address
-				city jsonObj.city
-				state jsonObj.state
-				amount total_data
-				zip jsonObj.zip
-				phone jsonObj.phone
-				country jsonObj.country
+				firstName jsonObj.firstName.toString()
+				lastName jsonObj.lastName.toString()
+				address jsonObj.address.toString()
+				city jsonObj.city.toString()
+				state jsonObj.state.toString()
+				amount total_data.toString()
+				zip jsonObj.zip.toString()
+				phone jsonObj.phone.toString()
+				country jsonObj.country.toString()
 				company 'Acme Inc.'
-				ccNumber ''+jsonObj.cardnumber+''
-				cvv jsonObj.cvc
-				ccExpDate date
-				email jsonObj.email
-				invoiceId jsonObj.invoiceid
+				ccNumber jsonObj.cardnumber.toString()
+				cvv jsonObj.cvc.toString()
+				ccExpDate date.toString()
+				email jsonObj.email.toString()
+				invoiceId jsonObj.invoiceid.toString()
 				shipToLastName 'Doe'
 				shipToFirstName 'John'
-				shipToAddress jsonObj.billing_address
-				shipToCity jsonObj.billing_city
-				shipToState jsonObj.billing_state
-				shipToZip jsonObj.billing_zip
+				shipToAddress jsonObj.billing_address.toString()
+				shipToCity jsonObj.billing_city.toString()
+				shipToState jsonObj.billing_state.toString()
+				shipToZip jsonObj.billing_zip.toString()
 				shipToPhone '7241112222'
-				shipToCountry jsonObj.billing_country
+				shipToCountry jsonObj.billing_country.toString()
 
 			}
 
@@ -871,29 +884,29 @@ class HomeController {
 			s.authorizeAndCapture {
 				custId '20'
 				description 'orderDescription'
-				firstName jsonObj.firstName
-				lastName jsonObj.lastName
-				address jsonObj.address
-				city jsonObj.city
-				state jsonObj.state
-				amount total_data
-				zip jsonObj.zip
-				phone jsonObj.phone
-				country jsonObj.country
+				firstName jsonObj.firstName.toString()
+				lastName jsonObj.lastName.toString()
+				address jsonObj.address.toString()
+				city jsonObj.city.toString()
+				state jsonObj.state.toString()
+				amount total_data.toString()
+				zip jsonObj.zip.toString()
+				phone jsonObj.phone.toString()
+				country jsonObj.country.toString()
 				company 'Acme Inc.'
-				ccNumber ''+jsonObj.cardnumber+''
-				cvv jsonObj.cvc
-				ccExpDate date
-				email jsonObj.email
-				invoiceId jsonObj.invoiceid
+				ccNumber jsonObj.cardnumber.toString()
+				cvv jsonObj.cvc.toString()
+				ccExpDate date.toString()
+				email jsonObj.email.toString()
+				invoiceId jsonObj.invoiceid.toString()
 				shipToLastName 'Doe'
 				shipToFirstName 'John'
-				shipToAddress jsonObj.address
-				shipToCity jsonObj.city
-				shipToState jsonObj.state
-				shipToZip jsonObj.zip
+				shipToAddress jsonObj.address.toString()
+				shipToCity jsonObj.city.toString()
+				shipToState jsonObj.state.toString()
+				shipToZip jsonObj.zip.toString()
 				shipToPhone '7241112222'
-				shipToCountry jsonObj.country
+				shipToCountry jsonObj.country.toString()
 
 
 
@@ -903,7 +916,7 @@ class HomeController {
 
 		def anr = s.submit()
 		println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
-		//println ("anr.transactionId:::::::::"+anr.transactionId)
+		println ("anr.transactionId:::::::::"+anr.transactionId)
 
 		def cart_inst
 
@@ -924,7 +937,7 @@ class HomeController {
 
 
 
-		if(anr.responseReasonText == "This transaction has been approved."){
+		if(anr.responseReasonText.contains("This transaction has been approved.")){
 
 			def result = prod_listtest1?.collect {
 
