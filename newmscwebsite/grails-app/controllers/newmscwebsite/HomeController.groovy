@@ -37,22 +37,22 @@ class HomeController {
 		map
 	}
 
-	def storeReport(){
+	def storeReport() {
 		def dmydate = params.date.split('/')
-		def date_inst = dmydate[2]+"-"+dmydate[0]+"-"+dmydate[1]
+		def date_inst = dmydate[2] + "-" + dmydate[0] + "-" + dmydate[1]
 		def program_inst = params.program
 		def hours_inst = params.hours
 		def time_inst = params.time
-		def person = springSecurityService.currentUser
-
-		def report_inst = new VolunteerSession(date: date_inst, hours: hours_inst, program :program_inst, time: time_inst)
+		def personId = springSecurityService.principal.id
+		Person person = Person.get(personId)
+		def report_inst = new VolunteerSession(date: date_inst, hours: hours_inst, program: program_inst, time: time_inst, person: person)
 		person.addToVolunteerSessions(report_inst)
 		report_inst.save(failOnError:true)
 
 		render "true"
 	}
 
-	def saveReportProblem(){
+	def saveReportProblem() {
 		def code_inst = params.code
 		def comments_inst = params.comments
 		def name_inst = params.name
@@ -83,7 +83,7 @@ class HomeController {
 		render "true"
 	}
 
-	def testPopup(){
+	def testPopup() {
 	}
 
 	def search() {
@@ -101,11 +101,11 @@ class HomeController {
 		SCMSStaticPage.currentPage = page
 	}
 
-	def reportInfo(){
+	def reportInfo() {
 		println("params::::::::::::::inside reportInfo :::::::::::"+params)
 	}
 
-	def donateInfo (){
+	def donateInfo() {
 
 		println("params::::::::::::::inside donateInfo :::::::::::"+params)
 	}
@@ -123,7 +123,7 @@ class HomeController {
 		}
 	}
 
-	boolean checkInteger(String input){
+	boolean checkInteger(String input) {
 		try {
 			Integer.parseInt(input)
 		} catch (NumberFormatException e) {
@@ -132,7 +132,9 @@ class HomeController {
 		}
 		return true
 	}
+	
 	def donateService
+	
 	def saveFullinfoData = {
 
 		def jsonObj = JSON.parse(params.data)
@@ -179,12 +181,12 @@ class HomeController {
 
 			recuringType = false
 
-		}else{
+		} else {
 
 			recuringType = true
 		}
 
-		if(anr.responseReasonText == "This transaction has been approved."){
+		if (anr.responseReasonText == "This transaction has been approved.") {
 
 			def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,city:jsonObj.city,state:jsonObj.state,
 			zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,

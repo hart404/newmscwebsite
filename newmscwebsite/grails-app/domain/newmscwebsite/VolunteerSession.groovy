@@ -9,6 +9,7 @@ class VolunteerSession {
 	String program
 	Date dateCreated
 	Date lastUpdated
+	Person person
 	
 	List<TrailSection> trailSections
 	static hasMany = [
@@ -16,10 +17,11 @@ class VolunteerSession {
 	]
 
     static constraints = {
-				trailSections(size: 0..100)
-                hours(nullable: false)
-                date(nullable: false)
-                time(nullable: false)
-                program(nullable: false)
+		trailSections(size: 0..100)
+        hours(nullable: false)
+        date(nullable: false)
+        time(nullable: false)
+        program(nullable: false)
+		person(nullable: true)
     }
 }

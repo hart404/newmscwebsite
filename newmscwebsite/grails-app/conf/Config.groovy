@@ -101,18 +101,7 @@ log4j = {
 		console name:'stacktrace', layout: pattern(conversionPattern: '%c{2} %m%n')
 		console name:'errors', layout: pattern(conversionPattern: '%c{2} %m%n')
     } */
-	
-	environments {
-		development {
-			appenders {
-				file name: 'file', file: '/Users/hart404/mylog.log'
-			}
-			root {
-				error 'stdout', 'file'
-			}
-		}
-	}
-	
+		
     error  	'org.codehaus.groovy.grails.web.servlet',  //  controllers
            	'org.codehaus.groovy.grails.web.pages', //  GSP
 			'org.codehaus.groovy.grails.web.sitemesh', //  layouts
