@@ -121,6 +121,7 @@
 	<div id="gallery" class="mscGallery">
 	</div>
 	<script>
+	
 	 var billing_address_status = "true"
 	    function loadAdSpace(json) {
 	    	if (typeof console == "undefined" || typeof console.log == "undefined") 
@@ -256,24 +257,37 @@
     	var firstName = document.getElementById("fname_data").value
 
     	var lastName = document.getElementById("lname_data").value
-    	
+
+    	var firstNameValidate = true;
+        var lastNameValidate = true;
+        var emailValidate = true;
+        var addressValidate = true;
+        var cityValidate = true;
+        var stateValidate = true;
+        var countryValidate = true;
+        var zipValidate = true;
+        var phoneValidate = true;
+        var cardValidate = true;
+        var cvcValidate = true;
    	 
     	if(firstName == ""){
 
-             
+    		firstNameValidate = false;
     		$("#firstNameError1").html("You must enter a First Name.")
         }else{
 
-
+        	firstNameValidate = true;
         	$("#firstNameError1").html("")
          }
 
 
         if(lastName == ""){
 
-        	
+        	lastNameValidate = false;
         	$("#lastNameError1").html("You must enter a Last Name.")
 
+        }else{
+        	lastNameValidate = true;
         }
         var email = document.getElementById("email_data").value
         //var x=document.forms["myForm"]["email"].value;
@@ -290,7 +304,9 @@
             	 $("#emailError1").html("")
                  $("#emailError1").html("You must enter a valid Email.")
              }
-            
+            emailValidate = false;
+         }else{
+         	emailValidate = true;
          }
 
         var address = document.getElementById("address_data").value
@@ -299,7 +315,9 @@
         if(address == ""){
 
         	$("#addressError1").html("You must enter an Address.")
-            
+            addressValidate = false;
+        }else{
+        	addressValidate = true;
         }
 
         var city = document.getElementById("city_data").value
@@ -307,7 +325,9 @@
         if(city == ""){
 
         	$("#cityError1").html("You must enter a City.")
-            
+            cityValidate = false;
+        }else{
+        	cityValidate = true;
         }
 
         var state = document.getElementById("state_data").value
@@ -315,7 +335,9 @@
         if(state == ""){
 
         	$("#stateError1").html("You must enter State.")
-            
+            stateValidate = false;
+        }else{
+        	stateValidate = true;
         }
 
 
@@ -324,33 +346,39 @@
         if(country == ""){
 
         	$("#countryError1").html("You must select a Country.")
-            
+            countryValidate = false;
+        }else{
+        	countryValidate = true;
         }
 
 
         var zip = document.getElementById("zip_data").value
         
-        if( zip == "" || isNaN( zip ) || zip.length != 5 )
+        if( zip == "" || !( zip.length >= 5 && zip.length <= 8) )
         {
           
           if(zip == ""){
 
         	  $("#zipError1").html("You must enter a Zip Code.")
-          }else if(isNaN( zip )){
-
-        	  $("#zipError1").html("")
-        	  $("#zipError1").html("You must enter Number.")
-           }else{
+          }else{
 
         	  $("#zipError1").html("")
          	  $("#zipError1").html("You must enter the format #####.")
             }
+          zipValidate = false;
           
-          
+        }else{
+        	zipValidate = true;
         }
 
 
    /* validation for billing address */
+   
+   		var billing_addressValidate = true;
+        var billing_cityValidate = true;
+        var billing_stateValidate = true;
+        var billing_countryValidate = true;
+        var billing_zipValidate = true;
    
    if(billing_address_status == "false"){
    
@@ -359,7 +387,9 @@
         if(billing_address == ""){
 
         	$("#billing_addressError1").html("You must enter an Address.")
-            
+            billing_addressValidate = false;
+        }else{
+        	billing_addressValidate = true;
         }
 
         var billing_city = document.getElementById("billing_city").value
@@ -367,7 +397,9 @@
         if(billing_city == ""){
 
         	$("#billing_cityError1").html("You must enter a City.")
-            
+           billing_cityValidate = false;
+        }else{
+        	billing_cityValidate = true;
         }
 
         var billing_state = document.getElementById("billing_state").value
@@ -375,7 +407,9 @@
         if(billing_state == ""){
 
         	$("#billing_stateError1").html("You must enter State.")
-            
+            billing_stateValidate = false;
+        }else{
+        	billing_stateValidate = true;
         }
 
 
@@ -384,29 +418,28 @@
         if(billing_country == ""){
 
         	$("#billing_countryError1").html("You must select a Country.")
-            
+           billing_countryValidate = false;
+        }else{
+        	billing_countryValidate = true;
         }
 
 
         var billing_zip = document.getElementById("billing_zip").value
         
-        if( billing_zip == "" || isNaN( billing_zip ) || billing_zip.length != 5 )
+        if( billing_zip == "" || !( zip.length >= 5 && zip.length <= 8) )
         {
           
           if(billing_zip == ""){
 
         	  $("#billing_zipError1").html("You must enter a Zip Code.")
-          }else if(isNaN( billing_zip )){
-
-        	  $("#billing_zipError1").html("")
-        	  $("#billing_zipError1").html("You must enter Number.")
-           }else{
+          }else{
 
         	  $("#billing_zipError1").html("")
          	  $("#billing_zipError1").html("You must enter the format #####.")
             }
-          
-          
+          billing_zipValidate = false;
+        }else{
+        	billing_zipValidate = true;
         }
    }
    
@@ -431,13 +464,15 @@
          	  $("#phoneError1").html("You must enter the format ##########.")
             }
           
-          
+          phoneValidate = false;
+        }else{
+        	phoneValidate = true;
         }
 
 
      var cardnumber = document.getElementById("cardnumber_data").value
      
-     if( cardnumber == "" || isNaN( cardnumber ) || cardnumber.length != 20 )
+     if( cardnumber == "" || isNaN( cardnumber ) || !(cardnumber.length >= 10 &&  cardnumber.length <= 20) )
      {
        if(cardnumber == ""){
 
@@ -449,16 +484,18 @@
         }else{
 
      	  $("#cardError1").html("")
-      	   //$("#cardError").html("You must enter the format ####################.")
+      	   //$("#cardError").html("You must enter the right format")
          }
        
-       
+       cardValidate = false;
+     }else{
+     	cardValidate = true;
      }
 
 
       var cvc = document.getElementById("cvc_data").value
      
-     if( cvc == "" || isNaN( cvc ) || cvc.length != 3 )
+     if( cvc == "" || isNaN( cvc ) || !(cvc.length >= 3 && cvc.length <= 5))
      {
        if(cvc == ""){
 
@@ -473,12 +510,15 @@
      	  $("#cvcError1").html("")
       	  $("#cvcError1").html("You must enter the format ###.")
          }
+       cvcValidate = false;
        
-       
+     }else{
+     	cvcValidate = true;
      }
 
      
     var invoiceid = document.getElementById("invoiceid_data").value
+    var invoiceidValidate = true;
 
     if( invoiceid == "" || isNaN( invoiceid ) || invoiceid.length != 3 )
     {
@@ -495,18 +535,11 @@
     	  $("#invoiceError1").html("")
      	  $("#invoiceError1").html("You must enter the format ###.")
         }
+      invoiceidValidate = false;
       
-      
+    }else{
+    	invoiceidValidate = true;
     }
-
-    	var street = document.getElementById("street_data").value
-    	if(street == ""){
-    	
-    		$("#streetError1").html("You must enter Street.")
-    		
-    	}else{
-    		$("#streetError1").html("")
-       }
 
 
     var month = document.getElementById("month_name").value
@@ -515,24 +548,21 @@
    
 				if(billing_address_status == "false"){
 				
-				   if(firstName !="" && lastName != "" && email != "" && address != "" && 
-				    	     city != "" && state != "" && country != "" && zip != "" &&
-				    	     phone != "" && cardnumber != "" && cvc != "" && invoiceid != "" && 
-				    	     street != "" && billing_address != "" && 
-				    	     billing_city != "" && billing_state != "" && billing_country != "" && billing_zip != "" && 
-				        	billing_street != "" ){ 
+				   if(firstNameValidate && lastNameValidate && emailValidate && addressValidate && 
+				    	     cityValidate && stateValidate && countryValidate && zipValidate &&
+				    	     phoneValidate && cardValidate && cvcValidate && invoiceidValidate && billing_addressValidate && 
+				    	     billing_cityValidate && billing_stateValidate && billing_countryValidate && billing_zipValidate ){ 
 				    	
 				
-				
+						processing();
 				    	
 				
 				    	var myJSONText = "data={firstName:"+firstName+
 				    	",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
 				    	",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
 				    	",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+
-				    	",street:"+street+
 				    	",billing_state:"+billing_state+",billing_country:"+billing_country+",billing_zip:"+billing_zip+
-				    	",billing_street:"+billing_street+",billing_address:"+billing_address+"}"
+				    	",billing_address:"+billing_address+",billing_city:"+billing_city+"}"
 				
 				           
 				        
@@ -540,41 +570,40 @@
 				    	 // var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
 				    		//$(location).attr('href',url);
 				    	 $.ajax({
-			                    type: "GET",
+			                    type: "POST",
 			                    url: checkout_url,
 			                    data : myJSONText,
 			                    cache : false,
 			                    success : function(text)
-			                     {                         
+			                     { 
 			                       location.reload();
 			                     }
 
 			    		     }) .fail(function() {
 			    		      alert( "Sorry, there was an error. Please try again" );
 			    		     });
-				    } 
+				    }
 				}else{
 
-					 if(firstName !="" && lastName != "" && email != "" && address != "" && 
-				    	     city != "" && state != "" && country != "" && zip != "" &&
-				    	     phone != "" && cardnumber != "" && cvc != "" && invoiceid != "" && 
-				    	     street != "" ){
+					 if(firstNameValidate && lastNameValidate && emailValidate && addressValidate && 
+				    	     cityValidate && stateValidate && countryValidate && zipValidate &&
+				    	     phoneValidate && cardValidate && cvcValidate && invoiceidValidate ){
 				    	
 				
-				    	
+				    	processing();
 				    	
 				
 				    	 var myJSONText = "data={firstName:"+firstName+
 											",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
 											",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-											",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+",street:"+street+"}"
+											",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+"}"
 				        
 				              
 				    	   //var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
 				    	     
 							//window.location.href=url
 											 $.ajax({
-								                    type: "GET",
+								                    type: "POST",
 								                    url: checkout_url,
 								                    data : myJSONText,
 								                    cache : false,
@@ -586,10 +615,9 @@
 								    		     }) .fail(function() {
 								    		      alert( "Sorry, there was an error. Please try again" );
 								    		     });
-				     }           
+				     }
 
-				}    
-    	
+				}
     }
 
 	
@@ -779,16 +807,7 @@
                                                  </div>
                                                  <input type="text"  class="" placeholder="city" name="city_data" id="city_data" style="width:200px;">
                                               </div>
-                                              <span id="cityError1" style="color:#F70000;margin-left:150px;"></span>
-                                              
-                                                <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Street:</label>
-                                                 </div>
-                                                 <input type="text"  class="" placeholder="street" name="street_data" id="street_data" style="width:200px;">
-                                              </div>
-                                              <span id="streetError1" style="color:#F70000;margin-left:150px;"></span>
+                                              <span id="cityError1" style="color:#F70000;margin-left:150px;"></span>                                       
                                               
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
@@ -822,10 +841,10 @@
                                                <label style="visibility:hidden;">Na</label>
                                                  <label Style="font-weight: bold;">Shipping Address</label>
                                                  </div>
-                                                 
+                                                 <p>
                                                       <input type="checkbox" onclick="addressCheck(this.checked);" style="float: left;background: red;" checked="checked">
                                                         <label style="margin-left: 10px;">Same As Billing Address</label>
-                                                
+                                                </p>
                                               </div>
                                               
                                               
@@ -848,16 +867,7 @@
                                                  <input type="text"  class="" placeholder="city" name="billing_city" id="billing_city" style="width:200px;">
                                               </div>
                                               <span id="billing_cityError1" style="color:#F70000;margin-left:150px;"></span>
-                                              
-                                                <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Street:</label>
-                                                 </div>
-                                                 <input type="text"  class="" placeholder="street" name="billing_street" id="billing_street" style="width:200px;">
-                                              </div>
-                                              <span id="billing_streetError1" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                      
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
@@ -994,8 +1004,7 @@
 		                               
                                     </div> 
                             
-                              </div>   <!--row-fluid popup end-->
-                              
+                              </div>   <!--row-fluid popup end-->                         
   <script src="../js/jquery.validate.js"></script> 
    <script src="../js/jquery.dataTables.min.js"></script>
 		<script src="../js/jquery.dataTables.bootstrap.js"></script> 

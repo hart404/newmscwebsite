@@ -61,46 +61,38 @@ function showcredicardInfo(){
          var letters = /^[0-9]+$/;
                 if(amount.match(letters) )
                 {
-            
-                
-                 $("#error1").html("")
-                
-                 if(amount_in >= 10){
+                	$("#error1").html("")
+	                
+	                 if(amount_in >= 10){
+	
+	                          var test = $("#radio11").is(":checked")
+	                                 amount_val = amount;
+	
+	                                 if($("#radio1").is(":checked")){
+	                                        
+	                                         disablePopup1();
+	                                         loadPopupBox2();
+	                
+	                                 }
+	
+	
+	                                 if($("#radio2").is(":checked")){
+	                                        
+							                 disablePopup1();
+							                 loadPopupBox4();
+	                                 }
+	
+		                 if($("#radio3").is(":checked")){
+		                                        
+			                 disablePopup1();
+			                 loadPopupBox5();
+		                  }
+	                 }else{
+	
+	                       $("#error1").html("You must enter a minimum $10 amount.")
+	
+	                 }
 
-                          var test = $("#radio11").is(":checked")
-                                 amount_val = amount;
-
-                                 if($("#radio1").is(":checked")){
-                                        
-                                         disablePopup1();
-                 loadPopupBox2();
-                
-                                 }
-
-
-                                 if($("#radio2").is(":checked")){
-                                        
-                 disablePopup1();
-                 loadPopupBox4();
-                                 }
-
-                 if($("#radio3").is(":checked")){
-                                        
-                 disablePopup1();
-                 loadPopupBox5();
-                                 }
-                         }else{
-
-                                 $("#error1").html("You must enter a minimum $10 amount.")
-
-                 }
-
-                
-          
-
-            
-                    
-                
                 }
                 else
                 {
@@ -134,23 +126,39 @@ function showcredicardInfo(){
    function fullformValidation(){
 
                 
-                var firstName = document.getElementById("fname").value
+                var firstName = document.getElementById("fname").value;
 
-                var lastName = document.getElementById("lname").value
+                var lastName = document.getElementById("lname").value;
+                
+                var firstNameValidate = true;
+                var lastNameValidate = true;
+                var emailValidate = true;
+                var addressValidate = true;
+                var cityValidate = true;
+                var stateValidate = true;
+                var countryValidate = true;
+                var zipValidate = true;
+                var phoneValidate = true;
+                var cardValidate = true;
+                var cvcValidate = true;
                 
                 if(firstName == ""){
         
-                        $("#firstNameError").html("You must enter a First Name.")
-
-         }
+                        $("#firstNameError").html("You must enter a First Name.");
+                        firstNameValidate = false;
+                }else{
+                	firstNameValidate = true;
+                }
 
 
 
          if(lastName == ""){
 
                  
-                 $("#lastNameError").html("You must enter a Last Name.")
-
+                 $("#lastNameError").html("You must enter a Last Name.");
+                 lastNameValidate = false;
+         }else{
+        	 lastNameValidate = true;
          }
          var email = document.getElementById("email").value
          var atpos=email.indexOf("@");
@@ -158,157 +166,147 @@ function showcredicardInfo(){
         
          if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
          {
-         if(email == ""){
+	         if(email == ""){
+	        
+	                 $("#emailError").html("You must enter an Email.");
+	                 emailValidate = false;
+	         }else{
+	
+	                  $("#emailError").html("");
+	         $("#emailError").html("You must enter a valid Email.");
+	         emailValidate = false;
+	         }
         
-                 $("#emailError").html("You must enter an Email.")
          }else{
-
-                  $("#emailError").html("")
-         $("#emailError").html("You must enter a valid Email.")
-         }
-        
+        	 emailValidate = true;
          }
 
          var address = document.getElementById("address").value
 
          if(address == ""){
 
-                 $("#addressError").html("You must enter an Address.")
-        
+                 $("#addressError").html("You must enter an Address.");
+                 addressValidate = false;        
+         }else{
+        	 addressValidate = true;
          }
 
-         var city = document.getElementById("city").value
+         var city = document.getElementById("city").value;
 
          if(city == ""){
 
-                 $("#cityError").html("You must enter a City.")
-        
+                 $("#cityError").html("You must enter a City.");
+                 cityValidate = false;
+         }else{
+        	 cityValidate = true;
          }
 
          var state = document.getElementById("state").value
 
          if(state == ""){
 
-                 $("#stateError").html("You must enter State.")
-        
+                 $("#stateError").html("You must enter State.");
+                 stateValidate = false;
+         }else{
+        	 stateValidate = true;
          }
 
 
-         var country = document.getElementById("country").value
+         var country = document.getElementById("country").value;
 
          if(country == ""){
 
-                 $("#countryError").html("You must select a Country.")
-        
+                 $("#countryError").html("You must select a Country.");
+                 countryValidate = false;        
+         }else{
+        	 countryValidate = true;
          }
 
 
          var zip = document.getElementById("zip").value
-        
-         if( zip == "" || isNaN( zip ) || zip.length != 5 )
+         
+         if( zip == "" || !( zip.length >= 5 && zip.length <= 8))
          {
         
-         if(zip == ""){
-
-                  $("#zipError").html("You must enter a Zip Code.")
-         }else if(isNaN( zip )){
-
-                  $("#zipError").html("")
-                  $("#zipError").html("You must enter Number.")
+	         if(zip == ""){
+	
+	                  $("#zipError").html("You must enter a Zip Code.")
+	         }else{
+	
+	                  $("#zipError").html("")
+	                  $("#zipError").html("You must enter the right format")
+	         }
+	         zipValidate = false;
+        
          }else{
-
-                  $("#zipError").html("")
-                  $("#zipError").html("You must enter the format #####.")
-         }
-        
-        
+        	 zipValidate = true;
          }
 
          var phone = document.getElementById("phone").value
         
          if( phone == "" || isNaN( phone ) || phone.length != 10 )
          {
-         if(phone == ""){
-
-                  $("#phoneError").html("You must enter a Phone Number.")
-         }else if(isNaN( phone )){
-
-                  $("#phoneError").html("")
-                  $("#phoneError").html("You must enter Number.")
+	         if(phone == ""){
+	
+	                  $("#phoneError").html("You must enter a Phone Number.")
+	         }else if(isNaN( phone )){
+	
+	                  $("#phoneError").html("")
+	                  $("#phoneError").html("You must enter Number.")
+	         }else{
+	
+	                  $("#phoneError").html("")
+	                  $("#phoneError").html("You must enter the format ##########.")
+	         }
+	         phoneValidate = false;       
          }else{
-
-                  $("#phoneError").html("")
-                  $("#phoneError").html("You must enter the format ##########.")
-         }
-        
-        
+        	 phoneValidate = true;
          }
 
 
          var cardnumber = document.getElementById("cardnumber").value
         
-         if( cardnumber == "" || isNaN( cardnumber ) || cardnumber.length != 15 )
+         if( cardnumber == "" || isNaN( cardnumber ) || !(cardnumber.length >= 10 &&  cardnumber.length <= 20))
          {
-         if(cardnumber == ""){
-
-                  $("#cardError").html("You must enter your Credit Card Number.")
-         }else if(isNaN( cardnumber )){
-
-                  $("#cardError").html("")
-                  $("#cardError").html("You must enter Number.")
+	         if(cardnumber == ""){
+	
+	                  $("#cardError").html("You must enter your Credit Card Number.")
+	         }else if(isNaN( cardnumber )){
+	
+	                  $("#cardError").html("")
+	                  $("#cardError").html("You must enter Number.")
+	         }else{
+	
+	                  $("#cardError").html("")
+	                  $("#cardError").html("You must enter the right format")
+	         }
+	         cardValidate = false;
          }else{
-
-                  $("#cardError").html("")
-                  $("#cardError").html("You must enter the format ###############.")
-         }
-        
-        
+        	 cardValidate = true;
          }
 
 
          var cvc = document.getElementById("cvc").value
         
-         if( cvc == "" || isNaN( cvc ) || cvc.length != 3 )
+         if( cvc == "" || isNaN( cvc ) || !(cvc.length >= 3 && cvc.length <= 5) )
          {
-         if(cvc == ""){
-
-                  $("#cvcError").html("Please enter the credit card's security code.")
-                 
-         }else if(isNaN( cvc )){
-
-                  $("#cvcError").html("")
-                  $("#cvcError").html("You must enter Number.")
+	         if(cvc == ""){
+	
+	                  $("#cvcError").html("Please enter the credit card's security code.")
+	                 
+	         }else if(isNaN( cvc )){
+	
+	                  $("#cvcError").html("")
+	                  $("#cvcError").html("You must enter Number.")
+	         }else{
+	
+	                  $("#cvcError").html("")
+	                  $("#cvcError").html("You must enter the right format.")
+	         }
+	         cvcValidate = false;
          }else{
-
-                  $("#cvcError").html("")
-                  $("#cvcError").html("You must enter the format ###.")
+        	 cvcValidate = true;
          }
-        
-        
-         }
-
-        
-//        var invoiceid = document.getElementById("invoiceid").value
-
-//        if( invoiceid == "" || isNaN( invoiceid ) || invoiceid.length != 3 )
-//        {
-//         if(invoiceid == ""){
-//
-//                 $("#invoiceError").html("Please enter the InvoiceId.")
-//                
-//         }else if(isNaN( invoiceid )){
-//
-//                 $("#invoiceError").html("")
-//                 $("#invoiceError").html("You must enter Number.")
-//         }else{
-//
-//                 $("#invoiceError").html("")
-//                  $("#invoiceError").html("You must enter the format ###.")
-//         }
-//        
-//        }
-
-
 
 
         var month = document.getElementById("month").value
@@ -319,9 +317,10 @@ function showcredicardInfo(){
 
         
         
-        if(firstName !="" && lastName != "" && email != "" && address != "" && city != "" && state != "" && country != "" && zip != "" && phone != "" && cardnumber != "" && cvc != ""){
+        if(firstNameValidate && lastNameValidate && emailValidate && addressValidate  && cityValidate && stateValidate && countryValidate && zipValidate && phoneValidate && cardValidate && cvcValidate){
 
-
+        		processing();
+        		
                 var myJSONText = "data={firstName:"+firstName+
                 ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
                 ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
@@ -342,8 +341,7 @@ function showcredicardInfo(){
     		      alert( "Sorry, there was an error. Please try again" );
     		     });
         }
-        
-                
+         
     }
 
 
@@ -382,7 +380,7 @@ function showcredicardInfo(){
                 
                  var cvc_2 = document.getElementById("cvc_2").value
 
-                 if( cvc_2 == "" || isNaN( cvc_2 ) || cvc_2.length != 3 )
+                 if( cvc_2 == "" || isNaN( cvc_2 ) || !(cvc_2.length >= 3 && cvc_2.length <= 5) )
                  {
                  if(cvc_2 == ""){
 
@@ -427,7 +425,7 @@ function showcredicardInfo(){
                  var cardnumber_2 = document.getElementById("cardnumber_2").value
                 
                 
-                        if( cardnumber_2 == "" || isNaN( cardnumber_2 ) || cardnumber_2.length != 15 )
+                        if( cardnumber_2 == "" || isNaN( cardnumber_2 ) || !(cardnumber_2.length >= 10 &&  cardnumber_2.length <= 18))
                          {
                          if(cardnumber_2 == ""){
                         
@@ -439,7 +437,7 @@ function showcredicardInfo(){
                          }else{
                         
                                   $("#cardnumber_2Error").html("")
-                                  $("#cardnumber_2Error").html("You must enter the format ###############.")
+                                  $("#cardnumber_2Error").html("You must enter the right format.")
                          }
                         
                         
@@ -476,7 +474,7 @@ function showcredicardInfo(){
                                         $(location).attr('href',url);
                         
 
-                        }
+                 }
                 
                 
                 
@@ -491,7 +489,7 @@ function showcredicardInfo(){
         
                  var cvc_3 = document.getElementById("cvc_3").value
 
-                 if( cvc_3 == "" || isNaN( cvc_3 ) || cvc_3.length != 3 )
+                 if( cvc_3 == "" || isNaN( cvc_3 ) ||  !(cvc_3.length >= 3 && cvc_3.length <= 5) )
                  {
                  if(cvc_3 == ""){
 
@@ -536,7 +534,7 @@ function showcredicardInfo(){
                  var cardnumber_3 = document.getElementById("cardnumber_3").value
                 
                 
-                 if( cardnumber_3 == "" || isNaN( cardnumber_3 ) || cardnumber_3.length != 15 )
+                 if( cardnumber_3 == "" || isNaN( cardnumber_3 ) || !(cardnumber_3.length >= 10 &&  cardnumber_3.length <= 18) )
                          {
                          if(cardnumber_3 == ""){
                         
@@ -548,7 +546,7 @@ function showcredicardInfo(){
                          }else{
                         
                                   $("#cardnumber_3Error").html("")
-                                  $("#cardnumber_3Error").html("You must enter the format ###############.")
+                                  $("#cardnumber_3Error").html("You must enter the right format")
                          }
                         
                         
@@ -706,4 +704,12 @@ function showcredicardInfo(){
                         
                                 unloadPopupBox5();
                         
-                        } 
+                        }
+                        
+                        function processing() {
+                    		$("div.loader1").show();
+                    	}
+                        
+                        function closeprocessing() {
+                    		$("div.loader1").fadeOut('normal');
+                    	}

@@ -254,7 +254,7 @@
                                                  <input type="text" class="" placeholder="address" name="address" id="address" style="width:200px;">
                                               </div>
                                               <span id="addressError" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                      
                                                 <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
@@ -263,16 +263,7 @@
                                                  <input type="text" class="" placeholder="city" name="city" id="city" style="width:200px;">
                                               </div>
                                               <span id="cityError" style="color:#F70000;margin-left:150px;"></span>
-                                              
-                                                <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Street:</label>
-                                                 </div>
-                                                 <input type="text" class="" placeholder="street" name="street" id="street" style="width:200px;">
-                                              </div>
-                                              <span id="streetError" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                                                                          
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
@@ -470,7 +461,7 @@
                                                   
                                                    <div style="width:61%;background:;float:left;">
                                                         
-                                                        <span style="margin-left:40px;float:left;font-size:18px; "> McDowell Sonoran Conservancy</span>
+                                                        <span style="margin-left:40px;float:left;font-size:18px; "> McDowell Sonoran Land Conservancy</span>
                                                                                                                 <span style="margin-left:35px;float:left;font-size:18px; ">16435 N Scottsdale Rd Ste #110 </span>
                                                                                                                 <span style="margin-left:40px;float:left;font-size:18px; ">Scottsdale, AZ</span>
                                                                                                                 <span style="margin-left:40px;float:left;font-size:18px; ">85254 </span>
@@ -972,5 +963,5 @@
                                     </div>
                             
                               </div> <!--row-fluid popup end-->
-
+<div class="loader1" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;Processing ... </div>
 <div id="backgroundPopup"></div>

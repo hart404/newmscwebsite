@@ -41,6 +41,10 @@ var amount_val = "";
 			
 		$("#donateNow").click(function() {
 			
+
+			
+			 	$("#error1").html("");
+			
 				
 				$("#donationamount").val("");
 				$("#recurring_type").val("");
@@ -74,7 +78,7 @@ var amount_val = "";
 					loadPopup1(); // function show popup 
 				}, 500); // .5 second
 		return false;
-		}); 
+		});
 
 
 

@@ -5,9 +5,7 @@
     Description:
         Purpose of the stylesheet follows.
 */
-.program{
-    width: 150px;
-}
+
 
 #reportForm{
     padding-left: 53px;
@@ -212,4 +210,16 @@ form input.submit { margin-left: 253px; }
    
    
 	
+}
+
+div.loader1 {
+    background: url("images/loading.gif") no-repeat scroll 0 0 transparent;
+    height: 40px;
+    width: 40px;
+	display: none;
+	z-index: 9999;
+	top: 40%;
+	left: 50%;
+	position: absolute;
+	margin-left: -10px;
 }
