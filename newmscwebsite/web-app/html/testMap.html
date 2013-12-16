@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Location</title>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false">
+	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js">
 	</script>
 	<style type="text/css">
 	html {
@@ -30,7 +31,7 @@
 			var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 			var marker = new google.maps.Marker({
 			    position: new google.maps.LatLng(33.647900, -111.862236),
-			    icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|FFFFFF",
+			    icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|00AD96",
 			    map: map,
 			    title: 'Gateway'
 			});
