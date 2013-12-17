@@ -43,6 +43,7 @@ grails.project.dependency.resolution = {
 		runtime 'mysql:mysql-connector-java:5.1.19'
 		compile 'net.java.dev.jets3t:jets3t:0.9.0'
 		compile 'org.apache.httpcomponents:httpclient:4.1.2'
+		compile 'net.authorize:anet-java-sdk:1.4.6'
 	}
 
 	plugins {
