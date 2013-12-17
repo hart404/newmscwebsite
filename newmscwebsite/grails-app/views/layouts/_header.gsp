@@ -55,7 +55,7 @@
          if(date && program && hours && starttime)
          {
                   storeReport(i);
-              	  reported = true;
+                       reported = true;
                   if(i == 10 && reported == true)
                          {
                                  alert("Your have successfully submited till Report-"+i);
@@ -65,7 +65,7 @@
          else
                  {
                          if(reported == true)
-                                 {        
+                                 {
                             alert("Your have successfully submited till Report-"+(i-1));
                             reported = false;
                                  }
@@ -322,7 +322,7 @@
                                                  <label>CCV:</label>
                                                  </div>
                                                 
-                                                 <input type="text" class="" placeholder="ccv" name="cvc" id="cvc" style="width:200px;">
+                                                 <input type="password" class="" placeholder="ccv" name="cvc" id="cvc" style="width:200px;">
                                               </div>
                                               <span id="cvcError" style="color:#F70000;margin-left:150px;"></span>
                                               

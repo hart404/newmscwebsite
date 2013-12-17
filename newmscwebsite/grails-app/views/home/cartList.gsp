@@ -1,4 +1,3 @@
-
 <head>
 <meta name="layout" content="homeLayout" />
 <meta name="description" content="The volunteer group that assists the City of Scottsdale in maintaining the McDowell Sonoran Preserve" />
@@ -12,7 +11,7 @@
              
 <link rel="stylesheet" href="${resource(dir:'css',file:'grid/style.css')}" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"> </script>
-<script src="../js/script.js"></script> 
+<script src="../js/script.js"></script>
 <g:javascript>
   var checkout_url="${createLink(controller:'home', action:'saveTransationForShoppingCart')}"
 </g:javascript>
@@ -20,63 +19,63 @@
 
 <style type="text/css">
 
-		#backgroundPopup1 { 
-	z-index:1;
-	position: fixed;
-	display:none;
-	height:100%;
-	width:100%;
-	background:#fcbe28;	
-	top:0px;  
-	left:0px;
+                #backgroundPopup1 {
+        z-index:1;
+        position: fixed;
+        display:none;
+        height:100%;
+        width:100%;
+        background:#fcbe28;        
+        top:0px;
+        left:0px;
 }
  #myDiv {
-	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+        font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     background: none repeat scroll 0 0 #FFFFFF;
       /*border: 10px solid #ccc;
-    border-radius: 3px 3px 3px 3px; */
+border-radius: 3px 3px 3px 3px; */
     color: #333333;
     display: none;
-	font-size: 14px;
+        font-size: 14px;
     left: 50%;
     margin-left: -402px;
     position: fixed;
     top: 10%;
     width: 600px;
-    z-index: 2; 
+    z-index: 2;
     
 }
     
-		#myDivPopupBoxClose{
-		    font-size:20px;  
-		    line-height:15px;  
-		    right:-15px;  
-		    top:-15px;  
-		    position:absolute;  
-		    color:#6fa5e2;  
-		    font-weight:500;      
-		}
-		#scroll {
-			  
-				  
-				    height:652px;
-				    background: transparent;
-				    overflow-y: scroll;
-				}
-				#scroll::-webkit-scrollbar {
-				    width: 12px;
-				}
-				
-				#scroll::-webkit-scrollbar-track {
-				    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-				    border-radius: 10px;
-				}
-				
-				#scroll::-webkit-scrollbar-thumb {
-				    border-radius: 10px;
-				    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-				}
-		
+                #myDivPopupBoxClose{
+                 font-size:20px;
+                 line-height:15px;
+                 right:-15px;
+                 top:-15px;
+                 position:absolute;
+                 color:#6fa5e2;
+                 font-weight:500;
+                }
+                #scroll {
+                        
+                                
+                                 height:652px;
+                                 background: transparent;
+                                 overflow-y: scroll;
+                                }
+                                #scroll::-webkit-scrollbar {
+                                 width: 12px;
+                                }
+                                
+                                #scroll::-webkit-scrollbar-track {
+                                 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                                 border-radius: 10px;
+                                }
+                                
+                                #scroll::-webkit-scrollbar-thumb {
+                                 border-radius: 10px;
+                                 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+                                }
+                
  .table thead:first-child tr th{
 
    background: #BFA87C;
@@ -91,9 +90,9 @@
     -webkit-border-radius: 4px;
     -khtml-border-radius: 4px;
     border-radius: 4px;
-    color:#664809; 
+    color:#664809;
    
-     background:#f49d2f; 
+     background:#f49d2f;
     padding: 8px 25px;
     border:solid 1px #e7af37;
     font:Arial;
@@ -108,8 +107,8 @@
     -webkit-border-radius: 4px;
     -khtml-border-radius: 4px;
     border-radius: 4px;
-    color:#704109; 
-    background:#fcbe28; 
+    color:#704109;
+    background:#fcbe28;
      padding: 8px 25px;
     border:solid 1px #e39d3d;
     font:Arial;
@@ -118,88 +117,88 @@
 </style>
 </head>
 <body>
-	<div id="gallery" class="mscGallery">
-	</div>
-	<script>
-	
-	 var billing_address_status = "true"
-	    function loadAdSpace(json) {
-	    	if (typeof console == "undefined" || typeof console.log == "undefined") 
-	    	{
-	    	   var console = { log: function() {} }; 
-	    	}
-	        var data = eval(json);
-	        Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
-	        $("#gallery").galleria({
-	            dataSource: data,
-	            showInfo: false,
-	            transition: 'fade',
-	            transitionSpeed: 1000,
-	            showImagenav: false,
-	            autoplay: 5000,
-	            width: 1194,
-	            height: 400,
-	            imageCrop: true
-	        });
-	    };
-	    var popupStatus = 0;
+        <div id="gallery" class="mscGallery">
+        </div>
+        <script>
+        
+         var billing_address_status = "true"
+         function loadAdSpace(json) {
+                 if (typeof console == "undefined" || typeof console.log == "undefined")
+                 {
+                  var console = { log: function() {} };
+                 }
+         var data = eval(json);
+         Galleria.loadTheme("<g:createLinkTo dir='/js/galleria/themes/classic/' file='galleria.classic.min.js'/>");
+         $("#gallery").galleria({
+         dataSource: data,
+         showInfo: false,
+         transition: 'fade',
+         transitionSpeed: 1000,
+         showImagenav: false,
+         autoplay: 5000,
+         width: 1194,
+         height: 400,
+         imageCrop: true
+         });
+         };
+         var popupStatus = 0;
 
-		  /*  function disablePopup1() {
-			   
-				alert("inside popupStatus1 :::::::::")
-				if(popupStatus1 == 1) { // if value is 1, close popup
-					$("#myDiv").fadeOut("normal");  
-					$("#backgroundPopup").fadeOut("normal");  
-					//$(".menuContainer").fadeOut("normal"); 
-					$(".menuContainer").css("opacity", "1");
-					popupStatus1 = 0;  // and set value to 0
-				}
-			}*/
+                 /* function disablePopup1() {
+                        
+                                alert("inside popupStatus1 :::::::::")
+                                if(popupStatus1 == 1) { // if value is 1, close popup
+                                        $("#myDiv").fadeOut("normal");
+                                        $("#backgroundPopup").fadeOut("normal");
+                                        //$(".menuContainer").fadeOut("normal");
+                                        $(".menuContainer").css("opacity", "1");
+                                        popupStatus1 = 0; // and set value to 0
+                                }
+                        }*/
 
-	     function loadPopupBox2() { 
-			 	
-	    	
+         function loadShopPopupBox() {
+                                 
+                 
 
-				if(popupStatus == 0) { // if value is 0, show popup
-					
-					$("#myDiv").fadeIn(0500); // fadein popup div
-					$("#backgroundPopup1").css("opacity", "0.3"); // css opacity, supports IE7, IE8
-					
-					$("#backgroundPopup1").fadeIn(0001); 
-				   $(".menuContainer").css("opacity", "0.3"); // css opacity, supports IE7, IE8
-					
-					$(".menuContainer").fadeIn(0001); 
+                                if(popupStatus == 0) { // if value is 0, show popup
+                                        
+                                        $("#myDiv").fadeIn(0500); // fadein popup div
+                                        $("#backgroundPopup1").css("opacity", "0.3"); // css opacity, supports IE7, IE8
+                                        
+                                        $("#backgroundPopup1").fadeIn(0001);
+                                 $(".menuContainer").css("opacity", "0.3"); // css opacity, supports IE7, IE8
+                                        
+                                        $(".menuContainer").fadeIn(0001);
 
-					
-					popupStatus = 1; // and set value to 1
-				}	
-		       
-			} 
-	    
+                                        
+                                        popupStatus = 1; // and set value to 1
+                                }        
+                
+                        }
+        
 
-		function closePopup2() { 
+                function closePopup2() {
 
-			  
-	   		
+                        
+                         
 
-	   		if(popupStatus == 1) { // if value is 1, close popup
-				$("#myDiv").fadeOut("normal");  
-				$("#backgroundPopup1").fadeOut("normal");  
-				//$(".menuContainer").fadeOut("normal"); 
-				$(".menuContainer").css("opacity", "1");
-				popupStatus = 0;  // and set value to 0
-			}
-	     	
-		}    
+                         if(popupStatus == 1) { // if value is 1, close popup
+                                $("#myDiv").fadeOut("normal");
+                                $("#backgroundPopup1").fadeOut("normal");
+                                //$(".menuContainer").fadeOut("normal");
+                                $(".menuContainer").css("opacity", "1");
+                                popupStatus = 0; // and set value to 0
+                        }
+                 
+                }
 
-	
-	function deleteData(id){
+        
+        function deleteData(id){
 
-		  var response;
+                 var response;
                   var productid = id;
                   var dataString = 'product_id='+ productid;
-          $.ajax({ 
-                    type: "GET",                 
+          $.ajax({
+                    type: "GET",
                     url: '${createLink(controller:'home', action:'deleteCartItem')}',
                           //async: false,
                     data : dataString,
@@ -208,11 +207,11 @@
                     {
                              //alert("Removed Successfully");
                       location.reload();
-     //                        response = text;
-     //                        if(response){
-     //                       window.location.href="cartList"
-     //               
-     //                    }
+     // response = text;
+     // if(response){
+     // window.location.href="cartList"
+     //
+     // }
                     }
 
               });
@@ -222,43 +221,43 @@
     function checkoutTransation(){
 
                 
-                loadPopupBox2()
+                loadShopPopupBox()
 
     }
 
     function addressCheck(blnchecked){
-    	
+            
 
-    	
-  		  if(blnchecked)
-  	       {
-  		       
-  		         $('#billingAddressContainingDiv').hide()
-  		          billing_address_status = "true"
+            
+                   if(blnchecked)
+           {
+                  
+                   $('#billingAddressContainingDiv').hide()
+                   billing_address_status = "true"
 
-  			    
-  	       } 
-  	       else
-  	       {
-  			     $('#billingAddressContainingDiv').show();
-  			      billing_address_status = "false"
+                          
+           }
+           else
+           {
+                           $('#billingAddressContainingDiv').show();
+                           billing_address_status = "false"
 
-  	         
-  	       }
+          
+           }
 
-  	 
+          
 
     }
 
     function checkoutformValidation(){
 
 
-    	
-    	var firstName = document.getElementById("fname_data").value
+            
+            var firstName = document.getElementById("fname_data").value
 
-    	var lastName = document.getElementById("lname_data").value
+            var lastName = document.getElementById("lname_data").value
 
-    	var firstNameValidate = true;
+            var firstNameValidate = true;
         var lastNameValidate = true;
         var emailValidate = true;
         var addressValidate = true;
@@ -269,25 +268,25 @@
         var phoneValidate = true;
         var cardValidate = true;
         var cvcValidate = true;
-   	 
-    	if(firstName == ""){
+           
+            if(firstName == ""){
 
-    		firstNameValidate = false;
-    		$("#firstNameError1").html("You must enter a First Name.")
+                    firstNameValidate = false;
+                    $("#firstNameError1").html("You must enter a First Name.")
         }else{
 
-        	firstNameValidate = true;
-        	$("#firstNameError1").html("")
+                firstNameValidate = true;
+                $("#firstNameError1").html("")
          }
 
 
         if(lastName == ""){
 
-        	lastNameValidate = false;
-        	$("#lastNameError1").html("You must enter a Last Name.")
+                lastNameValidate = false;
+                $("#lastNameError1").html("You must enter a Last Name.")
 
         }else{
-        	lastNameValidate = true;
+                lastNameValidate = true;
         }
         var email = document.getElementById("email_data").value
         //var x=document.forms["myForm"]["email"].value;
@@ -298,15 +297,15 @@
           {
              if(email == ""){
                  
-             	$("#emailError1").html("You must enter an Email.")
+                     $("#emailError1").html("You must enter an Email.")
              }else{
 
-            	 $("#emailError1").html("")
+                     $("#emailError1").html("")
                  $("#emailError1").html("You must enter a valid Email.")
              }
             emailValidate = false;
          }else{
-         	emailValidate = true;
+                 emailValidate = true;
          }
 
         var address = document.getElementById("address_data").value
@@ -314,30 +313,30 @@
 
         if(address == ""){
 
-        	$("#addressError1").html("You must enter an Address.")
+                $("#addressError1").html("You must enter an Address.")
             addressValidate = false;
         }else{
-        	addressValidate = true;
+                addressValidate = true;
         }
 
         var city = document.getElementById("city_data").value
 
         if(city == ""){
 
-        	$("#cityError1").html("You must enter a City.")
+                $("#cityError1").html("You must enter a City.")
             cityValidate = false;
         }else{
-        	cityValidate = true;
+                cityValidate = true;
         }
 
         var state = document.getElementById("state_data").value
 
         if(state == ""){
 
-        	$("#stateError1").html("You must enter State.")
+                $("#stateError1").html("You must enter State.")
             stateValidate = false;
         }else{
-        	stateValidate = true;
+                stateValidate = true;
         }
 
 
@@ -345,10 +344,10 @@
 
         if(country == ""){
 
-        	$("#countryError1").html("You must select a Country.")
+                $("#countryError1").html("You must select a Country.")
             countryValidate = false;
         }else{
-        	countryValidate = true;
+                countryValidate = true;
         }
 
 
@@ -359,22 +358,22 @@
           
           if(zip == ""){
 
-        	  $("#zipError1").html("You must enter a Zip Code.")
+                 $("#zipError1").html("You must enter a Zip Code.")
           }else{
 
-        	  $("#zipError1").html("")
-         	  $("#zipError1").html("You must enter the format #####.")
+                 $("#zipError1").html("")
+                  $("#zipError1").html("You must enter the format #####.")
             }
           zipValidate = false;
           
         }else{
-        	zipValidate = true;
+                zipValidate = true;
         }
 
 
    /* validation for billing address */
    
-   		var billing_addressValidate = true;
+                   var billing_addressValidate = true;
         var billing_cityValidate = true;
         var billing_stateValidate = true;
         var billing_countryValidate = true;
@@ -386,30 +385,30 @@
 
         if(billing_address == ""){
 
-        	$("#billing_addressError1").html("You must enter an Address.")
+                $("#billing_addressError1").html("You must enter an Address.")
             billing_addressValidate = false;
         }else{
-        	billing_addressValidate = true;
+                billing_addressValidate = true;
         }
 
         var billing_city = document.getElementById("billing_city").value
 
         if(billing_city == ""){
 
-        	$("#billing_cityError1").html("You must enter a City.")
+                $("#billing_cityError1").html("You must enter a City.")
            billing_cityValidate = false;
         }else{
-        	billing_cityValidate = true;
+                billing_cityValidate = true;
         }
 
         var billing_state = document.getElementById("billing_state").value
 
         if(billing_state == ""){
 
-        	$("#billing_stateError1").html("You must enter State.")
+                $("#billing_stateError1").html("You must enter State.")
             billing_stateValidate = false;
         }else{
-        	billing_stateValidate = true;
+                billing_stateValidate = true;
         }
 
 
@@ -417,10 +416,10 @@
 
         if(billing_country == ""){
 
-        	$("#billing_countryError1").html("You must select a Country.")
+                $("#billing_countryError1").html("You must select a Country.")
            billing_countryValidate = false;
         }else{
-        	billing_countryValidate = true;
+                billing_countryValidate = true;
         }
 
 
@@ -431,15 +430,15 @@
           
           if(billing_zip == ""){
 
-        	  $("#billing_zipError1").html("You must enter a Zip Code.")
+                 $("#billing_zipError1").html("You must enter a Zip Code.")
           }else{
 
-        	  $("#billing_zipError1").html("")
-         	  $("#billing_zipError1").html("You must enter the format #####.")
+                 $("#billing_zipError1").html("")
+                  $("#billing_zipError1").html("You must enter the format #####.")
             }
           billing_zipValidate = false;
         }else{
-        	billing_zipValidate = true;
+                billing_zipValidate = true;
         }
    }
    
@@ -453,43 +452,43 @@
         {
           if(phone == ""){
 
-        	  $("#phoneError1").html("You must enter a Phone Number.")
+                 $("#phoneError1").html("You must enter a Phone Number.")
           }else if(isNaN( phone )){
 
-        	  $("#phoneError1").html("")
-        	  $("#phoneError1").html("You must enter Number.")
+                 $("#phoneError1").html("")
+                 $("#phoneError1").html("You must enter Number.")
            }else{
 
-        	  $("#phoneError1").html("")
-         	  $("#phoneError1").html("You must enter the format ##########.")
+                 $("#phoneError1").html("")
+                  $("#phoneError1").html("You must enter the format ##########.")
             }
           
           phoneValidate = false;
         }else{
-        	phoneValidate = true;
+                phoneValidate = true;
         }
 
 
      var cardnumber = document.getElementById("cardnumber_data").value
      
-     if( cardnumber == "" || isNaN( cardnumber ) || !(cardnumber.length >= 10 &&  cardnumber.length <= 20) )
+     if( cardnumber == "" || isNaN( cardnumber ) || !(cardnumber.length >= 10 && cardnumber.length <= 20) )
      {
        if(cardnumber == ""){
 
-     	  $("#cardError1").html("You must enter your Credit Card Number.")
+              $("#cardError1").html("You must enter your Credit Card Number.")
        }else if(isNaN( cardnumber )){
 
-     	  $("#cardError1").html("")
-     	  $("#cardError1").html("You must enter Number.")
+              $("#cardError1").html("")
+              $("#cardError1").html("You must enter Number.")
         }else{
 
-     	  $("#cardError1").html("")
-      	   //$("#cardError").html("You must enter the right format")
+              $("#cardError1").html("")
+               //$("#cardError").html("You must enter the right format")
          }
        
        cardValidate = false;
      }else{
-     	cardValidate = true;
+             cardValidate = true;
      }
 
 
@@ -499,21 +498,21 @@
      {
        if(cvc == ""){
 
-     	  $("#cvcError1").html("Please enter the credit card's security code.")
-     	  
+              $("#cvcError1").html("Please enter the credit card's security code.")
+             
        }else if(isNaN( cvc )){
 
-     	  $("#cvcError1").html("")
-     	  $("#cvcError1").html("You must enter Number.")
+              $("#cvcError1").html("")
+              $("#cvcError1").html("You must enter Number.")
         }else{
 
-     	  $("#cvcError1").html("")
-      	  $("#cvcError1").html("You must enter the format ###.")
+              $("#cvcError1").html("")
+               $("#cvcError1").html("You must enter the format ###.")
          }
        cvcValidate = false;
        
      }else{
-     	cvcValidate = true;
+             cvcValidate = true;
      }
 
      
@@ -524,21 +523,21 @@
     {
       if(invoiceid == ""){
 
-    	  $("#invoiceError1").html("Please enter the InvoiceId.")
-    	  
+             $("#invoiceError1").html("Please enter the InvoiceId.")
+            
       }else if(isNaN( invoiceid )){
 
-    	  $("#invoiceError1").html("")
-    	  $("#invoiceError1").html("You must enter Number.")
+             $("#invoiceError1").html("")
+             $("#invoiceError1").html("You must enter Number.")
        }else{
 
-    	  $("#invoiceError1").html("")
-     	  $("#invoiceError1").html("You must enter the format ###.")
+             $("#invoiceError1").html("")
+              $("#invoiceError1").html("You must enter the format ###.")
         }
       invoiceidValidate = false;
       
     }else{
-    	invoiceidValidate = true;
+            invoiceidValidate = true;
     }
 
 
@@ -546,85 +545,85 @@
     var year = document.getElementById("year_name").value
 
    
-				if(billing_address_status == "false"){
-				
-				   if(firstNameValidate && lastNameValidate && emailValidate && addressValidate && 
-				    	     cityValidate && stateValidate && countryValidate && zipValidate &&
-				    	     phoneValidate && cardValidate && cvcValidate && invoiceidValidate && billing_addressValidate && 
-				    	     billing_cityValidate && billing_stateValidate && billing_countryValidate && billing_zipValidate ){ 
-				    	
-				
-						processing();
-				    	
-				
-				    	var myJSONText = "data={firstName:"+firstName+
-				    	",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
-				    	",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-				    	",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+
-				    	",billing_state:"+billing_state+",billing_country:"+billing_country+",billing_zip:"+billing_zip+
-				    	",billing_address:"+billing_address+",billing_city:"+billing_city+"}"
-				
-				           
-				        
-				              
-				    	 // var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
-				    		//$(location).attr('href',url);
-				    	 $.ajax({
-			                    type: "POST",
-			                    url: checkout_url,
-			                    data : myJSONText,
-			                    cache : false,
-			                    success : function(text)
-			                     { 
-			                       location.reload();
-			                     }
+                                if(billing_address_status == "false"){
+                                
+                                 if(firstNameValidate && lastNameValidate && emailValidate && addressValidate &&
+                                          cityValidate && stateValidate && countryValidate && zipValidate &&
+                                          phoneValidate && cardValidate && cvcValidate && invoiceidValidate && billing_addressValidate &&
+                                          billing_cityValidate && billing_stateValidate && billing_countryValidate && billing_zipValidate ){
+                                         
+                                
+                                                processing();
+                                         
+                                
+                                         var myJSONText = "data={firstName:"+firstName+
+                                         ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
+                                         ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
+                                         ",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+
+                                         ",billing_state:"+billing_state+",billing_country:"+billing_country+",billing_zip:"+billing_zip+
+                                         ",billing_address:"+billing_address+",billing_city:"+billing_city+"}"
+                                
+                                
+                                
+                                
+                                          // var url = "../home/saveTransationForShoppingCart?data="+myJSONText;
+                                                 //$(location).attr('href',url);
+                                          $.ajax({
+                         type: "POST",
+                         url: checkout_url,
+                         data : myJSONText,
+                         cache : false,
+                         success : function(text)
+                         {
+                         location.reload();
+                         }
 
-			    		     }) .fail(function() {
-			    		      alert( "Sorry, there was an error. Please try again" );
-			    		     });
-				    }
-				}else{
+                                          }) .fail(function() {
+                                          alert( "Sorry, there was an error. Please try again" );
+                                          });
+                                 }
+                                }else{
 
-					 if(firstNameValidate && lastNameValidate && emailValidate && addressValidate && 
-				    	     cityValidate && stateValidate && countryValidate && zipValidate &&
-				    	     phoneValidate && cardValidate && cvcValidate && invoiceidValidate ){
-				    	
-				
-				    	processing();
-				    	
-				
-				    	 var myJSONText = "data={firstName:"+firstName+
-											",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
-											",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-											",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+"}"
-				        
-				              
-				    	   //var url = "../home/saveTransationForShoppingCart?data="+myJSONText;  
-				    	     
-							//window.location.href=url
-											 $.ajax({
-								                    type: "POST",
-								                    url: checkout_url,
-								                    data : myJSONText,
-								                    cache : false,
-								                    success : function(text)
-								                     {                         
-								                       location.reload();
-								                     }
+                                         if(firstNameValidate && lastNameValidate && emailValidate && addressValidate &&
+                                          cityValidate && stateValidate && countryValidate && zipValidate &&
+                                          phoneValidate && cardValidate && cvcValidate && invoiceidValidate ){
+                                         
+                                
+                                         processing();
+                                         
+                                
+                                          var myJSONText = "data={firstName:"+firstName+
+                                                                                        ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
+                                                                                        ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
+                                                                                        ",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+"}"
+                                
+                                
+                                          //var url = "../home/saveTransationForShoppingCart?data="+myJSONText;
+                                         
+                                                        //window.location.href=url
+                                                                                         $.ajax({
+                                                                 type: "POST",
+                                                                 url: checkout_url,
+                                                                 data : myJSONText,
+                                                                 cache : false,
+                                                                 success : function(text)
+                                                                 {
+                                                                 location.reload();
+                                                                 }
 
-								    		     }) .fail(function() {
-								    		      alert( "Sorry, there was an error. Please try again" );
-								    		     });
-				     }
+                                                                                  }) .fail(function() {
+                                                                                  alert( "Sorry, there was an error. Please try again" );
+                                                                                  });
+                                 }
 
-				}
+                                }
     }
 
-	
-	</script>
-	
-	<script>
-       jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto' action='adSpacePhotos' />", 
+        
+        </script>
+        
+        <script>
+       jQuery.ajax({type:'POST', url:"<g:createLink controller='adSpacePhoto' action='adSpacePhotos' />",
             success:function(json, textStatus){loadAdSpace(json);}, error:function(XMLHttpRequest,textStatus,errorThrown){console.log(errorThrown)}});
     </script>
     
@@ -632,82 +631,82 @@
    
         var product_id = ""
     $(document).ready(function() {
-    	 $('#billingAddressContainingDiv').hide()
-    	var response;
-		 $.ajax({ type: "GET",                 
-	 	         url: '${createLink(controller:'home', action:'cartListDetailsJSON')}',	 	        
-                async: false,		                
+             $('#billingAddressContainingDiv').hide()
+            var response;
+                 $.ajax({ type: "GET",
+                  url: '${createLink(controller:'home', action:'cartListDetailsJSON')}',                 
+                async: false,                
                 success : function(text)
                   {
-       	         response = text;
-       	         if(response){
+                response = text;
+                if(response){
                     }
                   }
 
        });
-		 
-		$('#demo').html( '<table  class="table table-striped table-bordered " id="example"></table>' );
-		$('#example').dataTable({
-			"aaData":response,
-			"bFilter": false,
-			"bLengthChange": false,	   
-			"bPaginate": false,
-			"bInfo":false,
-          "aoColumns": [						
-				{ "sTitle": " ","bSortable": false}, 			
-				{ "sTitle": "Product" , "sClass": "center","bSortable": false},
-				{ "sTitle": "Price" , "sClass": "center","bSortable": false},
-				{ "sTitle": "Quantity", "sClass": "center" ,"bSortable": false},
-				{ "sTitle": "Total" , "sClass": "center","bSortable": false},
-				{ "sTitle": "Delete", "sClass": "center","bSortable": false}
-				
-				
-				
-				
-			]
-		});	
-	
-		
+                
+                $('#demo').html( '<table class="table table-striped table-bordered " id="example"></table>' );
+                $('#example').dataTable({
+                        "aaData":response,
+                        "bFilter": false,
+                        "bLengthChange": false,        
+                        "bPaginate": false,
+                        "bInfo":false,
+          "aoColumns": [                                                
+                                { "sTitle": " ","bSortable": false},                         
+                                { "sTitle": "Product" , "sClass": "center","bSortable": false},
+                                { "sTitle": "Price" , "sClass": "center","bSortable": false},
+                                { "sTitle": "Quantity", "sClass": "center" ,"bSortable": false},
+                                { "sTitle": "Total" , "sClass": "center","bSortable": false},
+                                { "sTitle": "Delete", "sClass": "center","bSortable": false}
+                                
+                                
+                                
+                                
+                        ]
+                });        
+        
+                
           });
 
         
         
-	
+        
 
-	 
+        
     </script>
     <div class="homePageItems">
-		<div class="homePageItem marginRight"  style="background: ;width: 100%;">
-		<div class="homePageItem marginRight"  style="background: ;width: 100%;">
-		
-		</div>
-			
-			
-		<div class="homePageItem marginRight"  style="background: ;width: 100%;">
-			<div class="blockHeader headerGreen"  style="background:;width: 99%;">
-				<h1 id="name_of_product" style="float:left" ></h1>
-				<h1 id="price_of_product" style="float:right;margin-right: 1%;"></h1>
-			</div>
-			<div class="generalContainer">
-			
-			  <div id="productContainingDiv" style="background:;" class="formContainer">
-				
-			 			 <div id="demo" name="demo" style="background: ;width:100%;">
-									                           
-						 </div>
-			  </div> <!-- end of productContainingDiv -->
-			  
-			   <div style="background:;">
-				   <button onclick="checkoutTransation()"  class="saveBtn">Proceed To Checkout</button>
-			 			<a href ="/newmscwebsite/home/shoppingCart">Continue Shopping</a>
-			  </div> 
-				
-			</div>
-			<div class="blockFooter headerGreen"  style="background: ;width: 100%;">
-            </div>          
-			
-		</div>
-		</div>
+                <div class="homePageItem marginRight" style="background: ;width: 100%;">
+                <div class="homePageItem marginRight" style="background: ;width: 100%;">
+                
+                </div>
+                        
+                        
+                <div class="homePageItem marginRight" style="background: ;width: 100%;">
+                        <div class="blockHeader headerGreen" style="background:;width: 99%;">
+                                <h1 id="name_of_product" style="float:left" ></h1>
+                                <h1 id="price_of_product" style="float:right;margin-right: 1%;"></h1>
+                        </div>
+                        <div class="generalContainer">
+                        
+                         <div id="productContainingDiv" style="background:;" class="formContainer">
+                                
+                                                  <div id="demo" name="demo" style="background: ;width:100%;">
+                                                                        
+                                                 </div>
+                         </div> <!-- end of productContainingDiv -->
+                        
+                         <div style="background:;">
+                                 <button onclick="checkoutTransation()" class="saveBtn">Proceed To Checkout</button>
+                                                 <a href ="/newmscwebsite/home/shoppingCart">Continue Shopping</a>
+                         </div>
+                                
+                        </div>
+                        <div class="blockFooter headerGreen" style="background: ;width: 100%;">
+            </div>
+                        
+                </div>
+                </div>
     </div>
     <g:render template="/widget/updateHtmlWidgetDialog" plugin="simple-cms" />
     <g:render template="/widget/updatePhotoWidget" plugin="simple-cms" />
@@ -721,8 +720,8 @@
                                 <div class="span12">
                                     <!--box-->
                                     
-                                        <!--box header  class="blockHeader headerGreen" -->
-                                        <div  style="margin-top: -1px;width:98.5%;" class="blockHeader headerGreen"  >
+                                        <!--box header class="blockHeader headerGreen" -->
+                                        <div style="margin-top: -1px;width:98.5%;" class="blockHeader headerGreen" >
                                            <h1>Card Information</h1>
                                              <a id="myDivPopupBoxClose" onclick="closePopup2()"><img src="<g:createLinkTo dir='images/layout' file='cancel_dialog.png'/>" height="25" width="25" /></a>
                                                </div>
@@ -730,11 +729,11 @@
                                              <div class="bodyGreen" style="background: white;">
                                              
                                                                   
-									        <div class="generalContainer" style="width:93%;height:500px;">
-									        
-										    <div class="formContainer" style="width:93%;height:488px;" id="scroll">
+                                                                         <div class="generalContainer" style="width:93%;height:500px;">
+                                                                        
+                                                                                 <div class="formContainer" style="width:93%;height:488px;" id="scroll">
                                              
-                                              <g:form  action="donateInfo" name="cardInfoForm" id="cardInfoForm" class="newclass">
+                                              <g:form action="donateInfo" name="cardInfoForm" id="cardInfoForm" class="newclass">
                                               
                                               <div style="">
                                                  <div style="width:100%;background: ;float: left;">
@@ -754,13 +753,13 @@
                                                 </div>
                                                  <input type="text" class="" placeholder="first name" name="fname_data" id="fname_data" style="width:200px;">
                                               </div>
-                                              <span id="firstNameError1"  name="firstNameError1" style="color:#F70000;margin-left:150px;"></span>
+                                              <span id="firstNameError1" name="firstNameError1" style="color:#F70000;margin-left:150px;"></span>
                                                <div style="">
                                                <div style="width:30%;background: ;float: left;">
                                                 <label style="visibility:hidden;">Na</label>
                                                  <label >Last Name:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="last name" name="lname_data" id="lname_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="last name" name="lname_data" id="lname_data" style="width:200px;">
                                               </div>
                                               <span id="lastNameError1" style="color:#F70000;margin-left:150px;"></span>
                                                <div style="">
@@ -769,17 +768,17 @@
                                                 <label style="visibility:hidden;">Na</label>
                                                  <label >Email:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="email address" name="email_data" id="email_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="email address" name="email_data" id="email_data" style="width:200px;">
                                               </div>
                                               <span id="emailError1" style="color:#F70000;margin-left:150px;"></span>
-                                               <div style="background: ;">                                               
+                                               <div style="background: ;">
                                                
                                                <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label >Phone:</label>                                               
-                                               </div>                                                 
+                                                 <label >Phone:</label>
+                                               </div>
                                                  
-                                                 <input type="text"  class="" placeholder="phone number" name="phone_data" id="phone_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="phone number" name="phone_data" id="phone_data" style="width:200px;">
                                               </div>
                                               <span id="phoneError1" style="color:#F70000;margin-left:150px;"></span>
                                               
@@ -788,7 +787,7 @@
                                                      <label style="visibility:hidden;">Na</label>
                                                     <label style="font-weight: bold;">Billing Address</label>
                                                     </div>
-                                                       <input type="text"  class="" style="width:200px;visibility:hidden;">
+                                                       <input type="text" class="" style="width:200px;visibility:hidden;">
                                                 </div>
                                                
                                                 <div style="">
@@ -796,7 +795,7 @@
                                                      <label style="visibility:hidden;">Na</label>
                                                     <label>Address:</label>
                                                     </div>
-                                                 <input type="text"  class="" placeholder="address" name="address_data" id="address_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="address" name="address_data" id="address_data" style="width:200px;">
                                               </div>
                                               <span id="addressError1" style="color:#F70000;margin-left:150px;"></span>
                                               
@@ -805,16 +804,16 @@
                                                <label style="visibility:hidden;">Na</label>
                                                  <label>City:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="city" name="city_data" id="city_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="city" name="city_data" id="city_data" style="width:200px;">
                                               </div>
-                                              <span id="cityError1" style="color:#F70000;margin-left:150px;"></span>                                       
+                                              <span id="cityError1" style="color:#F70000;margin-left:150px;"></span>
                                               
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
                                                  <label>State:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="state" name="state_data" id="state_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="state" name="state_data" id="state_data" style="width:200px;">
                                               </div>
                                               <span id="stateError1" style="color:#F70000;margin-left:150px;"></span>
                                               <div style="">
@@ -824,8 +823,8 @@
                                                  </div>
                                            
                                                  
-                                                 <g:countrySelect type="text"  name="country_data" id="country_data"  value="${ params?.country}" 
-												                                                noSelection="['':'-Choose your country-']" multiple="false"  style ="width:202px;"/>
+                                                 <g:countrySelect type="text" name="country_data" id="country_data" value="${ params?.country}"
+                                                                                                 noSelection="['':'-Choose your country-']" multiple="false" style ="width:202px;"/>
                                               </div>
                                               <span id="countryError1" style="color:#F70000;margin-left:150px;"></span>
                                              <div style="">
@@ -833,7 +832,7 @@
                                                <label style="visibility:hidden;">Na</label>
                                                  <label>Zip:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="zip" name="zip_data" id="zip_data" style="width:200px;">
+                                                 <input type="text" class="" placeholder="zip" name="zip_data" id="zip_data" style="width:200px;">
                                               </div>
                                               <span id="zipError1" style="color:#F70000;margin-left:150px;"></span>
                                                <div style="">
@@ -855,7 +854,7 @@
                                                      <label style="visibility:hidden;">Na</label>
                                                     <label>Address:</label>
                                                     </div>
-                                                 <input type="text"  class="" placeholder="address" name="billing_address" id="billing_address" style="width:200px;">
+                                                 <input type="text" class="" placeholder="address" name="billing_address" id="billing_address" style="width:200px;">
                                               </div>
                                               <span id="billing_addressError1" style="color:#F70000;margin-left:150px;"></span>
                                               
@@ -864,7 +863,7 @@
                                                <label style="visibility:hidden;">Na</label>
                                                  <label>City:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="city" name="billing_city" id="billing_city" style="width:200px;">
+                                                 <input type="text" class="" placeholder="city" name="billing_city" id="billing_city" style="width:200px;">
                                               </div>
                                               <span id="billing_cityError1" style="color:#F70000;margin-left:150px;"></span>
                                                                                       
@@ -873,7 +872,7 @@
                                                <label style="visibility:hidden;">Na</label>
                                                  <label>State:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="state" name="billing_state" id="billing_state" style="width:200px;">
+                                                 <input type="text" class="" placeholder="state" name="billing_state" id="billing_state" style="width:200px;">
                                               </div>
                                               <span id="billing_stateError1" style="color:#F70000;margin-left:150px;"></span>
                                               <div style="">
@@ -883,8 +882,8 @@
                                                  </div>
                                            
                                                  
-                                                 <g:countrySelect type="text"  name="billing_country" id="billing_country"  value="${ params?.country}" 
-												                                                noSelection="['':'-Choose your country-']" multiple="false"  style ="width:202px;"/>
+                                                 <g:countrySelect type="text" name="billing_country" id="billing_country" value="${ params?.country}"
+                                                                                                 noSelection="['':'-Choose your country-']" multiple="false" style ="width:202px;"/>
                                               </div>
                                               <span id="billing_countryError1" style="color:#F70000;margin-left:150px;"></span>
                                              <div style="">
@@ -892,7 +891,7 @@
                                                <label style="visibility:hidden;">Na</label>
                                                  <label>Zip:</label>
                                                  </div>
-                                                 <input type="text"  class="" placeholder="zip" name="billing_zip" id="billing_zip" style="width:200px;">
+                                                 <input type="text" class="" placeholder="zip" name="billing_zip" id="billing_zip" style="width:200px;">
                                               </div>
                                               <span id="billing_zipError1" style="color:#F70000;margin-left:150px;"></span>
                                               </div>
@@ -904,7 +903,7 @@
                                                  <label Style="font-weight: bold;">Credit Card Information</label>
                                                  </div>
                                                  
-                                                      <input type="checkbox" name=""  style="background: ;visibility: hidden;">
+                                                      <input type="checkbox" name="" style="background: ;visibility: hidden;">
                                                         
                                                 
                                               </div>
@@ -915,7 +914,7 @@
                                                  <label>Card Number:</label>
                                                  </div>
                                                 
-                                                 <input type="text"  maxlength="20"  placeholder="card number" name="cardnumber_data" id="cardnumber_data" style="width:200px;">
+                                                 <input type="text" maxlength="20" placeholder="card number" name="cardnumber_data" id="cardnumber_data" style="width:200px;">
                                               </div>
                                               <span id="cardError1" style="color:#F70000;margin-left:150px;"></span>
                                            
@@ -923,10 +922,10 @@
                                               <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label>CVC:</label>
+                                                 <label>CCV:</label>
                                                  </div>
                                                 
-                                                 <input type="text"  class="" placeholder="cvc" name="cvc_data" id="cvc_data" style="width:200px;">
+                                                 <input type="password" class="" placeholder="ccv" name="cvc_data" id="cvc_data" style="width:200px;">
                                               </div>
                                               <span id="cvcError1" style="color:#F70000;margin-left:150px;"></span>
                                               
@@ -936,8 +935,8 @@
                                                  <label>Invoice Id:</label>
                                                  </div>
                                                 
-                                                 <input type="text"  class="" placeholder="invoice id" name="invoiceid_data" id="invoiceid_data" style="width:200px;">
-                                              </div> 
+                                                 <input type="text" class="" placeholder="invoice id" name="invoiceid_data" id="invoiceid_data" style="width:200px;">
+                                              </div>
                                               
                                               <span id="invoiceError1" style="color:#F70000;margin-left:150px;"></span>
                                               
@@ -949,26 +948,26 @@
                                                  </div>
                                                 
                                                  <div class="expiry-wrapper">
-								                    <select class="card-expiry-month stripe-sensitive required" id="month_name" name="month_name" value="${ params?.month}" style ="width:105px;">
-								                    </select>
-								                    <script type="text/javascript">
-								                        var select = $(".card-expiry-month"),
-								                            month = new Date().getMonth() + 1;
-								                        for (var i = 1; i <= 12; i++) {
-								                            select.append($("<option value='"+i+"' "+(month === i ? "selected" : "")+">"+i+"</option>"))
-								                        }
-								                    </script>
-								                    <span> / </span>
-								                    <select class="card-expiry-year stripe-sensitive required" id="year_name" name="year_name" value="${ params?.year}" style ="width:105px;"></select>
-								                    <script type="text/javascript">
-								                        var select = $(".card-expiry-year"),
-								                            year = new Date().getFullYear();
-								 
-								                        for (var i = 0; i < 12; i++) {
-								                            select.append($("<option value='"+(i + year)+"' "+(i === 0 ? "selected" : "")+">"+(i + year)+"</option>"))
-								                        }
-								                    </script>
-								                </div>
+                                                                 <select class="card-expiry-month stripe-sensitive required" id="month_name" name="month_name" value="${ params?.month}" style ="width:105px;">
+                                                                 </select>
+                                                                 <script type="text/javascript">
+                                                                 var select = $(".card-expiry-month"),
+                                                                 month = new Date().getMonth() + 1;
+                                                                 for (var i = 1; i <= 12; i++) {
+                                                                 select.append($("<option value='"+i+"' "+(month === i ? "selected" : "")+">"+i+"</option>"))
+                                                                 }
+                                                                 </script>
+                                                                 <span> / </span>
+                                                                 <select class="card-expiry-year stripe-sensitive required" id="year_name" name="year_name" value="${ params?.year}" style ="width:105px;"></select>
+                                                                 <script type="text/javascript">
+                                                                 var select = $(".card-expiry-year"),
+                                                                 year = new Date().getFullYear();
+                                                                
+                                                                 for (var i = 0; i < 12; i++) {
+                                                                 select.append($("<option value='"+(i + year)+"' "+(i === 0 ? "selected" : "")+">"+(i + year)+"</option>"))
+                                                                 }
+                                                                 </script>
+                                                                 </div>
                                               </div>
                                             
                                             
@@ -978,7 +977,7 @@
                                                  <label>Description:</label>
                                                  </div>
                                                 
-                                                  <input type="button"  class="saveBtn" value="Proceed" onclick="checkoutformValidation();">
+                                                  <input type="button" class="saveBtn" value="Proceed" onclick="checkoutformValidation();">
                                                   
                                               </div>
                                               
@@ -991,21 +990,21 @@
                                               </div>
                                               </div>
                                                 
-                                             </div>    
-											   
-												                                                  
-												  
+                                             </div>
+                                                                                        
+                                                                                                
+                                                                                                
                                            
                                             
                                          <div class="blockFooter headerGreen" style="width:100%;background: ;">
                                          
                                        </div>
-						         
-		                               
-                                    </div> 
+                                                
+                
+                                    </div>
                             
-                              </div>   <!--row-fluid popup end-->                         
-  <script src="../js/jquery.validate.js"></script> 
+                              </div> <!--row-fluid popup end-->
+  <script src="../js/jquery.validate.js"></script>
    <script src="../js/jquery.dataTables.min.js"></script>
-		<script src="../js/jquery.dataTables.bootstrap.js"></script> 
+                <script src="../js/jquery.dataTables.bootstrap.js"></script>
  </body>

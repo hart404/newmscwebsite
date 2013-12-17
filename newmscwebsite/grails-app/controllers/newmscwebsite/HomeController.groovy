@@ -44,7 +44,7 @@ class HomeController {
             def hours_inst = params.hours
             def time_inst = params.time
             
-            def report_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst)
+            def report_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst,dateCreated:new Date(),lastUpdated:new Date())
             report_inst.save(failOnError:true)
           
             render "true"
@@ -75,7 +75,7 @@ class HomeController {
                         def trailreport_inst = new TrailReport(comment:comments_inst,code:code_inst,trailSection: trailsection_inst)
                         trailreport_inst.save(failOnError:true)
                         
-                        def volunteersession_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst,trailsSections:trailsection_inst)
+                        def volunteersession_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst,trailsSections:trailsection_inst,,dateCreated:new Date(),lastUpdated:new Date())
                         volunteersession_inst.save(failOnError:true)
                         
             render "true"
