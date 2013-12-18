@@ -264,6 +264,7 @@ class PersonController {
 		//println("params::::::::::::::::::::"+params)
 		def jsonObj = JSON.parse(params.data)
 		
+		def property_path = request.getSession().getServletContext().getRealPath("/").toString()+"../grails-app/conf/constant_contact.properties"
 		
 		///println("jsonObj.email_address ::::::::::::::"+jsonObj.email_address)
 		//println("jsonObj.lastname ::::::::::::::"+jsonObj.lastname)
@@ -271,6 +272,33 @@ class PersonController {
 		//println("jsonObj.companyname ::::::::::::::"+jsonObj.companyname)
 		
 		  try {
+			  
+				  String []tempapikey
+				  String []tempaccessToken
+				  File file = new File(property_path)
+				  String _apiKey
+				  String _accessToken
+				  
+				  def apikey =""
+				  def accesstoken =""
+				  
+				  file.eachLine {line->
+					  
+					  if(line.contains("apikey")) {
+					  
+						  tempapikey = line.split("=")
+						  apikey = tempapikey[1]
+						  println("apikey "+apikey)
+					  
+					  }
+					  if(line.contains("accesstoken")){
+						  tempaccessToken= line.split("=")
+						  accesstoken = tempaccessToken[1]
+						  println("accesstoken "+accesstoken)
+					  }
+					  
+					  
+				  }
 			//println("apikey"+grailsApplication.config.constant_contact.apikey)
 			//println("accesstoken"+grailsApplication.config.constant_contact.accesstoken)
 			TimeZone tz = TimeZone.getTimeZone("UTC");
@@ -278,7 +306,7 @@ class PersonController {
 			df.setTimeZone(tz);
 			String nowAsISO = df.format(new Date());
 			//System.out.println("nowAsISO"+nowAsISO);
-			String url = "https://api.constantcontact.com/v2/contacts?api_key="+grailsApplication.config.constant_contact.apikey+"&access_token="+grailsApplication.config.constant_contact.accesstoken;
+			String url = "https://api.constantcontact.com/v2/contacts?api_key="+apikey+"&access_token="+accesstoken;
 			URL obj = new URL(url);
 			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 //			String headerAcessToken="Bearer 426c3d83-db35-4cd4-8aff-11dd1efa5983";
@@ -300,12 +328,12 @@ class PersonController {
 			int responseCode = con.getResponseCode();
 			//println("\nSending 'POST' request to URL : " + url);
 			//println("Post parameters : " + getJSONObject("1","VISITOR","ACTION_BY_OWNER",nowAsISO,params.emailId));
-			//println("Response Code : " + responseCode);
+//			println("Response Code : " + responseCode);
 			
 			if(responseCode == 201){
 				
 				//String success = "Your successfully subscribed "
-				//println("inside iffffffffffffffff33333333333333333333333")
+//				println("inside iffffffffffffffff33333333333333333333333")
 				
 				//flash.message = "Your successfully subscribed "
 				

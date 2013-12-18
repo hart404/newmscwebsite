@@ -579,6 +579,7 @@ border-radius: 3px 3px 3px 3px; */
                          }
 
                                           }) .fail(function() {
+                                          closeprocessing();
                                           alert( "Sorry, there was an error. Please try again" );
                                           });
                                  }
@@ -612,6 +613,7 @@ border-radius: 3px 3px 3px 3px; */
                                                                  }
 
                                                                                   }) .fail(function() {
+                                                                                  closeprocessing();
                                                                                   alert( "Sorry, there was an error. Please try again" );
                                                                                   });
                                  }

@@ -15,7 +15,7 @@ class DonateService {
 	def processDonation(creditCardNumber, expirationMonth, expirationYear) {
 		def apiLoginId = grailsApplication.config.authorize.net.api.login.identity
 		def transactionKey = grailsApplication.config.authorize.net.transaction.key
-		Merchant merchant = Merchant.createMerchant(Environment.SANDBOX, apiLoginId, transactionKey)
+		Merchant merchant = Merchant.createMerchant(Environment.SANDBOX, apiLoginId.toString(), transactionKey.toString())
 		CreditCard creditCard = CreditCard.createCreditCard()
 		creditCard.setCreditCardNumber(creditCardNumber.toString())
 		creditCard.setExpirationMonth(expirationMonth.toString())

@@ -338,6 +338,7 @@ function showcredicardInfo(){
                      }
 
     		     }) .fail(function() {
+    		    	 closeprocessing();
     		      alert( "Sorry, there was an error. Please try again" );
     		     });
         }

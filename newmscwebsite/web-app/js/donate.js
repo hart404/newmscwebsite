@@ -25,13 +25,28 @@ var amount_val = "";
 		var lastname = document.getElementById("lastname").value
 		var company = document.getElementById("company").value
 		
-		  var myJSONText = "{'email_address':'"+email_addess+
+		  var myJSONText = "data={'email_address':'"+email_addess+
 			"','firstname':'"+firstname+"','lastname':'"+lastname+"','companyname':'"+company+"'}"
 	  
 
-		var url = "./person/registerUser?data="+myJSONText;  
-	    
-		$(location).attr('href',url);
+//		var url = "./person/registerUser?data="+myJSONText;  
+//	    
+//		$(location).attr('href',url);
+			
+			$.ajax({
+                type: "POST",
+                url: contact_url,
+                data : myJSONText,
+                cache : false,
+                success : function(text)
+                 {       
+                   location.reload();
+                 }
+
+		     }) .fail(function() {
+		    	 closeprocessing();
+		      alert( "Sorry, there was an error. Please try again" );
+		     });
 		
 		}
 

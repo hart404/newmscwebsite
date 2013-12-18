@@ -13,6 +13,7 @@
 <g:javascript>
   var donate_url="${createLink(controller:'home', action:'saveFullinfoData')}"
   var ajax_url="${createLink(controller:'home', action:'storeReport')}"
+  var contact_url="${createLink(controller:'person', action:'registerUser')}"
 </g:javascript>
 <script>
         var reported = false;

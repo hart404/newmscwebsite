@@ -104,7 +104,9 @@ class ProductController {
 		  // unit_price:$ 50, file1:org.springframework.web.multipart.commons.CommonsMultipartFile@1d87f52,
 		  // action:updateProduct, controller:product]
 		  
-		  def imageurl = grailsApplication.config.grails.config.filesUpload
+		  def imageurl = request.getSession().getServletContext().getRealPath("/").toString()+"imageFile/"
+		  
+		  println(":::::::::::::::::::"+imageurl)
 		  
 		  def product_inst = Product.get(params.product_id)
 		  
