@@ -14,6 +14,8 @@
   var donate_url="${createLink(controller:'home', action:'saveFullinfoData')}"
   var ajax_url="${createLink(controller:'home', action:'storeReport')}"
   var contact_url="${createLink(controller:'person', action:'registerUser')}"
+  var nameemail_url="${createLink(controller:'home', action:'saveNameEmail')}"
+  var nodata_url="${createLink(controller:'home', action:'saveNonData')}"
 </g:javascript>
 <script>
         var reported = false;
@@ -133,6 +135,7 @@
                         document.getElementById('hours'+id).value = "";
                         document.getElementById('starttime'+id).value = "";
                         alert("Your entry has been added");
+                        location.reload();
                        }
  
           }).fail(function() {
@@ -714,30 +717,18 @@
                                               <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label>CVC:</label>
+                                                 <label>CCV:</label>
                                                  </div>
                                                 
-                                                 <input type="text" maxlength="4" placeholder="cvc" name="cvc_2" id="cvc_2" style="width:200px;">
+                                                 <input type="password" maxlength="4" placeholder="ccv" name="cvc_2" id="cvc_2" style="width:200px;">
                                               </div>
                                               
                                              <span id="cvc_2Error" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                            
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label>Invoice Id:</label>
-                                                 </div>
-                                                
-                                                 <input type="text" maxlength="4" placeholder="invoice id" name="invoiceid_2" id="invoiceid_2" style="width:200px;">
-                                              </div>
-                                              
-                                              <span id="invoiceid_2Error" style="color:#F70000;margin-left:150px;"></span>
-                                              
-                                              
-                                               <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Expary Date:</label>
+                                                 <label> Expiration Date:</label>
                                                  </div>
                                                 
                                                  <div class="expiry-wrapper">
@@ -869,28 +860,17 @@
                                               <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label>CVC:</label>
+                                                 <label>CCV:</label>
                                                  </div>
                                                 
-                                                 <input type="text" class="" placeholder="cvc" name="cvc_3" id="cvc_3" style="width:200px;">
+                                                 <input type="password" class="" placeholder="ccv" name="cvc_3" id="cvc_3" style="width:200px;">
                                               </div>
                                               <span id="cvc_3Error" style="color:#F70000;margin-left:150px;"></span>
-                                              
+                                                                                           
                                                <div style="">
                                                  <div style="width:30%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label>Invoice Id:</label>
-                                                 </div>
-                                                
-                                                 <input type="text" class="" placeholder="invoice id" name="invoiceid_3" id="invoiceid_3" style="width:200px;">
-                                              </div>
-                                               <span id="invoiceid_3Error" style="color:#F70000;margin-left:150px;"></span>
-                                              
-                                              
-                                               <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Expary Date:</label>
+                                                 <label> Expiration Date:</label>
                                                  </div>
                                                 
                                                  <div class="expiry-wrapper">
@@ -964,5 +944,5 @@
                                     </div>
                             
                               </div> <!--row-fluid popup end-->
-<div class="loader1" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;Processing ... </div>
+<div class="loader1" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Processing</div>
 <div id="backgroundPopup"></div>

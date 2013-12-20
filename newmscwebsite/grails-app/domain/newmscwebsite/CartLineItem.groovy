@@ -6,6 +6,7 @@ class CartLineItem {
 	String unitPrice
 	String totalLineItemPrice
 	String sessionId
+	Boolean ordered = false
 	
 	
 	static belongsTo = [product:Product]

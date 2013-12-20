@@ -224,6 +224,7 @@ border-radius: 3px 3px 3px 3px; */
                 loadShopPopupBox()
 
     }
+    
 
     function addressCheck(blnchecked){
             
@@ -516,7 +517,7 @@ border-radius: 3px 3px 3px 3px; */
      }
 
      
-    var invoiceid = document.getElementById("invoiceid_data").value
+    /*var invoiceid = document.getElementById("invoiceid_data").value
     var invoiceidValidate = true;
 
     if( invoiceid == "" || isNaN( invoiceid ) || invoiceid.length != 3 )
@@ -538,7 +539,7 @@ border-radius: 3px 3px 3px 3px; */
       
     }else{
             invoiceidValidate = true;
-    }
+    }*/
 
 
     var month = document.getElementById("month_name").value
@@ -549,7 +550,7 @@ border-radius: 3px 3px 3px 3px; */
                                 
                                  if(firstNameValidate && lastNameValidate && emailValidate && addressValidate &&
                                           cityValidate && stateValidate && countryValidate && zipValidate &&
-                                          phoneValidate && cardValidate && cvcValidate && invoiceidValidate && billing_addressValidate &&
+                                          phoneValidate && cardValidate && cvcValidate  && billing_addressValidate &&
                                           billing_cityValidate && billing_stateValidate && billing_countryValidate && billing_zipValidate ){
                                          
                                 
@@ -559,7 +560,7 @@ border-radius: 3px 3px 3px 3px; */
                                          var myJSONText = "data={firstName:"+firstName+
                                          ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
                                          ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-                                         ",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+
+                                         ",month:"+month+" ,year:"+year+
                                          ",billing_state:"+billing_state+",billing_country:"+billing_country+",billing_zip:"+billing_zip+
                                          ",billing_address:"+billing_address+",billing_city:"+billing_city+"}"
                                 
@@ -569,14 +570,15 @@ border-radius: 3px 3px 3px 3px; */
                                           // var url = "../home/saveTransationForShoppingCart?data="+myJSONText;
                                                  //$(location).attr('href',url);
                                           $.ajax({
-                         type: "POST",
-                         url: checkout_url,
-                         data : myJSONText,
-                         cache : false,
-                         success : function(text)
-                         {
-                         location.reload();
-                         }
+					                         type: "POST",
+					                         url: checkout_url,
+					                         data : myJSONText,
+					                         cache : false,
+					                         success : function(text)
+					                         {
+					                         	alert( "Transaction Succesfull" );
+                                         		location.reload();
+					                         }
 
                                           }) .fail(function() {
                                           closeprocessing();
@@ -587,7 +589,7 @@ border-radius: 3px 3px 3px 3px; */
 
                                          if(firstNameValidate && lastNameValidate && emailValidate && addressValidate &&
                                           cityValidate && stateValidate && countryValidate && zipValidate &&
-                                          phoneValidate && cardValidate && cvcValidate && invoiceidValidate ){
+                                          phoneValidate && cardValidate && cvcValidate){
                                          
                                 
                                          processing();
@@ -596,7 +598,7 @@ border-radius: 3px 3px 3px 3px; */
                                           var myJSONText = "data={firstName:"+firstName+
                                                                                         ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
                                                                                         ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-                                                                                        ",invoiceid:"+invoiceid+",month:"+month+" ,year:"+year+"}"
+                                                                                        ",month:"+month+" ,year:"+year+"}"
                                 
                                 
                                           //var url = "../home/saveTransationForShoppingCart?data="+myJSONText;
@@ -609,7 +611,8 @@ border-radius: 3px 3px 3px 3px; */
                                                                  cache : false,
                                                                  success : function(text)
                                                                  {
-                                                                 location.reload();
+                                                                 	alert( "Transaction Succesfull" );
+                                                                 	location.reload();
                                                                  }
 
                                                                                   }) .fail(function() {
@@ -931,16 +934,7 @@ border-radius: 3px 3px 3px 3px; */
                                               </div>
                                               <span id="cvcError1" style="color:#F70000;margin-left:150px;"></span>
                                               
-                                               <div style="">
-                                                 <div style="width:30%;background: ;float: left;">
-                                               <label style="visibility:hidden;">Na</label>
-                                                 <label>Invoice Id:</label>
-                                                 </div>
-                                                
-                                                 <input type="text" class="" placeholder="invoice id" name="invoiceid_data" id="invoiceid_data" style="width:200px;">
-                                              </div>
-                                              
-                                              <span id="invoiceError1" style="color:#F70000;margin-left:150px;"></span>
+                                               
                                               
                                               
                                                <div style="">

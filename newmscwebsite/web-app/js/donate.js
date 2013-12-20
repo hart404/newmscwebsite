@@ -39,7 +39,8 @@ var amount_val = "";
                 data : myJSONText,
                 cache : false,
                 success : function(text)
-                 {       
+                 {
+                	alert("You are successfully subscribed");
                    location.reload();
                  }
 

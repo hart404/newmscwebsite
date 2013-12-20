@@ -8,12 +8,14 @@ import java.util.Date;
 
 import org.apache.jasper.tagplugins.jstl.core.Catch;
 import org.joda.time.LocalDate
+import org.springframework.aop.aspectj.RuntimeTestWalker.ThisInstanceOfResidueTestVisitor;
 
 import grails.converters.JSON
 import groovy.sql.Sql
 import simple.cms.SCMSPhoto;
 import simple.cms.SCMSStaticPage
 
+import com.google.gson.JsonObject;
 import com.vinomis.authnet.AuthorizeNet
 
 class HomeController {
@@ -21,7 +23,8 @@ class HomeController {
         def homeService
         def eventService
         def dataSource
-    def springSecurityService
+		def springSecurityService
+		static checkOut = false
         
         static navigation = [
                 group: 'navigationBar',
@@ -194,7 +197,7 @@ class HomeController {
 					
 						println "SUCCESS"                  
                                         
-                        def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,city:jsonObj.city,state:jsonObj.state,
+                        def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,email:jsonObj.email,city:jsonObj.city,state:jsonObj.state,
                                 zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
                                 phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,
                                 street:jsonObj.address,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
@@ -238,7 +241,7 @@ class HomeController {
                 
                 //println("jsonObj.invoiceid_2 :::::::::::::"+jsonObj.invoiceid_2)
                 
-                String date = jsonObj.month+jsonObj.year
+                String date = jsonObj.month.toString()+jsonObj.year.toString().substring(2)
                 
                 //println("date ::::::::::::"+date)
                 
@@ -258,13 +261,12 @@ class HomeController {
                 
                 def s = new AuthorizeNet()
                 s.authorizeAndCapture {
-                 firstName jsonObj.name
-                 amount jsonObj.amount
-                 ccNumber ''+jsonObj.cardnumber+''
-                 cvv jsonObj.cvc_2
-                 ccExpDate date
-                 email jsonObj.email_id
-                 invoiceId jsonObj.invoiceid_2
+                 firstName jsonObj.name.toString()
+                 amount jsonObj.amount.toString()
+                 ccNumber jsonObj.cardnumber.toString()
+                 cvv jsonObj.cvc_2.toString()
+                 ccExpDate date.toString()
+                 email jsonObj.email_id.toString()
          }
                  def anr = s.submit();
                  println ("anr ::::::::::::::::::::::: "+anr)
@@ -284,7 +286,7 @@ class HomeController {
                          recuringType = true
                  }
                 
-                        if(anr.responseReasonText == "This transaction has been approved."){
+                        if(anr.responseReasonText.contains("This transaction has been approved.")){
                                 
                                 //println("inside ifffffffffffffffffffffffffff"+Double.parseDouble(jsonObj.amount))
                                 
@@ -292,8 +294,8 @@ class HomeController {
                         
                                 
                                                 
-                                def donateinst = new Donation(firstName:jsonObj.name,recurring:recuringType,recurringDate:from_d,
-                                        actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+                                def donateinst = new Donation(firstName:jsonObj.name,email:jsonObj.email_id,recurring:recuringType,recurringDate:from_d,
+                                        actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
                                 
                                 if(donateinst.save(flush:true)){
                                         flash.message = "This transaction has been approved."
@@ -312,6 +314,8 @@ class HomeController {
                         }else{
                                 
                                 flash.message = anr.responseReasonText
+								
+								println flash.message
                                 
                                 redirect(controller:"home" ,action: "index")
                         }
@@ -338,7 +342,7 @@ class HomeController {
                 //println("jsonObj.cardnumber :::::::::::::"+jsonObj.cardnumber)
                 //println("jsonObj.recuringType :::::::::::::"+jsonObj.recuringType)
                 
-                String date = jsonObj.month+jsonObj.year
+                String date = jsonObj.month.toString()+jsonObj.year.toString().substring(2)
                 
                 //println("date ::::::::::::"+date)
                 
@@ -357,11 +361,10 @@ class HomeController {
                 
                 def s = new AuthorizeNet()
                 s.authorizeAndCapture {                
-                 amount jsonObj.amount
-                 ccNumber ''+jsonObj.cardnumber+''
-                 cvv jsonObj.cvc_3
-                 ccExpDate date                
-                 invoiceId jsonObj.invoiceid_3
+                 amount jsonObj.amount.toString()
+                 ccNumber jsonObj.cardnumber.toString()
+                 cvv jsonObj.cvc_3.toString()
+                 ccExpDate date.toString()
          }
                  def anr = s.submit();
                  println ("anr ::::::::::::::::::::::: "+anr)
@@ -382,7 +385,7 @@ class HomeController {
                          recuringType = true
                  }
                 
-                        if(anr.responseReasonText == "This transaction has been approved."){
+                        if(anr.responseReasonText.contains("This transaction has been approved.")){
                                 
                                 //println("inside ifffffffffffffffffffffffffff"+Double.parseDouble(jsonObj.amount))
                                 
@@ -392,7 +395,7 @@ class HomeController {
                                 
                                                 
                                 def donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
-                                        actualDonationAmount:Double.parseDouble(jsonObj.amount),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+                                        actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
                                 
                                 if(donateinst.save(flush:true)){
                                         flash.message = "This transaction has been approved."
@@ -411,6 +414,8 @@ class HomeController {
                         }else{
                                 
                                 flash.message = anr.responseReasonText
+								
+								println flash.message
                                 
                                 redirect(controller:"home" ,action: "index")
                         }
@@ -423,62 +428,70 @@ class HomeController {
          def list_data = []
          def main_list_data = []
          def sessionId = request.getSession().id
-         //println("sessionId "+sessionId)
+         println("sessionId "+sessionId)
+		 println "::::::::::"+checkOut
         
-         def cartlineid = Cart.findAllWhere(sessionId:sessionId)
+//         def cartlineid = Cart.findAllWhere(sessionId:sessionId)
          //def newquery = CartLineItem.findAllWhere(sessionId:sessionId)
-         def productresult = Product.getAll(CartLineItem.findAllWhere(sessionId:sessionId).productId)
-         if(cartlineid.size() == 0)
-         {
-         //println("Entering in if")
-         def prod_listtest = CartLineItem.withCriteria{
-         and {
-         eq('sessionId' , sessionId)
-         }
-        
-         }
-         println("The value is"+prod_listtest)
-         for(int k=0; k < productresult.size() ; k++)
-         {
-         list_data.add("<a href='#'><img src='../"+productresult.productImageUrl[k]+"' height='20' width='20' ></a>")
-         list_data.add(productresult.productName[k])
-         list_data.add(prod_listtest.unitPrice[k])
-         list_data.add(prod_listtest.quantity[k])
-         list_data.add(prod_listtest.totalLineItemPrice[k])
-         list_data.add("<a href='#'><img src='../images/delete_icon.png' alt='' height='20' width='20' onclick='deleteData("+productresult.id[k]+")'></a>")
-         main_list_data.add(list_data)
-         list_data = []
-         }
-        
-        
-         //render main_list_data as JSON
-         }
-         else
-         {
-         println("Entering in else"+productresult)
-        
-         def prod_listtest = CartLineItem.withCriteria{
-         not{
-         'in'('id' , cartlineid.id)
-         }
-         and {
-         eq('sessionId' , sessionId)
-         }
-         }
-         //println("Entering in else"+prod_listtest)
-         for(int k=0; k < productresult.size() ; k++)
-         {
-         list_data.add("<a href='#'><img src='../"+productresult.productImageUrl[k]+"' height='20' width='20' ></a>")
-         list_data.add(productresult.productName[k])
-         list_data.add(prod_listtest.unitPrice[k])
-         list_data.add(prod_listtest.quantity[k])
-         list_data.add(prod_listtest.totalLineItemPrice[k])
-         list_data.add("<a href='#'><img src='../images/delete_icon.png' alt='' height='20' width='20' onclick='deleteData("+productresult.id[k]+")'></a>")
-         main_list_data.add(list_data)
-         list_data = []
-         }
-        
-         }
+         def productresult = Product.getAll(CartLineItem.findAllWhere(sessionId:sessionId,ordered:false).productId)
+		 if(checkOut){
+			 main_list_data.removeAll(list_data)
+			 checkOut = false
+		 }
+		 else{
+//	         if(cartlineid.size() == 0)
+//	         {
+//		         println("Entering in if")
+//		         def prod_listtest = CartLineItem.withCriteria{
+//		         and {
+//		         eq('sessionId' , sessionId)
+//		         }
+//		        
+//		         }
+//		         println("The value is"+prod_listtest)
+//		         for(int k=0; k < productresult.size() ; k++)
+//		         {
+//			         list_data.add("<a href='#'><img src='../"+productresult.productImageUrl[k]+"' height='20' width='20' ></a>")
+//			         list_data.add(productresult.productName[k])
+//			         list_data.add(prod_listtest.unitPrice[k])
+//			         list_data.add(prod_listtest.quantity[k])
+//			         list_data.add(prod_listtest.totalLineItemPrice[k])
+//			         list_data.add("<a href='#'><img src='../images/delete_icon.png' alt='' height='20' width='20' onclick='deleteData("+productresult.id[k]+")'></a>")
+//			         main_list_data.add(list_data)
+//			         list_data = []
+//		         }
+//		        
+//		        
+//		         //render main_list_data as JSON
+//	         }
+//	         else
+//	         {
+		         println("Entering in else"+productresult)
+		        
+		         def prod_listtest = CartLineItem.findAllWhere(sessionId:sessionId,ordered:false)
+//		         not{
+//		         'in'('id' , cartlineid.id)
+//		         }
+//		         and {
+//		         eq('sessionId' , sessionId)
+//		         }
+//		         }
+		         println("Entering in else"+prod_listtest)
+		         for(int k=0; k < productresult.size() ; k++)
+		         {
+		         list_data.add("<a href='#'><img src='../"+productresult.productImageUrl[k]+"' height='20' width='20' ></a>")
+		         list_data.add(productresult.productName[k])
+		         list_data.add(prod_listtest.unitPrice[k])
+		         list_data.add(prod_listtest.quantity[k])
+		         list_data.add(prod_listtest.totalLineItemPrice[k])
+		         list_data.add("<a href='#'><img src='../images/delete_icon.png' alt='' height='20' width='20' onclick='deleteData("+productresult.id[k]+")'></a>")
+		         main_list_data.add(list_data)
+				 println main_list_data
+		         list_data = []
+		         }
+	        
+//	         }
+		 }
         
          render main_list_data as JSON
         
@@ -488,10 +501,10 @@ class HomeController {
                 
                 def currentsessionId = request.getSession().id
                   def product_inst = Product.get(params.product_id)
-                  def cart_item_list_inst = CartLineItem.findWhere(product:product_inst , sessionId:currentsessionId)
-                //
-                  def delete_inst = cart_item_list_inst.delete()
+                  def cart_item_list_inst = CartLineItem.findWhere(product:product_inst , sessionId:currentsessionId, ordered:false)
+				  cart_item_list_inst.delete()
                 
+				println "deleted ::::::::::::::::::"
                 render "true"
         }
         
@@ -699,7 +712,7 @@ class HomeController {
                 def total_price
                 def total_qant
                 
-                def exist_line_cart_inst = CartLineItem.findWhere(product:product_inst,sessionId:sessionId)
+                def exist_line_cart_inst = CartLineItem.findWhere(product:product_inst,sessionId:sessionId,ordered:false)
                 if(exist_line_cart_inst){
                 
                                  def exist_quantity = exist_line_cart_inst.quantity
@@ -780,7 +793,7 @@ class HomeController {
         }
         
         def saveTransationForShoppingCart(){
-                
+			
                 def db = new Sql(dataSource)
                 
                 //println("saveTransationForShoppingCart :::::;;;"+params)
@@ -795,22 +808,22 @@ class HomeController {
 				println("calling here now")
 				def criteria = CartLineItem.createCriteria()
 				println("println productNextData :::::::::;" )
-				def prod_listtest = criteria.list{
-										not{'in'("id" , '15'.toLong() )}
-										and{eq("sessionId" , sessionId)
-											}
+				def prod_listtest = criteria.list{										
+										eq("sessionId" , sessionId)
+											and{eq("ordered",false)}
 										}
 			    println("The result of criteria query is"+ prod_listtest)
                 
                 def total1 = 0
+				def totalPerProduct
                 
                 
                 def results = prod_listtest?.collect {
                         
-                        def amount = it.unitPrice.replace('$','').replaceAll("\\s+","")
+                        def amount = it.totalLineItemPrice.replace('$','').replaceAll("\\s+","")
 						def amount1 = Integer.parseInt(amount)
-                        total1 = amount1 + total1
-                        
+						totalPerProduct = amount1
+                        total1 = total1 + amount1                  
                                                 
                 }
                 
@@ -820,11 +833,8 @@ class HomeController {
                 def total = Double.parseDouble(total_3)
                 
                 def total_data = total.toString()
-                
-        
-                
-                
-        
+                                
+				println total_data
                 
                 def jsonObj = JSON.parse(params.data)
                 
@@ -865,7 +875,6 @@ class HomeController {
                                                 cvv jsonObj.cvc.toString()
                                                 ccExpDate date.toString()
                                                 email jsonObj.email.toString()
-                                                invoiceId jsonObj.invoiceid.toString()
                                                 shipToLastName jsonObj.lastName.toString()
                                                 shipToFirstName jsonObj.firstName.toString()
                                                 shipToAddress jsonObj.billing_address.toString()
@@ -898,7 +907,6 @@ class HomeController {
                                                 cvv jsonObj.cvc.toString()
                                                 ccExpDate date.toString()
                                                 email jsonObj.email.toString()
-                                                invoiceId jsonObj.invoiceid.toString()
                                                 shipToLastName jsonObj.lastName.toString()
                                                 shipToFirstName jsonObj.firstName.toString()
                                                 shipToAddress jsonObj.address.toString()
@@ -925,28 +933,34 @@ class HomeController {
 				 def criteria1 = CartLineItem.createCriteria()
 				 println("println productNextData :::::::::;" )
 				 def prod_listtest1 = criteria1.list{
-				 						not{'in'("id" , '15'.toLong() )}
-				 						and{eq("sessionId" , sessionId)
-				 							}
+				 						eq("sessionId" , sessionId)
+											and{eq("ordered",false)}
 				 						}
 				 println("The result of criteria query is"+ prod_listtest1)
                 
                 
                 def save_status = ""
-                        
-                        
-                                                
-                
         
                 if(anr.responseReasonText.contains("This transaction has been approved.")){
+					
+					    checkOut = true
+						def cart_line_item = CartLineItem.findAllWhere(sessionId:sessionId,ordered:false)
+						for(int i = 0;i<cart_line_item.size();i++)
+						{
+							cart_line_item[i].ordered = true
+							println cart_line_item[i]
+							cart_line_item[i].save()
+						}
                         
                         def result = prod_listtest1?.collect {
                                 
                                 def line_item_inst = CartLineItem.get(it.id)
+								def amountPerItem = line_item_inst.getTotalLineItemPrice().replace('$','').replaceAll("\\s+","")
+								println amountPerItem							
                         
                                                 if(jsonObj.billing_address){
                                                 
-                                                cart_inst = new Cart(totalAmount:total1,transationId:anr.transactionId,firstName:jsonObj.firstName,
+                                                cart_inst = new Cart(totalAmount:amountPerItem,transationId:anr.transactionId,firstName:jsonObj.firstName,
                                                         
                                                                                                  lastName:jsonObj.lastName,phoneNumber:jsonObj.phone,
                                                                                                 
@@ -968,7 +982,7 @@ class HomeController {
                                                 }else{
                                                 
                                                 
-                                                 cart_inst = new Cart(totalAmount:total1.toString(),transationId:anr.transactionId,firstName:jsonObj.firstName,
+                                                 cart_inst = new Cart(totalAmount:amountPerItem,transationId:anr.transactionId,firstName:jsonObj.firstName,
                                                         
                                                                                                  lastName:jsonObj.lastName,phoneNumber:jsonObj.phone,
                                                                                                 
@@ -990,7 +1004,7 @@ class HomeController {
                                                         
                                                         cartIdList.add(cart_inst.id)
                                                         
-                                                }
+                                                }	
                         
                         }
                         
@@ -1002,12 +1016,11 @@ class HomeController {
                                 chain(controller:"home" ,action: "shoppingCart", model: [transaction_message: "success",session_id:sessionId,cart_id_List_data:cartIdList])
                                 
                         }
-                        
-                        
-                        
+						                        
                 }else{
                         
                         //println("enddddddddddddddddddddddddddddddddddd ")
+						checkOut = false
                         
                         redirect(controller:"home" ,action: "shoppingCart")
                 }
@@ -1047,7 +1060,7 @@ class HomeController {
         
         def cartList(){
                 
-                //println("params::::::::::::::inside cartList :::::::::::"+params)
+//                println("inside cartList :::::::::::"+params)
                         
         }
         

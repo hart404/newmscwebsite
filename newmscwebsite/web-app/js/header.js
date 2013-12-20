@@ -334,6 +334,7 @@ function showcredicardInfo(){
                     cache : false,
                     success : function(text)
                      {       
+                       alert( "Transaction Succesfull" );
                        location.reload();
                      }
 
@@ -350,15 +351,20 @@ function showcredicardInfo(){
 
 
                  var name = document.getElementById("name").value
+                 
+                 var nameValidate = true;
+                 var emailValidate = true;
+                 var cardValidate = true;
+                 var cvcValidate = true;
 
                  if(name == ""){
 
                          $("#nameError").html("You must enter Name")
-        
+                         nameValidate = false;
                  }else{
 
                          $("#nameError").html("")
-        
+                         nameValidate = true;
                  }
 
                  var email_id = document.getElementById("email_id").value
@@ -368,80 +374,67 @@ function showcredicardInfo(){
                 
                  if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email_id.length)
                  {
-                 if(email == ""){
-                
-                         $("#emailIdError").html("You must enter an Email.")
-                 }else{
-
-                          $("#emailIdError").html("")
-                 $("#emailIdError").html("You must enter a valid Email.")
-                 }
-                
-                 }
+	                 if(email == ""){
+	                         $("#emailIdError").html("You must enter an Email.")
+	                 }else{
+	
+	                          $("#emailIdError").html("")
+	                 $("#emailIdError").html("You must enter a valid Email.")
+	                 }
+            	 	 emailValidate = false;                
+                 }else
+                	 {
+                	 	emailValidate = true;
+                	 }
                 
                  var cvc_2 = document.getElementById("cvc_2").value
 
                  if( cvc_2 == "" || isNaN( cvc_2 ) || !(cvc_2.length >= 3 && cvc_2.length <= 5) )
                  {
-                 if(cvc_2 == ""){
-
-                          $("#cvc_2Error").html("Please enter the credit card's security code.")
-                         
-                 }else if(isNaN( cvc_2 )){
-
-                          $("#cvc_2Error").html("")
-                          $("#cvc_2Error").html("You must enter Number.")
-                 }else{
-
-                          $("#cvc_2Error").html("")
-                          $("#cvc_2Error").html("You must enter the format ###.")
-                 }
+	                 if(cvc_2 == ""){
+	
+	                          $("#cvc_2Error").html("Please enter the credit card's security code.")
+	                         
+	                 }else if(isNaN( cvc_2 )){
+	
+	                          $("#cvc_2Error").html("")
+	                          $("#cvc_2Error").html("You must enter Number.")
+	                 }else{
+	
+	                          $("#cvc_2Error").html("")
+	                          $("#cvc_2Error").html("You must enter the format ###.")
+	                 }
+	                 cvcValidate = false;
                 
-                
-                 }
+                 }else
+                	 {
+                	 	cvcValidate = true;
+                	 }
 
-                 var invoiceid_2 = document.getElementById("invoiceid_2").value
-
-                 if( invoiceid_2 == "" || isNaN( invoiceid_2 ) || invoiceid_2.length != 3 )
-                 {
-                 if(invoiceid_2 == ""){
-
-                          $("#invoiceid_2Error").html("Please enter the InvoiceId.")
-                         
-                 }else if(isNaN( invoiceid_2 )){
-
-                          $("#invoiceid_2Error").html("")
-                          $("#invoiceid_2Error").html("You must enter Number.")
-                 }else{
-
-                          $("#invoiceid_2Error").html("")
-                          $("#invoiceid_2Error").html("You must enter the format ###.")
-                 }
-                
-                
-                 }
                  var month_1 = document.getElementById("month_1").value
                  var year_1 = document.getElementById("year_1").value
 
                  var cardnumber_2 = document.getElementById("cardnumber_2").value
                 
                 
-                        if( cardnumber_2 == "" || isNaN( cardnumber_2 ) || !(cardnumber_2.length >= 10 &&  cardnumber_2.length <= 18))
+                        if( cardnumber_2 == "" || isNaN( cardnumber_2 ) || !(cardnumber_2.length >= 10 &&  cardnumber_2.length <= 20))
                          {
-                         if(cardnumber_2 == ""){
+	                         if(cardnumber_2 == ""){
+	                        
+	                                  $("#cardnumber_2Error").html("You must enter your Credit Card Number.")
+	                         }else if(isNaN( cardnumber_2 )){
+	                        
+	                                  $("#cardnumber_2Error").html("")
+	                                  $("#cardnumber_2Error").html("You must enter Number.")
+	                         }else{
+	                        
+	                                  $("#cardnumber_2Error").html("")
+	                                  $("#cardnumber_2Error").html("You must enter the right format.")
+	                         }
                         
-                                  $("#cardnumber_2Error").html("You must enter your Credit Card Number.")
-                         }else if(isNaN( cardnumber_2 )){
-                        
-                                  $("#cardnumber_2Error").html("")
-                                  $("#cardnumber_2Error").html("You must enter Number.")
+	                         cardValidate = false;
                          }else{
-                        
-                                  $("#cardnumber_2Error").html("")
-                                  $("#cardnumber_2Error").html("You must enter the right format.")
-                         }
-                        
-                        
+                        	 cardValidate = true;
                          }
                 
                 
@@ -459,22 +452,36 @@ function showcredicardInfo(){
                          }
 
 
-                 if(name != "" && email_id != "" && cvc_2 != "" && invoiceid_2 != "" && cardnumber_2 != ""){
+                 if(nameValidate && emailValidate && cvcValidate && cardValidate){
 
 
+                	 		processing();
 
-
-                         var myJSONText = "{'name':'"+name+
-                                "','email_id':'"+email_id+"','cvc_2':'"+cvc_2+"','invoiceid_2':'"+invoiceid_2+
-                                 "','month':'"+month_1+"' ,'year':'"+year_1+"','amount':'"+amount+"','cardnumber':'"+cardnumber_2+"','recuringType':'"+recuringType+"'}"
+                         var myJSONText = "data={name:"+name+
+					                         ",email_id:"+email_id+",cvc_2:"+cvc_2+
+					                         ",month:"+month_1+" ,year:"+year_1+",amount:"+amount+",cardnumber:"+cardnumber_2+",recuringType:"+recuringType+"}"
 
                         
                         
-                                 var url = "./home/saveNameEmail?data="+myJSONText;
-                                
-                                        $(location).attr('href',url);
+//                                 var url = "./home/saveNameEmail?data="+myJSONText;
+//                                
+//                                        $(location).attr('href',url);
                         
+					                         $.ajax({
+					                             type: "POST",
+					                             url: nameemail_url,
+					                             data : myJSONText,
+					                             cache : false,
+					                             success : function(text)
+					                              {
+					                            	alert( "Transaction Succesfull" );
+					                                location.reload();
+					                              }
 
+					             		     }) .fail(function() {
+					             		    	 closeprocessing();
+					             		      alert( "Sorry, there was an error. Please try again" );
+					             		     });
                  }
                 
                 
@@ -488,47 +495,33 @@ function showcredicardInfo(){
 
 
         
-                 var cvc_3 = document.getElementById("cvc_3").value
+                 var cvc_3 = document.getElementById("cvc_3").value                 
+                 
+                 var cardValidate = true;
+                 var cvcValidate = true;
 
                  if( cvc_3 == "" || isNaN( cvc_3 ) ||  !(cvc_3.length >= 3 && cvc_3.length <= 5) )
                  {
-                 if(cvc_3 == ""){
-
-                          $("#cvc_3Error").html("Please enter the credit card's security code.")
-                         
-                 }else if(isNaN( cvc_3 )){
-
-                          $("#cvc_3Error").html("")
-                          $("#cvc_3Error").html("You must enter Number.")
+	                 if(cvc_3 == ""){
+	
+	                          $("#cvc_3Error").html("Please enter the credit card's security code.")
+	                         
+	                 }else if(isNaN( cvc_3 )){
+	
+	                          $("#cvc_3Error").html("")
+	                          $("#cvc_3Error").html("You must enter Number.")
+	                 }else{
+	
+	                          $("#cvc_3Error").html("")
+	                          $("#cvc_3Error").html("You must enter the format ###.")
+	                 }
+	                 cvcValidate = false;
+                
                  }else{
-
-                          $("#cvc_3Error").html("")
-                          $("#cvc_3Error").html("You must enter the format ###.")
-                 }
-                
-                
+                	 cvcValidate = true;
                  }
 
-                 var invoiceid_3 = document.getElementById("invoiceid_3").value
-
-                 if( invoiceid_3 == "" || isNaN( invoiceid_3 ) || invoiceid_3.length != 3 )
-                 {
-                 if(invoiceid_3 == ""){
-
-                          $("#invoiceid_3Error").html("Please enter the InvoiceId.")
-                         
-                 }else if(isNaN( invoiceid_3 )){
-
-                          $("#invoiceid_3Error").html("")
-                          $("#invoiceid_3Error").html("You must enter Number.")
-                 }else{
-
-                          $("#invoiceid_3Error").html("")
-                          $("#invoiceid_3Error").html("You must enter the format ###.")
-                 }
-                
-                
-                 }
+                 
                  var month_3 = document.getElementById("month_3").value
                  var year_3 = document.getElementById("year_3").value
 
@@ -537,40 +530,57 @@ function showcredicardInfo(){
                 
                  if( cardnumber_3 == "" || isNaN( cardnumber_3 ) || !(cardnumber_3.length >= 10 &&  cardnumber_3.length <= 18) )
                          {
-                         if(cardnumber_3 == ""){
-                        
-                                  $("#cardnumber_3Error").html("You must enter your Credit Card Number.")
-                         }else if(isNaN( cardnumber_3 )){
-                        
-                                  $("#cardnumber_3Error").html("")
-                                  $("#cardnumber_3Error").html("You must enter Number.")
+	                         if(cardnumber_3 == ""){
+	                        
+	                                  $("#cardnumber_3Error").html("You must enter your Credit Card Number.")
+	                         }else if(isNaN( cardnumber_3 )){
+	                        
+	                                  $("#cardnumber_3Error").html("")
+	                                  $("#cardnumber_3Error").html("You must enter Number.")
+	                         }else{
+	                        
+	                                  $("#cardnumber_3Error").html("")
+	                                  $("#cardnumber_3Error").html("You must enter the right format")
+	                         }
+	                        
+	                         cardValidate = false;
+	                         
                          }else{
-                        
-                                  $("#cardnumber_3Error").html("")
-                                  $("#cardnumber_3Error").html("You must enter the right format")
-                         }
-                        
-                        
+                        	 cardValidate = true;
                          }
                 
 
-                 if( cvc_3 != "" && invoiceid_3 != "" && cardnumber_3 != ""){
+                 if( cvcValidate && cardValidate){
 
+
+                	 processing();
+
+
+                         var myJSONText = "data={cvc_3:"+cvc_3+
+                         					",month:"+month_3+" ,year:"+year_3+",amount:"+amount+",cardnumber:"+cardnumber_3+",recuringType:"+recuringType+"}"
 
                         
-
-
-                         var myJSONText = "{'cvc_3':'"+cvc_3+"','invoiceid_3':'"+invoiceid_3+
-                                 "','month':'"+month_3+"' ,'year':'"+year_3+"','amount':'"+amount+"','cardnumber':'"+cardnumber_3+"','recuringType':'"+recuringType+"'}"
-
                         
+//                                 var url = "./home/saveNonData?data="+myJSONText;
+//                                
+//                                        $(location).attr('href',url);
                         
-                                 var url = "./home/saveNonData?data="+myJSONText;
-                                
-                                        $(location).attr('href',url);
-                        
+                         					$.ajax({
+					                             type: "POST",
+					                             url: nodata_url,
+					                             data : myJSONText,
+					                             cache : false,
+					                             success : function(text)
+					                              {  
+					                            	alert( "Transaction Succesfull" );
+					                                location.reload();
+					                              }
 
-                        }
+					             		     }) .fail(function() {
+					             		    	 closeprocessing();
+					             		      alert( "Sorry, there was an error. Please try again" );
+					             		     });
+                   }
 
          }
         

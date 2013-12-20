@@ -7,6 +7,7 @@ class Donation {
 	String title
 	String firstName
 	String lastName
+	String email
 	String street
 	String apartment
 	String city
@@ -33,6 +34,7 @@ class Donation {
 		zip(nullable:true)
 		firstName(nullable: true, blank: true)
 		lastName(nullable: true, blank: true)
+		email(nullable: true, blank: true)
 		street(nullable: true, blank: true)
 		apartment(nullable: true)
 		city(nullable: true, blank: true)
