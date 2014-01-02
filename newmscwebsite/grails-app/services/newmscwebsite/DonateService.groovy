@@ -1,5 +1,7 @@
 package newmscwebsite
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import net.authorize.Environment
 import net.authorize.Merchant
 import net.authorize.TransactionType
@@ -33,5 +35,7 @@ class DonateService {
 		println "responseCode = " + result.getResponseCode()
 		println "responseText = " + result.getResponseText()
 		println "reasonResponseCode = " + result.getReasonResponseCode()
+		
+		return  result.getResponseCode()
 	}
 }

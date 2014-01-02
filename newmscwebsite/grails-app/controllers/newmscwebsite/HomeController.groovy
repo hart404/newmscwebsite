@@ -141,6 +141,10 @@ class HomeController {
         def saveFullinfoData = {
                 
                 def jsonObj = JSON.parse(params.data)
+				
+				String donateOption = jsonObj.donateOption
+				
+				println ":::::::::::::::::::::::::::::::::::::::::"+donateOption
                   
                 String date = jsonObj.month.toString()+jsonObj.year.toString().substring(2)
                                 
@@ -195,21 +199,32 @@ class HomeController {
         
                 if(anr.responseReasonText.contains("This transaction has been approved.")){
 					
-						println "SUCCESS"                  
-                                        
-                        def donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,email:jsonObj.email,city:jsonObj.city,state:jsonObj.state,
+						println "SUCCESS"
+						def donateinst
+                       
+						if(donateOption == "all")                 
+                        {
+							donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,email:jsonObj.email,city:jsonObj.city,state:jsonObj.state,
                                 zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
                                 phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,
                                 street:jsonObj.address,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
-                        
+                        }else if(donateOption == "ne"){
+							donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,email:jsonObj.email,recurring:recuringType,recurringDate:from_d,
+								actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+						}else if(donateOption == "no"){
+							donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
+								actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+						}
+						
+						
                         if(donateinst.save(flush:true)){
                                 flash.message = "This transaction has been approved."
-                                redirect(controller:"home" ,action: "index")
+//                                redirect(controller:"home" ,action: "index")
                         }else{                        
-                         redirect(controller:"home" ,action: "index")
+//                         redirect(controller:"home" ,action: "index")
                         }
                         
-                        donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
+                        render donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
                         
                 }else{
 				
@@ -218,8 +233,10 @@ class HomeController {
                         flash.message = anr.responseReasonText
 						
 						println flash.message
+						
+						render flash.message
                         
-                        redirect(controller:"home" ,action: "index")
+//                        redirect(controller:"home" ,action: "index")
                 }
                 
         }
@@ -302,14 +319,14 @@ class HomeController {
                                         
                                         
                                         
-                                        redirect(controller:"home" ,action: "index")
+//                                        redirect(controller:"home" ,action: "index")
                                 }else{
                                 
                                  // println("njhhhhhhhhhhhhhhhhhhhhhhh")
-                                 redirect(controller:"home" ,action: "index")
+//                                 redirect(controller:"home" ,action: "index")
                                 }
                                 
-                                donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
+                              render  donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
                                 
                         }else{
                                 
@@ -317,7 +334,8 @@ class HomeController {
 								
 								println flash.message
                                 
-                                redirect(controller:"home" ,action: "index")
+//                                redirect(controller:"home" ,action: "index")
+								render flash.message
                         }
                 
                 
@@ -402,14 +420,14 @@ class HomeController {
                                         
                                         
                                         
-                                        redirect(controller:"home" ,action: "index")
+//                                        redirect(controller:"home" ,action: "index")
                                 }else{
                                 
                                  // println("njhhhhhhhhhhhhhhhhhhhhhhh")
-                                 redirect(controller:"home" ,action: "index")
+//                                 redirect(controller:"home" ,action: "index")
                                 }
                                 
-                                donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
+                                render donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
                                 
                         }else{
                                 
@@ -417,7 +435,8 @@ class HomeController {
 								
 								println flash.message
                                 
-                                redirect(controller:"home" ,action: "index")
+//                                redirect(controller:"home" ,action: "index")
+								render flash.message
                         }
         }
         
@@ -428,8 +447,8 @@ class HomeController {
          def list_data = []
          def main_list_data = []
          def sessionId = request.getSession().id
-         println("sessionId "+sessionId)
-		 println "::::::::::"+checkOut
+//         println("sessionId "+sessionId)
+//		 println "::::::::::"+checkOut
         
 //         def cartlineid = Cart.findAllWhere(sessionId:sessionId)
          //def newquery = CartLineItem.findAllWhere(sessionId:sessionId)
@@ -466,7 +485,7 @@ class HomeController {
 //	         }
 //	         else
 //	         {
-		         println("Entering in else"+productresult)
+//		         println("Entering in else"+productresult)
 		        
 		         def prod_listtest = CartLineItem.findAllWhere(sessionId:sessionId,ordered:false)
 //		         not{
@@ -476,7 +495,7 @@ class HomeController {
 //		         eq('sessionId' , sessionId)
 //		         }
 //		         }
-		         println("Entering in else"+prod_listtest)
+//		         println("Entering in else"+prod_listtest)
 		         for(int k=0; k < productresult.size() ; k++)
 		         {
 		         list_data.add("<a href='#'><img src='../"+productresult.productImageUrl[k]+"' height='20' width='20' ></a>")
@@ -486,7 +505,7 @@ class HomeController {
 		         list_data.add(prod_listtest.totalLineItemPrice[k])
 		         list_data.add("<a href='#'><img src='../images/delete_icon.png' alt='' height='20' width='20' onclick='deleteData("+productresult.id[k]+")'></a>")
 		         main_list_data.add(list_data)
-				 println main_list_data
+//				 println main_list_data
 		         list_data = []
 		         }
 	        
@@ -802,17 +821,17 @@ class HomeController {
                 
                 def cartIdList = []
                 
-                println("sessionId saveTransationForShoppingCart :::::;;;"+sessionId)
+//                println("sessionId saveTransationForShoppingCart :::::;;;"+sessionId)
                 
 				def idarray = Cart.findBySessionId(sessionId)
-				println("calling here now")
+//				println("calling here now")
 				def criteria = CartLineItem.createCriteria()
-				println("println productNextData :::::::::;" )
+//				println("println productNextData :::::::::;" )
 				def prod_listtest = criteria.list{										
 										eq("sessionId" , sessionId)
 											and{eq("ordered",false)}
 										}
-			    println("The result of criteria query is"+ prod_listtest)
+//			    println("The result of criteria query is"+ prod_listtest)
                 
                 def total1 = 0
 				def totalPerProduct
@@ -834,7 +853,7 @@ class HomeController {
                 
                 def total_data = total.toString()
                                 
-				println total_data
+//				println total_data
                 
                 def jsonObj = JSON.parse(params.data)
                 
@@ -923,20 +942,20 @@ class HomeController {
                 
                 
                  def anr = s.submit()
-                 println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
-                 println ("anr.transactionId:::::::::"+anr.transactionId)
+//                 println ("anr.responseReasonText:::::::::"+anr.responseReasonText)
+//                 println ("anr.transactionId:::::::::"+anr.transactionId)
                 
                  def cart_inst
 				 
 				 def idarray1 = Cart.findBySessionId(sessionId)
-				 println("calling here now")
+//				 println("calling here now")
 				 def criteria1 = CartLineItem.createCriteria()
-				 println("println productNextData :::::::::;" )
+//				 println("println productNextData :::::::::;" )
 				 def prod_listtest1 = criteria1.list{
 				 						eq("sessionId" , sessionId)
 											and{eq("ordered",false)}
 				 						}
-				 println("The result of criteria query is"+ prod_listtest1)
+//				 println("The result of criteria query is"+ prod_listtest1)
                 
                 
                 def save_status = ""
@@ -948,7 +967,7 @@ class HomeController {
 						for(int i = 0;i<cart_line_item.size();i++)
 						{
 							cart_line_item[i].ordered = true
-							println cart_line_item[i]
+//							println cart_line_item[i]
 							cart_line_item[i].save()
 						}
                         
@@ -956,7 +975,7 @@ class HomeController {
                                 
                                 def line_item_inst = CartLineItem.get(it.id)
 								def amountPerItem = line_item_inst.getTotalLineItemPrice().replace('$','').replaceAll("\\s+","")
-								println amountPerItem							
+//								println amountPerItem							
                         
                                                 if(jsonObj.billing_address){
                                                 
@@ -1011,18 +1030,21 @@ class HomeController {
                         //println("cartIdList ::::::::::::::"+cartIdList)
                                 
                                 
-                        if(save_status == "true"){
-                                
-                                chain(controller:"home" ,action: "shoppingCart", model: [transaction_message: "success",session_id:sessionId,cart_id_List_data:cartIdList])
-                                
-                        }
-						                        
+//                        if(save_status == "true"){
+//                                
+//                                chain(controller:"home" ,action: "shoppingCart", model: [transaction_message: "success",session_id:sessionId,cart_id_List_data:cartIdList])
+//                                
+//                        }
+						render "Your transaction has been approved"                  
                 }else{
                         
                         //println("enddddddddddddddddddddddddddddddddddd ")
 						checkOut = false
                         
-                        redirect(controller:"home" ,action: "shoppingCart")
+//                        redirect(controller:"home" ,action: "shoppingCart")
+						flash.message = anr.responseReasonText
+						
+						render flash.message
                 }
                 
                 

@@ -576,7 +576,8 @@ border-radius: 3px 3px 3px 3px; */
 					                         cache : false,
 					                         success : function(text)
 					                         {
-					                         	alert( "Transaction Succesfull" );
+					                         	alert( text );
+					                         	closeprocessing();
                                          		location.reload();
 					                         }
 
@@ -611,8 +612,9 @@ border-radius: 3px 3px 3px 3px; */
                                                                  cache : false,
                                                                  success : function(text)
                                                                  {
-                                                                 	alert( "Transaction Succesfull" );
-                                                                 	location.reload();
+                                                                 	alert(text);
+										                         	closeprocessing();
+					                                         		location.reload();
                                                                  }
 
                                                                                   }) .fail(function() {

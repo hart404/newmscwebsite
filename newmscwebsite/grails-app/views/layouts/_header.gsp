@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="${resource(dir:'css',file:'homeindex.css')}" />
 <link rel="stylesheet" href="${resource(dir:'css',file:'mapPopUp.css')}" />
 
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=true"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=true"></script>
 <g:javascript src="reportmap.js"/>
 <g:javascript src="donate.js"/>
 <g:javascript src="homeindex.js"/>
@@ -190,7 +190,7 @@
                                 <div class="span12">
                                     
                                         <div style="margin-top: -1px;width:98.5%;" class="blockHeader headerGreen" >
-                                           <h1>CONTACT INFORMATION</h1>
+                                           <h1>BILLING INFORMATION</h1>
                                              <a id="myDivPopupBoxClose2" onclick="unloadPopupBox2();"><img src="<g:createLinkTo dir='images/layout' file='cancel_dialog.png'/>" height="25" width="25" /></a>
                                                </div>
                                              
@@ -207,7 +207,7 @@
                                               <div style="">
                                                  <div style="width:100%;background: ;float: left;">
                                                <label style="visibility:hidden;">Na</label>
-                                                 <label Style="font-weight: bold;">Contact Information</label>
+                                                 <label Style="font-weight: bold;">Billing Information</label>
                                                  </div>
                                                  
                                                       <input type="checkbox" name="vehicle" value="Bike" style="background: ;visibility: hidden;">

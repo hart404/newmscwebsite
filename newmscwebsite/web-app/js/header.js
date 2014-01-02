@@ -71,7 +71,7 @@ function showcredicardInfo(){
 	                                 if($("#radio1").is(":checked")){
 	                                        
 	                                         disablePopup1();
-	                                         loadPopupBox2();
+	                                         loadPopupBox2("all");
 	                
 	                                 }
 	
@@ -79,13 +79,15 @@ function showcredicardInfo(){
 	                                 if($("#radio2").is(":checked")){
 	                                        
 							                 disablePopup1();
-							                 loadPopupBox4();
+//							                 loadPopupBox4();
+							                 loadPopupBox2("ne");
 	                                 }
 	
 		                 if($("#radio3").is(":checked")){
 		                                        
 			                 disablePopup1();
-			                 loadPopupBox5();
+//			                 loadPopupBox5();
+			                 loadPopupBox2("no");
 		                  }
 	                 }else{
 	
@@ -314,7 +316,10 @@ function showcredicardInfo(){
 
     
     var description = document.getElementById("description").value
-
+    
+    if(description == ""){
+    	description = "-"
+    }
         
         
         if(firstNameValidate && lastNameValidate && emailValidate && addressValidate  && cityValidate && stateValidate && countryValidate && zipValidate && phoneValidate && cardValidate && cvcValidate){
@@ -324,7 +329,7 @@ function showcredicardInfo(){
                 var myJSONText = "data={firstName:"+firstName+
                 ",lastName:"+lastName+",email:"+email+",address:"+address+",city:"+city+
                 ",state:"+state+",country:"+country+",zip:"+zip+",phone:"+phone+",cardnumber:"+cardnumber+",cvc:"+cvc+
-                ",month:"+month+",year:"+year+",amount:"+amount+",recuringType:"+recuringType+",description:"+description+"}"
+                ",month:"+month+",year:"+year+",amount:"+amount+",recuringType:"+recuringType+",description:"+description+",donateOption:"+donate_option+"}"
 
                 
                 $.ajax({
@@ -334,7 +339,8 @@ function showcredicardInfo(){
                     cache : false,
                     success : function(text)
                      {       
-                       alert( "Transaction Succesfull" );
+                       alert( text );
+                       closeprocessing();
                        location.reload();
                      }
 
@@ -474,7 +480,8 @@ function showcredicardInfo(){
 					                             cache : false,
 					                             success : function(text)
 					                              {
-					                            	alert( "Transaction Succesfull" );
+					                            	alert( text );
+					                            	closeprocessing();
 					                                location.reload();
 					                              }
 
@@ -572,7 +579,8 @@ function showcredicardInfo(){
 					                             cache : false,
 					                             success : function(text)
 					                              {  
-					                            	alert( "Transaction Succesfull" );
+					                            	alert( text );
+					                            	closeprocessing();
 					                                location.reload();
 					                              }
 
@@ -583,8 +591,10 @@ function showcredicardInfo(){
                    }
 
          }
+         
+         var donate_option = "";
         
-         function loadPopupBox2() {
+         function loadPopupBox2(option) {
                          
                          
         
@@ -592,7 +602,8 @@ function showcredicardInfo(){
                         
                         
                                 if(popupStatus2 == 0) { // if value is 0, show popup
-                                        
+                                		
+                                		donate_option = option;
                                         $("#myDiv2").fadeIn(0500); // fadein popup div
                                         $("#backgroundPopup").css("opacity", "0.3"); // css opacity, supports IE7, IE8
                                         
