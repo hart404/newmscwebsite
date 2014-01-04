@@ -330,7 +330,7 @@ class PersonController {
 			//println("Post parameters : " + getJSONObject("1","VISITOR","ACTION_BY_OWNER",nowAsISO,params.emailId));
 //			println("Response Code : " + responseCode);
 			
-			if(responseCode == 201){
+			if(responseCode == 201) {
 				
 				//String success = "Your successfully subscribed "
 //				println("inside iffffffffffffffff33333333333333333333333")
@@ -363,7 +363,7 @@ class PersonController {
 				//println("Email Address already Registered");
 				
 				
-				def message = "Your are already subscribed "
+				def message = "You are already subscribed "
 				
 				//redirect(controller:"home" ,action: "index")
 				
