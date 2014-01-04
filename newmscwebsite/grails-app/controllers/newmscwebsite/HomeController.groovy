@@ -413,7 +413,7 @@ class HomeController {
                                 
                                                 
                                 def donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
-                                        actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Land Conservancy")
+                                        actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
                                 
                                 if(donateinst.save(flush:true)){
                                         flash.message = "This transaction has been approved."
