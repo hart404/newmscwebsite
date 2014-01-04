@@ -321,11 +321,11 @@ class PersonController {
 			wr.close();
 
 			int responseCode = con.getResponseCode();
-			//println("\nSending 'POST' request to URL : " + url);
-			//println("Post parameters : " + getJSONObject("1","VISITOR","ACTION_BY_OWNER",nowAsISO,params.emailId));
-			//			println("Response Code : " + responseCode);
+			println("\nSending 'POST' request to URL : " + url);
+			println("Post parameters : " + getJSONObject("2","VISITOR","ACTION_BY_OWNER",nowAsISO,jsonObj.email_address,jsonObj.firstname,jsonObj.lastname,jsonObj.companyname));
+			println("Response Code : " + responseCode);
 
-			if(responseCode == 201) {
+			if (responseCode == 201) {
 				def message = "You successfully subscribed "
 				chain(controller:"home" ,action: "index", model: [message:message])
 			}
