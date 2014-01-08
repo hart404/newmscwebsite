@@ -107,6 +107,7 @@ class EventController {
     }
 
     def save = {
+		println "Event params: ${params}"
 		def photo = SCMSPhoto.get(params.photoId)
         def eventInstance = new Event(params)
 		eventInstance.mainPhoto = photo
