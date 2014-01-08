@@ -202,7 +202,7 @@
                                                                         
                                                                                  <div class="formContainer" style="width:93%;height:488px;" id="scroll">
                                              
-                                              <g:form action="donateInfo" name="cardInfoForm" id="cardInfoForm" class="newclass" >
+                                              <g:form controller="donate" action="donateInfo" name="cardInfoForm" class="newclass">
                                               
                                               <div style="">
                                                  <div style="width:100%;background: ;float: left;">
@@ -445,7 +445,7 @@
                                                                                 
                                                                                  <h2 style="color: black;margin-top: -5px;">Add to Giving Cart</h2>
                                              
-                                              <g:form action="cartInfo" id="cartInfoForm" class="newclass" name="cartInfoForm">
+                                              <g:form controller="donate" action="cartInfo" class="newclass" name="cartInfoForm">
                                               
                                                   <div style="width:100%;background:;height:140px;">
                                                     
@@ -657,7 +657,7 @@
                                                                         
                                                                                  <div class="formContainer" style="width:93%;height:488px;">
                                              
-                                              <g:form action="userInfo" name="userForm" id="userForm" class="newclass">
+                                              <g:form controller="donate" action="userInfo" name="userForm" id="userForm" class="newclass">
                                               
                                                 <div style="">
                                                  <div style="width:100%;background: ;float: left;">
@@ -831,7 +831,7 @@
                                                                         
                                                                                  <div class="formContainer" style="width:93%;height:488px;">
                                              
-                                              <g:form action="nonInfo" name="nonuserForm" id="nonuserForm" class="newclass">
+                                              <g:form controller="donate" action="nonInfo" name="nonuserForm" id="nonuserForm" class="newclass">
                                               
                                                    <div style="">
                                                  <div style="width:100%;background: ;float: left;">

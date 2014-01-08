@@ -96,7 +96,7 @@
 
 			</div>
 			<div class="blockFooter headerBlue">
-				<a href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=860674350" target="_blank">Support us &raquo</a>
+				<a href="javascript:showsDonatePopup()" class="supportUs">Support us &raquo</a>
 			</div>
 		</div>
 		<div class="homePageItem marginRight">

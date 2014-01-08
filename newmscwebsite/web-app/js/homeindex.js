@@ -3,48 +3,39 @@
  * and open the template in the editor.
  */
 
-	    function showsDonatePopup(){
+function showsDonatePopup() {
 
-          
+	loadPopupBox3();
 
-	    	loadPopupBox3();
+}
 
-	          
-	  }
+function showSubscribeForm() {
 
-	 function  showSubscribeForm(){
+	loadPopupBox6();
 
-          loadPopupBox6();
+}
 
-     }
+function loadPopupBox6() {
 
+	// To Load the Popupbox
 
-	 function loadPopupBox6() { 
-		 	
-			// To Load the Popupbox
-		
-	 		$('#myDiv6').show();	 		
-			//$('#myDiv2').draggable();  
-	        $('#myDiv6').fadeIn("slow");
-	        $('#myDiv6').animate({'top':'5%'},0);
-	       
-		} 
- 
+	$('#myDiv6').show();
+	// $('#myDiv2').draggable();
+	$('#myDiv6').fadeIn("slow");
+	$('#myDiv6').animate({
+		'top' : '5%'
+	}, 0);
 
-	function unloadPopupBox6() {  
-		  
-		
-		$('#myDiv6').fadeOut("slow");
-  	
-	}    
+}
 
+function unloadPopupBox6() {
 
+	$('#myDiv6').fadeOut("slow");
 
-	function closePopup6(){
-	
-	   	unloadPopupBox6();
-	   
-	}
-        
-       
+}
 
+function closePopup6() {
+
+	unloadPopupBox6();
+
+}
