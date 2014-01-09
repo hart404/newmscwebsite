@@ -48,6 +48,7 @@
 			return false;
 		}
 		
+		
 		function getEvents() {
 		    ajaxMode = "dateAndCategory";
 			var requestedDates = getRequestedDates();
@@ -58,7 +59,7 @@
 		
         function getRequestedDates() {
             var requestedDatesString = '{"dates": [';
-            for (var selection in currentDateSelections) {
+            for (var selection = 0; selection < currentDateSelections.length; selection++) {
                 requestedDatesString += '{"year":';
                 requestedDatesString += currentDateSelections[selection][0];
                 requestedDatesString += ', "monthNumber":';
@@ -132,9 +133,9 @@
 		}
 		
 		function clearSelections() {
-			for (var selection in currentDateSelections) {
-				currentDateSelections[selection][3].style.backgroundColor = "#F0F0F0";
-			}
+			currentDateSelections.forEach(function(selection) {
+				selection[3].style.backgroundColor = "#F0F0F0";
+			});
 			currentDateSelections = [];
 		}	
 		

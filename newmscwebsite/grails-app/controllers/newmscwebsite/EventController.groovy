@@ -1,9 +1,12 @@
 package newmscwebsite
 
+import groovy.json.JsonSlurper
+
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
+
 import simple.cms.SCMSMenu
 import simple.cms.SCMSPhoto
-import groovy.json.JsonSlurper
-import org.joda.time.LocalDate
 
 
 class EventController {
@@ -54,6 +57,7 @@ class EventController {
 	}
 	
 	def getEventsForDates = {
+		println "Events for dates params: ${params}"
 		def jsonDateList = new JsonSlurper().parseText(params.dates)
 		def dateList = jsonDateList.dates.collect {
 			new LocalDate(it.year, it.monthNumber, it.day)
@@ -107,9 +111,15 @@ class EventController {
     }
 
     def save = {
-		println "Event params: ${params}"
-		def photo = SCMSPhoto.get(params.photoId)
+		params.remove('startTime')
+		params.remove('endTime')
+		println "Event save params: ${params}"
         def eventInstance = new Event(params)
+		def startTime = new DateTime(params.'startTime_year' as Integer, params.'startTime_month' as Integer, params.'startTime_day' as Integer, params.'startTime_hour' as Integer, params.'startTime_minute' as Integer)
+		def endTime = new DateTime(params.'endTime_year' as Integer, params.'endTime_month' as Integer, params.'endTime_day' as Integer, params.'endTime_hour' as Integer, params.'endTime_minute' as Integer)
+		eventInstance.startTime = startTime
+		eventInstance.endTime = endTime
+		def photo = SCMSPhoto.get(params.photoId)
 		eventInstance.mainPhoto = photo
 		eventInstance.categories.clear()
 		def categories = getCategoriesFrom(params)
@@ -161,6 +171,7 @@ class EventController {
     }
 
     def update = {
+		println "Event update params: ${params}"
         def eventInstance = Event.get(params.id)
 		if (params.photoId != eventInstance.mainPhoto?.id) {
 			def photo = SCMSPhoto.get(params.photoId)
