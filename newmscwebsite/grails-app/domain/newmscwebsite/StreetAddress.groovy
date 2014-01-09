@@ -24,7 +24,7 @@ class StreetAddress {
 			buffer.append(street)
 			buffer.append(", ")
 		}
-		if (apartment) {
+		if (apartment && !apartment.trim().isEmpty()) {
 			buffer.append(apartment)
 			buffer.append(", ")
 		}
