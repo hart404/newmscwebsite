@@ -113,7 +113,6 @@ class EventController {
     def save = {
 		params.remove('startTime')
 		params.remove('endTime')
-		println "Event save params: ${params}"
         def eventInstance = new Event(params)
 		def startTime = new DateTime(params.'startTime_year' as Integer, params.'startTime_month' as Integer, params.'startTime_day' as Integer, params.'startTime_hour' as Integer, params.'startTime_minute' as Integer)
 		def endTime = new DateTime(params.'endTime_year' as Integer, params.'endTime_month' as Integer, params.'endTime_day' as Integer, params.'endTime_hour' as Integer, params.'endTime_minute' as Integer)
@@ -171,8 +170,14 @@ class EventController {
     }
 
     def update = {
-		println "Event update params: ${params}"
+		println "Update event parms: ${params}"
+		params.remove('startTime')
+		params.remove('endTime')
+		def startTime = new DateTime(params.'startTime_year' as Integer, params.'startTime_month' as Integer, params.'startTime_day' as Integer, params.'startTime_hour' as Integer, params.'startTime_minute' as Integer)
+		def endTime = new DateTime(params.'endTime_year' as Integer, params.'endTime_month' as Integer, params.'endTime_day' as Integer, params.'endTime_hour' as Integer, params.'endTime_minute' as Integer)
         def eventInstance = Event.get(params.id)
+		eventInstance.startTime = startTime
+		eventInstance.endTime = endTime
 		if (params.photoId != eventInstance.mainPhoto?.id) {
 			def photo = SCMSPhoto.get(params.photoId)
 			eventInstance.mainPhoto = photo
@@ -185,14 +190,15 @@ class EventController {
         if (eventInstance) {
             if (params.version) {
                 def version = params.version.toLong()
-                if (eventInstance.version > version) {
-                    
+                if (eventInstance.version > version) {                   
                     eventInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'event.label', default: 'Event')] as Object[], "Another user has updated this Event while you were editing")
                     render(view: "edit", model: [eventInstance: eventInstance])
                     return
                 }
             }
             eventInstance.properties = params
+			eventInstance.startTime = startTime
+			eventInstance.endTime = endTime
             if (!eventInstance.hasErrors() && eventInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])}"
                 redirect(action: "show", id: eventInstance.id)

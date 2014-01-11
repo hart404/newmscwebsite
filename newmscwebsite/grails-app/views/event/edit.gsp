@@ -114,7 +114,7 @@
                                   <label for="endTime"><g:message code="event.endTime.label" default="End Time" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'endTime', 'errors')}">
-                                    <richui:dateChooser name="startTime" format="MM-dd-yyyy" time="true" value="${eventInstance?.endTime?.toDate()}" />
+                                    <richui:dateChooser name="endTime" format="MM-dd-yyyy" time="true" value="${eventInstance?.endTime?.toDate()}" />
                                 </td>
                             </tr>
                         
