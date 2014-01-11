@@ -11,11 +11,11 @@ class StreetAddress {
 	String zip
 
     static constraints = {
-		street(blank: true)
+		street(nullable: true)
 		apartment(nullable: true)
-		city(blank: true)
-		state(blank: true)
-		zip(blank: true)
+		city(nullable: true)
+		state(nullable: true)
+		zip(nullable: true)
     }
 	
 	String toString() {

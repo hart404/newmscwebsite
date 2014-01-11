@@ -77,7 +77,7 @@ class PersonController {
 
 		// The person needs to be be saved before you can update authorities
 		// because creation of the role relationship requires an ID!
-		personInstance.save(flush: true)
+		personInstance.save(flush: true, failOnError: true)
 		updateAuthorities(personInstance, params)
 
 		if (!personInstance.save(flush: true)) {
