@@ -1,6 +1,6 @@
 authorizeNet {
     testMode = false
-    duplicateWindow = '120'  //Default is 120 (2 minutes)
+    duplicateWindow = '120'  // Default is 120 (2 minutes)
     delimiter = ';'
 }
 

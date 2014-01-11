@@ -20,7 +20,7 @@ class VolunteerSession {
 		trailSections(size: 0..100)
         hours(nullable: false)
         date(nullable: false)
-        time(nullable: false)
+        time(nullable: true)
         program(nullable: false)
 		person(nullable: true)
     }
