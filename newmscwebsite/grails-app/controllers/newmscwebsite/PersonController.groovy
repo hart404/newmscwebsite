@@ -600,6 +600,11 @@ class PersonController {
 			outputStream << "\n"
 		}
 	}
+	
+	def bulkReporting() {
+		def steward = [firstName: "Phil", lastName: "Hartley"]
+		[steward: steward, programs: ProgramReporting.values()]
+	}
 
 }
 

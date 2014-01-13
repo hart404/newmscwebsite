@@ -19,4 +19,8 @@ public enum ProgramReporting {
 	String value() {
 		value
 	}
+	
+	String representation() {
+		value
+	}
 }
