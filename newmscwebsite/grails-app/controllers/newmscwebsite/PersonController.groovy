@@ -1,18 +1,19 @@
 package newmscwebsite
 
+import grails.converters.JSON
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+import javax.net.ssl.HttpsURLConnection
+
+import org.joda.time.LocalDate
 import org.springframework.dao.DataIntegrityViolationException
 
 import simple.cms.SCMSMenu
 import simple.cms.SCMSPhoto
+
 import com.vinomis.authnet.AuthorizeNet
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import javax.net.ssl.HttpsURLConnection
-//import org.json.simple.JSONArray
-//import org.json.simple.JSONObject
-import org.codehaus.groovy.grails.web.json.JSONArray
-import org.codehaus.groovy.grails.web.json.JSONObject
-import grails.converters.JSON
 
 class PersonController {
 
@@ -609,8 +610,19 @@ class PersonController {
 	
 	def saveBulkReporting() {
 		println params
+		def programs = params.list('program').findAll{program -> program != 'null'}
+		println programs
+		def days = params.list('date_day')
+		def months = params.list('date_month')
+		def years = params.list('date_year')
+		def hours = params.list('hours')
 		def steward = Person.get(params.stewardId)
-		println steward
+		programs.eachWithIndex { program, index ->
+			def date = new LocalDate(years[index] as Integer, months[index] as Integer, days[index] as Integer)
+			println date
+			def volunteerSession = new VolunteerSession(person: steward, hours: hours[index] as Integer, date: date, program: program)
+			volunteerSession.save(failOnError: true)
+		}
 		redirect(action: 'stewardList')
 	}
 

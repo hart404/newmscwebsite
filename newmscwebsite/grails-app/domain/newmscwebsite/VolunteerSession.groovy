@@ -2,6 +2,7 @@ package newmscwebsite
 import org.joda.time.LocalDate
 import org.joda.time.LocalTime
 
+
 class VolunteerSession {
 	BigDecimal hours = 0
     LocalDate date
@@ -22,6 +23,6 @@ class VolunteerSession {
         date(nullable: false)
         time(nullable: true)
         program(nullable: false)
-		person(nullable: true)
+		person(nullable: false)
     }
 }

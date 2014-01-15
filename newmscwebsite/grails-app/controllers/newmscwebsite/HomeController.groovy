@@ -40,20 +40,21 @@ class HomeController {
 		map
 	}
 
-	def storeReport(){
+	def storeReport() {
 		def dmydate = params.date.split('/')
-		def date_inst = dmydate[2]+"-"+dmydate[0]+"-"+dmydate[1]
+		def date_inst = dmydate[2] + "-" + dmydate[0] + "-" + dmydate[1]
 		def program_inst = params.program
 		def hours_inst = params.hours
 		def time_inst = params.time
+		Person person = (Person)springSecurityService.currentUser
 
-		def report_inst = new VolunteerSession(date:date_inst,hours:hours_inst,program:program_inst,time:time_inst,dateCreated:new Date(),lastUpdated:new Date())
+		def report_inst = new VolunteerSession(date: date_inst, hours: hours_inst, program: program_inst, time: time_inst, person: person)
 		report_inst.save(failOnError:true)
 
 		render "true"
 	}
 
-	def saveReportProblem(){
+	def saveReportProblem() {
 		def code_inst = params.code
 		def comments_inst = params.comments
 		def name_inst = params.name

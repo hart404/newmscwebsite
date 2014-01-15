@@ -10,8 +10,8 @@ function selectedValue(selectid){
               $( "select#program"+selectid+" option:selected").val() == "Patrol Program - Foot"
             )
        {
-         $("#northarea"+selectid).removeAttr("disabled");
-         $("#southarea"+selectid).removeAttr("disabled");
+         $("#northarea"+selectid).attr("disabled", "disabled");
+         $("#southarea"+selectid).attr("disabled", "disabled");
        }else{
          $("#northarea"+selectid).attr("disabled", "disabled");
          $("#southarea"+selectid).attr("disabled", "disabled");
