@@ -601,9 +601,17 @@ class PersonController {
 		}
 	}
 	
-	def bulkReporting() {
-		def steward = [firstName: "Phil", lastName: "Hartley"]
+	def showBulkReporting(Long id) {
+		println params
+		def steward = Person.get(id)
 		[steward: steward, programs: ProgramReporting.values()]
+	}
+	
+	def saveBulkReporting() {
+		println params
+		def steward = Person.get(params.stewardId)
+		println steward
+		redirect(action: 'stewardList')
 	}
 
 }

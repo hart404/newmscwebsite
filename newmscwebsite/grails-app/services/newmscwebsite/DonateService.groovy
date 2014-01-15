@@ -15,7 +15,7 @@ class DonateService {
 	def grailsApplication
 
 	def processDonation(creditCardNumber, expirationMonth, expirationYear) {
-		def apiLoginId = grailsApplication.config.authorize.net.api.login.identity
+/*		def apiLoginId = grailsApplication.config.authorize.net.api.login.identity
 		def transactionKey = grailsApplication.config.authorize.net.transaction.key
 		Merchant merchant = Merchant.createMerchant(Environment.SANDBOX, apiLoginId.toString(), transactionKey.toString())
 		CreditCard creditCard = CreditCard.createCreditCard()
@@ -37,5 +37,7 @@ class DonateService {
 		println "reasonResponseCode = " + result.getReasonResponseCode()
 		
 		return  result.getResponseCode()
+		*/
+		return "Thanks for your donation!"
 	}
 }

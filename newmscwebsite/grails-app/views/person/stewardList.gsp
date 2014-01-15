@@ -37,9 +37,13 @@
                         <g:else>
                             <td></td>
                         </g:else>
-                        <td>${fieldValue(bean: steward, field: "firstName")}</td>
-                        <td>${fieldValue(bean: steward, field: "lastName")}</td> 
+                        <td>${fieldValue(bean: steward, field: "firstName")}</td> 
                         <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
+                            <td><g:link action="showBulkReporting" id="${steward.id}">${fieldValue(bean: steward, field: "lastName")}</g:link></td> 
+                        </sec:ifAnyGranted>                   
+                        <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
+                            <td>${fieldValue(bean: steward, field: "lastName")}</td> 
+                        </sec:ifNotGranted><sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
                             <td><g:link action="edit" id="${steward.id}">${fieldValue(bean: steward, field: "email")}</g:link></td> 
                         </sec:ifAnyGranted>                   
                         <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
