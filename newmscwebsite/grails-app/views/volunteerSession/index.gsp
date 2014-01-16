@@ -32,9 +32,9 @@
 					
 						<g:sortableColumn property="program" title="${message(code: 'volunteerSession.program.label', default: 'Program')}" />
 					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'volunteerSession.dateCreated.label', default: 'Date Created')}" />
+						<th><g:message code="volunteerSession.person.label" default="Person" /></th>
 					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'volunteerSession.lastUpdated.label', default: 'Last Updated')}" />
+						<g:sortableColumn property="dateCreated" title="${message(code: 'volunteerSession.dateCreated.label', default: 'Date Created')}" />
 					
 					</tr>
 				</thead>
@@ -50,9 +50,9 @@
 					
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "program")}</td>
 					
-						<td><g:formatDate date="${volunteerSessionInstance.dateCreated}" /></td>
+						<td>${fieldValue(bean: volunteerSessionInstance, field: "person")}</td>
 					
-						<td><g:formatDate date="${volunteerSessionInstance.lastUpdated}" /></td>
+						<td><g:formatDate date="${volunteerSessionInstance.dateCreated}" /></td>
 					
 					</tr>
 				</g:each>
