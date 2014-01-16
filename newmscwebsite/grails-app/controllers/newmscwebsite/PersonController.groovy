@@ -603,15 +603,12 @@ class PersonController {
 	}
 	
 	def showBulkReporting(Long id) {
-		println params
 		def steward = Person.get(id)
 		[steward: steward, programs: ProgramReporting.values()]
 	}
 	
 	def saveBulkReporting() {
-		println params
 		def programs = params.list('program').findAll{program -> program != 'null'}
-		println programs
 		def days = params.list('date_day')
 		def months = params.list('date_month')
 		def years = params.list('date_year')
@@ -619,7 +616,6 @@ class PersonController {
 		def steward = Person.get(params.stewardId)
 		programs.eachWithIndex { program, index ->
 			def date = new LocalDate(years[index] as Integer, months[index] as Integer, days[index] as Integer)
-			println date
 			def volunteerSession = new VolunteerSession(person: steward, hours: hours[index] as Integer, date: date, program: program)
 			volunteerSession.save(failOnError: true)
 		}
