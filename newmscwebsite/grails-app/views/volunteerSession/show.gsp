@@ -41,15 +41,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${volunteerSessionInstance?.time}">
-				<li class="fieldcontain">
-					<span id="time-label" class="property-label"><g:message code="volunteerSession.time.label" default="Time" /></span>
-					
-						<span class="property-value" aria-labelledby="time-label"><g:fieldValue bean="${volunteerSessionInstance}" field="time"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${volunteerSessionInstance?.program}">
 				<li class="fieldcontain">
 					<span id="program-label" class="property-label"><g:message code="volunteerSession.program.label" default="Program" /></span>

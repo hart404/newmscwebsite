@@ -16,6 +16,7 @@ class VolunteerSessionController {
     }
 
     def show(VolunteerSession volunteerSessionInstance) {
+		println "In Show"
         respond volunteerSessionInstance
     }
 

@@ -467,25 +467,6 @@
 						<label style="visibility: hidden;">Na</label> <label>Please share with this charity:</label>
 					</div>
 
-					<div>
-						<label style="visibility: hidden;">Na</label> <label style="font-weight: bold;">Donation Preferences:</label>
-					</div>
-
-					<div style="">
-						<div style="width: 60%; background:; float: left;">
-							<label style="visibility: hidden;">Na</label> <input type="radio" id="radio11" name="RadioGroup2" value="one time donation" checked="true" /> <label>This is a one time donation</label>
-						</div>
-
-					</div>
-
-					<div style="">
-						<div style="width: 100%; background:; float: left;">
-							<label style="visibility: hidden;">Na</label> <input type="radio" id="radio22" name="RadioGroup2" value="recurring " /> <label>I would like to make this a recurring donation deducted</label>
-							<g:select name="recurring_type" id="recurring_type" from="${['Monthly', 'Quarterly', 'Annually']}" noSelection="['': '']" style="width:100px;" />
-						</div>
-
-					</div>
-
 					<div style="visibility: hidden; width: 100%;">
 						<label style="visibility: hidden;">Na</label> <label style="font-weight: bold;">Please share with this charity:</label>
 					</div>

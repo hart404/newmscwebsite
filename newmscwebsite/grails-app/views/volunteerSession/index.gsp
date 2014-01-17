@@ -28,13 +28,13 @@
 					
 						<g:sortableColumn property="date" title="${message(code: 'volunteerSession.date.label', default: 'Date')}" />
 					
-						<g:sortableColumn property="time" title="${message(code: 'volunteerSession.time.label', default: 'Time')}" />
-					
 						<g:sortableColumn property="program" title="${message(code: 'volunteerSession.program.label', default: 'Program')}" />
 					
 						<th><g:message code="volunteerSession.person.label" default="Person" /></th>
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'volunteerSession.dateCreated.label', default: 'Date Created')}" />
+					
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'volunteerSession.lastUpdated.label', default: 'Last Updated')}" />
 					
 					</tr>
 				</thead>
@@ -42,17 +42,17 @@
 				<g:each in="${volunteerSessionInstanceList}" status="i" var="volunteerSessionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${volunteerSessionInstance.id}">${fieldValue(bean: volunteerSessionInstance, field: "hours")}</g:link></td>
+						<td><g:link action="edit" id="${volunteerSessionInstance.id}">${fieldValue(bean: volunteerSessionInstance, field: "hours")}</g:link></td>
 					
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "date")}</td>
-					
-						<td>${fieldValue(bean: volunteerSessionInstance, field: "time")}</td>
 					
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "program")}</td>
 					
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "person")}</td>
 					
 						<td><g:formatDate date="${volunteerSessionInstance.dateCreated}" /></td>
+					
+						<td><g:formatDate date="${volunteerSessionInstance.lastUpdated}" /></td>
 					
 					</tr>
 				</g:each>

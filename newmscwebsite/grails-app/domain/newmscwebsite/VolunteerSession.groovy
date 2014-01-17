@@ -6,7 +6,6 @@ import org.joda.time.LocalTime
 class VolunteerSession {
 	BigDecimal hours = 0
     LocalDate date
-	Integer time
 	String program
 	Date dateCreated
 	Date lastUpdated
@@ -21,7 +20,6 @@ class VolunteerSession {
 		trailSections(size: 0..100)
         hours(nullable: false)
         date(nullable: false)
-        time(nullable: true)
         program(nullable: false)
 		person(nullable: false)
     }
