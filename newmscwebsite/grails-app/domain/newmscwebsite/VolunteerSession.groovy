@@ -13,7 +13,7 @@ class VolunteerSession {
 	
 	List<TrailSection> trailSections
 	static hasMany = [
-		trailsSections: TrailSection	
+		trailSections: TrailSection	
 	]
 
     static constraints = {

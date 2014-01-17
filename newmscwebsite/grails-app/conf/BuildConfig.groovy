@@ -50,10 +50,11 @@ grails.project.dependency.resolution = {
 		build ":tomcat:7.0.47"
 		// build ':release:2.2.1'
 		// compile ':app-info-hibernate:0.2'
+		compile ":scaffolding:2.0.1"
         runtime ":hibernate:3.6.10.4"
         runtime ":jquery:1.10.2"
+        runtime ":resources:1.2.1"
 		compile ":jquery-ui:1.8.24"
-        runtime ":resources:1.2.RC2"
 		compile ":spring-security-core:1.2.7.3"
 		compile ":spring-security-ui:0.2"
 		compile ":famfamfam:1.0.1"
@@ -68,7 +69,6 @@ grails.project.dependency.resolution = {
 		compile ":searchable:0.6.5"
 		compile ":joda-time:1.4"
 		compile ":authorize-net:0.12"
-		compile ":scaffolding:2.0.1"
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

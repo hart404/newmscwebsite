@@ -1,9 +1,9 @@
 
 <%@ page import="newmscwebsite.VolunteerSession" %>
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="generatedLayout">
 		<g:set var="entityName" value="${message(code: 'volunteerSession.label', default: 'VolunteerSession')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -12,8 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="show-volunteerSession" class="content scaffold-show" role="main">
@@ -22,6 +21,17 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list volunteerSession">
+			
+				<g:if test="${volunteerSessionInstance?.trailSections}">
+				<li class="fieldcontain">
+					<span id="trailSections-label" class="property-label"><g:message code="volunteerSession.trailSections.label" default="Trail Sections" /></span>
+					
+						<g:each in="${volunteerSessionInstance.trailSections}" var="t">
+						<span class="property-value" aria-labelledby="trailSections-label"><g:link controller="trailSection" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
 			
 				<g:if test="${volunteerSessionInstance?.hours}">
 				<li class="fieldcontain">
@@ -50,6 +60,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${volunteerSessionInstance?.person}">
+				<li class="fieldcontain">
+					<span id="person-label" class="property-label"><g:message code="volunteerSession.person.label" default="Person" /></span>
+					
+						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${volunteerSessionInstance?.person?.id}">${volunteerSessionInstance?.person?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${volunteerSessionInstance?.dateCreated}">
 				<li class="fieldcontain">
 					<span id="dateCreated-label" class="property-label"><g:message code="volunteerSession.dateCreated.label" default="Date Created" /></span>
@@ -68,21 +87,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${volunteerSessionInstance?.trailsSections}">
-				<li class="fieldcontain">
-					<span id="trailsSections-label" class="property-label"><g:message code="volunteerSession.trailsSections.label" default="Trails Sections" /></span>
-					
-						<g:each in="${volunteerSessionInstance.trailsSections}" var="t">
-						<span class="property-value" aria-labelledby="trailsSections-label"><g:link controller="trailSection" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 			</ol>
-			<g:form url="[resource:volunteerSessionInstance, action:'delete']" method="DELETE">
+			<g:form>
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${volunteerSessionInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:hiddenField name="id" value="${volunteerSessionInstance?.id}" />
+					<g:link class="edit" action="edit" id="${volunteerSessionInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

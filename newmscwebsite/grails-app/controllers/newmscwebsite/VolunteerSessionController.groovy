@@ -1,105 +1,108 @@
 package newmscwebsite
 
+import org.joda.time.LocalDate
+import org.springframework.dao.DataIntegrityViolationException
 
-
-import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
-
-@Transactional(readOnly = true)
 class VolunteerSessionController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond VolunteerSession.list(params), model:[volunteerSessionInstanceCount: VolunteerSession.count()]
+    def index() {
+        redirect(action: "list", params: params)
     }
 
-    def show(VolunteerSession volunteerSessionInstance) {
-		println "In Show"
-        respond volunteerSessionInstance
+    def list() {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        [volunteerSessionInstanceList: VolunteerSession.list(params), volunteerSessionInstanceTotal: VolunteerSession.count()]
     }
 
     def create() {
-        respond new VolunteerSession(params)
+        [volunteerSessionInstance: new VolunteerSession(params)]
     }
 
-    @Transactional
-    def save(VolunteerSession volunteerSessionInstance) {
-        if (volunteerSessionInstance == null) {
-            notFound()
+    def save() {
+        def volunteerSessionInstance = new VolunteerSession(params)
+        if (!volunteerSessionInstance.save(flush: true)) {
+            render(view: "create", model: [volunteerSessionInstance: volunteerSessionInstance])
             return
         }
 
-        if (volunteerSessionInstance.hasErrors()) {
-            respond volunteerSessionInstance.errors, view:'create'
+		flash.message = message(code: 'default.created.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), volunteerSessionInstance.id])
+        redirect(action: "show", id: volunteerSessionInstance.id)
+    }
+
+    def show() {
+        def volunteerSessionInstance = VolunteerSession.get(params.id)
+        if (!volunteerSessionInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "list")
             return
         }
 
-        volunteerSessionInstance.save flush:true
+        [volunteerSessionInstance: volunteerSessionInstance]
+    }
 
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'volunteerSessionInstance.label', default: 'VolunteerSession'), volunteerSessionInstance.id])
-                redirect volunteerSessionInstance
+    def edit() {
+        def volunteerSessionInstance = VolunteerSession.get(params.id)
+        if (!volunteerSessionInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        [volunteerSessionInstance: volunteerSessionInstance]
+    }
+
+    def update() {
+		println params
+		// Workaround for a JODA issue in Grails 2.3.0+
+		LocalDate updatedDate = new LocalDate(params.'date_year' as Integer, params.'date_month' as Integer, params.'date_day' as Integer)
+		params.date = updatedDate
+        def volunteerSessionInstance = VolunteerSession.get(params.id)
+        if (!volunteerSessionInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        if (params.version) {
+            def version = params.version.toLong()
+            if (volunteerSessionInstance.version > version) {
+                volunteerSessionInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'volunteerSession.label', default: 'VolunteerSession')] as Object[],
+                          "Another user has updated this VolunteerSession while you were editing")
+                render(view: "edit", model: [volunteerSessionInstance: volunteerSessionInstance])
+                return
             }
-            '*' { respond volunteerSessionInstance, [status: CREATED] }
         }
-    }
 
-    def edit(VolunteerSession volunteerSessionInstance) {
-        respond volunteerSessionInstance
-    }
+        volunteerSessionInstance.properties = params
 
-    @Transactional
-    def update(VolunteerSession volunteerSessionInstance) {
-        if (volunteerSessionInstance == null) {
-            notFound()
+        if (!volunteerSessionInstance.save(flush: true)) {
+            render(view: "edit", model: [volunteerSessionInstance: volunteerSessionInstance])
             return
         }
 
-        if (volunteerSessionInstance.hasErrors()) {
-            respond volunteerSessionInstance.errors, view:'edit'
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), volunteerSessionInstance.id])
+        redirect(action: "show", id: volunteerSessionInstance.id)
+    }
+
+    def delete() {
+        def volunteerSessionInstance = VolunteerSession.get(params.id)
+        if (!volunteerSessionInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "list")
             return
         }
 
-        volunteerSessionInstance.save flush:true
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'VolunteerSession.label', default: 'VolunteerSession'), volunteerSessionInstance.id])
-                redirect volunteerSessionInstance
-            }
-            '*'{ respond volunteerSessionInstance, [status: OK] }
+        try {
+            volunteerSessionInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "list")
         }
-    }
-
-    @Transactional
-    def delete(VolunteerSession volunteerSessionInstance) {
-
-        if (volunteerSessionInstance == null) {
-            notFound()
-            return
-        }
-
-        volunteerSessionInstance.delete flush:true
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'VolunteerSession.label', default: 'VolunteerSession'), volunteerSessionInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSessionInstance.label', default: 'VolunteerSession'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
+        catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "show", id: params.id)
         }
     }
 }
