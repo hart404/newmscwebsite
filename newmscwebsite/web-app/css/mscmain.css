@@ -677,7 +677,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
     background-color: #F0F0F0;
 }
 
-#calendarTable {
+#calendar {
 	text-align: center;
 	font-size: 16px;
 }
@@ -901,4 +901,8 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	padding-top: 10px;
 	float: right;
 	visibility: hidden;
+}
+
+.programHours {
+	width: 400px;
 }

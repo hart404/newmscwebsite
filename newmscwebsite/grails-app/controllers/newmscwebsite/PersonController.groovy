@@ -20,6 +20,7 @@ class PersonController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 	def personService
+	def volunteerSessionService
 	def springSecurityService
 
 
@@ -620,6 +621,23 @@ class PersonController {
 			volunteerSession.save(failOnError: true)
 		}
 		redirect(action: 'stewardList')
+	}
+	
+	def showStewardReportingSummary() {
+		def steward = (Person)springSecurityService.currentUser
+		def total = volunteerSessionService.totalHoursForSteward(steward)
+		def totalYTD = volunteerSessionService.totalHoursForStewardYearToDate(steward)
+		def byProgram = volunteerSessionService.totalHoursForStewardByProgram(steward)
+		def byProgramYTD = volunteerSessionService.totalHoursForStewardByProgramYearToDate(steward)
+		def volunteerSessionsBySteward = volunteerSessionService.sessionsBySteward(steward, params)
+		def volunteerSessionsByStewardCount = volunteerSessionService.countSessionsBySteward(steward)
+		println "Total: ${total}"
+		println "Total YTD: ${totalYTD}"
+		println "By Program: ${byProgram}"
+		println "By Program YTD: ${byProgramYTD}"
+		println "Sessions: ${volunteerSessionsBySteward}"
+		println "Session count: ${volunteerSessionsByStewardCount}"
+		[steward: steward, total: total, totalYTD: totalYTD, byProgram: byProgram, byProgramYTD: byProgramYTD, volunteerSessions: volunteerSessionsBySteward, volunteerSessionsCount: volunteerSessionsByStewardCount]
 	}
 
 }

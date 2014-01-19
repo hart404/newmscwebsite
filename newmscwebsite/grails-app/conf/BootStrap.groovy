@@ -35,8 +35,6 @@ class BootStrap {
 	def init = { servletContext ->
 		println "Running bootstrap..."
 		println "Root directory: ${System.getProperty("user.home")}"
-		println "apikey=${grailsApplication.config.constant_contact.apikey}"
-		println "accesstoken=${grailsApplication.config.constant_contact.accesstoken}"
 		updateSql()
 		createRoles()
 		createAdminUser()
