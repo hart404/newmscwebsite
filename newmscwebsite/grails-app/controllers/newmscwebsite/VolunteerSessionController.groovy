@@ -53,8 +53,51 @@ class VolunteerSessionController {
         [volunteerSessionInstance: volunteerSessionInstance]
     }
 
-    def update() {
-		println params
+    def userEdit() {
+        def volunteerSessionInstance = VolunteerSession.get(params.id)
+        if (!volunteerSessionInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        [volunteerSessionInstance: volunteerSessionInstance]
+    }
+
+    def userUpdate() {
+		// Workaround for a JODA issue in Grails 2.3.0+
+		LocalDate updatedDate = new LocalDate(params.'date_year' as Integer, params.'date_month' as Integer, params.'date_day' as Integer)
+		params.date = updatedDate
+        def volunteerSessionInstance = VolunteerSession.get(params.id)
+        if (!volunteerSessionInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])
+            redirect(controller: "person", action: "showStewardReportingSummary")
+            return
+        }
+
+        if (params.version) {
+            def version = params.version.toLong()
+            if (volunteerSessionInstance.version > version) {
+                volunteerSessionInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'volunteerSession.label', default: 'VolunteerSession')] as Object[],
+                          "Another user has updated this VolunteerSession while you were editing")
+                render(view: "userEdit", model: [volunteerSessionInstance: volunteerSessionInstance])
+                return
+            }
+        }
+
+        volunteerSessionInstance.properties = params
+
+        if (!volunteerSessionInstance.save(flush: true)) {
+            render(view: "userEdit", model: [volunteerSessionInstance: volunteerSessionInstance])
+            return
+        }
+
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), volunteerSessionInstance.id])
+        redirect(controller: "person", action: "showStewardReportingSummary")
+    }
+
+     def update() {
 		// Workaround for a JODA issue in Grails 2.3.0+
 		LocalDate updatedDate = new LocalDate(params.'date_year' as Integer, params.'date_month' as Integer, params.'date_day' as Integer)
 		params.date = updatedDate
@@ -87,7 +130,7 @@ class VolunteerSessionController {
         redirect(action: "show", id: volunteerSessionInstance.id)
     }
 
-    def delete() {
+   def delete() {
         def volunteerSessionInstance = VolunteerSession.get(params.id)
         if (!volunteerSessionInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'volunteerSession.label', default: 'VolunteerSession'), params.id])

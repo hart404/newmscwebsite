@@ -44,7 +44,8 @@
 					<tr>					
 						<g:sortableColumn property="program" title="${message(code: 'volunteerSession.program.label', default: 'Program')}" />
 						<g:sortableColumn property="date" title="${message(code: 'volunteerSession.date.label', default: 'Date')}" />
-						<g:sortableColumn property="hours" title="${message(code: 'volunteerSession.hours.label', default: 'Hours')}" />					
+						<g:sortableColumn property="hours" title="${message(code: 'volunteerSession.hours.label', default: 'Hours')}" />
+						<th></th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +54,7 @@
 						<td>${((ProgramReporting)(volunteerSessionInstance.program)).value()}</td>
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "date")}</td>
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "hours")}</td>
+						<td><g:link controller="volunteerSession" action="userEdit" id="${volunteerSessionInstance.id}">Edit</g:link></td>
 					</tr>
 				</g:each>
 				</tbody>

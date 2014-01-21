@@ -56,15 +56,15 @@
 				storeReport(i);
 				reported = true;
 				if (i == 10 && reported == true) {
-					alert("Your have successfully submited till Report-" + i);
+					alert("Your have successfully submitted " + i + " reports");
 					reported = false;
 				}
 			} else {
 				if (reported == true) {
-					alert("Your have successfully submited till Report-" + (i - 1));
+					alert("Your have successfully submitted " + (i - 1) + " report(s)");
 					reported = false;
 				} else {
-					alert("Please Enter values into Report-1,then Report-2 and so on......");
+					alert("Please your reports......");
 				}
 				break;
 			}

@@ -6,7 +6,7 @@
 		<g:message code="volunteerSession.hours.label" default="Hours" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="hours" required="" value="${fieldValue(bean: volunteerSessionInstance, field: 'hours')}"/>
+	<g:field type="number" name="hours" step= "0.5" required="" value="${fieldValue(bean: volunteerSessionInstance, field: 'hours')}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: volunteerSessionInstance, field: 'date', 'error')} required">
