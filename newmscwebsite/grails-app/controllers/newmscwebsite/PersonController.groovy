@@ -617,7 +617,7 @@ class PersonController {
 		def steward = Person.get(params.stewardId)
 		programs.eachWithIndex { program, index ->
 			def date = new LocalDate(years[index] as Integer, months[index] as Integer, days[index] as Integer)
-			def volunteerSession = new VolunteerSession(person: steward, hours: hours[index] as Integer, date: date, program: program)
+			def volunteerSession = new VolunteerSession(person: steward, hours: hours[index] as BigDecimal, date: date, program: program)
 			volunteerSession.save(failOnError: true)
 		}
 		redirect(action: 'stewardList')

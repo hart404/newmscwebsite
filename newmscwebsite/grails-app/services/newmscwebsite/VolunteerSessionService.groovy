@@ -46,11 +46,12 @@ class VolunteerSessionService {
 	}
 	
 	def sessionsBySteward(steward, params) {
+		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
 		def criteria = VolunteerSession.createCriteria()
 		def result = criteria.list {
 			eq("person", steward)
 			firstResult(params.offset as Integer ?: 0)
-			maxResults(params.max as Integer?: 50)
+			maxResults(params.max)
 			order(params.sort ?: "date", params.order ?: "desc")
 		}
 		result
