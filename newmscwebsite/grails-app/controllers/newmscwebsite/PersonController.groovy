@@ -609,6 +609,7 @@ class PersonController {
 	}
 	
 	def saveBulkReporting() {
+		println params
 		def programs = params.list('program').findAll{program -> program != 'null'}
 		def days = params.list('date_day')
 		def months = params.list('date_month')
