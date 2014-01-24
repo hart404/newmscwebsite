@@ -87,7 +87,7 @@ environments {
 		grails.plugins.springsecurity.portMapper.httpsPort = "443"
 	}
 	backup {
-		grails.serverURL = "http://newmscwebsitexlv.elasticbeanstalk.com"
+		grails.serverURL = "http://newmscwebsitexlviii.elasticbeanstalk.com/"
 		grails.plugins.springsecurity.portMapper.httpPort = "80"
 		grails.plugins.springsecurity.portMapper.httpsPort = "443"
 	}
