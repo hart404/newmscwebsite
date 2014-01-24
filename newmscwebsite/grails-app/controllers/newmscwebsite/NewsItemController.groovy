@@ -1,5 +1,6 @@
 package newmscwebsite
 
+import org.joda.time.LocalDate
 import org.springframework.dao.DataIntegrityViolationException
 
 import simple.cms.SCMSPhoto
@@ -24,8 +25,15 @@ class NewsItemController {
     }
 
     def save() {
+		println params
 		def photo = SCMSPhoto.get(params.photoId)
+		params.remove('displayStartDate')
+		params.remove('displayEndDate')
+ 		def displayStartDate = new LocalDate(params.'displayStartDate_year' as Integer, params.'displayStartDate_month' as Integer, params.'displayStartDate_day' as Integer)
+		def displayEndDate = new LocalDate(params.'displayEndDate_year' as Integer, params.'displayEndDate_month' as Integer, params.'displayEndDate_day' as Integer)
         def newsItemInstance = new NewsItem(params)
+		newsItemInstance.displayStartDate = displayStartDate
+		newsItemInstance.displayEndDate = displayEndDate
 		newsItemInstance.photo = photo
         if (!newsItemInstance.save(flush: true)) {
             render(view: "create", model: [newsItemInstance: newsItemInstance])
@@ -59,7 +67,14 @@ class NewsItemController {
     }
 
     def update() {
+		println params
         def newsItemInstance = NewsItem.get(params.id)
+		params.remove('displayStartDate')
+		params.remove('displayEndDate')
+		def displayStartDate = new LocalDate(params.'displayStartDate_year' as Integer, params.'displayStartDate_month' as Integer, params.'displayStartDate_day' as Integer)
+		def displayEndDate = new LocalDate(params.'displayEndDate_year' as Integer, params.'displayEndDate_month' as Integer, params.'displayEndDate_day' as Integer)
+		newsItemInstance.displayStartDate = displayStartDate
+		newsItemInstance.displayEndDate = displayEndDate
   		if (params.photoId != newsItemInstance.photo?.id) {
 			def photo = SCMSPhoto.get(params.photoId)
 			newsItemInstance.photo = photo
