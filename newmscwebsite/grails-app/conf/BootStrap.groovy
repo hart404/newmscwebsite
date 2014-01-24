@@ -35,6 +35,8 @@ class BootStrap {
 	def init = { servletContext ->
 		println "Running bootstrap..."
 		println "Root directory: ${System.getProperty("user.home")}"
+		println "Login: ${grailsApplication.config.authorizeNet.login}"
+		println "TK: ${grailsApplication.config.authorizeNet.transactionKey}"
 		updateSql()
 		createRoles()
 		createAdminUser()
