@@ -1,4 +1,4 @@
-
+<%@ page import="newmscwebsite.ProgramReporting" %>
 <%@ page import="newmscwebsite.VolunteerSession" %>
 <!doctype html>
 <html>
@@ -21,28 +21,24 @@
 			</g:if>
 			<table>
 				<thead>
-					<tr>
-					
+					<tr>					
 						<th><g:message code="volunteerSession.person.label" default="Person" /></th>
 						<g:sortableColumn property="program" title="${message(code: 'volunteerSession.program.label', default: 'Program')}" />
 						<g:sortableColumn property="date" title="${message(code: 'volunteerSession.date.label', default: 'Date')}" />
 						<g:sortableColumn property="hours" title="${message(code: 'volunteerSession.hours.label', default: 'Hours')}" />
 						<g:sortableColumn property="dateCreated" title="${message(code: 'volunteerSession.dateCreated.label', default: 'Date Created')}" />
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'volunteerSession.lastUpdated.label', default: 'Last Updated')}" />
-					
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'volunteerSession.lastUpdated.label', default: 'Last Updated')}" />					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${volunteerSessionInstanceList}" status="i" var="volunteerSessionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
 						<td><g:link action="edit" id="${volunteerSessionInstance.id}">${fieldValue(bean: volunteerSessionInstance, field: "person")}</g:link></td>
-						<td>${fieldValue(bean: volunteerSessionInstance, field: "program")}</td>
+						<td>${((ProgramReporting)(volunteerSessionInstance.program)).value()}</td>
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "date")}</td>
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "hours")}</td>
 						<td><g:formatDate date="${volunteerSessionInstance.dateCreated}" /></td>
-						<td><g:formatDate date="${volunteerSessionInstance.lastUpdated}" /></td>
-					
+						<td><g:formatDate date="${volunteerSessionInstance.lastUpdated}" /></td>					
 					</tr>
 				</g:each>
 				</tbody>
