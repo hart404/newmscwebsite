@@ -10,6 +10,12 @@
      <div id="reportHead" style ="padding-top: 20px;">
 	<h1>
 		Steward Reporting</h1>
+		<div class="generalContainer">
+		<p class="grayEventText">This reporting page is for reporting <em>HOURS ONLY</em>.
+The trail reporting map for patrol is under construction and we will notify you when it is functional.
+ <br/>
+THANK YOU FOR YOUR PATIENCE!</p>
+</div>
 </div>
 <div id="reportForm">
   Date <input id="date1" name="date" type="text" />&nbsp;&nbsp;&nbsp; Program <select class="program" id="program1" name="program" onchange="selectedValue(1);"><option selected="selected" value=""></option><option  value="PATROL_FOOT">Patrol Program - Foot</option><option  value="PATROL_BIKE">Patrol Program - Bike</option><option  value="PATROL_HORSE">Patrol Program - Horse</option><option  value="PATHFINDERS">Pathfinder Program</option><option  value="CONSTRUCTION_AND_MAINTENANCE">Construction/Maintenance Program</option><option  value="HIKE">Hike Program</option><option  value="STEWARD_EDUCATION">Steward Education Program</option><option value="CITIZEN_SCIENCE">Citizen Science</option><option  value="COMMUNITY_RELATIONS">Community Relations Program</option><option  value="FUNDRAISING">Fundraising Program</option><option  value="NATURE_GUIDES">Nature Guides Program</option><option  value="VOLUNTEER_SUPPORT">Volunteer Support Program</option><option  value="CORE_LEADERSHIP_TEAM">Core Leadership Team</option><option  value="OFFICE_AND_WEB_WORK">Office and Web Work</option><option  value="BOARD">Board of Directors</option><option value="TOUR_DE_SCOTTSDALE">Tour de Scottsdale</option>
@@ -37,6 +43,10 @@
         <input id="submit" name="Submit" onclick="submitReport();" type="button" value="Submit" />&nbsp;
         <p>
                 &nbsp;</p>
+    <g:form controller="person" action="showStewardReportingSummary">
+    <g:actionSubmit class="edit" controller="person" action="showStewardReportingSummary" value="${message(code: 'default.button.show.reporting.summary.label', default: 'Show Reporting Summary')}" />
+    </g:form>
+                
 </div>
 <div id="toPopup" style="display: none;">
 	<div class="close">
