@@ -29,7 +29,6 @@ class VolunteerSessionService {
 	
 	def totalHoursForStewardByProgramYearToDate(steward) {
 		def today = new Date()
-		println today[YEAR]
 		def newYears = new LocalDate(today[YEAR], 1, 1)
 		def criteria = VolunteerSession.createCriteria()
 		def result = criteria.list {
@@ -46,12 +45,18 @@ class VolunteerSessionService {
 	}
 	
 	def sessionsBySteward(steward, params) {
-		params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+		def max = Math.min(params.max ? params.int('max') : 100, 1000)
+		params.max = max
+		def offset = params.offset as Integer ?: 0
+		sessionsBySteward(steward, offset, max, params)
+	}
+	
+	def sessionsBySteward(steward, offset, max, params) {
 		def criteria = VolunteerSession.createCriteria()
 		def result = criteria.list {
 			eq("person", steward)
-			firstResult(params.offset as Integer ?: 0)
-			maxResults(params.max)
+			firstResult(offset)
+			maxResults(max)
 			order(params.sort ?: "date", params.order ?: "desc")
 		}
 		result

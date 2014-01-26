@@ -609,7 +609,6 @@ class PersonController {
 	}
 	
 	def saveBulkReporting() {
-		println params
 		def programs = params.list('program').findAll{program -> program != 'null'}
 		def days = params.list('date_day')
 		def months = params.list('date_month')
@@ -632,12 +631,6 @@ class PersonController {
 		def byProgramYTD = volunteerSessionService.totalHoursForStewardByProgramYearToDate(steward)
 		def volunteerSessionsBySteward = volunteerSessionService.sessionsBySteward(steward, params)
 		def volunteerSessionsByStewardCount = volunteerSessionService.countSessionsBySteward(steward)
-		println "Total: ${total}"
-		println "Total YTD: ${totalYTD}"
-		println "By Program: ${byProgram}"
-		println "By Program YTD: ${byProgramYTD}"
-		println "Sessions: ${volunteerSessionsBySteward}"
-		println "Session count: ${volunteerSessionsByStewardCount}"
 		[steward: steward, total: total, totalYTD: totalYTD, byProgram: byProgram, byProgramYTD: byProgramYTD, volunteerSessions: volunteerSessionsBySteward, volunteerSessionsCount: volunteerSessionsByStewardCount]
 	}
 

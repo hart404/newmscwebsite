@@ -7,29 +7,29 @@ authorizeNet {
 environments {
     development {
         authorizeNet {
-            login = '6pKhTc8S9PC'
-            transactionKey = '8W3jsZ8U8k7b3ZhY'
-            urlString = 'https://test.authorize.net/gateway/transact.dll'
+            login = '7Z3bBa6H'
+            transactionKey = '52EM6fDTa4M57xq7'
+            urlString = 'https://secure.authorize.net/gateway/transact.dll'
         }
     }
     production {
         authorizeNet {
             login = '7Z3bBa6H'
-            transactionKey = '78gHdj2XVZ8ew42p'
+            transactionKey = '52EM6fDTa4M57xq7'
             urlString = 'https://secure.authorize.net/gateway/transact.dll'
         }
     }
     prod {
         authorizeNet {
             login = '7Z3bBa6H'
-            transactionKey = '78gHdj2XVZ8ew42p'
+            transactionKey = '52EM6fDTa4M57xq7'
             urlString = 'https://secure.authorize.net/gateway/transact.dll'
         }
     }
     backup {
         authorizeNet {
             login = '7Z3bBa6H'
-            transactionKey = '78gHdj2XVZ8ew42p'
+            transactionKey = '52EM6fDTa4M57xq7'
             urlString = 'https://secure.authorize.net/gateway/transact.dll'
         }
     }

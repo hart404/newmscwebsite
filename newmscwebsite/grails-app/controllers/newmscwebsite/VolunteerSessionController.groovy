@@ -4,6 +4,9 @@ import org.joda.time.LocalDate
 import org.springframework.dao.DataIntegrityViolationException
 
 class VolunteerSessionController {
+	
+	def volunteerSessionService
+	def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -148,4 +151,23 @@ class VolunteerSessionController {
             redirect(action: "show", id: params.id)
         }
     }
+   
+   def downloadVolunteerSessionsAsCSV() {
+	   response.setHeader "Content-disposition", "attachment; filename=volunteerHours.csv"
+	   response.contentType = 'text/csv'
+	   def steward = (Person)springSecurityService.currentUser
+	   createCSVFileVolunteerSessions(steward, response.outputStream)
+	   response.outputStream.flush()
+   }
+
+   def createCSVFileVolunteerSessions(steward, outputStream) {
+	   def volunteerSessions = volunteerSessionService.sessionsBySteward(steward, 0, 100000, [:])
+	   volunteerSessions.each { VolunteerSession session ->
+		   outputStream << "'${((ProgramReporting)session.program).value()}',"
+		   outputStream << "'${session.date}',"
+		   outputStream << "'${session.hours}'"
+		   outputStream << "\n"
+	   }
+   }
+   
 }

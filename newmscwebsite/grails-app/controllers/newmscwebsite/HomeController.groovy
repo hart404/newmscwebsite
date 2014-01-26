@@ -170,7 +170,8 @@ class HomeController {
 		}
 		def anr = s.submit()
 
-		println anr
+		println "ANR: ${anr}"
+		println "Response Reason Code: ${anr.responseReasonCode}"
 
 		boolean recuringType
 		if (jsonObj.recuringType == "One-time") {
@@ -178,6 +179,8 @@ class HomeController {
 		} else {
 			recuringType = true
 		}
+		
+		println "Recurring type: ${recuringType}"
 
 		if (anr.responseReasonText.contains("This transaction has been approved.")) {
 			println "SUCCESS"

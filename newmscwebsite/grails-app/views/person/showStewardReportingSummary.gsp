@@ -62,6 +62,9 @@
 			<div class="pagination">
 				<g:paginate total="${volunteerSessionsCount}" />
 			</div>
+			<g:form controller="volunteerSession" action="downloadVolunteerSessionsAsCSV">
+            <g:actionSubmit class="edit" controller="volunteerSession" action="downloadVolunteerSessionsAsCSV" value="${message(code: 'default.button.download.label', default: 'Download as CSV')}" />
+            </g:form>
 		</div>
 		   
     </div>
