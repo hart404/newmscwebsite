@@ -44,6 +44,7 @@ grails.project.dependency.resolution = {
 		compile 'net.java.dev.jets3t:jets3t:0.9.0'
 		compile 'org.apache.httpcomponents:httpclient:4.1.2'
 		compile 'net.authorize:anet-java-sdk:1.4.6'
+		runtime 'org.springframework:spring-test:3.2.6.RELEASE'
 	}
 
 	plugins {

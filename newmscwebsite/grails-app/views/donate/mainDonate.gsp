@@ -20,10 +20,6 @@
 	        </g:else>
 	        </g:radioGroup>
 	        <input type="hidden" name="donationAmount" id="donationAmount" value="">
-	        <p class="bigp grayEventText">Gift Frequency: Choose to make a one-­time gift or a monthly recurring gift</p>
-	        <g:radioGroup values="[1, 2]" name="giftFrequency" value='1' labels="['I want to make a one-­time gift', 'I want to make a monthly recurring gift']">
-	        <p class="bigp grayEventText">${it.radio} ${it.label}</p>
-	        </g:radioGroup>
 	        <h2 class="redEventText wideBackground">Billing Information</h2>
 	        <table border="" class="donateTable">
 	        <tr>
@@ -59,6 +55,10 @@
 	            <td><g:textField name="country" maxlength="20" size="15" required="${true}" value="USA"/></td>
 	        </tr>        
 	        <tr>
+	            <td><label for="zip"><g:message code="donation.zip.label" default="Zip" /></label></td>
+	            <td><g:textField name="zip" maxlength="20" size="15" required="${true}" value=""/></td>
+	        </tr>        
+	        <tr>
 	            <td><label for="phone"><g:message code="donation.phone.label" default="Phone" /></label></td>
 	            <td><g:textField name="phone" maxlength="20" size="12" required="${true}" /></td>
 	        </tr>        
@@ -86,7 +86,11 @@
 	        </tr>        
 	        <tr>
 	            <td><label for="ccv"><g:message code="donation.ccv.label" default="CCV" /></label></td>
-	            <td><g:textField name="ccv" maxlength="6" size="6" required="${true}" /></td>
+	            <td><g:textField name="ccv" maxlength="4" size="4" required="${true}" /></td>
+	        </tr>        
+	        <tr>
+	            <td><label for="description"><g:message code="donation.description.label" default="Description" /></label></td>
+	            <td><g:textField name="description" maxlength="50" size="50" /></td>
 	        </tr>        
 	        </table>
 	        <p class="bigp grayEventText">
@@ -119,7 +123,6 @@
 		           </div>  
 		        </g:each>
 	        </div>
-	        <input type="hidden" id="selectedECard" name="selectedECard" value="1">
 	        <input type="hidden" id="actualDonationAmount" name="actualDonationAmount">
 	        <div style="width: 950px; float: right; ">
 	        <!-- (c) 2005, 2012. Authorize.Net is a registered trademark of CyberSource Corporation --> <div class="AuthorizeNetSeal"> <script type="text/javascript" language="javascript">var ANS_customer_id="5bd0fbb3-fa4d-4c00-b7eb-214f4a97f288";</script> <script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script> <a href="http://www.authorize.net/" id="AuthorizeNetText" target="_blank">Payment Processing</a> </div>     

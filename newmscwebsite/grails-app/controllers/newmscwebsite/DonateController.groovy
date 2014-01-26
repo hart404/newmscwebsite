@@ -12,6 +12,7 @@ import com.vinomis.authnet.AuthorizeNet
 class DonateController {
 	
 	def donateService
+	def mailService
 
     def index = { }
 
@@ -21,82 +22,73 @@ class DonateController {
 	
 	def takeDonation() {
 		println params
-		/*
-		def jsonObj = JSON.parse(params.data)
-		String donateOption = jsonObj.donateOption
-		println ":::::::::::::::::::::::::::::::::::::::::"+donateOption
-		String date = jsonObj.month.toString()+jsonObj.year.toString().substring(2)
-		DateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
-		def currentdate = dfDate.format(new Date());
-		java.util.Date parsedUtilDate = dfDate.parse(currentdate);
-		java.sql.Timestamp from_d= new java.sql.Timestamp(parsedUtilDate.getTime());
-		println date
 
 		def s = new AuthorizeNet()
-		//NOTE: If you need to override the login and transaction keys from the configuration, you can do it here:
-		//                 s.login = '6pKhTc8S9PC'
-		//         s.transactionKey = '8W3jsZ8U8k7b3ZhY'
 		s.authorizeAndCapture {
-			description jsonObj.description.toString()
-			firstName jsonObj.firstName.toString()
-			lastName jsonObj.lastName.toString()
-			address jsonObj.address.toString()
-			city jsonObj.city.toString()
-			state jsonObj.state.toString()
-			amount jsonObj.amount.toString()
-			zip jsonObj.zip.toString()
-			phone jsonObj.phone.toString()
-			country jsonObj.country.toString()
-			ccNumber jsonObj.cardnumber.toString()
-			cvv jsonObj.cvc.toString()
-			ccExpDate date.toString()
-			email jsonObj.email.toString()
+			description params.description
+			firstName params.firstName
+			lastName params.lastName
+			address params.street
+			city params.city
+			state params.state
+			amount params.actualDonationAmount
+			zip params.zip
+			phone params.phone
+			country params.country
+			ccNumber params.cardNumber
+			cvv params.ccv
+			ccExpDate params.expirationMonth + params.expirationYear
+			email params.email
 		}
 		def anr = s.submit()
 
 		println "ANR: ${anr}"
 		println "Response Reason Code: ${anr.responseReasonCode}"
-
-		boolean recuringType
-		if (jsonObj.recuringType == "One-time") {
-			recuringType = false
-		} else {
-			recuringType = true
-		}
-		
-		println "Recurring type: ${recuringType}"
-
+		println "Response Reason Text: ${anr.responseReasonText}"
+		// 4007000000027
 		if (anr.responseReasonText.contains("This transaction has been approved.")) {
 			println "SUCCESS"
-			def donateinst
-			if (donateOption == "all") {
-				donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,email:jsonObj.email,city:jsonObj.city,state:jsonObj.state,
-				zip:jsonObj.zip,recurring:recuringType,recurringDate:from_d,country:jsonObj.country,
-				phone:jsonObj.phone,actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,
-				street:jsonObj.address,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
-			} else if (donateOption == "ne"){
-				donateinst = new Donation(firstName:jsonObj.firstName,lastName:jsonObj.lastName,email:jsonObj.email,recurring:recuringType,recurringDate:from_d,
-				actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
-			} else if (donateOption == "no"){
-				donateinst = new Donation(recurring:recuringType,recurringDate:from_d,
-				actualDonationAmount:Double.parseDouble(jsonObj.amount.toString()),tributeDonation:true,transactionId:anr.transactionId,recurringType:jsonObj.recuringType,recipientName:"McDowell Sonoran Conservancy")
-			}
-			if (donateinst.save(flush:true)) {
+			def donation = new Donation(firstName: params.firstName, lastName: params.lastName,
+				email: params.email, city: params.city, state: params.state,
+				zip: params.zip, country: params.country,
+				phone: params.phone, actualDonationAmount: params.actualDonationAmount as Double,
+				tributeDonation:true, street: params.street,
+				transactionId: anr.transactionId,
+				recipientName:"McDowell Sonoran Conservancy")
+			if (donation.save(flush:true)) {
 				flash.message = "This transaction has been approved."
 				//                                redirect(controller:"home" ,action: "index")
 			} else {
 				//                         redirect(controller:"home" ,action: "index")
 			}
-			render donateService.processDonation(jsonObj.cardnumber,jsonObj.month,jsonObj.year)
+			render "Thanks for your donation!"
 		} else {
 			println "FAIL"
-			flash.message = anr.responseReasonText
-			println flash.message
+			flash.message = "${anr.responseReasonText} code: ${anr.responseReasonCode}"
 			render flash.message
 		}
-		*/
+		
+		if (params.tributeDonation) {
+			sendTribute(params.firstName, params.lastName, params.email, params.eCardSelection, params.tributeBody, params.tributeSubject, params.recipientName, params.recipientEmail)
+		}
 
 		redirect(action: "thankYouForYourDonation")
+	}
+	
+	def sendTribute(firstName, lastName, email, ecardSelection, tributeBody, tributeSubject, recipientName, recipientEmail) {
+		List eCards = SCMSPhoto.findAllByDescription("eCard") as List
+		def eCard = eCards[ecardSelection as Integer]
+		mailService.sendMail {
+			to recipientEmail
+			from "donate@mcdowellsonoran.org"
+			cc email
+			bcc "hart404+donate@gmail.com"
+			subject tributeSubject
+			body (
+				view: "mailTemplate",
+				model: [firstName: firstName, lastName: lastName, eCard: eCard, recipientName: recipientName, tributeBody: tributeBody]
+			)
+		}
 	}
 	
 	def thankYouForYourDonation() {
