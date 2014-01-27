@@ -111,11 +111,17 @@ class EventController {
     }
 
     def save = {
+		println params
 		params.remove('startTime')
 		params.remove('endTime')
         def eventInstance = new Event(params)
 		def startTime = new DateTime(params.'startTime_year' as Integer, params.'startTime_month' as Integer, params.'startTime_day' as Integer, params.'startTime_hour' as Integer, params.'startTime_minute' as Integer)
-		def endTime = new DateTime(params.'endTime_year' as Integer, params.'endTime_month' as Integer, params.'endTime_day' as Integer, params.'endTime_hour' as Integer, params.'endTime_minute' as Integer)
+		def endTime = null
+		if (!params.'endTime_year') {
+			endTime = startTime
+		} else {
+			endTime = new DateTime(params.'endTime_year' as Integer, params.'endTime_month' as Integer, params.'endTime_day' as Integer, params.'endTime_hour' as Integer, params.'endTime_minute' as Integer)
+		}
 		eventInstance.startTime = startTime
 		eventInstance.endTime = endTime
 		def photo = SCMSPhoto.get(params.photoId)
