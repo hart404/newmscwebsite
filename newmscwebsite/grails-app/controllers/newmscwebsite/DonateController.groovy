@@ -10,16 +10,16 @@ import simple.cms.SCMSPhoto
 import com.vinomis.authnet.AuthorizeNet
 
 class DonateController {
-	
+
 	def donateService
 	def mailService
 
-    def index = { }
+	def index = { }
 
 	def mainDonate = {
 		[donation: new Donation(), eCards: SCMSPhoto.findAllByDescription("eCard")]
 	}
-	
+
 	def takeDonation() {
 		println params
 
@@ -49,17 +49,16 @@ class DonateController {
 		if (anr.responseReasonText.contains("This transaction has been approved.")) {
 			println "SUCCESS"
 			def donation = new Donation(firstName: params.firstName, lastName: params.lastName,
-				email: params.email, city: params.city, state: params.state,
-				zip: params.zip, country: params.country,
-				phone: params.phone, actualDonationAmount: params.actualDonationAmount as Double,
-				tributeDonation:true, street: params.street,
-				transactionId: anr.transactionId,
-				recipientName:"McDowell Sonoran Conservancy")
+			email: params.email, city: params.city, state: params.state,
+			zip: params.zip, country: params.country,
+			phone: params.phone, actualDonationAmount: params.actualDonationAmount as Double,
+			tributeDonation:true, street: params.street,
+			transactionId: anr.transactionId,
+			recipientName:"McDowell Sonoran Conservancy")
 			if (donation.save(flush:true)) {
 				flash.message = "This transaction has been approved."
-				//                                redirect(controller:"home" ,action: "index")
 			} else {
-				//                         redirect(controller:"home" ,action: "index")
+				donation.errors.allErrors.each { println it }
 			}
 			render "Thanks for your donation!"
 		} else {
@@ -67,14 +66,14 @@ class DonateController {
 			flash.message = "${anr.responseReasonText} code: ${anr.responseReasonCode}"
 			render flash.message
 		}
-		
+
 		if (params.tributeDonation) {
 			sendTribute(params.firstName, params.lastName, params.email, params.eCardSelection, params.tributeBody, params.tributeSubject, params.recipientName, params.recipientEmail)
 		}
 
 		redirect(action: "thankYouForYourDonation")
 	}
-	
+
 	def sendTribute(firstName, lastName, email, ecardSelection, tributeBody, tributeSubject, recipientName, recipientEmail) {
 		List eCards = SCMSPhoto.findAllByDescription("eCard") as List
 		def eCard = eCards[ecardSelection as Integer]
@@ -84,13 +83,13 @@ class DonateController {
 			cc email
 			subject tributeSubject
 			body (
-				view: "mailTemplate",
-				model: [firstName: firstName, lastName: lastName, eCard: eCard, recipientName: recipientName, tributeBody: tributeBody]
-			)
+					view: "mailTemplate",
+					model: [firstName: firstName, lastName: lastName, eCard: eCard, recipientName: recipientName, tributeBody: tributeBody]
+					)
 		}
 	}
-	
+
 	def thankYouForYourDonation() {
-		
+
 	}
 }

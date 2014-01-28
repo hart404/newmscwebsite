@@ -49,7 +49,7 @@
                         <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
                             <td>${fieldValue(bean: steward, field: "email")}</td> 
                         </sec:ifNotGranted>                   
-                        <td><g:if test="${steward?.homePhone?.number}"><p style="font-size: 10px">${steward?.homePhone?.number} (H)</p></g:if><g:if test="${steward?.cellPhone?.number}"><p style="font-size: 10px">${steward?.cellPhone?.number} (M)</p></g:if></td>                    
+                        <td><g:if test="${steward?.homePhone?.number}"><p style="font-size: 14px">H: ${steward?.homePhone?.number}</p></g:if><g:if test="${steward?.cellPhone?.number}"><p style="font-size: 14px">C: ${steward?.cellPhone?.number}</p></g:if></td>                    
                         <td><g:if test="${steward.classNumber == 'Unspecified'}"></g:if><g:else>${steward.classNumber}</g:else></td>                    
                         <td><g:if test="${steward.masterSteward}">Master</g:if><g:if test="${steward.leadSteward}">Lead</g:if></td>                    
                         <td>${steward.leadershipPosition()}</td> 

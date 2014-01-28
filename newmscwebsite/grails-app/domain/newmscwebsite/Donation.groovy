@@ -48,6 +48,7 @@ class Donation {
 		selectedECard(nullable: true)
 		transactionId(nullable: true)
 		recurringType(nullable: true)
+		recurringDate(nullable: true)
 	}
 
 }
