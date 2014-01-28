@@ -80,8 +80,8 @@
 	        <tr>
 	            <td><label for="expirationDate"><g:message code="donation.expirationDate.label" default="Expiration Date" /></label></td>
 	            <td>
-	                <g:select required="" name="expirationMonth" from="${['01', '02', '03', '04', '05', '06', '07', '08', '08', '10', '11', '12']}" valueMessagePrefix="donation.cardType" noSelection="['': '']"/>
-	                <g:select required="" name="expirationYear" from="${['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']}" valueMessagePrefix="donation.cardType" noSelection="['': '']"/>
+	                <g:select required="" name="expirationMonth" from="${['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']}" valueMessagePrefix="donation.cardType" noSelection="['': '']"/>
+	                <g:select required="" name="expirationYear" from="${['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']}" valueMessagePrefix="donation.cardType" noSelection="['': '']"/>
 	            </td>
 	        </tr>        
 	        <tr>

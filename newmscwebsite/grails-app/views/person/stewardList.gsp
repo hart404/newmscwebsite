@@ -26,6 +26,10 @@
                         <g:sortableColumn property="classNumber" title="${message(code: 'steward.classnumber.label', default: 'Class<br/>Number')}" />
                         <th>Master/Lead<br/>Steward</th>
                         <th>Leadership</th>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
+                        <th></th>
+                        <th></th>
+                        </sec:ifAnyGranted>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,12 +42,8 @@
                             <td></td>
                         </g:else>
                         <td>${fieldValue(bean: steward, field: "firstName")}</td> 
+                        <td>${fieldValue(bean: steward, field: "lastName")}</td> 
                         <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
-                            <td><g:link action="showBulkReporting" id="${steward.id}">${fieldValue(bean: steward, field: "lastName")}</g:link></td> 
-                        </sec:ifAnyGranted>                   
-                        <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
-                            <td>${fieldValue(bean: steward, field: "lastName")}</td> 
-                        </sec:ifNotGranted><sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
                             <td><g:link action="edit" id="${steward.id}">${fieldValue(bean: steward, field: "email")}</g:link></td> 
                         </sec:ifAnyGranted>                   
                         <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
@@ -52,7 +52,11 @@
                         <td><g:if test="${steward?.homePhone?.number}"><p style="font-size: 10px">${steward?.homePhone?.number} (H)</p></g:if><g:if test="${steward?.cellPhone?.number}"><p style="font-size: 10px">${steward?.cellPhone?.number} (M)</p></g:if></td>                    
                         <td><g:if test="${steward.classNumber == 'Unspecified'}"></g:if><g:else>${steward.classNumber}</g:else></td>                    
                         <td><g:if test="${steward.masterSteward}">Master</g:if><g:if test="${steward.leadSteward}">Lead</g:if></td>                    
-                        <td>${steward.leadershipPosition()}</td>                    
+                        <td>${steward.leadershipPosition()}</td> 
+                        <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
+                            <td><g:link action="showBulkReporting" id="${steward.id}">Bulk</g:link></td> 
+                            <td><g:link action="showIndividualStewardReportingSummary" id="${steward.id}">Summary</g:link></td> 
+                        </sec:ifAnyGranted>                   
                     </tr>
                 </g:each>
                 </tbody>

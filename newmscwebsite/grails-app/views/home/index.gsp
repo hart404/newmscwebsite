@@ -68,9 +68,7 @@
 						</p>
 					</div>
 					<div class="imageButton">
-
-
-						<input type="image" value="Submit" class="buttonDropShadow" alt="Submit" id="donateNow" src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" onclick="showsDonatePopup();" />
+						<a href="<g:createLink controller='donate' action='mainDonate'/>"><img src="<g:createLinkTo dir='images/layout' file='img_donate-89x28.png'/>" class = "buttonDropShadow"/></a>
 					</div>
 					<g:if test="${flash.message}">
 
@@ -96,7 +94,7 @@
 
 			</div>
 			<div class="blockFooter headerBlue">
-				<a href="javascript:showsDonatePopup()" class="supportUs">Support us &raquo</a>
+				<a href="<g:createLink controller='donate' action='mainDonate'/>" class="supportUs">Support us &raquo</a>
 			</div>
 		</div>
 		<div class="homePageItem marginRight">

@@ -50,56 +50,6 @@ function validateForm()
 
 jQuery(function($) {
 
-	$("#donateNow").click(function() {
-
-		$("#error1").html("");
-
-		$("#donationamount").val("");
-		$("#recurring_type").val("");
-
-		$('input[id="radio1"]').prop('checked', true);
-		$('input[id="radio11"]').prop('checked', true);
-
-		// $("#radio1").attr("checked", "checked");
-		// $("#radio2").attr('checked', false);
-		// $("#radio3").attr('checked', false);
-
-		setTimeout(function() { // then show popup, deley in .5 second
-			loadPopup1(); // function show popup
-		}, 500); // .5 second
-		return false;
-	});
-
-	/* start of mydiv3 */
-
-	$(".buttonDropShadow").click(function() {
-
-		$("#donationamount").val("");
-		$("#recurring_type").val("");
-
-		$('input[id="radio1"]').prop('checked', true);
-		$('input[id="radio11"]').prop('checked', true);
-
-		setTimeout(function() { // then show popup, deley in .5 second
-			loadPopup1(); // function show popup
-		}, 500); // .5 second
-		return false;
-	});
-
-	$(".supportUs").click(function() {
-
-		$("#donationamount").val("");
-		$("#recurring_type").val("");
-
-		$('input[id="radio1"]').prop('checked', true);
-		$('input[id="radio11"]').prop('checked', true);
-
-		setTimeout(function() { // then show popup, deley in .5 second
-			loadPopup1(); // function show popup
-		}, 500); // .5 second
-		return false;
-	});
-
 	function loadPopup1() {
 		if (popupStatus1 == 0) { // if value is 0, show popup
 

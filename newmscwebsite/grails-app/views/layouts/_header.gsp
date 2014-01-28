@@ -172,7 +172,7 @@
 	</div>
 	<div class="topMenu">
 		<ul class="topMenuList">
-			<li class="topMenuListItem"><a href="#" class="parent" id="donateNow"><span>DONATE NOW</span></a></li>
+			<li class="topMenuListItem"><a href="<g:createLink controller='donate' action='mainDonate' />" class="parent"><span>DONATE NOW</span></a></li>
 			<li class="topMenuListItem"><a href="<g:createLink controller='newsItem' action='index' />" class="parent"><span>NEWS</span></a></li>
 			<li class="topMenuListItem"><a href="<g:createLink controller='event' action='index' />" class="parent"><span>EVENTS</span></a></li>
 		</ul>

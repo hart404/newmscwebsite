@@ -623,8 +623,17 @@ class PersonController {
 		redirect(action: 'stewardList')
 	}
 	
+	def showIndividualStewardReportingSummary() {
+		def steward = Person.get(params.id)
+		render(view: "showStewardReportingSummary", model: stewardReportingData(steward))
+	}
+	
 	def showStewardReportingSummary() {
 		def steward = (Person)springSecurityService.currentUser
+		stewardReportingData(steward)
+	}
+	
+	def stewardReportingData(steward) {
 		def total = volunteerSessionService.totalHoursForSteward(steward)
 		def totalYTD = volunteerSessionService.totalHoursForStewardYearToDate(steward)
 		def byProgram = volunteerSessionService.totalHoursForStewardByProgram(steward)

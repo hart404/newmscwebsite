@@ -82,7 +82,6 @@ class DonateController {
 			to recipientEmail
 			from "donate@mcdowellsonoran.org"
 			cc email
-			bcc "hart404+donate@gmail.com"
 			subject tributeSubject
 			body (
 				view: "mailTemplate",
