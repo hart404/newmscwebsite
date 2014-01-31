@@ -75,7 +75,7 @@
 	        </tr>        
 	        <tr>
 	            <td><label for="cardNumber"><g:message code="donation.cardNumber.label" default="Card Number" /></label></td>
-	            <td><g:textField name="cardNumber" maxlength="40" size="16" required="${true}" /></td>
+	            <td><g:textField name="cardNumber" maxlength="40" size="24" required="${true}" /></td>
 	        </tr>        
 	        <tr>
 	            <td><label for="expirationDate"><g:message code="donation.expirationDate.label" default="Expiration Date" /></label></td>

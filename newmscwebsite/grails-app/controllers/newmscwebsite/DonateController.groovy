@@ -46,12 +46,13 @@ class DonateController {
 		println "Response Reason Code: ${anr.responseReasonCode}"
 		println "Response Reason Text: ${anr.responseReasonText}"
 		// 4007000000027
+		// Note that the actualDOnationAmount is now not being stored in the DB for security reasons
 		if (anr.responseReasonText.contains("This transaction has been approved.")) {
 			println "SUCCESS"
 			def donation = new Donation(firstName: params.firstName, lastName: params.lastName,
 			email: params.email, city: params.city, state: params.state,
 			zip: params.zip, country: params.country,
-			phone: params.phone, actualDonationAmount: params.actualDonationAmount as Double,
+			phone: params.phone, actualDonationAmount: 0 as Double,
 			tributeDonation:true, street: params.street,
 			transactionId: anr.transactionId,
 			recipientName:"McDowell Sonoran Conservancy")

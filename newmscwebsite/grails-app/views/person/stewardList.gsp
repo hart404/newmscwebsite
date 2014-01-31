@@ -23,9 +23,9 @@
                         <g:sortableColumn property="lastName" title="${message(code: 'steward.lastname.label', default: 'Last Name')}" />                    
                         <g:sortableColumn property="email" title="${message(code: 'steward.email.label', default: 'Email')}" />                   
                         <th>Phone</th>
-                        <g:sortableColumn property="classNumber" title="${message(code: 'steward.classnumber.label', default: 'Class<br/>Number')}" />
-                        <th>Master/Lead<br/>Steward</th>
-                        <th>Leadership</th>
+                        <g:sortableColumn property="classNumber" title="${message(code: 'steward.classnumber.label', default: 'Class')}" />
+                        <th>Master/<br/>Lead<br/>Steward</th>
+                        <th>CLT</th>
                         <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_WEB,ROLE_STAFF">
                         <th></th>
                         <th></th>
