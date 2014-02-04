@@ -14,7 +14,9 @@ class DonateController {
 	def donateService
 	def mailService
 
-	def index = { }
+	def index = { 
+		redirect(action: "mainDonate", params: params)
+	}
 
 	def mainDonate = {
 		[donation: new Donation(), eCards: SCMSPhoto.findAllByDescription("eCard")]
