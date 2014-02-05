@@ -11,13 +11,13 @@ class VolunteerSession {
 	Date lastUpdated
 	Person person
 	
-	List<TrailSection> trailSections
+	List<TrailReport> trailReports
 	static hasMany = [
-		trailSections: TrailSection	
+		trailReports: TrailReport	
 	]
 
     static constraints = {
-		trailSections(size: 0..100)
+		trailReports(size: 0..100)
         hours(nullable: false)
         date(nullable: false)
         program(nullable: false)
