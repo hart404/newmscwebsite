@@ -14,6 +14,6 @@
 			<li class="bottomMenuListItem"><a href="${createLink(controller: 'logout')}" class="parent"><span>Logout</span></a></li>
 			<li class="bottomMenuListItem">Welcome, <sec:loggedInUserInfo field="username" class="bottomMenuListItem"/></li>
 		</sec:ifLoggedIn>
-		&nbsp;<g:meta name="app.version"/>	
+		&nbsp;<span class='grayEventText'><g:meta name="app.version"/></span>
 	</ul>
 </div>
