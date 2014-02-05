@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="generatedLayout">
 		<g:set var="entityName" value="${message(code: 'trailSection.label', default: 'TrailSection')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -23,6 +23,24 @@
 			</g:if>
 			<ol class="property-list trailSection">
 			
+				<g:if test="${trailSectionInstance?.pinName}">
+				<li class="fieldcontain">
+					<span id="pinName-label" class="property-label"><g:message code="trailSection.pinName.label" default="Pin Name" /></span>
+					
+						<span class="property-value" aria-labelledby="pinName-label"><g:fieldValue bean="${trailSectionInstance}" field="pinName"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.trailName}">
+				<li class="fieldcontain">
+					<span id="trailName-label" class="property-label"><g:message code="trailSection.trailName.label" default="Trail Name" /></span>
+					
+						<span class="property-value" aria-labelledby="trailName-label"><g:fieldValue bean="${trailSectionInstance}" field="trailName"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${trailSectionInstance?.notes}">
 				<li class="fieldcontain">
 					<span id="notes-label" class="property-label"><g:message code="trailSection.notes.label" default="Notes" /></span>
@@ -32,11 +50,38 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${trailSectionInstance?.iconURL}">
+				<g:if test="${trailSectionInstance?.description}">
 				<li class="fieldcontain">
-					<span id="iconURL-label" class="property-label"><g:message code="trailSection.iconURL.label" default="Icon URL" /></span>
+					<span id="description-label" class="property-label"><g:message code="trailSection.description.label" default="Description" /></span>
 					
-						<span class="property-value" aria-labelledby="iconURL-label"><g:fieldValue bean="${trailSectionInstance}" field="iconURL"/></span>
+						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${trailSectionInstance}" field="description"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.color}">
+				<li class="fieldcontain">
+					<span id="color-label" class="property-label"><g:message code="trailSection.color.label" default="Color" /></span>
+					
+						<span class="property-value" aria-labelledby="color-label"><g:fieldValue bean="${trailSectionInstance}" field="color"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.enabled}">
+				<li class="fieldcontain">
+					<span id="enabled-label" class="property-label"><g:message code="trailSection.enabled.label" default="Enabled" /></span>
+					
+						<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${trailSectionInstance?.enabled}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.usedForReporting}">
+				<li class="fieldcontain">
+					<span id="usedForReporting-label" class="property-label"><g:message code="trailSection.usedForReporting.label" default="Used For Reporting" /></span>
+					
+						<span class="property-value" aria-labelledby="usedForReporting-label"><g:formatBoolean boolean="${trailSectionInstance?.usedForReporting}" /></span>
 					
 				</li>
 				</g:if>
@@ -59,20 +104,56 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${trailSectionInstance?.description}">
+				<g:if test="${trailSectionInstance?.iconURL}">
 				<li class="fieldcontain">
-					<span id="description-label" class="property-label"><g:message code="trailSection.description.label" default="Description" /></span>
+					<span id="iconURL-label" class="property-label"><g:message code="trailSection.iconURL.label" default="Icon URL" /></span>
 					
-						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${trailSectionInstance}" field="description"/></span>
+						<span class="property-value" aria-labelledby="iconURL-label"><g:fieldValue bean="${trailSectionInstance}" field="iconURL"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${trailSectionInstance?.enabled}">
+				<g:if test="${trailSectionInstance?.lastPatrolled}">
 				<li class="fieldcontain">
-					<span id="enabled-label" class="property-label"><g:message code="trailSection.enabled.label" default="Enabled" /></span>
+					<span id="lastPatrolled-label" class="property-label"><g:message code="trailSection.lastPatrolled.label" default="Last Patrolled" /></span>
 					
-						<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${trailSectionInstance?.enabled}" /></span>
+						<span class="property-value" aria-labelledby="lastPatrolled-label"><g:fieldValue bean="${trailSectionInstance}" field="lastPatrolled"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.frequency}">
+				<li class="fieldcontain">
+					<span id="frequency-label" class="property-label"><g:message code="trailSection.frequency.label" default="Frequency" /></span>
+					
+						<span class="property-value" aria-labelledby="frequency-label"><g:fieldValue bean="${trailSectionInstance}" field="frequency"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.dateCreated}">
+				<li class="fieldcontain">
+					<span id="dateCreated-label" class="property-label"><g:message code="trailSection.dateCreated.label" default="Date Created" /></span>
+					
+						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${trailSectionInstance?.dateCreated}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.lastUpdated}">
+				<li class="fieldcontain">
+					<span id="lastUpdated-label" class="property-label"><g:message code="trailSection.lastUpdated.label" default="Last Updated" /></span>
+					
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${trailSectionInstance?.lastUpdated}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${trailSectionInstance?.northPins}">
+				<li class="fieldcontain">
+					<span id="northPins-label" class="property-label"><g:message code="trailSection.northPins.label" default="North Pins" /></span>
+					
+						<span class="property-value" aria-labelledby="northPins-label"><g:formatBoolean boolean="${trailSectionInstance?.northPins}" /></span>
 					
 				</li>
 				</g:if>
@@ -86,11 +167,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${trailSectionInstance?.pinName}">
+				<g:if test="${trailSectionInstance?.southPins}">
 				<li class="fieldcontain">
-					<span id="pinName-label" class="property-label"><g:message code="trailSection.pinName.label" default="Pin Name" /></span>
+					<span id="southPins-label" class="property-label"><g:message code="trailSection.southPins.label" default="South Pins" /></span>
 					
-						<span class="property-value" aria-labelledby="pinName-label"><g:fieldValue bean="${trailSectionInstance}" field="pinName"/></span>
+						<span class="property-value" aria-labelledby="southPins-label"><g:formatBoolean boolean="${trailSectionInstance?.southPins}" /></span>
 					
 				</li>
 				</g:if>

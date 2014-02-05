@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="generatedLayout">
 		<g:set var="entityName" value="${message(code: 'trailSection.label', default: 'TrailSection')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -24,15 +24,15 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="pinName" title="${message(code: 'trailSection.pinName.label', default: 'Pin Name')}" />
+					
+						<g:sortableColumn property="trailName" title="${message(code: 'trailSection.trailName.label', default: 'Trail Name')}" />
+					
 						<g:sortableColumn property="notes" title="${message(code: 'trailSection.notes.label', default: 'Notes')}" />
 					
-						<g:sortableColumn property="iconURL" title="${message(code: 'trailSection.iconURL.label', default: 'Icon URL')}" />
-					
-						<g:sortableColumn property="anchorX" title="${message(code: 'trailSection.anchorX.label', default: 'Anchor X')}" />
-					
-						<g:sortableColumn property="anchorY" title="${message(code: 'trailSection.anchorY.label', default: 'Anchor Y')}" />
-					
 						<g:sortableColumn property="description" title="${message(code: 'trailSection.description.label', default: 'Description')}" />
+					
+						<g:sortableColumn property="color" title="${message(code: 'trailSection.color.label', default: 'Color')}" />
 					
 						<g:sortableColumn property="enabled" title="${message(code: 'trailSection.enabled.label', default: 'Enabled')}" />
 					
@@ -42,15 +42,15 @@
 				<g:each in="${trailSectionInstanceList}" status="i" var="trailSectionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${trailSectionInstance.id}">${fieldValue(bean: trailSectionInstance, field: "notes")}</g:link></td>
+						<td><g:link action="show" id="${trailSectionInstance.id}">${fieldValue(bean: trailSectionInstance, field: "pinName")}</g:link></td>
 					
-						<td>${fieldValue(bean: trailSectionInstance, field: "iconURL")}</td>
+						<td>${fieldValue(bean: trailSectionInstance, field: "trailName")}</td>
 					
-						<td>${fieldValue(bean: trailSectionInstance, field: "anchorX")}</td>
-					
-						<td>${fieldValue(bean: trailSectionInstance, field: "anchorY")}</td>
+						<td>${fieldValue(bean: trailSectionInstance, field: "notes")}</td>
 					
 						<td>${fieldValue(bean: trailSectionInstance, field: "description")}</td>
+					
+						<td>${fieldValue(bean: trailSectionInstance, field: "color")}</td>
 					
 						<td><g:formatBoolean boolean="${trailSectionInstance.enabled}" /></td>
 					
