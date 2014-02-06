@@ -22,6 +22,7 @@ class HomeController {
 
 	def homeService
 	def eventService
+	def newsItemService
 	def dataSource
 	def springSecurityService
 	static checkOut = false
@@ -35,7 +36,7 @@ class HomeController {
 
 	def index = {
 		def events = eventService.findEventsForHomePage()
-		def map = [events: events, newsItems: NewsItem.findAllByImportant(true)]
+		def map = [events: events, newsItems: newsItemService.getHomePageNewsItems()]
 		addWidgetsToMap(map)
 		map
 	}

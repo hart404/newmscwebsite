@@ -25,7 +25,6 @@ class NewsItemController {
     }
 
     def save() {
-		println params
 		def photo = SCMSPhoto.get(params.photoId)
 		params.remove('displayStartDate')
 		params.remove('displayEndDate')
@@ -67,7 +66,6 @@ class NewsItemController {
     }
 
     def update() {
-		println params
         def newsItemInstance = NewsItem.get(params.id)
 		params.remove('displayStartDate')
 		params.remove('displayEndDate')
