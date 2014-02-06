@@ -16,7 +16,9 @@ class NewsItemController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 20, 100)
+		if (!params.sort) params.sort = "dateCreated"
+		if (!params.order) params.order = "desc"
         [newsItemInstanceList: NewsItem.list(params), newsItemInstanceTotal: NewsItem.count()]
     }
 

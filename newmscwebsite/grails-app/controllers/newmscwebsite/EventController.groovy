@@ -100,7 +100,9 @@ class EventController {
 	}
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 20, 100)
+		if (!params.sort) params.sort = "dateCreated"
+		if (!params.order) params.order = "desc"
         [eventInstanceList: Event.list(params), eventInstanceTotal: Event.count()]
     }
 
