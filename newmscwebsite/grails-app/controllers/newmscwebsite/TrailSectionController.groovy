@@ -21,6 +21,8 @@ class TrailSectionController {
 
     def save() {
         def trailSectionInstance = new TrailSection(params)
+		def geographicCoordinatesInstance = new GeographicCoordinates(params)
+		trailSectionInstance.pinLocation = geographicCoordinatesInstance
         if (!trailSectionInstance.save(flush: true)) {
             render(view: "create", model: [trailSectionInstance: trailSectionInstance])
             return
@@ -43,17 +45,22 @@ class TrailSectionController {
 
     def edit() {
         def trailSectionInstance = TrailSection.get(params.id)
+		println "Anchor X: ${trailSectionInstance.anchorX}"
+		println "Anchor Y: ${trailSectionInstance.anchorY}"
         if (!trailSectionInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'trailSection.label', default: 'TrailSection'), params.id])
             redirect(action: "list")
             return
         }
 
-        [trailSectionInstance: trailSectionInstance]
+        [trailSectionInstance: trailSectionInstance, geographicCoordinatesInstance: trailSectionInstance.pinLocation]
     }
 
     def update() {
+		println params
         def trailSectionInstance = TrailSection.get(params.id)
+		trailSectionInstance.pinLocation.latitude = params.latitude as BigDecimal
+		trailSectionInstance.pinLocation.longitude = params.longitude as BigDecimal
         if (!trailSectionInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'trailSection.label', default: 'TrailSection'), params.id])
             redirect(action: "list")
@@ -66,7 +73,7 @@ class TrailSectionController {
                 trailSectionInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'trailSection.label', default: 'TrailSection')] as Object[],
                           "Another user has updated this TrailSection while you were editing")
-                render(view: "edit", model: [trailSectionInstance: trailSectionInstance])
+                render(view: "edit", model: [trailSectionInstance: trailSectionInstance, geographicCoordinatesInstance: trailSectionInstance.pinLocation])
                 return
             }
         }
@@ -74,7 +81,7 @@ class TrailSectionController {
         trailSectionInstance.properties = params
 
         if (!trailSectionInstance.save(flush: true)) {
-            render(view: "edit", model: [trailSectionInstance: trailSectionInstance])
+            render(view: "edit", model: [trailSectionInstance: trailSectionInstance, geographicCoordinatesInstance: trailSectionInstance.pinLocation])
             return
         }
 

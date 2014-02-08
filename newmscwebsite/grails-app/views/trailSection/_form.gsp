@@ -109,7 +109,7 @@
 		<g:message code="trailSection.pinLocation.latitude.label" default="Latitude" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="latitude" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'latitude')}"/>
+	<g:field type="number" name="latitude" required="" value="${formatNumber(number: geographicCoordinatesInstance.latitude, format: "####.######")}" min="30" step="0.0000000000001"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'pinLocation.longitude', 'error')} required">
@@ -117,7 +117,7 @@
 		<g:message code="trailSection.pinLocation.longitude.label" default="Longitude" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="longitude" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'longitude')}"/>
+	<g:field type="number" name="longitude" required="" value="${formatNumber(number: geographicCoordinatesInstance.longitude, format: "####.######")}"  min="-114" step="0.0000000000001"/>
 </div>
 
 
