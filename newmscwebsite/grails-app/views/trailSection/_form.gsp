@@ -1,13 +1,11 @@
 <%@ page import="newmscwebsite.TrailSection" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'pinName', 'error')} ">
 	<label for="pinName">
 		<g:message code="trailSection.pinName.label" default="Pin Name" />
 		
 	</label>
-	<g:textField name="pinName" value="${trailSectionInstance?.pinName}"/>
+	<g:textField name="pinName" value="${trailSectionInstance?.pinName}" size="20"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'trailName', 'error')} ">
@@ -15,7 +13,7 @@
 		<g:message code="trailSection.trailName.label" default="Trail Name" />
 		
 	</label>
-	<g:textField name="trailName" value="${trailSectionInstance?.trailName}"/>
+	<g:textField name="trailName" value="${trailSectionInstance?.trailName}" size="80"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'notes', 'error')} ">
@@ -82,14 +80,6 @@
 	<g:textField name="iconURL" value="${trailSectionInstance?.iconURL}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'lastPatrolled', 'error')} ">
-	<label for="lastPatrolled">
-		<g:message code="trailSection.lastPatrolled.label" default="Last Patrolled" />
-		
-	</label>
-	<joda:datePicker name="lastPatrolled" value="${trailSectionInstance?.lastPatrolled}" default="none" noSelection="['': '']"></joda:datePicker>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'frequency', 'error')} ">
 	<label for="frequency">
 		<g:message code="trailSection.frequency.label" default="Frequency" />
@@ -105,13 +95,13 @@
 	</label>
 	<g:checkBox name="northPins" value="${trailSectionInstance?.northPins}" />
 </div>
-<fieldset class="embedded"><legend><g:message code="trailSection.pinLocation.label" default="Pin Location" /></legend>
-<div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'pinLocation.id', 'error')} required">
-	<label for="pinLocation.id">
-		<g:message code="trailSection.pinLocation.id.label" default="Id" />
-		<span class="required-indicator">*</span>
+
+<div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'southPins', 'error')} ">
+	<label for="southPins">
+		<g:message code="trailSection.southPins.label" default="South Pins" />
+		
 	</label>
-	<g:field type="number" name="id" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'id')}"/>
+	<g:checkBox name="southPins" value="${trailSectionInstance?.southPins}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'pinLocation.latitude', 'error')} required">
@@ -130,19 +120,4 @@
 	<g:field type="number" name="longitude" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'longitude')}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'pinLocation.version', 'error')} required">
-	<label for="pinLocation.version">
-		<g:message code="trailSection.pinLocation.version.label" default="Version" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field type="number" name="version" required="" value="${fieldValue(bean: geographicCoordinatesInstance, field: 'version')}"/>
-</div>
-</fieldset>
-<div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'southPins', 'error')} ">
-	<label for="southPins">
-		<g:message code="trailSection.southPins.label" default="South Pins" />
-		
-	</label>
-	<g:checkBox name="southPins" value="${trailSectionInstance?.southPins}" />
-</div>
 

@@ -16,7 +16,7 @@ class TrailSectionController {
     }
 
     def create() {
-        [trailSectionInstance: new TrailSection(params)]
+        [trailSectionInstance: new TrailSection(params), geographicCoordinatesInstance: new GeographicCoordinates()]
     }
 
     def save() {
