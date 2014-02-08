@@ -254,6 +254,10 @@
         <g:checkBox name="stewardEducation" value="${personInstance?.hasInterest('stewardEducation')}" />
         Steward Education
     </div>
+    <div>
+        <g:checkBox name="volunteerSupport" value="${personInstance?.hasInterest('volunteerSupport')}" />
+        Volunteer Support
+    </div>
     <br/>
 </div>
 
