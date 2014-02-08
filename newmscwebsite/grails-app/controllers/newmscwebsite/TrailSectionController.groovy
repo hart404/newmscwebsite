@@ -11,7 +11,7 @@ class TrailSectionController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 20, 100)
+        params.max = Math.min(params.max ? params.int('max') : 40, 100)
         [trailSectionInstanceList: TrailSection.list(params), trailSectionInstanceTotal: TrailSection.count()]
     }
 

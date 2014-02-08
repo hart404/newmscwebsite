@@ -120,8 +120,6 @@ class PersonController {
 	}
 
 	def update() {
-		println params
-
 		if (params.username == null || params.username.trim().isEmpty()) {
 			flash.error = "Username (your email address) is required."
 			redirect(action: "stewardUpdateDetails")

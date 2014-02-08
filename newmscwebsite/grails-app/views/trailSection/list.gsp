@@ -42,7 +42,7 @@
 				<g:each in="${trailSectionInstanceList}" status="i" var="trailSectionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${trailSectionInstance.id}">${fieldValue(bean: trailSectionInstance, field: "pinName")}</g:link></td>
+						<td><g:link action="edit" id="${trailSectionInstance.id}">${fieldValue(bean: trailSectionInstance, field: "pinName")}</g:link></td>
 					
 						<td>${fieldValue(bean: trailSectionInstance, field: "trailName")}</td>
 					

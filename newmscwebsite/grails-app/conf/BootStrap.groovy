@@ -1,30 +1,21 @@
 import newmscwebsite.Activity
 import newmscwebsite.Amenity
-import newmscwebsite.Category
-import newmscwebsite.Event
 import newmscwebsite.GeographicCoordinates
 import newmscwebsite.Hike
-import newmscwebsite.NewsItem
-import newmscwebsite.Person
-import newmscwebsite.Phone
 import newmscwebsite.SecRole
 import newmscwebsite.SecUser
 import newmscwebsite.SecUserSecRole
 import newmscwebsite.StreetAddress
+import newmscwebsite.TrailSection
 import newmscwebsite.Trailhead
 import newmscwebsite.TrailheadService
 
-import org.joda.time.LocalDate
-import org.joda.time.format.DateTimeFormat
 import org.springframework.core.io.ClassPathResource
 
-import simple.cms.SCMSAdSpacePhoto
 import simple.cms.SCMSMenu
 import simple.cms.SCMSMenuBar
 import simple.cms.SCMSMenuItem
 import simple.cms.SCMSPhoto
-
-import groovy.sql.Sql
 
 class BootStrap {
 
@@ -37,6 +28,7 @@ class BootStrap {
 		println "Root directory: ${System.getProperty("user.home")}"
 		println "Login: ${grailsApplication.config.authorizeNet.login}"
 		println "TK: ${grailsApplication.config.authorizeNet.transactionKey}"
+		createReportingPins()
 		updateSql()
 		createRoles()
 		createAdminUser()
@@ -45,6 +37,23 @@ class BootStrap {
 		createLocations()
 		createHikes()
 		websiteUpdates()
+	}
+	
+	def createReportingPins() {
+		if (!TrailSection.count()) {
+			File file = new ClassPathResource('reportingPins.csv').getFile()
+			file.eachCsvLine { tokens ->
+				def trailName = tokens[0]
+				def pinName = tokens[1]
+				def longitude = tokens[2]
+				def latitude = tokens[3]
+				def southArea = tokens[5] 
+				def northArea = tokens[6]
+				def coordinates = new GeographicCoordinates(latitude: latitude, longitude: longitude)
+				def section = new TrailSection(pinName: pinName, trailName: trailName, southPins: southArea, northPins: northArea, pinLocation: coordinates)
+				section.save(flush: true, failOnError: true)
+			}
+		}
 	}
 	
 	def createECards() {

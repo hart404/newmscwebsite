@@ -61,7 +61,7 @@
 		<g:message code="trailSection.anchorX.label" default="Anchor X" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="anchorX" from="${-200..200}" class="range" required="" value="${fieldValue(bean: trailSectionInstance, field: 'anchorX')}"/>
+	<g:select name="anchorX" from="${-200..200}" class="range" required="" value="${trailSectionInstance.anchorX}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'anchorY', 'error')} required">
@@ -69,7 +69,7 @@
 		<g:message code="trailSection.anchorY.label" default="Anchor Y" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="anchorY" from="${-200..200}" class="range" required="" value="${fieldValue(bean: trailSectionInstance, field: 'anchorY')}"/>
+	<g:select name="anchorY" from="${-200..200}" class="range" required="" value="${trailSectionInstance.anchorY}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'iconURL', 'error')} ">
@@ -85,7 +85,7 @@
 		<g:message code="trailSection.frequency.label" default="Frequency" />
 		
 	</label>
-	<g:select name="frequency" from="${newmscwebsite.PatrolFrequency?.values()}" keys="${newmscwebsite.PatrolFrequency.values()*.name()}" value="${trailSectionInstance?.frequency?.name()}" noSelection="['': '']"/>
+	<g:select name="frequency" from="${newmscwebsite.PatrolFrequency?.values()*.representation()}" keys="${newmscwebsite.PatrolFrequency.values()*.name()}" value="${trailSectionInstance?.frequency?.name()}" noSelection="['': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'northPins', 'error')} ">
