@@ -3,9 +3,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Location</title>
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false">
-	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js">
-	</script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
+	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js"></script>
+	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery-ui-1.8.21.custom/js/jquery-ui-1.8.21.custom.min.js"></script> 
+	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery-ui-1.8.21.custom/js/dialog-patch.js"></script>
+	
 	<style type="text/css">
 	html {
 		height: 100%
@@ -22,13 +25,22 @@
 	}
 	</style>
 	<script>
+		var pins = null;
+		var map = null;
 		function initialize() {
 			var mapOptions = {
 				zoom: 14,
 				center: new google.maps.LatLng(33.647900, -111.862236),
 				mapTypeId: google.maps.MapTypeId.TERRAIN
 		  	}
-			var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			
+			jQuery.ajax({type:'GET', url:"/trailSection/pinsForArea", data: {'area': 'south'}, success:function(data,textStatus){setPins(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
+		}
+		
+		function setPins(pinJSON) {
+			console.log(pinJSON);
+			
 			var marker = new google.maps.Marker({
 			    position: new google.maps.LatLng(33.647900, -111.862236),
 			    icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|00AD96",
@@ -41,6 +53,7 @@
 			    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + marker.get("id") + "|00FF00");
 			});
 		}
+		
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>	
 </head>

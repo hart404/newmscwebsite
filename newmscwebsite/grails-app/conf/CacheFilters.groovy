@@ -58,6 +58,11 @@ class CacheFilters {
 				noCache(response)
 			}
 		}
+		trailSections(uri : '/trailSection/**') {
+			before = {
+				noCache(response)
+			}
+		}
 		content(uri : '/content/pages') {
 			before = {
 				// Ensure that pages that can possibly be edited are not cached

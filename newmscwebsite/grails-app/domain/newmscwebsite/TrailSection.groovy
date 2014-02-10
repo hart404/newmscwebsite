@@ -37,4 +37,8 @@ class TrailSection {
 			lastPatrolled(nullable: true)
 			frequency(nullable: true)
 		}
+		
+		def forMapDisplay() {
+			[id: id, pinName: pinName, trailName: trailName, notes: notes, description: description, color: color, usedForReporting: usedForReporting, iconURL: iconURL, anchorX: anchorX, anchorY: anchorY, latitude: pinLocation.latitude, longitude: pinLocation.longitude]
+		}
 }

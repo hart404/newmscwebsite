@@ -400,7 +400,11 @@ class PersonController {
 	}
 
 	def stewardReporting() {
-		println("Calling steward Reporting");
+	}
+	
+	def stewardReportingNew() {	
+		def programsToShow = ProgramReporting.values().findAll {program -> program.isShowable()}
+		[programs: programsToShow]
 	}
 
 	def stewardList() {

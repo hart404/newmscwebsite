@@ -37,7 +37,7 @@
 		<g:message code="trailSection.color.label" default="Color" />
 		
 	</label>
-	<g:textField name="color" value="${trailSectionInstance?.color}"/>
+	<g:select name="color" from="${newmscwebsite.PinColor?.values()*.color()}" keys="${newmscwebsite.PinColor.values()*.value()}" value="${trailSectionInstance?.color}" noSelection="['': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: trailSectionInstance, field: 'enabled', 'error')} ">

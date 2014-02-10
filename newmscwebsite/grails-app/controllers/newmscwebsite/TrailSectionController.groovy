@@ -1,8 +1,12 @@
 package newmscwebsite
 
+import grails.converters.JSON
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class TrailSectionController {
+	
+	def trailSectionService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -45,8 +49,6 @@ class TrailSectionController {
 
     def edit() {
         def trailSectionInstance = TrailSection.get(params.id)
-		println "Anchor X: ${trailSectionInstance.anchorX}"
-		println "Anchor Y: ${trailSectionInstance.anchorY}"
         if (!trailSectionInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'trailSection.label', default: 'TrailSection'), params.id])
             redirect(action: "list")
@@ -57,7 +59,6 @@ class TrailSectionController {
     }
 
     def update() {
-		println params
         def trailSectionInstance = TrailSection.get(params.id)
 		trailSectionInstance.pinLocation.latitude = params.latitude as BigDecimal
 		trailSectionInstance.pinLocation.longitude = params.longitude as BigDecimal
@@ -107,4 +108,19 @@ class TrailSectionController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def pinsForArea() {
+		def result
+		println params
+		if (params.area == 'north') {
+			result = trailSectionService.retrievePins(false, true)	
+		} else {
+			result = trailSectionService.retrievePins(true, false)	
+		}
+		render result.collect {trailSection -> trailSection.forMapDisplay()} as JSON
+	}
+	
+	def testMap() {
+		
+	}
 }
