@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Location</title>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
-	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js"></script>
+	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
 	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery-ui-1.8.21.custom/js/jquery-ui-1.8.21.custom.min.js"></script> 
 	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery-ui-1.8.21.custom/js/dialog-patch.js"></script>
@@ -47,11 +47,13 @@
 			$.each(pins, function(index, pin) {
 				var color = pin.color;
 				if (color == null) color = '888888';
-				var marker = new google.maps.Marker({
+				var marker = new MarkerWithLabel({
 				    position: new google.maps.LatLng(pin.latitude, pin.longitude),
 				    icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
 				    map: map,
-				    title: pin.pinName
+				    title: pin.pinName,
+				    labelAnchor: new google.maps.Point(25, 50),
+				    labelContent: pin.pinName
 				});
 				marker.set("id", pin.id);
 
