@@ -64,7 +64,7 @@
 					alert("Your have successfully submitted " + (i - 1) + " report(s)");
 					reported = false;
 				} else {
-					alert("Please your reports......");
+					alert("Please enter your reports......");
 				}
 				break;
 			}

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Location</title>
+	<title>Test Reporting Maps</title>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
 	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
 	<script type="text/javascript" src="http://mcdowellsonoran.org/js/jquery/jquery-1.7.1.min.js"></script>
@@ -27,7 +27,7 @@
 	<script>
 		var pins = null;
 		var map = null;
-		var mapToDisplay = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/7cfd43c8-85e6-4341-b763-6f1155e43ee85459184511650637164.kmz";
+		var southMap = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/7cfd43c8-85e6-4341-b763-6f1155e43ee85459184511650637164.kmz";
 		function initialize() {
 			var mapOptions = {
 				zoom: 12,
@@ -35,7 +35,7 @@
 				mapTypeId: google.maps.MapTypeId.TERRAIN
 		  	}
 			map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-			var georssLayer = new google.maps.KmlLayer(mapToDisplay);
+			var georssLayer = new google.maps.KmlLayer(southMap);
             georssLayer.setMap(map);
 			
 			$.ajax({type:'GET', url:"<g:createLink controller='trailSection' action='pinsForArea' />", data: {'area': 'south'}, success:function(data,textStatus){setPins(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
@@ -52,14 +52,14 @@
 				    icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
 				    map: map,
 				    title: pin.pinName,
-				    labelAnchor: new google.maps.Point(25, 50),
+				    labelAnchor: new google.maps.Point(pin.anchorX, pin.anchorY),
 				    labelContent: pin.pinName
 				});
 				marker.set("id", pin.id);
 
 				
 				google.maps.event.addListener(marker, 'click', function() {
-				    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|00FF00" );
+				    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
 				});
 					
 			});			
