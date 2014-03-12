@@ -98,13 +98,12 @@
 </sec:ifAnyGranted>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'dateOfBirth', 'error')} ">
-    <label for="tshirtSize">
+    <label for="dateOfBirth">
         <g:message code="person.dateOfBirth.label" default="Date of Birth" />
         
     </label>
     <g:datePicker name="dateOfBirth" value="${personInstance?.dateOfBirth}" precision="day" years="${years}"/>
 </div>
-
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'tshirtSize', 'error')} ">
 	<label for="tshirtSize">
@@ -198,6 +197,42 @@
         <g:message code="person.leadSteward.label" default="Lead Steward" />        
     </label>
     <em><g:if test="${personInstance.leadSteward}">Yes</g:if><g:else>No</g:else></em>
+</div>
+</sec:ifNotGranted>
+
+<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'stewardInTraining', 'error')} ">
+    <label for="stewardInTraining">
+        <g:message code="person.stewardInTraining.label" default="Steward in Training" />        
+    </label>
+    <g:checkBox name="stewardInTraining" value="${personInstance?.stewardInTraining}" />
+</div>
+</sec:ifAnyGranted>
+
+<sec:ifNotGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'leadSteward', 'error')} ">
+    <label for="stewardInTraining">
+        <g:message code="person.stewardInTraining.label" default="Steward in Training" />        
+    </label>
+    <em><g:if test="${personInstance.stewardInTraining}">Yes</g:if><g:else>No</g:else></em>
+</div>
+</sec:ifNotGranted>
+
+<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'graduationDate', 'error')} ">
+    <label for="graduationDate">
+        <g:message code="person.graduationDate.label" default="Graduation Date" />       
+    </label>
+    <g:datePicker name="graduationDate" default="none" value="${personInstance?.graduationDate}" precision="day" noSelection="['':'']"/>
+</div>
+</sec:ifAnyGranted>
+
+<sec:ifNotGranted roles="ROLE_ADMIN,ROLE_LEADER,ROLE_STAFF">
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'graduationDate', 'error')} ">
+    <label for="graduationDate">
+        <g:message code="person.graduationDate.label" default="Graduation Date" />       
+    </label>
+    <g:formatDate format="dd-MM-yyyy" date="${personInstance?.graduationDate}"/>
 </div>
 </sec:ifNotGranted>
 

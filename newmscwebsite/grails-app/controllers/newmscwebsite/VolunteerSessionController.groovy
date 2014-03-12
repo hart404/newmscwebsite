@@ -155,7 +155,7 @@ class VolunteerSessionController {
    def downloadVolunteerSessionsAsCSV() {
 	   response.setHeader "Content-disposition", "attachment; filename=volunteerHours.csv"
 	   response.contentType = 'text/csv'
-	   def steward = (Person)springSecurityService.currentUser
+	   def steward = Person.get(params.id)
 	   createCSVFileVolunteerSessions(steward, response.outputStream)
 	   response.outputStream.flush()
    }

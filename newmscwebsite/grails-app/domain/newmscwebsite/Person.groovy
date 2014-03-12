@@ -24,6 +24,8 @@ class Person extends SecUser {
 	Boolean hasStewardRole = false
 	Date dateOfBirth
 	Person mentor
+	boolean stewardInTraining = false
+	Date graduationDate
 	
 	static embedded = ['address', 'homePhone', 'cellPhone']
 	
@@ -52,6 +54,7 @@ class Person extends SecUser {
 		mentor(nullable: true)
 		leadSteward(nullable: true)
 		interests(nullable: true)
+		graduationDate(nullable: true)
 	}
 	
 	static mapping = {
