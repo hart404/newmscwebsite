@@ -36,7 +36,6 @@
 		</tr>
 		<tr>
 			<td colspan='2'>
-				<s2ui:linkButton elementId='register' controller='person' action='registerUser' messageCode='spring.security.ui.login.register'/>
 				<input type="submit" value="Login">
 			</td>
 		</tr>
