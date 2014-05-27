@@ -43,7 +43,12 @@ class HomeController {
 
 	def storeReport() {
 		def dmydate = params.date.split('/')
-		def date_inst = dmydate[2] + "-" + dmydate[0] + "-" + dmydate[1]
+		def year = dmydate[2]
+		// Convert single and double digit date to 2000 century dates
+		if (year.size() == 1) year = "200" + year
+		if (year.size() == 2) year = "20" + year
+		def date_inst = year + "-" + dmydate[0] + "-" + dmydate[1]
+		println "Report date: ${date_inst}"
 		def program_inst = params.program
 		def hours_inst = params.hours
 		def time_inst = params.time

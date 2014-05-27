@@ -29,8 +29,11 @@ class PersonController {
 	}
 
 	def list() {
+		println "Params: ${params}"
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
-		[personInstanceList: Person.list(params), personInstanceTotal: Person.count()]
+		def people = Person.list(params)
+		def peopleCount = Person.count()
+		[personInstanceList: people, personInstanceTotal: peopleCount]
 	}
 
 	def create() {

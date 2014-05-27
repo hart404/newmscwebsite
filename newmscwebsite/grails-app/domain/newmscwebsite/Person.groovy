@@ -55,6 +55,7 @@ class Person extends SecUser {
 		leadSteward(nullable: true)
 		interests(nullable: true)
 		graduationDate(nullable: true)
+		stewardInTraining(nullable: true)
 	}
 	
 	static mapping = {
