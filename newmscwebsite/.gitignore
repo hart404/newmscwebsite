@@ -16,3 +16,7 @@ target
 Secret*.*
 testDb
 .DS_Store
+.idea
+*.iml
+*.ipr
+out/
