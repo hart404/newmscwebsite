@@ -95,12 +95,14 @@ environments {
 
 // log4j configuration
 log4j = {
-	/*
+
     appenders {
-        console name:'stdout', layout: pattern(conversionPattern: '%c{2} %m%n')
-		console name:'stacktrace', layout: pattern(conversionPattern: '%c{2} %m%n')
-		console name:'errors', layout: pattern(conversionPattern: '%c{2} %m%n')
-    } */
+        String pattern = '%d{HH:mm:ss} [%X{userName},%X{actionId},request:%X{requestId},session:%X{sessionId}] %c{2} %m%n'
+        PatternLayout patternLayout = new PatternLayout(pattern)
+        console name:'stdout', layout: patternLayout
+//		console name:'stacktrace', layout: pattern(conversionPattern: '%c{2} %m%n')
+//		console name:'errors', layout: pattern(conversionPattern: '%c{2} %m%n')
+    }
 		
     error  	'org.codehaus.groovy.grails.web.servlet',  //  controllers
            	'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -118,11 +120,14 @@ log4j = {
 
     error   'org.mortbay.log'
 	
-	error	'org.codehaus.groovy.grails.plugins.springsecurity'
+	info	'org.codehaus.groovy.grails.plugins.springsecurity'
 	
 	info 	'org.springframework.security'
 	
-	debug 	'newmscwebsite'
+	info 	'newmscwebsite'
+    info    'grails.app'
+    info    'grails.app.services.newmscwebsite'
+    info    'grails.app.controllers.newmscwebsite'
 	
  /*	debug 'org.hibernate.SQL'
 	trace 'org.hibernate.type.descriptor.sql.BasicBinder' 
@@ -137,7 +142,7 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'newmscwebsite
 grails.plugins.springsecurity.authority.className = 'newmscwebsite.SecRole'
 
 import grails.plugins.springsecurity.SecurityConfigType
-
+import org.apache.log4j.PatternLayout
 import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
