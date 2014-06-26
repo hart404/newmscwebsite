@@ -100,6 +100,20 @@ class BootStrap {
 		if (!adminUser.authorities.contains(webRole)) {
 			SecUserSecRole.create adminUser, webRole
 		}
+
+        def testUser = SecUser.findByUsername('test@mcdowellsonoran.org') ?: new SecUser(
+                username: 'test@mcdowellsonoran.org',
+                password: 'test',
+                enabled: true,
+                accountExpired: false,
+                accountLocked: false,
+                passwordExpired: false).save(failOnError: true)
+        if (!testUser.authorities.contains(adminRole)) {
+            SecUserSecRole.create testUser, adminRole
+        }
+        if (!testUser.authorities.contains(webRole)) {
+            SecUserSecRole.create testUser, webRole
+        }
 	}
 	
 	def createMenus() {
@@ -256,7 +270,7 @@ class BootStrap {
 			]
 			addressInstance = new StreetAddress(street: "12300 N. 128th St", zip: "85259")
 			coordinatesInstance = new GeographicCoordinates(latitude: 33.599343, longitude: -111.804630)
-			locationInstance = new Trailhead(name: "Ringtail Trailhead", internalName: "ringtail", description: "", address: addressInstance, coordinates: coordinatesInstance)
+			locationInstance = new Trailhead(name: "Ringtail Trailhead", internalName: "ringtail", description: "No description given", address: addressInstance, coordinates: coordinatesInstance)
 			locationInstance.save(failOnError: true)
 			amenities = [
 				Amenity.DIRECTORY,
