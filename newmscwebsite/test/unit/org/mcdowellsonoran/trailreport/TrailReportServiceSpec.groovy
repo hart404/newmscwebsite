@@ -1,4 +1,4 @@
-package org.mcdowellsonoran.trailreport.relational
+package org.mcdowellsonoran.trailreport
 
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
@@ -7,9 +7,9 @@ import newmscwebsite.TrailSection
 import org.joda.time.LocalDate
 import spock.lang.Specification
 
-@TestFor(RelationalTrailReportService)
+@TestFor(TrailReportService)
 @Mock([TrailReport])
-class RelationalTrailReportServiceSpec extends Specification{
+class TrailReportServiceSpec extends Specification{
 
     void "test save trail report data successfully from client"() {
         given: "A valid trail report"

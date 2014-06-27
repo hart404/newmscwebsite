@@ -7,9 +7,12 @@ class TrailReport {
         String comment
         String code
 		LocalDate date
-		// Indication if there is an issue with the trails section being reported on. If it is false, it means the section was patrolled with no issues.
+
+		// Indication if there is an issue with the trails section being reported on.
+		// If it is false, it means the section was patrolled with no issues.
 		Boolean issue = false
-		Date dateCreated
+
+        Date dateCreated
 		Date lastUpdated
         
         static constraints = {
