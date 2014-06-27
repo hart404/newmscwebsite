@@ -25,7 +25,10 @@ environments {
 		dataSource {
 			dialect = "org.hibernate.dialect.H2Dialect"
 			dbCreate = "create-drop"
-			url = "jdbc:h2:testDb;MVCC=TRUE"
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            driverClassName = "org.h2.Driver"
+            username = "sa"
+            password = ""
 		}
 	}
 	production {
