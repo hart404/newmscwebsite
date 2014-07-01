@@ -67,5 +67,14 @@ class NotificationTypeSpec extends Specification {
 
         then: "The person objects are persisted"
         2 == NotificationType.findByCode("testCode").recipients.size()
+
+        when: "A person object is removed from the NotificationType and re-saved"
+        NotificationType savedNotificationType = NotificationType.findByCode("testCode")
+        Person savedPerson = savedNotificationType.recipients[0]
+        savedNotificationType.removeFromRecipients(savedPerson)
+        savedNotificationType.save(failOnError: true, flush: true)
+
+        then: "The database reflects the removed person"
+        1 == NotificationType.findByCode("testCode").recipients.size()
     }
 }
