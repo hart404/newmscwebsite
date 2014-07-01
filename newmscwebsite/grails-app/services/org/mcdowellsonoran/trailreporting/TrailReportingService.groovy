@@ -1,8 +1,8 @@
-package org.mcdowellsonoran.trailreport
+package org.mcdowellsonoran.trailreporting
 
 import newmscwebsite.TrailReport
 
-class TrailReportService {
+class TrailReportingService {
 
     TrailReport saveTrailReport(TrailReport trailReport) {
         return trailReport.save()

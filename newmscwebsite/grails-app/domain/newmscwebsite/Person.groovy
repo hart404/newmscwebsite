@@ -86,5 +86,5 @@ class Person extends SecUser {
 		if (!interests) return false
 		interests.contains(Interest.fromString(interestName))
 	}
-	
+
 }
