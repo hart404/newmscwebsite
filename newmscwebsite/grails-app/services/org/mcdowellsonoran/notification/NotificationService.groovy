@@ -25,7 +25,7 @@ class NotificationService {
 
         for(Person person : notificationType.recipients) {
             mailService.sendMail {
-                to person.email
+                to person.username
                 from sender
                 subject messageSubject
                 body message
