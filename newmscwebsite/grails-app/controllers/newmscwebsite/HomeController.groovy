@@ -1,21 +1,13 @@
 package newmscwebsite
 
-import java.math.BigDecimal;
-import java.sql.Ref;
+import org.mcdowellsonoran.trailreporting.TrailReport
+
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.Date;
-
-import org.apache.jasper.tagplugins.jstl.core.Catch;
-import org.joda.time.LocalDate
-import org.springframework.aop.aspectj.RuntimeTestWalker.ThisInstanceOfResidueTestVisitor;
 
 import grails.converters.JSON
 import groovy.sql.Sql
-import simple.cms.SCMSPhoto;
 import simple.cms.SCMSStaticPage
-
-import com.google.gson.JsonObject;
 import com.vinomis.authnet.AuthorizeNet
 
 class HomeController {
