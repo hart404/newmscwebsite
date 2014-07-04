@@ -52,7 +52,7 @@ class TrailReportingServiceSpec extends Specification {
         then: "A notification is sent"
         1 * mockNotificationService.sendNotification(notificationType,
                                                      "no-reply@mcdowellsonoran.org",
-                                                     "Trail issue reported!",
+                                                     "Trail issue reported of type: " + trailReport.code,
                                                      trailReport.comment) >> {}
         TrailReport.findByComment("test comment")
         TrailReport.findByComment("test comment").notificationType

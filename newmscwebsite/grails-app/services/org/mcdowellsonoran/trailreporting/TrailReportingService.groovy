@@ -18,7 +18,7 @@ class TrailReportingService {
         if(trailReport.issue) {
             notificationService.sendNotification(trailReport.notificationType,
                                                  "no-reply@mcdowellsonoran.org",
-                                                 "Trail issue reported!",
+                                                 "Trail issue reported of type: " + trailReport.code,
                                                  trailReport.comment)
         }
         return trailReport.save()
