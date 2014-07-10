@@ -58,6 +58,30 @@ class TrailReportingServiceSpec extends Specification {
         TrailReport.findByComment("test comment").notificationType
     }
 
+    void "test if there is no trail problem no notification is sent but it is saved to database"() {
+
+        given: "A tail report that has no issue issue"
+        NotificationType notificationType = NotificationType.findByCode("emergency")
+        TrailReport trailReport = new TrailReport(comment: "test comment",
+                                                  code: "test code",
+                                                  date: new LocalDate(),
+                                                  trailSection: new TrailSection(),
+                                                  issue: false,
+                                                  notificationType: notificationType)
+
+        when: "the trail report is saved"
+        service.notificationService = mockNotificationService
+        service.saveTrailReport(trailReport)
+
+        then: "A notification is sent"
+        0 * mockNotificationService.sendNotification(notificationType,
+                                                     "no-reply@mcdowellsonoran.org",
+                                                     "Trail issue reported of type: " + trailReport.code,
+                                                     trailReport.comment) >> {}
+        TrailReport.findByComment("test comment")
+        TrailReport.findByComment("test comment").notificationType
+    }
+
     void setupNotificationType() {
         new NotificationType(code: "emergency", display: "Emergency Action Needed").save(failOnError: true,
                                                                                          flush: true)
