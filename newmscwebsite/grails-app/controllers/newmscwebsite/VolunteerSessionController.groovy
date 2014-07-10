@@ -1,6 +1,7 @@
 package newmscwebsite
 
 import org.joda.time.LocalDate
+import org.mcdowellsonoran.volunteersession.VolunteerSession
 import org.springframework.dao.DataIntegrityViolationException
 
 class VolunteerSessionController {

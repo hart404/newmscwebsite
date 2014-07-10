@@ -1,6 +1,7 @@
 package newmscwebsite
 
 import org.mcdowellsonoran.trailreporting.TrailReport
+import org.mcdowellsonoran.volunteersession.VolunteerSession
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat

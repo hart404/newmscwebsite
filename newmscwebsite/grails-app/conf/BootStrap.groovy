@@ -9,7 +9,7 @@ import newmscwebsite.StreetAddress
 import newmscwebsite.TrailSection
 import newmscwebsite.Trailhead
 import newmscwebsite.TrailheadService
-
+import org.mcdowellsonoran.notification.NotificationType
 import org.springframework.core.io.ClassPathResource
 
 import simple.cms.SCMSMenu
@@ -36,6 +36,7 @@ class BootStrap {
 		createECards()
 		createLocations()
 		createHikes()
+        createNotificationTypes()
 		websiteUpdates()
 	}
 	
@@ -502,6 +503,13 @@ class BootStrap {
 			tomsThumb.save(failOnError: true)
 		}
 	}
+
+    void createNotificationTypes() {
+        if(0 == NotificationType.count()) {
+            new NotificationType(code: "emergency", display: "Emergency Action Needed").save(failOnError: true, flush: true)
+            new NotificationType(code: "maintenance", display: "Maintenance Action Needed").save(failOnError: true, flush: true)
+        }
+    }
 	 
 	def createAdSpace() {
 	}

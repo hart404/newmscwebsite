@@ -1,4 +1,7 @@
 package newmscwebsite
+
+import org.mcdowellsonoran.volunteersession.VolunteerSession
+
 import static java.util.Calendar.YEAR
 
 import org.joda.time.LocalDate

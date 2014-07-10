@@ -1,4 +1,6 @@
-package newmscwebsite
+package org.mcdowellsonoran.volunteersession
+
+import newmscwebsite.Person
 import org.joda.time.LocalDate
 import org.mcdowellsonoran.trailreporting.TrailReport
 

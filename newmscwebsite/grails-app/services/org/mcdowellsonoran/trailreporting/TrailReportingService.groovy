@@ -3,24 +3,29 @@ package org.mcdowellsonoran.trailreporting
 import org.mcdowellsonoran.notification.NotificationService
 
 /**
- * Operations for TrailReports
+ * Operations for TrailReports.
  */
 class TrailReportingService {
 
     NotificationService notificationService
 
     /**
-     * Persisted the TrailReport to the datastore.
+     * Persists the TrailReport to the data store
+     * and sends a notification if the TrailReport
+     * has a reported issue.
      * @param trailReport TrailReport to persist
      * @return The persisted TrailReport instance
      */
     TrailReport saveTrailReport(TrailReport trailReport) {
+
+        trailReport.save()
+
         if(trailReport.issue) {
             notificationService.sendNotification(trailReport.notificationType,
                                                  "no-reply@mcdowellsonoran.org",
                                                  "Trail issue reported of type: " + trailReport.code,
                                                  trailReport.comment)
         }
-        return trailReport.save()
+        return trailReport
     }
 }
