@@ -18,7 +18,7 @@ class NotificationType {
     String display
 
     // The list of users who will receive a notification
-    // of the configured type
+    // of this configured type
     static hasMany = [recipients: Person]
 
     static constraints = {

@@ -21,11 +21,20 @@ class TrailReportingService {
         trailReport.save()
 
         if(trailReport.issue) {
-            notificationService.sendNotification(trailReport.notificationType,
+            notificationService.sendNotification(trailReport.trailReportNotification.notificationType,
                                                  "no-reply@mcdowellsonoran.org",
-                                                 "Trail issue reported of type: " + trailReport.code,
-                                                 trailReport.comment)
+                                                 "Trail issue reported of type: " + trailReport.trailReportNotification.notificationType.display,
+                                                 buildTrailNotificationMessage(trailReport))
         }
         return trailReport
+    }
+
+    private static String buildTrailNotificationMessage(TrailReport trailReport) {
+        String reportDate = trailReport.trailReportNotification.date.toString()
+        String reporter = "$trailReport.trailReportNotification.person.firstName $trailReport.trailReportNotification.person.lastName"
+        String trail = trailReport.trailSection.trailName
+        String reportComment = trailReport.trailReportNotification.description
+        String reportType = trailReport.trailReportNotification.notificationType.display
+        return "On $reportDate, $reporter reported an issue on trail $trail of type $reportType: $reportComment"
     }
 }

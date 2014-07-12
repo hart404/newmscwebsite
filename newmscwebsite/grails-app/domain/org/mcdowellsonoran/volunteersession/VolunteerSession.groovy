@@ -4,9 +4,14 @@ import newmscwebsite.Person
 import org.joda.time.LocalDate
 import org.mcdowellsonoran.trailreporting.TrailReport
 
-
+/**
+ * Models the time spent checking trails
+ * along with the findings at each trail
+ * segment for volunteers.
+ */
 class VolunteerSession {
-	BigDecimal hours = 0
+
+    BigDecimal hours = 0
     LocalDate date
 	String program
 	Date dateCreated
@@ -14,7 +19,8 @@ class VolunteerSession {
 	Person person
 	
 	List<TrailReport> trailReports
-	static hasMany = [
+
+    static hasMany = [
 		trailReports: TrailReport	
 	]
 

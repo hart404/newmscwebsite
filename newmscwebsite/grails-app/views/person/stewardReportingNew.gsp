@@ -102,22 +102,19 @@
                         var trailProgram = $("#program1 option:selected").text();
                         marker.color = "00FF00";
                     } else if (marker.color == "00FF00") {
-
-                        var formContent = '<div><form name="trailReportForm"><table style="border: none;">' +
-                                '<tr><td>Trail Problem Type</td><td><select name="problemType"><option value="one">1</option></select></td></tr>' +
-                                '<tr><td>Description</td><td><textarea name="problemDescription"></textarea></td></tr>' +
-                                '<tr><td>Date</td><td><input type="text" name="problemDate" /></td></tr>' +
-                                '<tr><td>Name</td><td><input type="text" name="problemReporterName"/> </td></tr>' +
-                                '<tr><td>Phone</td><td><input type="text" name="problemReporterPhone" /></td></tr>' +
-                                '<tr><td>Email</td><td><input type="text" name="problemReporterEmail" /></td></tr>' +
-                                '<tr><td><input type="button" name="saveProblem" value="Ok" /><tr><td></table></form></div>';
-
-                        var infowindow = new google.maps.InfoWindow({
-                            content: formContent
+                        var dialog = $("#dialog").dialog({
+                            buttons: {
+                                "Report Problem": function () {
+                                    alert('you chose yes');
+                                    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
+                                    marker.color = "FF0000";
+                                    dialog.dialog('close');
+                                },
+                                "Cancel": function () {
+                                    dialog.dialog('close');
+                                }
+                            }
                         });
-                        marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
-                        marker.color = "FF0000";
-                        infowindow.open(map, marker)
                     }
 				});
 
@@ -183,5 +180,15 @@
     </blockquote>
     <div id="map_canvas_south" style="width: 1px; height: 1px;"></div>
     <div id="map_canvas_north" style="width: 1px; height: 1px;"></div>
+
+<div id="dialog" title="Dialog Title" style="display:none"><form name="trailReportForm"><table style="border: none;">
+    <tr><td>Trail Problem Type</td><td><select name="problemType"><option value="one">1</option></select></td></tr>
+    <tr><td>Description</td><td><textarea name="problemDescription"></textarea></td></tr>
+    <tr><td>Date</td><td><input type="text" name="problemDate"/></td></tr>
+    <tr><td>Name</td><td><input type="text" name="problemReporterName"/></td></tr>
+    <tr><td>Phone</td><td><input type="text" name="problemReporterPhone"/></td></tr>
+    <tr><td>Email</td><td><input type="text" name="problemReporterEmail"/></td></tr>
+</table></form></div>
+
 </body>
 </html>
