@@ -6,6 +6,12 @@ import static java.util.Calendar.YEAR
 
 import org.joda.time.LocalDate
 
+/**
+ * TODO: Either move these to the VolunteerSessionController
+ * or refactor them over to the org.mcdowellsonoran.volunteersession.VolunteerSessionService
+ * and set them to readonly since they are all read only operations and don't need transactional
+ * behavior. Also, we should never be using params objects in the service layer.
+ */
 class VolunteerSessionService {
 	
 	def totalHoursForSteward(steward) {
