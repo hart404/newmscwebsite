@@ -12,10 +12,10 @@ class TrailReportNotificationControllerSpec extends Specification {
 
     void "test a valid trail report notification returns an object with no errors"() {
         given: "a request with valid trail report notification"
-        String dateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()).toString()
+        String dateString = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString()
         String requestJson = '{notificationType:"emergency",' +
-                             ' description: "test description",' +
-                             ' date: "' + dateString + '"}'
+                             ' problemDescription: "test description",' +
+                             ' problemDate: "' + dateString + '"}'
         request.method = 'POST'
         request.JSON = requestJson
 

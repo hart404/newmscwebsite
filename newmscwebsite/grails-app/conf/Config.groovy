@@ -258,6 +258,9 @@ grails {
 
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
 
+//grails.databinding.dateFormats = [
+//        'MMddyyyy', 'yyyy-MM-dd', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
+
 // grails.plugin.databasemigration.updateOnStart = false
 // grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 

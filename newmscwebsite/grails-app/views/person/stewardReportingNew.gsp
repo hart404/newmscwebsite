@@ -103,6 +103,10 @@
                         marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
                         marker.color = "00FF00";
                     } else if (marker.color == "00FF00") {
+
+
+                        $("#problemDate").datepicker({defaultDate: new Date(), dateFormat: 'yy-mm-dd'});
+
                         $.ajax({
                             type: "GET",
                             url: appContext + "/notificationType/getAllNotificationTypes"
@@ -124,10 +128,21 @@
                             draggable: false,
                             buttons: {
                                 "Save": function () {
-                                    alert('you chose yes');
+                                    $.ajax({
+                                        type: "POST",
+                                        url: appContext + "/trailReportNotification/validateTrailReport",
+                                        data: $("#trailReportForm").serialize()
+                                    }).done(function(data, textStatus, jqXHR) {
+                                                alert("No Validation Errors!");
+                                            }).fail(function(jqXHR, textStatus, errorThrown) {
+                                                alert("Validation Errors!");
+                                                console.error("Error")
+                                                console.error("Error Thrown: " + errorThrown)
+                                                console.error("textStatus: " + textStatus)
+                                            });
                                     marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
                                     marker.color = "FF0000";
-                                    dialog.dialog('close');
+//                                    dialog.dialog('close');
                                 },
                                 "Cancel": function () {
                                     dialog.dialog('close');
@@ -203,12 +218,17 @@
     <div id="map_canvas_north" style="width: 1px; height: 1px;"></div>
 
 <div id="dialog" title="Dialog Title" style="display:none">
-    <form name="trailReportForm">
+    <p style="color: #54534a;">
+        Please report any trail issues for this trail segment here. Note that all issues
+        will not be logged and communicated until the report is saved as a whole.
+        These fields can be updated as needed until the report is saved. Clicking
+        "Cancel" will reset this trail section to an unpatrolled and clear the form.
+    </p>
+    <form name="trailReportForm" id="trailReportForm">
         <table style="border: none;">
             <tr>
                 <td>Trail Problem Type</td>
-                %{--<td><g:select name="problemType" optionKey="code" optionValue="display" from="${NotificationType.findAll()}" style="width:18em;"/></td>--}%
-                <td><select name="problemSelect" id="problemSelect" style="width:18em;"></select></td>
+                <td><select name="notificationType" id="problemSelect" style="width:18em;"></select></td>
             </tr>
             <tr>
                 <td>Description</td>
@@ -216,7 +236,7 @@
             </tr>
             <tr>
                 <td>Date</td>
-                <td><richui:dateChooser name='problemDate' format='MM/dd/yyyy' value='${new Date()}' style="width:18em;"/></td>
+                <td><input type="text" name="problemDate" id="problemDate" style="width:18em;" /></td>
             </tr>
         </table>
     </form>

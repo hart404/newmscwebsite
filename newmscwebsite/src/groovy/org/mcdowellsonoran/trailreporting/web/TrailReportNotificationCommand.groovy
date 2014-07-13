@@ -11,14 +11,14 @@ import org.grails.databinding.BindingFormat
 class TrailReportNotificationCommand {
 
     String notificationType
-    String description
+    String problemDescription
 
-    @BindingFormat('yyyy-MM-dd HH:mm:ss')
-    Date date
+    @BindingFormat('yyyy-MM-dd')
+    Date problemDate
 
     static constraints = {
         notificationType nullable: false, blank: false
-        description nullable: false, blank: false
-        date nullable: false, blank: false
+        problemDescription nullable: false, blank: false
+        problemDate nullable: false, blank: false
     }
 }
