@@ -1,3 +1,4 @@
+<%@ page import="org.mcdowellsonoran.notification.NotificationType" %>
 <html>
 <head>
     <meta name="layout" content="generatedLayout" />
@@ -6,6 +7,7 @@
 	<script type="text/javascript" src="<g:createLinkTo dir='/js' file='maplabel.js'/>"></script>
     <resource:dateChooser/>
     <script type="text/javascript">
+        window.appContext = '${request.contextPath}';
     	function checkPatrolButtons(index) {
         	var programValue = $("#program" + index).val();
         	if (programValue.substring(0,7) == 'PATROL_') {
@@ -96,15 +98,32 @@
                 marker.setTitle("Report Issue")
 					
 				google.maps.event.addListener(marker, 'click', function() {
-//                    TODO: if color is red and they change it back to green, clear out the object it created
+
                     if(marker.color == "888888" || marker.color == "FF0000") {
                         marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
-                        var trailProgram = $("#program1 option:selected").text();
                         marker.color = "00FF00";
                     } else if (marker.color == "00FF00") {
+                        $.ajax({
+                            type: "GET",
+                            url: appContext + "/notificationType/getAllNotificationTypes"
+                        }).done(function(data, textStatus, jqXHR) {
+                                    $(data).each(function(i, d) {
+                                        $("#problemSelect").append(new Option(d.display, d.code));
+                                    });
+                                }).fail(function(jqXHR, textStatus, errorThrown) {
+                                    console.error("Error")
+                                    console.error("Error Thrown: " + errorThrown)
+                                    console.error("textStatus: " + textStatus)
+                                });
+
                         var dialog = $("#dialog").dialog({
+                            title: "Report Trail Issue",
+                            width: 500,
+                            height: 550,
+                            resizable: false,
+                            draggable: false,
                             buttons: {
-                                "Report Problem": function () {
+                                "Save": function () {
                                     alert('you chose yes');
                                     marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
                                     marker.color = "FF0000";
@@ -113,7 +132,9 @@
                                 "Cancel": function () {
                                     dialog.dialog('close');
                                 }
-                            }
+                            },
+                            closeOnEscape: false,
+                            open: function(event, ui) { $(".ui-dialog-titlebar-close").hide();}
                         });
                     }
 				});
@@ -181,14 +202,25 @@
     <div id="map_canvas_south" style="width: 1px; height: 1px;"></div>
     <div id="map_canvas_north" style="width: 1px; height: 1px;"></div>
 
-<div id="dialog" title="Dialog Title" style="display:none"><form name="trailReportForm"><table style="border: none;">
-    <tr><td>Trail Problem Type</td><td><select name="problemType"><option value="one">1</option></select></td></tr>
-    <tr><td>Description</td><td><textarea name="problemDescription"></textarea></td></tr>
-    <tr><td>Date</td><td><input type="text" name="problemDate"/></td></tr>
-    <tr><td>Name</td><td><input type="text" name="problemReporterName"/></td></tr>
-    <tr><td>Phone</td><td><input type="text" name="problemReporterPhone"/></td></tr>
-    <tr><td>Email</td><td><input type="text" name="problemReporterEmail"/></td></tr>
-</table></form></div>
+<div id="dialog" title="Dialog Title" style="display:none">
+    <form name="trailReportForm">
+        <table style="border: none;">
+            <tr>
+                <td>Trail Problem Type</td>
+                %{--<td><g:select name="problemType" optionKey="code" optionValue="display" from="${NotificationType.findAll()}" style="width:18em;"/></td>--}%
+                <td><select name="problemSelect" id="problemSelect" style="width:18em;"></select></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea name="problemDescription" style="width:18em; height:10em;"></textarea></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td><richui:dateChooser name='problemDate' format='MM/dd/yyyy' value='${new Date()}' style="width:18em;"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
 
 </body>
 </html>
