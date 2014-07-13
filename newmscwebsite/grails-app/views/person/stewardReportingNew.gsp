@@ -99,11 +99,10 @@
 					
 				google.maps.event.addListener(marker, 'click', function() {
 
-                    if(marker.color == "888888" || marker.color == "FF0000") {
+                    if(marker.color == "888888") {
                         marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
                         marker.color = "00FF00";
-                    } else if (marker.color == "00FF00") {
-
+                    } else if (marker.color == "00FF00" || marker.color == "FF0000") {
 
                         $("#problemDate").datepicker({defaultDate: new Date(), dateFormat: 'yy-mm-dd'});
 
@@ -133,18 +132,20 @@
                                         url: appContext + "/trailReportNotification/validateTrailReport",
                                         data: $("#trailReportForm").serialize()
                                     }).done(function(data, textStatus, jqXHR) {
-                                                alert("No Validation Errors!");
+                                                marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
+                                                marker.color = "FF0000";
+                                                dialog.dialog('close');
+                                                $("#errorsList").empty();
                                             }).fail(function(jqXHR, textStatus, errorThrown) {
-                                                alert("Validation Errors!");
-                                                console.error("Error")
-                                                console.error("Error Thrown: " + errorThrown)
-                                                console.error("textStatus: " + textStatus)
+                                                $("#errorsList").empty();
+                                                var validationErrors = jQuery.parseJSON(jqXHR.responseText).valErrors;
+                                                for (var i = 0; i < validationErrors.length; i++) {
+                                                    $("#errorsList").append('<li style="color:red;">' + validationErrors[i] + '</li>');
+                                                }
                                             });
-                                    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
-                                    marker.color = "FF0000";
-//                                    dialog.dialog('close');
                                 },
                                 "Cancel": function () {
+                                    $("#errorsList").empty();
                                     dialog.dialog('close');
                                 }
                             },
@@ -219,11 +220,14 @@
 
 <div id="dialog" title="Dialog Title" style="display:none">
     <p style="color: #54534a;">
-        Please report any trail issues for this trail segment here. Note that all issues
+        Please use this form to report any issues for this trail segment. Note that all issues
         will not be logged and communicated until the report is saved as a whole.
         These fields can be updated as needed until the report is saved. Clicking
-        "Cancel" will reset this trail section to an unpatrolled and clear the form.
+        "Cancel" will reset this trail section to an unpatrolled state and clear the form.
     </p>
+    <div id="errorsDiv">
+        <ul class="errors" id="errorsList" role="alert"></ul>
+    </div>
     <form name="trailReportForm" id="trailReportForm">
         <table style="border: none;">
             <tr>

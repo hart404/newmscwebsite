@@ -26,7 +26,7 @@ class TrailReportNotificationController {
             g.eachError(bean: trailReportNotification) {
                 errors.add(g.message(error: it))
             }
-            errorsMap.put("errors", errors)
+            errorsMap.put("valErrors", errors)
         } else {
             response.status = 200
             errorsMap.put("hasErrors", false)

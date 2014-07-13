@@ -39,6 +39,6 @@ class TrailReportNotificationControllerSpec extends Specification {
 
         then: "an object is returned that contains multiple error messages"
         response.json.hasErrors as Boolean
-        3 == response.json.errors.size()
+        3 == response.json.valErrors.size()
     }
 }
