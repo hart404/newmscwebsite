@@ -1,7 +1,10 @@
 package org.mcdowellsonoran.volunteersession.web
 
+import grails.converters.JSON
 import grails.plugins.springsecurity.SpringSecurityService
 import newmscwebsite.Person
+import newmscwebsite.Program
+import newmscwebsite.ProgramReporting
 import org.mcdowellsonoran.volunteersession.VolunteerSession
 import org.mcdowellsonoran.volunteersession.VolunteerSessionService
 
@@ -23,6 +26,17 @@ class VolunteerSessionController {
         }
         flash.message = "Volunteer session successfully saved"
         redirect controller: "person", action: "stewardReporting"
+    }
+
+    def getPrograms() {
+        List programList = []
+        ProgramReporting.values().findAll {program -> program.isShowable()}.each {
+            Map programMap = [:]
+            programMap.put("programKey", it.name())
+            programMap.put("programValue", it.value())
+            programList << programMap
+        }
+        render programList as JSON
     }
 
     /**
