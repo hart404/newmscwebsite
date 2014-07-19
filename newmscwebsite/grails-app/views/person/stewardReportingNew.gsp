@@ -8,6 +8,8 @@
     <g:javascript src="stewardReporting.js" />
     <g:javascript src="trailReporting.js" />
     <g:javascript src="notificationType.js" />
+    <g:javascript src="volunteersession/volunteerSession.js" />
+    <g:javascript src="volunteersession/trailReport.js" />
     <script type="text/javascript">
         window.appContext = '${request.contextPath}';
         $(document).ready(addReportingTableRow);

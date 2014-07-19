@@ -1,10 +1,13 @@
 var trailReportIndex = 0;
 
-function initializeTrailReportingForm() {
+function initializeTrailReportingForm(volunteerSession) {
     var index = trailReportIndex;
     var notificationTypeId = "problemNotificationTypeId-" + index;
     var descriptionId = "problemDescriptionId-" + index;
     var dateId = "problemDateId-" + index;
+
+    var trailReport = new TrailReport(index);
+    volunteerSession.push(trailReport);
 
     $('#trailReportingContainer')
         .append('<div style="display:none" id="trailReportingDiv-' + index + '">' +
@@ -21,15 +24,15 @@ function initializeTrailReportingForm() {
         '<table style="border:none;">' +
         '<tr>' +
         '<td>Trail Problem Type</td>' +
-        '<td><select name="notificationType" style="width:18em;" id="' + notificationTypeId +'"></select></td>' +
+        '<td><select name="notificationType" style="width:18em;" id="' + notificationTypeId +'" data-tr-bind-' + index + '="notificationType"></select></td>' +
         '</tr>' +
         '<tr>' +
         '<td>Description</td>' +
-        '<td><textarea name="problemDescription" style="width:18em; height:10em;" id="' + descriptionId +'"></textarea></td>' +
+        '<td><textarea name="problemDescription" style="width:18em; height:10em;" id="' + descriptionId +'" data-tr-bind-' + index + '="problemDescription"></textarea></td>' +
         '</tr>' +
         '<tr>' +
         '<td>Date</td>' +
-        '<td><input type="text" name="problemDate" style="width:18em;" id="' + dateId +'"></td>' +
+        '<td><input type="text" name="problemDate" style="width:18em;" id="' + dateId +'" data-tr-bind-' + index + '="problemDate"></td>' +
         '</tr>' +
         '</table>' +
         '</form>' +

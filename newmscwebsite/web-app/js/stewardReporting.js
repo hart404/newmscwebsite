@@ -1,8 +1,7 @@
 var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/7cfd43c8-85e6-4341-b763-6f1155e43ee85459184511650637164.kmz";
 var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/84b6660a-7de1-407e-bccf-ebc16b3a2c711460419313501223830.kmz";
 var reportingTableRowIndex = 0;
-
-//google.maps.event.addDomListener(window, 'load', initialize);
+var volunteerSessions = [];
 
 function addReportingTableRow() {
     var index = reportingTableRowIndex;
@@ -14,19 +13,20 @@ function addReportingTableRow() {
     var northMapCanvasId = "northMapCanvasId-" + index;
     var southMapCanvasId = "southMapCanvasId-" + index;
 
+    var volunteerSession = new VolunteerSession(index);
+    volunteerSessions.push(volunteerSession);
+
     // Add a new row onto the reporting table
     $('#stewardReportingTable').find('tbody:last')
         .append('<tr>')
-        .append('<td>Date <input id="' + dateFieldId + '" name="date" type="text"></td>')
-        .append('<td>Program <select id="' + programFieldId + '" onchange="checkPatrolButtons(jQuery(this));"></select></td>')
-        .append('<td>Hours <input id="' + hoursFieldId + '" name="hours" type="number" min="0" value="0" step="0.5" /></td>')
+        .append('<td>Date <input id="' + dateFieldId + '" name="date" type="text" data-vs-bind-' + index + '="date"></td>')
+        .append('<td>Program <select id="' + programFieldId + '" onchange="checkPatrolButtons(jQuery(this));" data-vs-bind-' + index + '="program"></select></td>')
+        .append('<td>Hours <input id="' + hoursFieldId + '" name="hours" type="number" min="0" value="0" step="0.5" data-vs-bind-' + index + '="hours"/></td>')
         .append('<td><input class="southarea" disabled="disabled" id="' + southMapFieldId + '" name="southarea" type="button" value="South Area"/></td>')
         .append('<td><input class="northarea" disabled="disabled" id="' + northMapFieldId + '" name="northarea" type="button" value="North Area"/></td>')
         .append('</tr>');
 
-    // create map canvas'
     var mapCanvasContainer = $('#mapCanvasContainer');
-
     mapCanvasContainer
         .append('<div id="' + northMapCanvasId + '" style="width: 1px; height: 1px;"></div>');
     mapCanvasContainer
@@ -39,10 +39,10 @@ function addReportingTableRow() {
     };
 
     var northMap = new google.maps.Map(document.getElementById(northMapCanvasId), mapOptions);
-    loadPins(northMap, "north");
+    loadPins(northMap, "north", volunteerSession);
 
     var southMap = new google.maps.Map(document.getElementById(southMapCanvasId), mapOptions);
-    loadPins(southMap, "south");
+    loadPins(southMap, "south", volunteerSession);
 
     $("#" + northMapCanvasId).dialog({
         autoOpen:false,
@@ -102,7 +102,7 @@ function getPrograms(index) {
         });
 }
 
-function setPins(pinJSON, map) {
+function setPins(pinJSON, map, volunteerSession) {
     var pins = eval(pinJSON);
 
     $.each(pins, function(index, pin) {
@@ -123,14 +123,14 @@ function setPins(pinJSON, map) {
 
         google.maps.event.addListener(marker, 'click', function() {
 
+            if(marker.reportingForm == null) {
+                marker.set("reportingForm", initializeTrailReportingForm(volunteerSession));
+            }
+
             if(marker.color == "888888") {
                 marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
                 marker.color = "00FF00";
             } else if (marker.color == "00FF00" || marker.color == "FF0000") {
-
-                if(marker.reportingForm == null) {
-                    marker.set("reportingForm", initializeTrailReportingForm());
-                }
 
                 var trailReportingDivId = marker.reportingForm;
                 var trailReportingDiv = $('#' + trailReportingDivId);
@@ -180,10 +180,10 @@ function setPins(pinJSON, map) {
     });
 }
 
-function loadPins(map, area) {
+function loadPins(map, area, volunteerSession) {
     $.ajax({type:'GET', url: window.appContext + '/trailSection/pinsForArea',
         data: {'area': area},
-        success:function(data,textStatus){setPins(data, map);},
+        success:function(data,textStatus){setPins(data, map, volunteerSession);},
         error:function(XMLHttpRequest,textStatus,errorThrown){}});
 }
 
