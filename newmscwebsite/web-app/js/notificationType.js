@@ -4,6 +4,7 @@ function populateNotificationTypes(parentDivId) {
         url: appContext + "/notificationType/getAllNotificationTypes"
     }).done(function(data, textStatus, jqXHR) {
             var selectElement = $('#' + parentDivId).find("[id^='problemNotificationTypeId-']")
+            selectElement.append(new Option("Select one...", ""));
             $(data).each(function(i, d) {
                 selectElement.append(new Option(d.display, d.code));
             });

@@ -22,7 +22,8 @@
             <tbody></tbody>
         </table>
         <br />
-        <button id="reportingTableSubmit">Submit</button> <button onclick="addReportingTableRow();">Add Another..</button>
+        <button id="reportingTableSubmit" onsubmit="submitStewardReport();">Submit</button>
+        <button onclick="addReportingTableRow();">Add Another..</button>
     </blockquote>
     %{--<div id="mapCanvas" style="width: 1px; height: 1px;"></div>--}%
     <div id="mapCanvasContainer"></div>

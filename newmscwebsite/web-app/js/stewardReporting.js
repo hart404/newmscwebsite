@@ -44,26 +44,43 @@ function addReportingTableRow() {
     var southMap = new google.maps.Map(document.getElementById(southMapCanvasId), mapOptions);
     loadPins(southMap, "south", volunteerSession);
 
-    $("#" + northMapCanvasId).dialog({
+    var northMapDialog = $("#" + northMapCanvasId).dialog({
         autoOpen:false,
         width: 1000,
         height: 900,
         title: "North Area Reporting",
         resizeStop: function(event, ui) {},
-        open: function(event, ui) {google.maps.event.trigger(northMap, 'resize');},
+        open: function(event, ui) {
+            google.maps.event.trigger(northMap, 'resize');
+            $(".ui-dialog-titlebar-close").hide();
+        },
         show: "blind",
-        hide: "blind"
+        hide: "blind",
+        buttons: {
+            "Close": function () {
+                northMapDialog.dialog('close');
+            }
+        }
     });
 
-    $("#" + southMapCanvasId).dialog({
+    var southMapDialog = $("#" + southMapCanvasId).dialog({
         autoOpen:false,
         width: 1000,
         height: 900,
         title: "South Area Reporting",
         resizeStop: function(event, ui) {},
-        open: function(event, ui) {google.maps.event.trigger(southMap, 'resize');},
+        open: function(event, ui) {
+            google.maps.event.trigger(southMap, 'resize');
+            $(".ui-dialog-titlebar-close").hide();
+        },
         show: "blind",
-        hide: "blind"
+        hide: "blind",
+        buttons: {
+            "Close": function () {
+                southMapDialog.dialog('close');
+            }
+        },
+        closeOnEscape: false
     });
 
     $('#' + northMapFieldId).click(function(){
@@ -108,6 +125,7 @@ function setPins(pinJSON, map, volunteerSession) {
     $.each(pins, function(index, pin) {
         var color = pin.color;
         if (color == null) color = '888888';
+        var originalColor = color;
         var latLong = new google.maps.LatLng(pin.latitude, pin.longitude);
         var anchorPoint = new google.maps.Point(pin.anchorX, pin.anchorY);
 
@@ -119,12 +137,15 @@ function setPins(pinJSON, map, volunteerSession) {
         });
         marker.set("id", pin.id);
         marker.set("color", color);
-        marker.setTitle("Report Issue")
+        marker.set("originalColor", originalColor);
+        marker.setTitle("Report Issue");
 
         google.maps.event.addListener(marker, 'click', function() {
+            var reportFormObject;
 
             if(marker.reportingForm == null) {
-                marker.set("reportingForm", initializeTrailReportingForm(volunteerSession));
+                reportFormObject = initializeTrailReportingForm(volunteerSession);
+                marker.set("reportingForm", "trailReportingDiv-" + reportFormObject.attributes.uid.toString());
             }
 
             if(marker.color == "888888") {
@@ -168,11 +189,15 @@ function setPins(pinJSON, map, volunteerSession) {
                         },
                         "Cancel": function () {
                             errorsList.empty();
+                            volunteerSession.attributes.trailReports.splice(volunteerSession.attributes.trailReports.indexOf(reportFormObject), 1);
+                            marker.set("reportingForm", null);
+                            marker.color = marker.originalColor;
+                            marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|" + marker.color );
                             dialog.dialog('close');
                         }
                     },
                     closeOnEscape: false,
-                    open: function(event, ui) { $($(".ui-dialog-titlebar-close")[1]).hide() }
+                    open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
                 });
             }
         });
@@ -204,4 +229,17 @@ function checkPatrolButtons(selectElement) {
     } else {
         disablePatrolButtons(selectElement);
     }
+}
+
+function submitStewardReport() {
+    $.ajax({
+        type: "POST",
+        url: appContext + "/volunteerSession/saveVolunteerSessions",
+        data: volunteerSessions.serialize()
+    }).done(function(data, textStatus, jqXHR) {
+            alert('success!');
+
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert('fail');
+        });
 }

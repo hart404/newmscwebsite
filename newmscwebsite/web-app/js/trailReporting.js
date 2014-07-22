@@ -7,7 +7,7 @@ function initializeTrailReportingForm(volunteerSession) {
     var dateId = "problemDateId-" + index;
 
     var trailReport = new TrailReport(index);
-    volunteerSession.push(trailReport);
+    volunteerSession.attributes.trailReports.push(trailReport);
 
     $('#trailReportingContainer')
         .append('<div style="display:none" id="trailReportingDiv-' + index + '">' +
@@ -39,5 +39,6 @@ function initializeTrailReportingForm(volunteerSession) {
         '</div>');
 
     trailReportIndex++;
-    return "trailReportingDiv-" + index;
+//    return "trailReportingDiv-" + index;
+    return trailReport;
 }

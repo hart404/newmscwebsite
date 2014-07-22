@@ -16,10 +16,6 @@ function VolunteerSession( uid ) {
                 return this.attributes[ attr_name ];
             },
 
-            push: function( val ) {
-                this.attributes.trailReports.push(val)
-            },
-
             _binder: binder
         };
 

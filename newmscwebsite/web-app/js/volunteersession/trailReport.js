@@ -2,7 +2,9 @@ function TrailReport( uid ) {
     var binder = new TrailReportDataBinder( uid ),
 
         trailReport = {
-            attributes: {},
+            attributes: {
+                uid: uid
+            },
 
             // The attribute setter publish changes using the DataBinder PubSub
             set: function( attr_name, val ) {
