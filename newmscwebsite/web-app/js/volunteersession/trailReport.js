@@ -3,7 +3,9 @@ function TrailReport( uid ) {
 
         trailReport = {
             attributes: {
-                uid: uid
+                uid: uid,
+                issue: false,
+                pinId: null
             },
 
             // The attribute setter publish changes using the DataBinder PubSub

@@ -39,6 +39,5 @@ function initializeTrailReportingForm(volunteerSession) {
         '</div>');
 
     trailReportIndex++;
-//    return "trailReportingDiv-" + index;
     return trailReport;
 }

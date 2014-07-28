@@ -18,14 +18,14 @@
 <body>
     <h1>Steward Reporting</h1>
     <blockquote>
+        <ul class="errors" role="alert" id="volunteerSessionErrors"></ul>
         <table id="stewardReportingTable">
             <tbody></tbody>
         </table>
         <br />
-        <button id="reportingTableSubmit" onsubmit="submitStewardReport();">Submit</button>
+        <button id="reportingTableSubmit" onclick="submitStewardReport();">Submit</button>
         <button onclick="addReportingTableRow();">Add Another..</button>
     </blockquote>
-    %{--<div id="mapCanvas" style="width: 1px; height: 1px;"></div>--}%
     <div id="mapCanvasContainer"></div>
     <div id="trailReportingContainer"></div>
 </body>
