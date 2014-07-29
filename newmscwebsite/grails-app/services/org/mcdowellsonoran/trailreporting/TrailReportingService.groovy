@@ -1,5 +1,6 @@
 package org.mcdowellsonoran.trailreporting
 
+import grails.transaction.Transactional
 import org.mcdowellsonoran.notification.NotificationService
 
 /**
@@ -16,9 +17,10 @@ class TrailReportingService {
      * @param trailReport TrailReport to persist
      * @return The persisted TrailReport instance
      */
+    @Transactional
     TrailReport saveTrailReport(TrailReport trailReport) {
 
-        trailReport.save()
+        trailReport.save(failOnError: true)
 
         if(trailReport.issue) {
             notificationService.sendNotification(trailReport.trailReportNotification.notificationType,

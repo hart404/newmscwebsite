@@ -1,5 +1,6 @@
 package org.mcdowellsonoran.volunteersession
 
+import grails.transaction.Transactional
 import org.mcdowellsonoran.trailreporting.TrailReport
 import org.mcdowellsonoran.trailreporting.TrailReportingService
 
@@ -16,6 +17,7 @@ class VolunteerSessionService {
      * in one transaction.
      * @param volunteerSessions List of VolunteerSessions to be saved.
      */
+    @Transactional
     void saveVolunteerSessions(List<VolunteerSession> volunteerSessions) {
         for (VolunteerSession volunteerSession : volunteerSessions) {
             saveVolunteerSession(volunteerSession)
@@ -29,6 +31,7 @@ class VolunteerSessionService {
      * @param trailReports a list of TrailReports for the VolunteerSession
      * @return the saved VolunteerSession instance
      */
+    @Transactional
     VolunteerSession saveVolunteerSession(VolunteerSession volunteerSession) {
 
         // TrailReports need to be saved on their own instead of cascaded
@@ -42,6 +45,6 @@ class VolunteerSessionService {
             }
             volunteerSession.trailReports = savedTrailReports
         }
-        return volunteerSession.save()
+        return volunteerSession.save(failOnError: true)
     }
 }
