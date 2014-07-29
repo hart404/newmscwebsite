@@ -79,9 +79,10 @@ class VolunteerSessionController {
     }
 
     /**
-     *
-     * @param params
-     * @return
+     * Builds valid VolunteerSession objects from the data binded to
+     * a StewardReportingCommand.
+     * @param cmd The command object used to compose the VolunteerSessions
+     * @return A List of VolunteerSessions composed from the passed-in command
      */
     private List<VolunteerSession> buildVolunteerSessions(StewardReportingCommand cmd) {
         List<VolunteerSession> volunteerSessions = []
@@ -102,6 +103,7 @@ class VolunteerSessionController {
                     trailReport.date = vcs.date
                     trailReport.issue = trc.issue
 
+                    // There will only be a TrailReportNotification if there is an issue
                     if(trc.issue){
                         TrailReportNotification notification = new TrailReportNotification()
                         notification.notificationType = NotificationType.findByCode(trc.notificationType)

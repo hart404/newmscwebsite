@@ -1,19 +1,6 @@
-import newmscwebsite.Activity
-import newmscwebsite.Amenity
-import newmscwebsite.GeographicCoordinates
-import newmscwebsite.Hike
-import newmscwebsite.Person
-import newmscwebsite.SecRole
-import newmscwebsite.SecUser
-import newmscwebsite.SecUserSecRole
-import newmscwebsite.StreetAddress
-import newmscwebsite.TrailSection
-import newmscwebsite.Trailhead
-import newmscwebsite.TrailheadService
+import newmscwebsite.*
 import org.mcdowellsonoran.notification.NotificationType
 import org.springframework.core.io.ClassPathResource
-import grails.util.Environment
-
 import simple.cms.SCMSMenu
 import simple.cms.SCMSMenuBar
 import simple.cms.SCMSMenuItem
@@ -94,9 +81,13 @@ class BootStrap {
 		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		def webRole = SecRole.findByAuthority('ROLE_WEB') ?: new SecRole(authority: 'ROLE_WEB').save(failOnError: true)
-		def adminUser = SecUser.findByUsername('admin@mcdowellsonoran.org') ?: new SecUser(
-				username: 'admin@mcdowellsonoran.org',
-				password: 'admin',
+
+        String adminUsername = grailsApplication.config.newmscwebsite.secuser.admin.username
+        String adminPassword = grailsApplication.config.newmscwebsite.secuser.admin.password
+
+		def adminUser = SecUser.findByUsername(adminUsername) ?: new SecUser(
+				username: adminUsername,
+				password: adminPassword,
 				enabled: true).save(failOnError: true)
 		if (!adminUser.authorities.contains(adminRole)) {
 			SecUserSecRole.create adminUser, adminRole
@@ -105,9 +96,12 @@ class BootStrap {
 			SecUserSecRole.create adminUser, webRole
 		}
 
-        def testUser = SecUser.findByUsername('test@mcdowellsonoran.org') ?: new SecUser(
-                username: 'test@mcdowellsonoran.org',
-                password: 'test',
+        String testUserUsername = grailsApplication.config.newmscwebsite.secuser.test.username
+        String testUserPassword = grailsApplication.config.newmscwebsite.secuser.test.password
+
+        def testUser = SecUser.findByUsername(testUserUsername) ?: new SecUser(
+                username: testUserUsername,
+                password: testUserPassword,
                 enabled: true,
                 accountExpired: false,
                 accountLocked: false,
@@ -515,33 +509,24 @@ class BootStrap {
     }
 
     void addNotificationList() {
-        if(Environment.current == Environment.DEVELOPMENT) {
-            ['jacoba.severson@gmail.com','jacob.severson@objectpartners.com'].eachWithIndex { String username, i ->
-                if(!Person.findByUsername(username)) {
-                    new Person(firstName: "Jacob" + i,
-                               lastName: "Severson" + i,
-                               username: username,
-                               password: "testpassword",
-                               hasStewardRole: true).save(flush: true,
-                                                          failOnError: true)
-                }
 
-                if(NotificationType?.findByCode("emergency")?.recipients?.isEmpty()) {
-                    println ">>>>>>>> Adding $username to the emergency notification list"
-                    NotificationType emergency = NotificationType.findByCode("emergency")
-                    emergency.addToRecipients(Person.findByUsername(username))
-                    emergency.save(flush: true, failOnError: true)
-                }
-                if(NotificationType?.findByCode("maintenance")?.recipients?.isEmpty()) {
-                    println ">>>>>>>> Adding $username to the emergency notification list"
-                    NotificationType maintenance = NotificationType.findByCode("maintenance")
-                    maintenance.addToRecipients(Person.findByUsername(username))
-                    maintenance.save(flush: true, failOnError: true)
-                }
+        List<String> maintenanceNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.maintenance).tokenize(",")
+        List<String> emergencyNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.emergency).tokenize(",")
+
+        if(maintenanceNotificationList && NotificationType?.findByCode("maintenance")?.recipients?.isEmpty()) {
+            for (String userForMaintenance : maintenanceNotificationList) {
+                NotificationType maintenance = NotificationType.findByCode("maintenance")
+                maintenance.addToRecipients(Person.findByUsername(userForMaintenance))
+                maintenance.save(flush: true, failOnError: true)
             }
         }
-        if(Environment.current == Environment.PRODUCTION) {
-            println('test')
+
+        if(emergencyNotificationList && NotificationType?.findByCode("emergency")?.recipients?.isEmpty()) {
+            for (String userForEmergency : emergencyNotificationList) {
+                    NotificationType emergency = NotificationType.findByCode("emergency")
+                    emergency.addToRecipients(Person.findByUsername(userForEmergency))
+                    emergency.save(flush: true, failOnError: true)
+            }
         }
     }
 	 
