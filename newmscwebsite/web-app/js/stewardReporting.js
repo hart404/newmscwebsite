@@ -301,7 +301,8 @@ function submitStewardReport() {
         dataType: "json"
     }).done(function(data, textStatus, jqXHR) {
             errorsList.empty();
-            alert('success!');
+            alert(data.message);
+            window.location.replace(data.successLink);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
             errorsList.empty();

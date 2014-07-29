@@ -25,8 +25,8 @@ class VolunteerSessionCommand {
 
     static constraints = {
         date nullable: false, blank: false
-        program nullable: false, blank: false
-        hours nullable: false, blank: false
+        program nullable: false, blank: false, notEqual: "null"
+        hours nullable: false, blank: false, notEqual: 0 as BigDecimal
         trailReports nullable: true, blank: true
     }
 }

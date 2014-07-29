@@ -2,6 +2,7 @@ import newmscwebsite.Activity
 import newmscwebsite.Amenity
 import newmscwebsite.GeographicCoordinates
 import newmscwebsite.Hike
+import newmscwebsite.Person
 import newmscwebsite.SecRole
 import newmscwebsite.SecUser
 import newmscwebsite.SecUserSecRole
@@ -11,6 +12,7 @@ import newmscwebsite.Trailhead
 import newmscwebsite.TrailheadService
 import org.mcdowellsonoran.notification.NotificationType
 import org.springframework.core.io.ClassPathResource
+import grails.util.Environment
 
 import simple.cms.SCMSMenu
 import simple.cms.SCMSMenuBar
@@ -37,6 +39,7 @@ class BootStrap {
 		createLocations()
 		createHikes()
         createNotificationTypes()
+        addNotificationList()
 		websiteUpdates()
 	}
 	
@@ -508,6 +511,37 @@ class BootStrap {
         if(0 == NotificationType.count()) {
             new NotificationType(code: "emergency", display: "Emergency Action Needed").save(failOnError: true, flush: true)
             new NotificationType(code: "maintenance", display: "Maintenance Action Needed").save(failOnError: true, flush: true)
+        }
+    }
+
+    void addNotificationList() {
+        if(Environment.current == Environment.DEVELOPMENT) {
+            ['jacoba.severson@gmail.com','jacob.severson@objectpartners.com'].eachWithIndex { String username, i ->
+                if(!Person.findByUsername(username)) {
+                    new Person(firstName: "Jacob" + i,
+                               lastName: "Severson" + i,
+                               username: username,
+                               password: "testpassword",
+                               hasStewardRole: true).save(flush: true,
+                                                          failOnError: true)
+                }
+
+                if(NotificationType?.findByCode("emergency")?.recipients?.isEmpty()) {
+                    println ">>>>>>>> Adding $username to the emergency notification list"
+                    NotificationType emergency = NotificationType.findByCode("emergency")
+                    emergency.addToRecipients(Person.findByUsername(username))
+                    emergency.save(flush: true, failOnError: true)
+                }
+                if(NotificationType?.findByCode("maintenance")?.recipients?.isEmpty()) {
+                    println ">>>>>>>> Adding $username to the emergency notification list"
+                    NotificationType maintenance = NotificationType.findByCode("maintenance")
+                    maintenance.addToRecipients(Person.findByUsername(username))
+                    maintenance.save(flush: true, failOnError: true)
+                }
+            }
+        }
+        if(Environment.current == Environment.PRODUCTION) {
+            println('test')
         }
     }
 	 

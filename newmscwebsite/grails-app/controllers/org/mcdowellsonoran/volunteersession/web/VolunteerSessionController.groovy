@@ -5,7 +5,11 @@ import grails.plugins.springsecurity.SpringSecurityService
 import newmscwebsite.Person
 import newmscwebsite.Program
 import newmscwebsite.ProgramReporting
+import newmscwebsite.TrailSection
+import org.joda.time.LocalDate
+import org.mcdowellsonoran.notification.NotificationType
 import org.mcdowellsonoran.trailreporting.TrailReport
+import org.mcdowellsonoran.trailreporting.TrailReportNotification
 import org.mcdowellsonoran.volunteersession.VolunteerSession
 import org.mcdowellsonoran.volunteersession.VolunteerSessionService
 
@@ -48,9 +52,12 @@ class VolunteerSessionController {
             errorsMap.put("valErrors", errors)
 
         } else {
-            // TODO: save each one
+            Integer volunteerSessionCount = stewardReportingCommand.volunteerSessions.size()
+            volunteerSessionService.saveVolunteerSessions(buildVolunteerSessions(stewardReportingCommand))
             response.status = 200
             errorsMap.put("hasErrors", false)
+            errorsMap.put("message", "$volunteerSessionCount volunteer sessions have been saved.")
+            errorsMap.put("successLink", g.createLink(controller: "home"))
         }
 
         render errorsMap as JSON
@@ -76,14 +83,42 @@ class VolunteerSessionController {
      * @param params
      * @return
      */
-    private List<VolunteerSession> buildVolunteerSessions(def request) {
+    private List<VolunteerSession> buildVolunteerSessions(StewardReportingCommand cmd) {
+        List<VolunteerSession> volunteerSessions = []
+        Person currentUser = springSecurityService.currentUser as Person
 
-//        List<VolunteerSession> volunteerSessionList = []
-//        VolunteerSession volunteerSession = new VolunteerSession(request.JSON)
-//        volunteerSession.person = springSecurityService.currentUser as Person
-//        volunteerSessionList << volunteerSession
-        return null
+        for (VolunteerSessionCommand vcs : cmd.volunteerSessions) {
+            VolunteerSession volunteerSession = new VolunteerSession()
+            volunteerSession.hours = vcs.hours
+            volunteerSession.date = new LocalDate(vcs.date)
+            volunteerSession.program = vcs.program
+            volunteerSession.person = currentUser
+
+            if(vcs.trailReports && !vcs.trailReports.isEmpty()) {
+                List<TrailReport> trailReports = []
+                for (TrailReportCommand trc : vcs.trailReports) {
+                    TrailReport trailReport = new TrailReport()
+                    trailReport.trailSection = TrailSection.get(trc.pinId)
+                    trailReport.date = vcs.date
+                    trailReport.issue = trc.issue
+
+                    if(trc.issue){
+                        TrailReportNotification notification = new TrailReportNotification()
+                        notification.notificationType = NotificationType.findByCode(trc.notificationType)
+                        notification.description = trc.problemDescription
+                        notification.date = trc.problemDate
+                        notification.person = currentUser
+                        notification.trailReport = trailReport
+                        trailReport.trailReportNotification = notification
+                        notification.trailReport = trailReport
+
+                    }
+                    trailReports << trailReport
+                }
+                volunteerSession.trailReports = trailReports
+            }
+            volunteerSessions << volunteerSession
+        }
+        return volunteerSessions
     }
-
-
 }

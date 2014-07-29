@@ -26,7 +26,62 @@ class VolunteerSessionControllerSpec extends Specification {
         setupValidPerson()
     }
 
-    void "test save a single valid volunteer session"() {
+    void "test saving a single invalid volunteer session returns errors"() {
+
+        given: "a request with an invalid volunteer session"
+        request.json = [volunteerSessions: [[:]]]
+
+        when: "the volunteer session is saved"
+        controller.saveVolunteerSessions()
+
+        then: "errors are returned"
+        400 == response.status
+        true == response.json.hasErrors
+        3 == response.json.valErrors.size()
+    }
+
+    void "test saving multiple invalid volunteer sessions returns errors"() {
+
+        given: "a request with multiple invalid volunteer sessions"
+        request.json = [volunteerSessions: [[:], [:]]]
+
+        when: "the volunteer sessions are saved"
+        controller.saveVolunteerSessions()
+
+        then: "errors are returned"
+        400 == response.status
+        true == response.json.hasErrors
+        6 == response.json.valErrors.size()
+    }
+
+    void "test saving an invalid volunteer session when there is also a valid one"() {
+
+        given: "a request with multiple invalid volunteer sessions"
+        TrailSection trailSection = setupValidTrailSection()
+
+        TrailReport trailReport = new TrailReport(trailSection: trailSection,
+                date: new Date())
+
+        request.json =
+            [   volunteerSessions: [
+                    [:],
+                    [hours: 2,
+                     date: new LocalDate().toString(),
+                     program: Program.PATROL.title(),
+                     trailReports: [trailReport]]
+                ]
+            ]
+
+        when: "the volunteer sessions are saved"
+        controller.saveVolunteerSessions()
+
+        then: "errors are returned"
+        400 == response.status
+        true == response.json.hasErrors
+        3 == response.json.valErrors.size()
+    }
+
+    void "test save a single valid volunteer session with no issues"() {
 
         given: "a request with a valid volunteer session"
         TrailSection trailSection = setupValidTrailSection()
@@ -34,22 +89,24 @@ class VolunteerSessionControllerSpec extends Specification {
         TrailReport trailReport = new TrailReport(trailSection: trailSection,
                                                   date: new Date())
 
-        request.json = [hours: 2,
+        request.json = [
+                volunteerSessions: [
+                        [hours: 2,
                         date: new LocalDate().toString(),
                         program: Program.PATROL.title(),
                         trailReports: [trailReport]]
+                ]
+        ]
 
         when: "the volunteer session is saved"
         controller.saveVolunteerSessions()
 
-        then: "the request data is persisted to the appropriate domains"
-        '/person/stewardReporting' == response.redirectedUrl
-        0 < VolunteerSession.findAll().size()
-        "testPinName" == TrailReport.findByTrailSection(trailSection).trailSection.pinName
-        1 * mockVolunteerSessionService.saveVolunteerSession(_) >> { VolunteerSession volunteerSession ->
-            volunteerSession.save(failOnError: true,
-                                  flush: true)
-        }
+        then: "no errors are returned and a success link is in the response"
+        1 * mockVolunteerSessionService.saveVolunteerSessions(_) >> {}
+        200 == response.status
+        false == response.json.hasErrors
+        "1 volunteer sessions have been saved." == response.json.message
+        "/home" == response.json.successLink
     }
 
     /**
