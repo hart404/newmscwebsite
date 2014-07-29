@@ -81,6 +81,29 @@ class VolunteerSessionServiceISpec extends Specification {
         "test description" == VolunteerSession.findById(savedVolunteerSession.id).trailReports.get(0).trailReportNotification.description
     }
 
+    void "test saving multiple volunteer sessions" () {
+
+        given: "a list of volunteer sessions"
+        List<VolunteerSession> volunteerSessions = []
+        VolunteerSession volunteerSession1 = new VolunteerSession(person: person,
+                                                                  hours: 2,
+                                                                  date: new LocalDate(),
+                                                                  program: "testProgram")
+        volunteerSessions << volunteerSession1
+        VolunteerSession volunteerSession2 = new VolunteerSession(person: person,
+                                                                  hours: 5,
+                                                                  date: new LocalDate(),
+                                                                  program: "anotherProgram")
+        volunteerSessions << volunteerSession2
+
+        when: "that list is saved"
+        volunteerSessionService.saveVolunteerSessions(volunteerSessions)
+
+        then: "those sessions are persisted to the database"
+        VolunteerSession.get(volunteerSession1.id)
+        VolunteerSession.get(volunteerSession2.id)
+    }
+
     private void setupValidPerson() {
         person = new Person(username: "jacob.severson@objectpartners.com",
                             password: "testPassword",
