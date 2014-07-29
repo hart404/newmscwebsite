@@ -6,6 +6,7 @@ import grails.test.mixin.TestFor
 import newmscwebsite.GeographicCoordinates
 import newmscwebsite.Person
 import newmscwebsite.Program
+import newmscwebsite.ProgramReporting
 import newmscwebsite.TrailSection
 import org.joda.time.LocalDate
 import org.mcdowellsonoran.trailreporting.TrailReport
@@ -107,6 +108,16 @@ class VolunteerSessionControllerSpec extends Specification {
         false == response.json.hasErrors
         "1 volunteer sessions have been saved." == response.json.message
         "/home" == response.json.successLink
+    }
+
+    void "test returning all programs for reporting"() {
+
+        when: "all programs are retrieved"
+        controller.getPrograms()
+
+        then: "all programs that are listable for reporting are present"
+        ProgramReporting.values().findAll {program -> program.isShowable()}.size() ==
+                response.json.size()
     }
 
     /**

@@ -64,7 +64,7 @@ class VolunteerSessionController {
     }
 
     /**
-     * Returns all programs for reporting purposes.
+     * Returns all showable programs for reporting purposes.
      * @return json list of programs
      */
     def getPrograms() {
