@@ -516,16 +516,22 @@ class BootStrap {
         if(maintenanceNotificationList && NotificationType?.findByCode("maintenance")?.recipients?.isEmpty()) {
             for (String userForMaintenance : maintenanceNotificationList) {
                 NotificationType maintenance = NotificationType.findByCode("maintenance")
-                maintenance.addToRecipients(Person.findByUsername(userForMaintenance))
-                maintenance.save(flush: true, failOnError: true)
+                Person user = Person.findByUsername(userForMaintenance)
+                if (user) {
+                    maintenance.addToRecipients(user)
+                    maintenance.save(flush: true, failOnError: true)
+                }
             }
         }
 
         if(emergencyNotificationList && NotificationType?.findByCode("emergency")?.recipients?.isEmpty()) {
             for (String userForEmergency : emergencyNotificationList) {
-                    NotificationType emergency = NotificationType.findByCode("emergency")
-                    emergency.addToRecipients(Person.findByUsername(userForEmergency))
+                NotificationType emergency = NotificationType.findByCode("emergency")
+                Person user = Person.findByUsername(userForEmergency)
+                if (user) {
+                    emergency.addToRecipients(user)
                     emergency.save(flush: true, failOnError: true)
+                }
             }
         }
     }
