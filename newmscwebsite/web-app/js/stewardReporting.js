@@ -161,7 +161,6 @@ function setPins(pinJSON, map, volunteerSession) {
         marker.set("id", pin.id);
         marker.set("color", color);
         marker.set("originalColor", originalColor);
-        marker.setTitle("Report Issue");
 
         google.maps.event.addListener(marker, 'click', function() {
             var reportFormObject;
