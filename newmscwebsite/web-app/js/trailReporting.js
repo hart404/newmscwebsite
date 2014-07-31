@@ -15,7 +15,7 @@ function initializeTrailReportingForm(volunteerSession) {
         'Please use this form to report any issues for this trail segment. Note that all issues ' +
                 'will not be logged and communicated until the report is saved as a whole. ' +
                 'These fields can be updated as needed until the report is saved. Clicking ' +
-                '"Cancel" will reset this trail section to an unpatrolled state and clear the form.' +
+                '"Clear" will reset this trail section to an unpatrolled state and clear the form.' +
         '</p>' +
         '<div id="errorsDiv-' + index +'">' +
         '<ul class="errors" role="alert" id=errorsListId-"' + index + '"></ul>' +
