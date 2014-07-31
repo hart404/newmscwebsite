@@ -18,6 +18,7 @@ var volunteerSessions = [];
  */
 function addReportingTableRow() {
     var index = reportingTableRowIndex;
+    var validationTableRow = index + 1;
     var dateFieldId = "sessionDateId-" + index;
     var programFieldId = "sessionProgramId-" + index;
     var hoursFieldId = "sessionHoursId-" + index;
@@ -27,6 +28,7 @@ function addReportingTableRow() {
     var southMapCanvasId = "southMapCanvasId-" + index;
 
     var volunteerSession = new VolunteerSession(index);
+    volunteerSession.attributes.validationRow = validationTableRow;
     volunteerSessions.push(volunteerSession);
 
     // Add a new row onto the reporting table
@@ -324,14 +326,20 @@ function formatVolunteerSessionsForSubmit() {
     };
 
     for (var i=0; i < volunteerSessions.length; i++) {
-        var trailReportArray = [];
-
         var tempVolSession = volunteerSessions[i].attributes;
-        for (var j=0; j < volunteerSessions[i].attributes.trailReports.length; j++) {
-            trailReportArray.push(volunteerSessions[i].attributes.trailReports[j].attributes)
+        if(tempVolSession.hasOwnProperty("date") ||
+           tempVolSession.hasOwnProperty("program") ||
+           tempVolSession.hasOwnProperty("hours")) {
+
+            var trailReportArray = [];
+
+
+            for (var j=0; j < volunteerSessions[i].attributes.trailReports.length; j++) {
+                trailReportArray.push(volunteerSessions[i].attributes.trailReports[j].attributes)
+            }
+            tempVolSession.trailReports = trailReportArray;
+            stewardReport.volunteerSessions.push(tempVolSession);
         }
-        tempVolSession.trailReports = trailReportArray;
-        stewardReport.volunteerSessions.push(tempVolSession);
     }
     return stewardReport;
 }

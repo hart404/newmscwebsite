@@ -30,7 +30,7 @@ class VolunteerSessionControllerSpec extends Specification {
     void "test saving a single invalid volunteer session returns errors"() {
 
         given: "a request with an invalid volunteer session"
-        request.json = [volunteerSessions: [[:]]]
+        request.json = [volunteerSessions: [[validationRow: 1]]]
 
         when: "the volunteer session is saved"
         controller.saveVolunteerSessions()
@@ -44,7 +44,7 @@ class VolunteerSessionControllerSpec extends Specification {
     void "test saving multiple invalid volunteer sessions returns errors"() {
 
         given: "a request with multiple invalid volunteer sessions"
-        request.json = [volunteerSessions: [[:], [:]]]
+        request.json = [volunteerSessions: [[validationRow: 1], [validationRow: 2]]]
 
         when: "the volunteer sessions are saved"
         controller.saveVolunteerSessions()
@@ -65,8 +65,9 @@ class VolunteerSessionControllerSpec extends Specification {
 
         request.json =
             [   volunteerSessions: [
-                    [:],
-                    [hours: 2,
+                    [validationRow: 1],
+                    [validationRow: 2,
+                     hours: 2,
                      date: new LocalDate().toString(),
                      program: Program.PATROL.title(),
                      trailReports: [trailReport]]
@@ -92,7 +93,8 @@ class VolunteerSessionControllerSpec extends Specification {
 
         request.json = [
                 volunteerSessions: [
-                        [hours: 2,
+                        [validationRow: 1,
+                        hours: 2,
                         date: new LocalDate().toString(),
                         program: Program.PATROL.title(),
                         trailReports: [trailReport]]
@@ -107,7 +109,7 @@ class VolunteerSessionControllerSpec extends Specification {
         200 == response.status
         false == response.json.hasErrors
         "1 volunteer sessions have been saved." == response.json.message
-        "/home" == response.json.successLink
+        "/person/stewardReportingNew" == response.json.successLink
     }
 
     void "test returning all programs for reporting"() {

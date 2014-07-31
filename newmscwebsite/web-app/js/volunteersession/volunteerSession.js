@@ -3,7 +3,8 @@ function VolunteerSession( uid ) {
 
         volunteerSession = {
             attributes: {
-                trailReports: []
+                trailReports: [],
+                validationRow: null
             },
 
             // The attribute setter publish changes using the DataBinder PubSub

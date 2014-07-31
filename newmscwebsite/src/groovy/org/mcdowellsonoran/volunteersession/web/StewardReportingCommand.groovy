@@ -22,12 +22,14 @@ class VolunteerSessionCommand {
     String program
     BigDecimal hours
     List<TrailReportCommand> trailReports
+    Integer validationRow
 
     static constraints = {
         date nullable: false, blank: false
         program nullable: false, blank: false, notEqual: "null"
         hours nullable: false, blank: false, notEqual: 0 as BigDecimal
         trailReports nullable: true, blank: true
+        validationRow nullable: false, blank: false
     }
 }
 

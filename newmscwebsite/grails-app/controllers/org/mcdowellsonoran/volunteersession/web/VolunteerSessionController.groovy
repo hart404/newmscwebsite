@@ -28,12 +28,6 @@ class VolunteerSessionController {
 
         Map errorsMap = [:]
 
-        // It would be very cumbersome to pass around each
-        // volunteer session element to attach errors straight to
-        // them. Instead we will just use a counter and tell the
-        // user which volunteer session number on the page has the specific error.
-        Integer volunteerSessionCounter = 1
-
         stewardReportingCommand.volunteerSessions.each { it.validate() }
 
         if(stewardReportingCommand.volunteerSessions.any { it.hasErrors() }) {
@@ -42,12 +36,11 @@ class VolunteerSessionController {
             List errors = []
 
             for(VolunteerSessionCommand vsc : stewardReportingCommand.volunteerSessions) {
-
+                Integer row = vsc.validationRow
                 // Pull each error from messages.properties
                 g.eachError(bean: vsc) {
-                    errors.add("For volunteer session $volunteerSessionCounter: " + g.message(error: it))
+                    errors.add("For volunteer session $row: " + g.message(error: it))
                 }
-                volunteerSessionCounter++
             }
             errorsMap.put("valErrors", errors)
 
@@ -57,7 +50,7 @@ class VolunteerSessionController {
             response.status = 200
             errorsMap.put("hasErrors", false)
             errorsMap.put("message", "$volunteerSessionCount volunteer sessions have been saved.")
-            errorsMap.put("successLink", g.createLink(controller: "home"))
+            errorsMap.put("successLink", g.createLink(controller: "person", action: "stewardReportingNew"))
         }
 
         render errorsMap as JSON

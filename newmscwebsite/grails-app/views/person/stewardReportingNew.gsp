@@ -12,7 +12,9 @@
     <g:javascript src="volunteersession/trailReport.js" />
     <script type="text/javascript">
         window.appContext = '${request.contextPath}';
-        $(document).ready(addReportingTableRow);
+        for (var i=0; i < 10; i++) {
+            $(document).ready(addReportingTableRow);
+        }
     </script>
 </head>
 <body>
@@ -24,7 +26,6 @@
         </table>
         <br />
         <button id="reportingTableSubmit" onclick="submitStewardReport();">Submit</button>
-        <button onclick="addReportingTableRow();">Add Another..</button>
     </blockquote>
     <div id="mapCanvasContainer"></div>
     <div id="trailReportingContainer"></div>
