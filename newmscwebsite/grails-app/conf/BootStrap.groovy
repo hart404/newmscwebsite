@@ -1,17 +1,6 @@
-import newmscwebsite.Activity
-import newmscwebsite.Amenity
-import newmscwebsite.GeographicCoordinates
-import newmscwebsite.Hike
-import newmscwebsite.SecRole
-import newmscwebsite.SecUser
-import newmscwebsite.SecUserSecRole
-import newmscwebsite.StreetAddress
-import newmscwebsite.TrailSection
-import newmscwebsite.Trailhead
-import newmscwebsite.TrailheadService
-
+import newmscwebsite.*
+import org.mcdowellsonoran.notification.NotificationType
 import org.springframework.core.io.ClassPathResource
-
 import simple.cms.SCMSMenu
 import simple.cms.SCMSMenuBar
 import simple.cms.SCMSMenuItem
@@ -36,6 +25,8 @@ class BootStrap {
 		createECards()
 		createLocations()
 		createHikes()
+        createNotificationTypes()
+        addNotificationList()
 		websiteUpdates()
 	}
 	
@@ -90,9 +81,13 @@ class BootStrap {
 		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		def webRole = SecRole.findByAuthority('ROLE_WEB') ?: new SecRole(authority: 'ROLE_WEB').save(failOnError: true)
-		def adminUser = SecUser.findByUsername('admin@mcdowellsonoran.org') ?: new SecUser(
-				username: 'admin@mcdowellsonoran.org',
-				password: 'admin',
+
+        String adminUsername = grailsApplication.config.newmscwebsite.secuser.admin.username
+        String adminPassword = grailsApplication.config.newmscwebsite.secuser.admin.password
+
+		def adminUser = SecUser.findByUsername(adminUsername) ?: new SecUser(
+				username: adminUsername,
+				password: adminPassword,
 				enabled: true).save(failOnError: true)
 		if (!adminUser.authorities.contains(adminRole)) {
 			SecUserSecRole.create adminUser, adminRole
@@ -100,6 +95,23 @@ class BootStrap {
 		if (!adminUser.authorities.contains(webRole)) {
 			SecUserSecRole.create adminUser, webRole
 		}
+
+        String testUserUsername = grailsApplication.config.newmscwebsite.secuser.test.username
+        String testUserPassword = grailsApplication.config.newmscwebsite.secuser.test.password
+
+        def testUser = SecUser.findByUsername(testUserUsername) ?: new SecUser(
+                username: testUserUsername,
+                password: testUserPassword,
+                enabled: true,
+                accountExpired: false,
+                accountLocked: false,
+                passwordExpired: false).save(failOnError: true)
+        if (!testUser.authorities.contains(adminRole)) {
+            SecUserSecRole.create testUser, adminRole
+        }
+        if (!testUser.authorities.contains(webRole)) {
+            SecUserSecRole.create testUser, webRole
+        }
 	}
 	
 	def createMenus() {
@@ -256,7 +268,7 @@ class BootStrap {
 			]
 			addressInstance = new StreetAddress(street: "12300 N. 128th St", zip: "85259")
 			coordinatesInstance = new GeographicCoordinates(latitude: 33.599343, longitude: -111.804630)
-			locationInstance = new Trailhead(name: "Ringtail Trailhead", internalName: "ringtail", description: "", address: addressInstance, coordinates: coordinatesInstance)
+			locationInstance = new Trailhead(name: "Ringtail Trailhead", internalName: "ringtail", description: "No description given", address: addressInstance, coordinates: coordinatesInstance)
 			locationInstance.save(failOnError: true)
 			amenities = [
 				Amenity.DIRECTORY,
@@ -488,6 +500,41 @@ class BootStrap {
 			tomsThumb.save(failOnError: true)
 		}
 	}
+
+    void createNotificationTypes() {
+        if(0 == NotificationType.count()) {
+            new NotificationType(code: "emergency", display: "Emergency Action Needed").save(failOnError: true, flush: true)
+            new NotificationType(code: "maintenance", display: "Maintenance Action Needed").save(failOnError: true, flush: true)
+        }
+    }
+
+    void addNotificationList() {
+
+        List<String> maintenanceNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.maintenance).tokenize(",")
+        List<String> emergencyNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.emergency).tokenize(",")
+
+        if(maintenanceNotificationList && NotificationType?.findByCode("maintenance")?.recipients?.isEmpty()) {
+            for (String userForMaintenance : maintenanceNotificationList) {
+                NotificationType maintenance = NotificationType.findByCode("maintenance")
+                Person user = Person.findByUsername(userForMaintenance)
+                if (user) {
+                    maintenance.addToRecipients(user)
+                    maintenance.save(flush: true, failOnError: true)
+                }
+            }
+        }
+
+        if(emergencyNotificationList && NotificationType?.findByCode("emergency")?.recipients?.isEmpty()) {
+            for (String userForEmergency : emergencyNotificationList) {
+                NotificationType emergency = NotificationType.findByCode("emergency")
+                Person user = Person.findByUsername(userForEmergency)
+                if (user) {
+                    emergency.addToRecipients(user)
+                    emergency.save(flush: true, failOnError: true)
+                }
+            }
+        }
+    }
 	 
 	def createAdSpace() {
 	}

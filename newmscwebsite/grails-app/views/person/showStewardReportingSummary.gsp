@@ -1,5 +1,5 @@
 <%@ page import="newmscwebsite.ProgramReporting" %>
-<%@ page import="newmscwebsite.VolunteerSession" %>
+<%@ page import="org.mcdowellsonoran.volunteersession.VolunteerSession" %>
 <!doctype html>
 <html>
 <head>

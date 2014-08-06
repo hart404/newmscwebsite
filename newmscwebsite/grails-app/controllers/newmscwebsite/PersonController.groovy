@@ -1,6 +1,8 @@
 package newmscwebsite
 
 import grails.converters.JSON
+import org.mcdowellsonoran.notification.NotificationType
+import org.mcdowellsonoran.volunteersession.VolunteerSession
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -407,8 +409,15 @@ class PersonController {
 	
 	def stewardReportingNew() {	
 		def programsToShow = ProgramReporting.values().findAll {program -> program.isShowable()}
-		[programs: programsToShow]
+		[programs: programsToShow,
+         notificationTypes: NotificationType.findAll()]
 	}
+
+    def saveReport() {
+        VolunteerSession volunteerSession2 = new VolunteerSession(params)
+        volunteerSession2.person = Person.get(springSecurityService.currentUser.id)
+        volunteerSession2.date = new LocalDate(params.date_year as int, params.date_month as int, params.date_day as int)
+    }
 
 	def stewardList() {
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)

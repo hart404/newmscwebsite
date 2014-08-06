@@ -1,8 +1,7 @@
 package newmscwebsite
 
-import simple.cms.SCMSPhoto;
-import groovy.transform.InheritConstructors
-
+import org.mcdowellsonoran.volunteersession.VolunteerSession
+import simple.cms.SCMSPhoto
 
 class Person extends SecUser {
 	String firstName
@@ -86,5 +85,5 @@ class Person extends SecUser {
 		if (!interests) return false
 		interests.contains(Interest.fromString(interestName))
 	}
-	
+
 }

@@ -318,3 +318,11 @@ th.desc a {
     padding-left: 28px;
 }
 
+/*Steward Reporting Styling*/
+#stewardReportingTable {
+    border: none;
+    width: auto;
+}
+#stewardReportingTable td {
+    padding: 2px;
+}

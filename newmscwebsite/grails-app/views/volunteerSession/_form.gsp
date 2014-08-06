@@ -1,4 +1,4 @@
-<%@ page import="newmscwebsite.VolunteerSession" %>
+<%@ page import="org.mcdowellsonoran.volunteersession.VolunteerSession" %>
 <%@ page import="newmscwebsite.ProgramReporting" %>
 
 <div class="fieldcontain ${hasErrors(bean: volunteerSessionInstance, field: 'hours', 'error')} required">
