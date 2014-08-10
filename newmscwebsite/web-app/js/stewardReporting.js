@@ -175,10 +175,7 @@ function setPins(pinJSON, map, volunteerSession) {
 
             }
 
-            if(marker.color == "888888") {
-                marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
-                marker.color = "00FF00";
-            } else if (marker.color == "00FF00" || marker.color == "FF0000") {
+            if (marker.color == "00FF00" || marker.color == "FF0000") {
 
                 var trailReportingDivId = marker.reportingForm;
                 var trailReportingDiv = $('#' + trailReportingDivId);
@@ -228,6 +225,9 @@ function setPins(pinJSON, map, volunteerSession) {
                     closeOnEscape: false,
                     open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
                 });
+            } else {
+                marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
+                marker.color = "00FF00";
             }
         });
 
