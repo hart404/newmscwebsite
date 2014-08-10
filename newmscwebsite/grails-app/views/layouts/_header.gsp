@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="${resource(dir:'css',file:'homeindex.css')}" />
 <link rel="stylesheet" href="${resource(dir:'css',file:'mapPopUp.css')}" />
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=true"></script>
+%{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=true"></script>--}%
 <g:javascript src="reportmap.js" />
 <g:javascript src="donate.js" />
 <g:javascript src="homeindex.js" />

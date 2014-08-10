@@ -4,12 +4,13 @@
     <meta name="layout" content="generatedLayout" />
     <title>Steward Reporting</title>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
-	<script type="text/javascript" src="<g:createLinkTo dir='/js' file='maplabel.js'/>"></script>
+	%{--<script type="text/javascript" src="<g:createLinkTo dir='/js' file='maplabel.js'/>"></script>--}%
     <g:javascript src="stewardReporting.js" />
     <g:javascript src="trailReporting.js" />
     <g:javascript src="notificationType.js" />
     <g:javascript src="volunteersession/volunteerSession.js" />
     <g:javascript src="volunteersession/trailReport.js" />
+    <g:javascript src="maplabel.js" />
     <script type="text/javascript">
         window.appContext = '${request.contextPath}';
         for (var i=0; i < 10; i++) {
