@@ -100,7 +100,7 @@ class VolunteerSessionReportingController {
                         TrailReportNotification notification = new TrailReportNotification()
                         notification.notificationType = NotificationType.findByCode(trc.notificationType)
                         notification.description = trc.problemDescription
-                        notification.date = trc.problemDate
+                        notification.date = vcs.date
                         notification.person = currentUser
                         notification.trailReport = trailReport
                         trailReport.trailReportNotification = notification
