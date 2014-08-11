@@ -13,12 +13,8 @@ class TrailReportNotificationCommand {
     String notificationType
     String problemDescription
 
-    @BindingFormat('yyyy-MM-dd')
-    Date problemDate
-
     static constraints = {
         notificationType nullable: false, blank: false
         problemDescription nullable: false, blank: false
-        problemDate nullable: false, blank: false
     }
 }

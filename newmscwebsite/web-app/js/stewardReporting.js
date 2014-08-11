@@ -125,7 +125,7 @@ function addReportingTableRow() {
 function getPrograms(index) {
     $.ajax({
         type: "GET",
-        url: appContext + "/volunteerSession/getPrograms"
+        url: appContext + "/volunteerSessionReporting/getPrograms"
     }).done(function(data, textStatus, jqXHR) {
             $("#sessionProgramId-" + index).append(new Option("Select one...", null));
             $(data).each(function(i, d) {
@@ -296,7 +296,7 @@ function submitStewardReport() {
 
     $.ajax({
         type: "POST",
-        url: appContext + "/volunteerSession/saveVolunteerSessions",
+        url: appContext + "/volunteerSessionReporting/saveVolunteerSessions",
         data:  JSON.stringify(formatVolunteerSessionsForSubmit()),
         contentType: "application/json",
         dataType: "json"

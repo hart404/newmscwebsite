@@ -3,7 +3,6 @@ package org.mcdowellsonoran.volunteersession.web
 import grails.converters.JSON
 import grails.plugins.springsecurity.SpringSecurityService
 import newmscwebsite.Person
-import newmscwebsite.Program
 import newmscwebsite.ProgramReporting
 import newmscwebsite.TrailSection
 import org.joda.time.LocalDate
@@ -11,14 +10,14 @@ import org.mcdowellsonoran.notification.NotificationType
 import org.mcdowellsonoran.trailreporting.TrailReport
 import org.mcdowellsonoran.trailreporting.TrailReportNotification
 import org.mcdowellsonoran.volunteersession.VolunteerSession
-import org.mcdowellsonoran.volunteersession.VolunteerSessionService
+import org.mcdowellsonoran.volunteersession.VolunteerSessionReportingService
 
 /**
  * Controller for VolunteerSession operations.
  */
-class VolunteerSessionController {
+class VolunteerSessionReportingController {
 
-    VolunteerSessionService volunteerSessionService
+    VolunteerSessionReportingService volunteerSessionReportingService
     SpringSecurityService springSecurityService
 
     /**
@@ -46,7 +45,7 @@ class VolunteerSessionController {
 
         } else {
             Integer volunteerSessionCount = stewardReportingCommand.volunteerSessions.size()
-            volunteerSessionService.saveVolunteerSessions(buildVolunteerSessions(stewardReportingCommand))
+            volunteerSessionReportingService.saveVolunteerSessions(buildVolunteerSessions(stewardReportingCommand))
             response.status = 200
             errorsMap.put("hasErrors", false)
             errorsMap.put("message", "$volunteerSessionCount volunteer sessions have been saved.")
@@ -101,7 +100,7 @@ class VolunteerSessionController {
                         TrailReportNotification notification = new TrailReportNotification()
                         notification.notificationType = NotificationType.findByCode(trc.notificationType)
                         notification.description = trc.problemDescription
-                        notification.date = trc.problemDate
+                        notification.date = vcs.date
                         notification.person = currentUser
                         notification.trailReport = trailReport
                         trailReport.trailReportNotification = notification

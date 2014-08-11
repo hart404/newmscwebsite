@@ -12,9 +12,9 @@ import org.mcdowellsonoran.trailreporting.TrailReport
 import org.mcdowellsonoran.trailreporting.TrailReportingService
 import spock.lang.Specification
 
-@TestFor(VolunteerSessionService)
+@TestFor(VolunteerSessionReportingService)
 @Mock([VolunteerSession, Person, TrailReport, TrailSection, GeographicCoordinates, NotificationType])
-class VolunteerSessionServiceSpec extends Specification {
+class VolunteerSessionReportingServiceSpec extends Specification {
 
     Person person
     TrailReportingService mockTrailReportingService

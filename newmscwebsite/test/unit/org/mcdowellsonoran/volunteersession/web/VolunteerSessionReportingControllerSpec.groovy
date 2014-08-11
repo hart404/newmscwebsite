@@ -11,14 +11,14 @@ import newmscwebsite.TrailSection
 import org.joda.time.LocalDate
 import org.mcdowellsonoran.trailreporting.TrailReport
 import org.mcdowellsonoran.volunteersession.VolunteerSession
-import org.mcdowellsonoran.volunteersession.VolunteerSessionService
+import org.mcdowellsonoran.volunteersession.VolunteerSessionReportingService
 import spock.lang.Specification
 
-@TestFor(VolunteerSessionController)
+@TestFor(VolunteerSessionReportingController)
 @Mock([VolunteerSession, GeographicCoordinates, TrailSection, TrailReport, Person])
-class VolunteerSessionControllerSpec extends Specification {
+class VolunteerSessionReportingControllerSpec extends Specification {
 
-    VolunteerSessionService mockVolunteerSessionService
+    VolunteerSessionReportingService mockVolunteerSessionService
     SpringSecurityService mockSpringSecurityService
     Person person
 
@@ -123,11 +123,11 @@ class VolunteerSessionControllerSpec extends Specification {
     }
 
     /**
-     * Set up a mocked version of the VolunteerSessionService
+     * Set up a mocked version of the VolunteerSessionReportingService
      */
     private void setupVolunteerSessionService() {
-        mockVolunteerSessionService = Mock(VolunteerSessionService)
-        controller.volunteerSessionService = mockVolunteerSessionService
+        mockVolunteerSessionService = Mock(VolunteerSessionReportingService)
+        controller.volunteerSessionReportingService = mockVolunteerSessionService
     }
 
     /**

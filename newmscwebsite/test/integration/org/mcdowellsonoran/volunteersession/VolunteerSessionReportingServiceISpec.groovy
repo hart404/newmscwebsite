@@ -9,9 +9,9 @@ import org.mcdowellsonoran.trailreporting.TrailReport
 import org.mcdowellsonoran.trailreporting.TrailReportNotification
 import spock.lang.*
 
-class VolunteerSessionServiceISpec extends Specification {
+class VolunteerSessionReportingServiceISpec extends Specification {
 
-    VolunteerSessionService volunteerSessionService
+    VolunteerSessionReportingService volunteerSessionReportingService
     Person person
 
     def setup() {
@@ -27,7 +27,7 @@ class VolunteerSessionServiceISpec extends Specification {
                                                                  program: "testProgram")
 
         when: "the volunteer session is saved"
-        VolunteerSession savedVolunteerSession = volunteerSessionService.saveVolunteerSession(volunteerSession)
+        VolunteerSession savedVolunteerSession = volunteerSessionReportingService.saveVolunteerSession(volunteerSession)
 
         then: "the volunteer session is persisted to the database"
         VolunteerSession.findById(savedVolunteerSession.id)
@@ -73,7 +73,7 @@ class VolunteerSessionServiceISpec extends Specification {
                                                                  trailReports: trailReportList)
 
         when: "the volunteer session is saved"
-        VolunteerSession savedVolunteerSession = volunteerSessionService.saveVolunteerSession(volunteerSession)
+        VolunteerSession savedVolunteerSession = volunteerSessionReportingService.saveVolunteerSession(volunteerSession)
 
         then: "the volunteer session and all of the trail reports are persisted to the database"
         VolunteerSession.findById(savedVolunteerSession.id)
@@ -97,7 +97,7 @@ class VolunteerSessionServiceISpec extends Specification {
         volunteerSessions << volunteerSession2
 
         when: "that list is saved"
-        volunteerSessionService.saveVolunteerSessions(volunteerSessions)
+        volunteerSessionReportingService.saveVolunteerSessions(volunteerSessions)
 
         then: "those sessions are persisted to the database"
         VolunteerSession.get(volunteerSession1.id)

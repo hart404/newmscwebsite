@@ -7,7 +7,7 @@ import org.mcdowellsonoran.trailreporting.TrailReportingService
 /**
  * Operations for VolunteerSessions
  */
-class VolunteerSessionService {
+class VolunteerSessionReportingService {
 
     TrailReportingService trailReportingService
 

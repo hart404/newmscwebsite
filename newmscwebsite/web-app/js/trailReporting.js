@@ -30,10 +30,6 @@ function initializeTrailReportingForm(volunteerSession) {
         '<td>Description</td>' +
         '<td><textarea name="problemDescription" style="width:18em; height:10em;" id="' + descriptionId +'" data-tr-bind-' + index + '="problemDescription"></textarea></td>' +
         '</tr>' +
-        '<tr>' +
-        '<td>Date</td>' +
-        '<td><input type="text" name="problemDate" style="width:18em;" id="' + dateId +'" data-tr-bind-' + index + '="problemDate"></td>' +
-        '</tr>' +
         '</table>' +
         '</form>' +
         '</div>');
