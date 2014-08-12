@@ -10,6 +10,7 @@
     <g:javascript src="notificationType.js" />
     <g:javascript src="volunteersession/volunteerSession.js" />
     <g:javascript src="volunteersession/trailReport.js" />
+    <g:javascript src="markerwithlabel.js" />
     <g:javascript src="maplabel.js" />
     <script type="text/javascript">
         window.appContext = '${request.contextPath}';

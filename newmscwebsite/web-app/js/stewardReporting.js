@@ -154,11 +154,11 @@ function setPins(pinJSON, map, volunteerSession) {
         var latLong = new google.maps.LatLng(pin.latitude, pin.longitude);
         var anchorPoint = new google.maps.Point(pin.anchorX, pin.anchorY);
 
-        var marker = new google.maps.Marker({
+        var marker = new MarkerWithLabel({
             map: map,
             position: latLong,
             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
-            title: pin.pinName
+            labelContent: pin.pinName
         });
         marker.set("id", pin.id);
         marker.set("color", color);
