@@ -66,30 +66,49 @@ grails.spring.bean.packages = []
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
+grails {
+    mail {
+        host = "email-smtp.us-east-1.amazonaws.com"
+        port = 465
+        props = ["mail.smtp.auth":"true",
+                "mail.smtp.socketFactory.port":"465",
+                "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
+
 // set per-environment serverURL stem for creating absolute links
 environments {
 	development {
 		grails.serverURL = "http://localhost:8080/${appName}"
 		grails.plugins.springsecurity.portMapper.httpPort = "8080"
 		grails.plugins.springsecurity.portMapper.httpsPort = "8443"
+        greenmail.disabled=true
 	}
 	test {
 		grails.serverURL = "http://localhost:8080/${appName}"
+        greenmail.disabled=false
+        grails.mail.port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
+        grails.mail.host = 'localhost'
+        grails.mail.props = null
 	}
 	production {
 		grails.serverURL = "http://www.mcdowellsonoran.org"
 		grails.plugins.springsecurity.portMapper.httpPort = "80"
 		grails.plugins.springsecurity.portMapper.httpsPort = "443"
+        greenmail.disabled=true
 	}
 	phil {
 		grails.serverURL = "http://www.mcdowellsonoran.org"
 		grails.plugins.springsecurity.portMapper.httpPort = "80"
 		grails.plugins.springsecurity.portMapper.httpsPort = "443"
+        greenmail.disabled=true
 	}
 	backup {
 		grails.serverURL = "http://newmscwebsitexlviii.elasticbeanstalk.com/"
 		grails.plugins.springsecurity.portMapper.httpPort = "80"
 		grails.plugins.springsecurity.portMapper.httpsPort = "443"
+        greenmail.disabled=true
 	}
 }
 
@@ -244,17 +263,6 @@ grails.gorm.default.mapping = {
 }
 
 grails.plugin.cloudfoundry.showStackTrace = true
-
-grails {
-	mail {
-	  host = "email-smtp.us-east-1.amazonaws.com"
-	  port = 465
-	  props = ["mail.smtp.auth":"true",
-			   "mail.smtp.socketFactory.port":"465",
-			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-			   "mail.smtp.socketFactory.fallback":"false"]
-	}
-}
 
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
 

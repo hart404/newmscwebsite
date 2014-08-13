@@ -5,13 +5,13 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 //grails.project.war.file = "target/${appName}.war"
 
-forkConfig = [maxMemory: 1024, minMemory: 64, debug: false, maxPerm: 256]
-grails.project.fork = [
-   test: false, // configure settings for the test-app JVM
-   run: false, // configure settings for the run-app JVM
-//   war: forkConfig, // configure settings for the run-war JVM
-//   console: forkConfig // configure settings for the Swing console JVM
-]
+//forkConfig = [maxMemory: 1024, minMemory: 64, debug: false, maxPerm: 256]
+//grails.project.fork = [
+//   test: false, // configure settings for the test-app JVM
+//   run: false, // configure settings for the run-app JVM
+////   war: forkConfig, // configure settings for the run-war JVM
+////   console: forkConfig // configure settings for the Swing console JVM
+//]
 
 grails.project.dependency.resolution = {
 	// inherit Grails' default dependencies
@@ -70,6 +70,7 @@ grails.project.dependency.resolution = {
 		compile ":searchable:0.6.5"
 		compile ":joda-time:1.4"
 		compile ":authorize-net:0.12"
+        test ":greenmail:1.3.4"
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

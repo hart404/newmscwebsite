@@ -22,10 +22,9 @@ class NotificationService {
                           String sender,
                           String messageSubject,
                           String message) {
-
-        for(Person person : notificationType.recipients) {
+        if (!notificationType.recipients.isEmpty()) {
             mailService.sendMail {
-                to person.username
+                to notificationType.recipients.collect {it.username}.toArray()
                 from sender
                 subject messageSubject
                 body message
