@@ -37,6 +37,9 @@ class TrailReportingService {
         String trail = trailReport.trailSection.trailName
         String reportComment = trailReport.trailReportNotification.description
         String reportType = trailReport.trailReportNotification.notificationType.display
-        return "On $reportDate, $reporter reported an issue on trail $trail of type $reportType: $reportComment"
+        String stewardPhone = trailReport.trailReportNotification?.person?.cellPhone
+        String stewardEmail = trailReport.trailReportNotification?.person?.username
+        return "On $reportDate, $reporter reported an issue on trail $trail of type $reportType: $reportComment." +
+                "Their recorded cell number: $stewardPhone. Their recorded email address: $stewardEmail ."
     }
 }
