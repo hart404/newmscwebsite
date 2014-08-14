@@ -163,6 +163,7 @@ function setPins(pinJSON, map, volunteerSession) {
         marker.set("id", pin.id);
         marker.set("color", color);
         marker.set("originalColor", originalColor);
+        marker.set("patrolled", false);
 
         google.maps.event.addListener(marker, 'click', function() {
             var reportFormObject;
@@ -172,10 +173,9 @@ function setPins(pinJSON, map, volunteerSession) {
                 reportFormObject.attributes.pinId = marker.id;
                 marker.set("reportingForm", "trailReportingDiv-" + reportFormObject.attributes.uid.toString());
                 marker.set("trailReportingObject", reportFormObject);
-
             }
 
-            if (marker.color == "00FF00" || marker.color == "FF0000") {
+            if (marker.patrolled == true) {
 
                 var trailReportingDivId = marker.reportingForm;
                 var trailReportingDiv = $('#' + trailReportingDivId);
@@ -185,6 +185,10 @@ function setPins(pinJSON, map, volunteerSession) {
 
                 populateNotificationTypes(trailReportingDivId);
                 var errorsList = trailReportingDiv.find("[id^='errorsListId-']");
+
+                // Turn marker to red
+                marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
+                marker.color = "FF0000";
 
                 var dialog = trailReportingDiv.dialog({
                     title: "Report Trail Issue",
@@ -199,8 +203,6 @@ function setPins(pinJSON, map, volunteerSession) {
                                 url: appContext + "/trailReportNotification/validateTrailReport",
                                 data: trailReportingForm.serialize()
                             }).done(function(data, textStatus, jqXHR) {
-                                    marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
-                                    marker.color = "FF0000";
                                     marker.trailReportingObject.attributes.issue = true;
                                     dialog.dialog('close');
                                     errorsList.empty();
@@ -219,6 +221,7 @@ function setPins(pinJSON, map, volunteerSession) {
                             marker.set("trailReportingObject", null);
                             marker.color = marker.originalColor;
                             marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|" + marker.color );
+                            marker.set("patrolled", false);
                             dialog.dialog('close');
                         }
                     },
@@ -228,6 +231,7 @@ function setPins(pinJSON, map, volunteerSession) {
             } else {
                 marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|00FF00" );
                 marker.color = "00FF00";
+                marker.set("patrolled", true);
             }
         });
 
