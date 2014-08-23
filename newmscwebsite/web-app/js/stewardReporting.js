@@ -110,7 +110,7 @@ function addReportingTableRow() {
     });
 
     // Initialize a date picker for the date field
-    $('#' + dateFieldId).datepicker({defaultDate: new Date(), dateFormat: 'yy-mm-dd'});
+    $('#' + dateFieldId).datepicker({defaultDate: new Date(), dateFormat: 'mm-dd-yy'});
 
     // Initialize the program select element
     getPrograms(index);

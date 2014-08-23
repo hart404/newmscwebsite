@@ -16,7 +16,7 @@ class StewardReportingCommand {
 @Validateable
 class VolunteerSessionCommand {
 
-    @BindingFormat('yyyy-MM-dd')
+    @BindingFormat('MM-dd-yyyy')
     Date date
 
     String program
@@ -39,7 +39,7 @@ class TrailReportCommand {
     String notificationType
     String problemDescription
 
-    @BindingFormat('yyyy-MM-dd')
+    @BindingFormat('MM-dd-yyyy')
     Date problemDate
 
     Boolean issue

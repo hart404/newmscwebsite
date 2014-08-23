@@ -17,7 +17,8 @@ public enum ProgramReporting {
 	OFFICE_AND_WEB_WORK("Office and Web Work"), 
 	BOARD("Board of Directors"), 
 	TOUR_DE_SCOTTSDALE("Tour de Scottsdale"), 
-	PRE2010("Pre 2010", false)
+	PRE2010("Pre 2010", false),
+	MENTORING("Mentoring")
 
 	private final String value
 	private final Boolean show
