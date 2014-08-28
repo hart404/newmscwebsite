@@ -31,6 +31,11 @@ function initializeTrailReportingForm(volunteerSession) {
         '<td><textarea name="problemDescription" style="width:18em; height:10em;" id="' + descriptionId +'" data-tr-bind-' + index + '="problemDescription"></textarea></td>' +
         '</tr>' +
         '</table>' +
+            '<p style="color:#54534a;">' +
+            "Please describe the situation.  If possible, include the nearest emergency marker #, " +
+            "direction from that marker, and approximate distance from the marker. If you don't know, " +
+            "please explain the exact location of the situation as best you can." +
+            '</p>' +
         '</form>' +
         '</div>');
 
