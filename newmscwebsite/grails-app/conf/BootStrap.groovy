@@ -25,11 +25,11 @@ class BootStrap {
 		createECards()
 		createLocations()
 		createHikes()
-        createNotificationTypes()
-        addNotificationList()
+		createNotificationTypes()
+		addNotificationList()
 		websiteUpdates()
 	}
-	
+
 	def createReportingPins() {
 		if (!TrailSection.count()) {
 			File file = new ClassPathResource('reportingPins.csv').getFile()
@@ -38,7 +38,7 @@ class BootStrap {
 				def pinName = tokens[1]
 				def longitude = tokens[2]
 				def latitude = tokens[3]
-				def southArea = tokens[5] 
+				def southArea = tokens[5]
 				def northArea = tokens[6]
 				def coordinates = new GeographicCoordinates(latitude: latitude, longitude: longitude)
 				def section = new TrailSection(pinName: pinName, trailName: trailName, southPins: southArea, northPins: northArea, pinLocation: coordinates)
@@ -46,7 +46,7 @@ class BootStrap {
 			}
 		}
 	}
-	
+
 	def createECards() {
 		def eCards = SCMSPhoto.findAllByDescription("eCard")
 		if (eCards.isEmpty()) {
@@ -56,7 +56,9 @@ class BootStrap {
 			eCard.save(failOnError: true, flush: true)
 			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "sympathy_bird.jpg", fileName: "sympathy_bird.jpg", width: 432, height: 288, keywords: ["eCard sympathy bird"], allKeywords: "eCard sympathy bird", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
 			eCard.save(failOnError: true, flush: true)
-			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "sympathy_mtnsunset.jpg", fileName: "sympathy_mtnsunset.jpg", width: 432, height: 288, keywords: ["eCard sympathy mountain sunset"], allKeywords: "eCard sympathy mountain sunset", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
+			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "sympathy_mtnsunset.jpg", fileName: "sympathy_mtnsunset.jpg", width: 432, height: 288, keywords: [
+				"eCard sympathy mountain sunset"
+			], allKeywords: "eCard sympathy mountain sunset", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
 			eCard.save(failOnError: true, flush: true)
 			eCard = new SCMSPhoto(description: "eCard", source: serverURL, path: imagePath, originalFileName: "trail.jpg", fileName: "trail.jpg", width: 432, height: 288, keywords: ["eCard trail"], allKeywords: "eCard trail", artist: "Debra Doss", copyright: "McDowell Sonoran Preserve")
 			eCard.save(failOnError: true, flush: true)
@@ -70,7 +72,16 @@ class BootStrap {
 		println "Roles: ${SecRole.count()}"
 		if (!SecRole.count()) {
 			println "Creating Roles"
-			def roles = ["ROLE_ADMIN", "ROLE_GUEST","ROLE_USER","ROLE_STEWARD", "ROLE_LEADER", "ROLE_BOARD", "ROLE_STAFF", "ROLE_WEB"]
+			def roles = [
+				"ROLE_ADMIN",
+				"ROLE_GUEST",
+				"ROLE_USER",
+				"ROLE_STEWARD",
+				"ROLE_LEADER",
+				"ROLE_BOARD",
+				"ROLE_STAFF",
+				"ROLE_WEB"
+			]
 			roles.each { role ->
 				new SecRole(authority: role).save(failOnError: true)
 			}
@@ -82,8 +93,8 @@ class BootStrap {
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		def webRole = SecRole.findByAuthority('ROLE_WEB') ?: new SecRole(authority: 'ROLE_WEB').save(failOnError: true)
 
-        String adminUsername = grailsApplication.config.newmscwebsite.secuser.admin.username
-        String adminPassword = grailsApplication.config.newmscwebsite.secuser.admin.password
+		String adminUsername = grailsApplication.config.newmscwebsite.secuser.admin.username
+		String adminPassword = grailsApplication.config.newmscwebsite.secuser.admin.password
 
 		def adminUser = SecUser.findByUsername(adminUsername) ?: new SecUser(
 				username: adminUsername,
@@ -96,24 +107,24 @@ class BootStrap {
 			SecUserSecRole.create adminUser, webRole
 		}
 
-        String testUserUsername = grailsApplication.config.newmscwebsite.secuser.test.username
-        String testUserPassword = grailsApplication.config.newmscwebsite.secuser.test.password
+		String testUserUsername = grailsApplication.config.newmscwebsite.secuser.test.username
+		String testUserPassword = grailsApplication.config.newmscwebsite.secuser.test.password
 
-        def testUser = SecUser.findByUsername(testUserUsername) ?: new SecUser(
-                username: testUserUsername,
-                password: testUserPassword,
-                enabled: true,
-                accountExpired: false,
-                accountLocked: false,
-                passwordExpired: false).save(failOnError: true)
-        if (!testUser.authorities.contains(adminRole)) {
-            SecUserSecRole.create testUser, adminRole
-        }
-        if (!testUser.authorities.contains(webRole)) {
-            SecUserSecRole.create testUser, webRole
-        }
+		def testUser = SecUser.findByUsername(testUserUsername) ?: new SecUser(
+				username: testUserUsername,
+				password: testUserPassword,
+				enabled: true,
+				accountExpired: false,
+				accountLocked: false,
+				passwordExpired: false).save(failOnError: true)
+		if (!testUser.authorities.contains(adminRole)) {
+			SecUserSecRole.create testUser, adminRole
+		}
+		if (!testUser.authorities.contains(webRole)) {
+			SecUserSecRole.create testUser, webRole
+		}
 	}
-	
+
 	def createMenus() {
 		SCMSMenuBar menuBar = SCMSMenuBar.findByWidgetId("mainNavigationBar")
 		if (menuBar == null) {
@@ -128,12 +139,12 @@ class BootStrap {
 			menuBar.save(failOnError: true)
 		}
 	}
-	
+
 	def addHome(menuBar) {
 		SCMSMenu home = new SCMSMenu(title: "Home", link: "/home")
 		menuBar.addToMenus(home)
 	}
-	
+
 	def addVisitThePreserve(menuBar) {
 		// Plan Your Visit, Trailheads and Directions, Recreation, Photo Gallery
 		SCMSMenu visitThePreserve = new SCMSMenu(title: "Visit the Preserve")
@@ -145,7 +156,7 @@ class BootStrap {
 		visitThePreserve.addToMenuItems(new SCMSMenu(title: "PhotoGallery", link: "photoGallery"))
 		menuBar.addToMenus(visitThePreserve)
 	}
-	
+
 	def addPlanYourVisitSubItems(planYourVisit) {
 		// Pathfinders, Nature Guides, Family Passport, Know Before You Go
 		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Pathfinders", link: "content/pages/pathfinders"))
@@ -154,7 +165,7 @@ class BootStrap {
 		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "Know Before You Go", link: "content/pages/knowBeforeYouGo"))
 		planYourVisit.addToMenuItems(new SCMSMenuItem(title: "FAQs", link: "content/pages/faqs"))
 	}
-	
+
 	def addAboutUs(menuBar) {
 		def aboutUs = new SCMSMenu(title: "About Us", link: "aboutUs")
 		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Mission and Vision", link: "content/pages/missionAndVision"))
@@ -167,7 +178,7 @@ class BootStrap {
 		aboutUs.addToMenuItems(new SCMSMenuItem(title: "Annual Reports", link: "content/pages/annualReports"))
 		menuBar.addToMenus(aboutUs)
 	}
-	
+
 	def addEducationAndResearch(menuBar) {
 		SCMSMenu educationAndResearch = new SCMSMenu(title: "Education & Research")
 		educationAndResearch.addToMenuItems(new SCMSMenu(title: "Adult Learning", link: "#"))
@@ -178,15 +189,15 @@ class BootStrap {
 		educationAndResearch.addToMenuItems(new SCMSMenuItem(title: "Publications & News", link: "content/pages/herpatology"))
 		menuBar.addToMenus(educationAndResearch)
 	}
-	
+
 	def addVolunteer(menuBar) {
 		menuBar.addToMenus(new SCMSMenu(title: "Volunteer", link: "content/pages/volunteer"))
 	}
-	
+
 	def addSupportUs(menuBar) {
 		menuBar.addToMenus(new SCMSMenu(title: "Support Us", link: "supportUs"))
 	}
-	
+
 	def addAdministration(menuBar) {
 		// Manage Users, Photos, Manage Events, Manage AdSpace, Manage News Items
 		def administration = new SCMSMenu(title: "Administration")
@@ -203,7 +214,7 @@ class BootStrap {
 		administration.addToMenuItems(new SCMSMenuItem(title: "Search", link: "searchable"))
 		menuBar.addToMenus(administration)
 	}
-	
+
 	def addPhotoMenuItems(photoMenu) {
 		// Photo list, upload photos
 		photoMenu.addToMenuItems(new SCMSMenuItem(title: "Manage Photos", link: "photo/list"))
@@ -355,7 +366,7 @@ class BootStrap {
 
 	void createNews() {
 	}
-	
+
 	void createHikes() {
 		println "Hikes: ${Hike.count()}"
 		if (!Hike.count()) {
@@ -365,50 +376,50 @@ class BootStrap {
 			def brownsRanch = trailheadService.brownsRanch()
 			def tomsThumb = trailheadService.tomsThumb()
 			def bajadaNatureTrail = new Hike(
-				name: "Bajada Nature Trail",
-				description: "A barrier-free semi-loop trail with a smooth, solid surface; &frac14 and &frac12 mile loops available.",
-				noteworthyFeatures: "Interpretive trail with signs explaining many aspects of the Sonoran Desert; beautiful mountain views.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "BajadaNatureTrail.kml",
-				elevationGain: 0,
-				roundTripDistance: 0.5
-			)
+					name: "Bajada Nature Trail",
+					description: "A barrier-free semi-loop trail with a smooth, solid surface; &frac14 and &frac12 mile loops available.",
+					noteworthyFeatures: "Interpretive trail with signs explaining many aspects of the Sonoran Desert; beautiful mountain views.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "BajadaNatureTrail.kml",
+					elevationGain: 0,
+					roundTripDistance: 0.5
+					)
 			def horseshoeLoop = new Hike(
-				name: "Horseshoe Loop",
-				description: "Very gentle loop trail that crosses several small washes; rocky in places.",
-				noteworthyFeatures: "Typical bajada vegetation, interesting desert wash crossings, great mountain views.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "HorseshoeLoop.kml",
-				elevationGain: 100,
-				roundTripDistance: 1.7
-			)
+					name: "Horseshoe Loop",
+					description: "Very gentle loop trail that crosses several small washes; rocky in places.",
+					noteworthyFeatures: "Typical bajada vegetation, interesting desert wash crossings, great mountain views.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "HorseshoeLoop.kml",
+					elevationGain: 100,
+					roundTripDistance: 1.7
+					)
 			def inspirationPoint = new Hike(
-				name: "Inspiration Point",
-				description: "Wide, generally moderate out-and-back hike with a few steep sections; rocky",
-				noteworthyFeatures: "Viewpoint off the main trail with expansive views, stone benches.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "InspirationPoint.kml",
-				elevationGain: 1000,
-				roundTripDistance: 5.8
-			)
+					name: "Inspiration Point",
+					description: "Wide, generally moderate out-and-back hike with a few steep sections; rocky",
+					noteworthyFeatures: "Viewpoint off the main trail with expansive views, stone benches.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "InspirationPoint.kml",
+					elevationGain: 1000,
+					roundTripDistance: 5.8
+					)
 			def bellPassWindgatePassLoop = new Hike(
-				name: "Bell Pass/Windgate Pass Loop",
-				description: "Challenging semi-loop hike with two passes to climb and steep sections; rocky in places.",
-				noteworthyFeatures: "Exceptional views eastward from the passes; area east of the passes is little-used and feels remote; different vegetation at different elevations.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "BellPassWindgatePassLoop.kml",
-				elevationGain: 1900,
-				roundTripDistance: 9.6
-			)
+					name: "Bell Pass/Windgate Pass Loop",
+					description: "Challenging semi-loop hike with two passes to climb and steep sections; rocky in places.",
+					noteworthyFeatures: "Exceptional views eastward from the passes; area east of the passes is little-used and feels remote; different vegetation at different elevations.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "BellPassWindgatePassLoop.kml",
+					elevationGain: 1900,
+					roundTripDistance: 9.6
+					)
 			def gatewayLoop = new Hike(
-				name: "Gateway Loop",
-				description: "Wide, generally moderate semi-loop trail that climbs/descends steadily; rocky.",
-				noteworthyFeatures: "Variety of vistas, parallels a major drainage, crosses a scenic saddle; one of the most popular trails in the Preserve; great wildflowers in spring.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "GatewayLoop.kml",
-				elevationGain: 650,
-				roundTripDistance: 4.5
-			)
+					name: "Gateway Loop",
+					description: "Wide, generally moderate semi-loop trail that climbs/descends steadily; rocky.",
+					noteworthyFeatures: "Variety of vistas, parallels a major drainage, crosses a scenic saddle; one of the most popular trails in the Preserve; great wildflowers in spring.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "GatewayLoop.kml",
+					elevationGain: 650,
+					roundTripDistance: 4.5
+					)
 			gateway.addToHikes(bajadaNatureTrail)
 			gateway.addToHikes(horseshoeLoop)
 			gateway.addToHikes(inspirationPoint)
@@ -416,84 +427,84 @@ class BootStrap {
 			gateway.addToHikes(gatewayLoop)
 			gateway.save(failOnError: true)
 			def oldJeepLoop = new Hike(
-				name: "Old Jeep Trail",
-				description: "Moderate semi-loop trail with steeper sections; very rocky stretches.",
-				noteworthyFeatures: "The Old Jeep Trail portion is little-used and feels very remote; passes near several ancient tool-making sites and an WWII-era plane crash site.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "OldJeepLoop.kml",
-				elevationGain: 450,
-				roundTripDistance: 4.1
-			)
+					name: "Old Jeep Trail",
+					description: "Moderate semi-loop trail with steeper sections; very rocky stretches.",
+					noteworthyFeatures: "The Old Jeep Trail portion is little-used and feels very remote; passes near several ancient tool-making sites and an WWII-era plane crash site.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "OldJeepLoop.kml",
+					elevationGain: 450,
+					roundTripDistance: 4.1
+					)
 			def taliesinOverlook = new Hike(
-				name: "Taliesin Overlook",
-				description: "Gentle out-and-back trail that crosses several small washes; rocky in places.",
-				noteworthyFeatures: "Taliesin Overlook has extensive views northwest and looks down onto Frank Lloyd Wright's Taliesin West, his winter home and school. Taliesin is still active as a school of architecture.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "TaliesinOverlook.kml",
-				elevationGain: 350,
-				roundTripDistance: 4.0
-			)
+					name: "Taliesin Overlook",
+					description: "Gentle out-and-back trail that crosses several small washes; rocky in places.",
+					noteworthyFeatures: "Taliesin Overlook has extensive views northwest and looks down onto Frank Lloyd Wright's Taliesin West, his winter home and school. Taliesin is still active as a school of architecture.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "TaliesinOverlook.kml",
+					elevationGain: 350,
+					roundTripDistance: 4.0
+					)
 			def sunriseEast = new Hike(
-				name: "Sunrise Trail East (from Sunrise Trailhead)",
-				description: "Challenging out-and-back hike with many steep sections; rocky in places",
-				noteworthyFeatures: "Sunrise Peak is one of very few Preserve peaks with a trail to the top, from which there are expansive views in all directions; beautiful granite formations; lots of spring wildflowers; excellent for fast exercise without the crowds.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "SunriseEast.kml",
-				elevationGain: 1150,
-				roundTripDistance: 4.0
-			)
+					name: "Sunrise Trail East (from Sunrise Trailhead)",
+					description: "Challenging out-and-back hike with many steep sections; rocky in places",
+					noteworthyFeatures: "Sunrise Peak is one of very few Preserve peaks with a trail to the top, from which there are expansive views in all directions; beautiful granite formations; lots of spring wildflowers; excellent for fast exercise without the crowds.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "SunriseEast.kml",
+					elevationGain: 1150,
+					roundTripDistance: 4.0
+					)
 			def ringtailLoop = new Hike(
-				name: "Ringtail Trail",
-				description: "Gentle semi-loop trail with a few moderate sections, several wash crossings; rocky in places.",
-				noteworthyFeatures: "Follows a major wash; Lost Dog Overlook has excellent views south and is an ancient tool-making site�some of the rock flakes are from prehistoric tool-making work; great wildflower trail in spring.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "RingtailLoop.kml",
-				elevationGain: 250,
-				roundTripDistance: 2.4
-			)
+					name: "Ringtail Trail",
+					description: "Gentle semi-loop trail with a few moderate sections, several wash crossings; rocky in places.",
+					noteworthyFeatures: "Follows a major wash; Lost Dog Overlook has excellent views south and is an ancient tool-making site�some of the rock flakes are from prehistoric tool-making work; great wildflower trail in spring.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "RingtailLoop.kml",
+					elevationGain: 250,
+					roundTripDistance: 2.4
+					)
 			lostDog.addToHikes(oldJeepLoop)
 			lostDog.addToHikes(taliesinOverlook)
 			lostDog.addToHikes(sunriseEast)
 			lostDog.addToHikes(ringtailLoop)
 			lostDog.save(failOnError: true)
 			def brownsRanchHike = new Hike(
-				name: "Brown's Ranch",
-				description: "Gentle out-and-back hike on a very wide trail with occasional sandy stretches; crosses one wash.",
-				noteworthyFeatures: "Ends at the location of Brown's Ranch, with many ranching structures still visible. This area was used for ranching from the later 1800s until the mid-1950s. Site of Scottsdale Community College Center for Native and Urban Wildlife experiments to determine how best to restore this grazed area. Excellent wildflowers in spring.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "BrownsRanch.kml",
-				elevationGain: 100,
-				roundTripDistance: 3.1
-			)
+					name: "Brown's Ranch",
+					description: "Gentle out-and-back hike on a very wide trail with occasional sandy stretches; crosses one wash.",
+					noteworthyFeatures: "Ends at the location of Brown's Ranch, with many ranching structures still visible. This area was used for ranching from the later 1800s until the mid-1950s. Site of Scottsdale Community College Center for Native and Urban Wildlife experiments to determine how best to restore this grazed area. Excellent wildflowers in spring.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "BrownsRanch.kml",
+					elevationGain: 100,
+					roundTripDistance: 3.1
+					)
 			brownsRanch.addToHikes(brownsRanchHike)
 			brownsRanch.save(failOnError: true)
 			def marcusLandslide = new Hike(
-				name: "Marcus Landslide",
-				description: "Gentle out-and-back hike with optional small loop; a few moderate sections.",
-				noteworthyFeatures: "Interpretive geology trail starting at trailhead and ending beside or on top of the second largest landslide in AZ; remote area with many beautiful rock formations; excellent wildflowers in spring.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "MarcusLandslide.kml",
-				elevationGain: 300,
-				roundTripDistance: 3.7
-			)
+					name: "Marcus Landslide",
+					description: "Gentle out-and-back hike with optional small loop; a few moderate sections.",
+					noteworthyFeatures: "Interpretive geology trail starting at trailhead and ending beside or on top of the second largest landslide in AZ; remote area with many beautiful rock formations; excellent wildflowers in spring.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "MarcusLandslide.kml",
+					elevationGain: 300,
+					roundTripDistance: 3.7
+					)
 			def tomsThumbEastEndLoop = new Hike(
-				name: "Tom's Thumb/East End Loop",
-				description: "Extremely challenging semi-loop hike with many very steep and loose sections; three major climbs.",
-				noteworthyFeatures: "Exceptional views throughout the hike; dramatic rock formations and changes in rock/trail composition in transition between granitic and metamorphic rock; changes in vegetation and wildflowers as elevation changes; seldom-used sections offer great solitude; crosses one of the few springs in the Preserve.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "TomsThumbEastEndLoop.kml",
-				elevationGain: 2500,
-				roundTripDistance: 11.1
-			)
+					name: "Tom's Thumb/East End Loop",
+					description: "Extremely challenging semi-loop hike with many very steep and loose sections; three major climbs.",
+					noteworthyFeatures: "Exceptional views throughout the hike; dramatic rock formations and changes in rock/trail composition in transition between granitic and metamorphic rock; changes in vegetation and wildflowers as elevation changes; seldom-used sections offer great solitude; crosses one of the few springs in the Preserve.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "TomsThumbEastEndLoop.kml",
+					elevationGain: 2500,
+					roundTripDistance: 11.1
+					)
 			def lookoutViewpoint = new Hike(
-				name: "Lookout Viewpoint",
-				description: "Challenging out-and-back hike with many very steep and loose sections; spur trail to viewpoint is narrow and rocky.",
-				noteworthyFeatures: "Best viewpoint in the McDowell Mountains, with extensive views east and west from top of a cliff; trail crosses boundary between granite and metamorphic rock, with obvious differences in trail composition and nearby rock; spectacular rock formations; unusual vegetation and flowers found only at high elevation.",
-				directions: "Follow the trail to the...",
-				kmlFileName: "LookoutViewpoint.kml",
-				elevationGain: 1100,
-				roundTripDistance: 5.7
-			)
+					name: "Lookout Viewpoint",
+					description: "Challenging out-and-back hike with many very steep and loose sections; spur trail to viewpoint is narrow and rocky.",
+					noteworthyFeatures: "Best viewpoint in the McDowell Mountains, with extensive views east and west from top of a cliff; trail crosses boundary between granite and metamorphic rock, with obvious differences in trail composition and nearby rock; spectacular rock formations; unusual vegetation and flowers found only at high elevation.",
+					directions: "Follow the trail to the...",
+					kmlFileName: "LookoutViewpoint.kml",
+					elevationGain: 1100,
+					roundTripDistance: 5.7
+					)
 			tomsThumb.addToHikes(marcusLandslide)
 			tomsThumb.addToHikes(tomsThumbEastEndLoop)
 			tomsThumb.addToHikes(lookoutViewpoint)
@@ -501,57 +512,58 @@ class BootStrap {
 		}
 	}
 
-    void createNotificationTypes() {
-        if(0 == NotificationType.count()) {
-            new NotificationType(code: "emergency", display: "Emergency Action Needed").save(failOnError: true, flush: true)
-            new NotificationType(code: "maintenance", display: "Maintenance Action Needed").save(failOnError: true, flush: true)
-        }
-    }
+	void createNotificationTypes() {
+		if (0 == NotificationType.count()) {
+			new NotificationType(code: "emergency", display: "Emergency Action Needed").save(failOnError: true, flush: true)
+			new NotificationType(code: "maintenance", display: "Maintenance Action Needed").save(failOnError: true, flush: true)
+		}
+	}
 
-    void addNotificationList() {
+	void addNotificationList() {
 
-        List<String> maintenanceNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.maintenance).tokenize(",")
-        List<String> emergencyNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.emergency).tokenize(",")
+		List<String> maintenanceNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.maintenance).tokenize(",")
+		List<String> emergencyNotificationList = (grailsApplication.config.org.mcdowellsonoran.notification.notificationType.recipients.emergency).tokenize(",")
 
-        if(maintenanceNotificationList && NotificationType?.findByCode("maintenance")?.recipients?.isEmpty()) {
-            for (String userForMaintenance : maintenanceNotificationList) {
-                NotificationType maintenance = NotificationType.findByCode("maintenance")
-                Person user = Person.findByUsername(userForMaintenance)
-                if (user) {
-                    maintenance.addToRecipients(user)
-                    maintenance.save(flush: true, failOnError: true)
-                }
-            }
-        }
+		if (maintenanceNotificationList) {
+			NotificationType maintenance = NotificationType.findByCode("maintenance")
+			maintenance.recipients.clear()
+			for (String userForMaintenance : maintenanceNotificationList) {
+				Person user = Person.findByUsername(userForMaintenance)
+				if (user) {
+					maintenance.addToRecipients(user)
+					maintenance.save(flush: true, failOnError: true)
+				}
+			}
+		}
 
-        if(emergencyNotificationList && NotificationType?.findByCode("emergency")?.recipients?.isEmpty()) {
-            for (String userForEmergency : emergencyNotificationList) {
-                NotificationType emergency = NotificationType.findByCode("emergency")
-                Person user = Person.findByUsername(userForEmergency)
-                if (user) {
-                    emergency.addToRecipients(user)
-                    emergency.save(flush: true, failOnError: true)
-                }
-            }
-        }
-    }
-	 
+		if (emergencyNotificationList) {
+			NotificationType emergency = NotificationType.findByCode("emergency")
+			emergency.recipients.clear()
+			for (String userForEmergency : emergencyNotificationList) {
+				Person user = Person.findByUsername(userForEmergency)
+				if (user) {
+					emergency.addToRecipients(user)
+					emergency.save(flush: true, failOnError: true)
+				}
+			}
+		}
+	}
+
 	def createAdSpace() {
 	}
-		
+
 	def updateSql() {
 		/*
-		def updateSQL = "update mscmsc.sec_user set lead_steward = 0"
-		def db = [url:'jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc', user:'root', password:'uni-dev01', driver:'com.mysql.jdbc.Driver']
-		def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
-		sql.execute(updateSQL)
-		*/ 
-	}
-	
-	def websiteUpdates() {
-	}
-		
-	def destroy = {
+		 def updateSQL = "update mscmsc.sec_user set lead_steward = 0"
+		 def db = [url:'jdbc:mysql://mscmsc.clchcirmqiuh.us-west-1.rds.amazonaws.com/mscmsc', user:'root', password:'uni-dev01', driver:'com.mysql.jdbc.Driver']
+		 def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
+		 sql.execute(updateSQL)
+		 */
 	}
 
+	def websiteUpdates() {
+	}
+
+	def destroy = {
+	}
 }
