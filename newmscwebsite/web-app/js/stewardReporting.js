@@ -47,16 +47,22 @@ function addReportingTableRow() {
     mapCanvasContainer
         .append('<div id="' + southMapCanvasId + '" style="width: 1px; height: 1px;"></div>');
 
-    var mapOptions = {
+    var northMapOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(33.647900, -111.862236),
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+    
+    var southMapOptions = {
         zoom: 12,
         center: new google.maps.LatLng(33.647900, -111.862236),
         mapTypeId: google.maps.MapTypeId.TERRAIN
     };
 
-    var northMap = new google.maps.Map(document.getElementById(northMapCanvasId), mapOptions);
+    var northMap = new google.maps.Map(document.getElementById(northMapCanvasId), northMapOptions);
     loadPins(northMap, "north", volunteerSession);
 
-    var southMap = new google.maps.Map(document.getElementById(southMapCanvasId), mapOptions);
+    var southMap = new google.maps.Map(document.getElementById(southMapCanvasId), southMapOptions);
     loadPins(southMap, "south", volunteerSession);
 
     var northMapDialog = $("#" + northMapCanvasId).dialog({
