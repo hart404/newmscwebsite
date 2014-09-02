@@ -1,4 +1,4 @@
-<%@ page import="org.mcdowellsonoran.notification.NotificationType" %>
+<%@ page import="newmscwebsite.ProgramReporting; org.mcdowellsonoran.notification.NotificationType" %>
 <html>
 <head>
     <meta name="layout" content="generatedLayout" />
@@ -14,9 +14,10 @@
     <g:javascript src="maplabel.js" />
     <script type="text/javascript">
         window.appContext = '${request.contextPath}';
-        for (var i=0; i < 10; i++) {
-            $(document).ready(addReportingTableRow);
-        }
+        $(document).ready(function(){
+            var programs = ${program.reportingPrograms()};
+            addReportingTableRow(programs);
+        });
     </script>
 </head>
 <body>

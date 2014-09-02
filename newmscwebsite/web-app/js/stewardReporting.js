@@ -1,11 +1,6 @@
 var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/7cfd43c8-85e6-4341-b763-6f1155e43ee85459184511650637164.kmz";
 var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/84b6660a-7de1-407e-bccf-ebc16b3a2c711460419313501223830.kmz";
 
-// Since the reporting table is dynamic, we need
-// this counter so we can append a number to each
-// element in the row to keep them unique from each other.
-var reportingTableRowIndex = 0;
-
 // Instead of keeping track of one-to-many dynamic form data,
 // all data entered for each volunteer session and their corresponding
 // trail reports will be 2-way-binded to VolunteerSession and TrailReport
@@ -16,132 +11,123 @@ var volunteerSessions = [];
 /**
  * Adds a table row dynamically to the stewardReportingTable.
  */
-function addReportingTableRow() {
-    var index = reportingTableRowIndex;
-    var validationTableRow = index + 1;
-    var dateFieldId = "sessionDateId-" + index;
-    var programFieldId = "sessionProgramId-" + index;
-    var hoursFieldId = "sessionHoursId-" + index;
-    var southMapFieldId = "sessionSouthMapId-" + index;
-    var northMapFieldId = "sessionNorthMapId-" + index;
-    var northMapCanvasId = "northMapCanvasId-" + index;
-    var southMapCanvasId = "southMapCanvasId-" + index;
+function addReportingTableRow(programs) {
+    for (var index=0; index < 10; index++) {
+        var validationTableRow = index + 1;
+        var dateFieldId = "sessionDateId-" + index;
+        var programFieldId = "sessionProgramId-" + index;
+        var hoursFieldId = "sessionHoursId-" + index;
+        var southMapFieldId = "sessionSouthMapId-" + index;
+        var northMapFieldId = "sessionNorthMapId-" + index;
+        var northMapCanvasId = "northMapCanvasId-" + index;
+        var southMapCanvasId = "southMapCanvasId-" + index;
 
-    var volunteerSession = new VolunteerSession(index);
-    volunteerSession.attributes.validationRow = validationTableRow;
-    volunteerSessions.push(volunteerSession);
+        var volunteerSession = new VolunteerSession(index);
+        volunteerSession.attributes.validationRow = validationTableRow;
+        volunteerSessions.push(volunteerSession);
 
-    // Add a new row onto the reporting table
-    $('#stewardReportingTable').find('tbody:last')
-        .append('<tr>')
-        .append('<td>Date <input id="' + dateFieldId + '" name="date" type="text" data-vs-bind-' + index + '="date"></td>')
-        .append('<td>Program <select id="' + programFieldId + '" onchange="checkPatrolButtons(jQuery(this));" data-vs-bind-' + index + '="program"></select></td>')
-        .append('<td>Hours <input id="' + hoursFieldId + '" name="hours" type="number" min="0" value="0" step="0.5" data-vs-bind-' + index + '="hours"/></td>')
-        .append('<td><input class="southarea" disabled="disabled" id="' + southMapFieldId + '" name="southarea" type="button" value="South Area"/></td>')
-        .append('<td><input class="northarea" disabled="disabled" id="' + northMapFieldId + '" name="northarea" type="button" value="North Area"/></td>')
-        .append('</tr>');
+        // Add a new row onto the reporting table
+        $('#stewardReportingTable').find('tbody:last')
+            .append('<tr>')
+            .append('<td>Date <input id="' + dateFieldId + '" name="date" type="text" data-vs-bind-' + index + '="date"></td>')
+            .append('<td>Program <select id="' + programFieldId + '" onchange="checkPatrolButtons(jQuery(this));" data-vs-bind-' + index + '="program"></select></td>')
+            .append('<td>Hours <input id="' + hoursFieldId + '" name="hours" type="number" min="0" value="0" step="0.5" data-vs-bind-' + index + '="hours"/></td>')
+            .append('<td><input class="southarea" disabled="disabled" id="' + southMapFieldId + '" name="southarea" type="button" value="South Area"/></td>')
+            .append('<td><input class="northarea" disabled="disabled" id="' + northMapFieldId + '" name="northarea" type="button" value="North Area"/></td>')
+            .append('</tr>');
 
-    var mapCanvasContainer = $('#mapCanvasContainer');
-    mapCanvasContainer
-        .append('<div id="' + northMapCanvasId + '" style="width: 1px; height: 1px;"></div>');
-    mapCanvasContainer
-        .append('<div id="' + southMapCanvasId + '" style="width: 1px; height: 1px;"></div>');
+        var mapCanvasContainer = $('#mapCanvasContainer');
+        mapCanvasContainer
+            .append('<div id="' + northMapCanvasId + '" style="width: 1px; height: 1px;"></div>');
+        mapCanvasContainer
+            .append('<div id="' + southMapCanvasId + '" style="width: 1px; height: 1px;"></div>');
 
-    var northMapOptions = {
-        zoom: 8,
-        center: new google.maps.LatLng(33.647900, -111.862236),
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-    };
-    
-    var southMapOptions = {
-        zoom: 12,
-        center: new google.maps.LatLng(33.647900, -111.862236),
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-    };
+        var northMapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(33.647900, -111.862236),
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
 
-    var northMap = new google.maps.Map(document.getElementById(northMapCanvasId), northMapOptions);
-    loadPins(northMap, "north", volunteerSession);
+        var southMapOptions = {
+            zoom: 12,
+            center: new google.maps.LatLng(33.647900, -111.862236),
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
 
-    var southMap = new google.maps.Map(document.getElementById(southMapCanvasId), southMapOptions);
-    loadPins(southMap, "south", volunteerSession);
+        var northMap = new google.maps.Map(document.getElementById(northMapCanvasId), northMapOptions);
+        loadPins(northMap, "north", volunteerSession);
 
-    var northMapDialog = $("#" + northMapCanvasId).dialog({
-        autoOpen:false,
-        width: 1000,
-        height: 900,
-        title: "North Area Reporting",
-        resizeStop: function(event, ui) {},
-        open: function(event, ui) {
-            google.maps.event.trigger(northMap, 'resize');
-            $(".ui-dialog-titlebar-close").hide();
-        },
-        show: "blind",
-        hide: "blind",
-        buttons: {
-            "Close": function () {
-                northMapDialog.dialog('close');
+        var southMap = new google.maps.Map(document.getElementById(southMapCanvasId), southMapOptions);
+        loadPins(southMap, "south", volunteerSession);
+
+        var northMapDialog = $("#" + northMapCanvasId).dialog({
+            autoOpen:false,
+            width: 1000,
+            height: 900,
+            title: "North Area Reporting",
+            resizeStop: function(event, ui) {},
+            open: function(event, ui) {
+                google.maps.event.trigger(northMap, 'resize');
+                $(".ui-dialog-titlebar-close").hide();
+            },
+            show: "blind",
+            hide: "blind",
+            buttons: {
+                "Close": function () {
+                    northMapDialog.dialog('close');
+                }
             }
-        }
-    });
+        });
 
-    var southMapDialog = $("#" + southMapCanvasId).dialog({
-        autoOpen:false,
-        width: 1000,
-        height: 900,
-        title: "South Area Reporting",
-        resizeStop: function(event, ui) {},
-        open: function(event, ui) {
-            google.maps.event.trigger(southMap, 'resize');
-            $(".ui-dialog-titlebar-close").hide();
-        },
-        show: "blind",
-        hide: "blind",
-        buttons: {
-            "Close": function () {
-                southMapDialog.dialog('close');
-            }
-        },
-        closeOnEscape: false
-    });
+        var southMapDialog = $("#" + southMapCanvasId).dialog({
+            autoOpen:false,
+            width: 1000,
+            height: 900,
+            title: "South Area Reporting",
+            resizeStop: function(event, ui) {},
+            open: function(event, ui) {
+                google.maps.event.trigger(southMap, 'resize');
+                $(".ui-dialog-titlebar-close").hide();
+            },
+            show: "blind",
+            hide: "blind",
+            buttons: {
+                "Close": function () {
+                    southMapDialog.dialog('close');
+                }
+            },
+            closeOnEscape: false
+        });
 
-    $('#' + northMapFieldId).click(function(){
-        var georssLayerNorth = new google.maps.KmlLayer(northMapURL);
-        georssLayerNorth.setMap(northMap);
-        $("#" + northMapCanvasId).dialog("open")
-    });
-    $('#' + southMapFieldId).click(function(){
-        var georssLayerSouth = new google.maps.KmlLayer(southMapURL);
-        georssLayerSouth.setMap(southMap);
-        $("#" + southMapCanvasId).dialog("open")
-    });
+        $('#' + northMapFieldId).click(function(){
+            var georssLayerNorth = new google.maps.KmlLayer(northMapURL);
+            georssLayerNorth.setMap(northMap);
+            $("#" + northMapCanvasId).dialog("open")
+        });
+        $('#' + southMapFieldId).click(function(){
+            var georssLayerSouth = new google.maps.KmlLayer(southMapURL);
+            georssLayerSouth.setMap(southMap);
+            $("#" + southMapCanvasId).dialog("open")
+        });
 
-    // Initialize a date picker for the date field
-    $('#' + dateFieldId).datepicker({defaultDate: new Date(), dateFormat: 'mm-dd-yy'});
+        // Initialize a date picker for the date field
+        $('#' + dateFieldId).datepicker({defaultDate: new Date(), dateFormat: 'mm-dd-yy'});
 
-    // Initialize the program select element
-    getPrograms(index);
-
-    reportingTableRowIndex++;
+        setProgramOptions(programs, index);
+    }
 }
 
 /**
- * Retrieves all selectable programs from the back end.
- * @param index
+ * Sets the options for the program
+ * dropdown at the provided index.
+ * @param data The program data
+ * @param index Index of the dynamically incremented program element.
  */
-function getPrograms(index) {
-    $.ajax({
-        type: "GET",
-        url: appContext + "/volunteerSessionReporting/getPrograms"
-    }).done(function(data, textStatus, jqXHR) {
-            $("#sessionProgramId-" + index).append(new Option("Select one...", null));
-            $(data).each(function(i, d) {
-                $("#sessionProgramId-" + index).append(new Option(d.programValue, d.programKey));
-            });
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error("Error")
-            console.error("Error Thrown: " + errorThrown)
-            console.error("textStatus: " + textStatus)
-        });
+function setProgramOptions(data, index) {
+    $("#sessionProgramId-" + index).append(new Option("Select one...", null));
+    $(data).each(function(i, d) {
+        $("#sessionProgramId-" + index).append(new Option(d.programValue, d.programKey));
+    });
 }
 
 /**
