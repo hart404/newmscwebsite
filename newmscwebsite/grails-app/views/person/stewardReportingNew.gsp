@@ -14,9 +14,11 @@
     <g:javascript src="maplabel.js" />
     <script type="text/javascript">
         window.appContext = '${request.contextPath}';
+        var programs = ${program.reportingPrograms()};
         $(document).ready(function(){
-            var programs = ${program.reportingPrograms()};
-            addReportingTableRow(programs);
+            for (var i=0; i < 10; i++) {
+                addReportingTableRow(programs);
+            }
         });
     </script>
 </head>
