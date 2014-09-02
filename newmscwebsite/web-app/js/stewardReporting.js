@@ -245,7 +245,6 @@ function setPins(pinJSON, map, volunteerSession) {
  */
 function loadPins(map, area, volunteerSession) {
     $.ajax({type:'GET',
-        async: false,
         url: window.appContext + '/trailSection/pinsForArea',
         data: {'area': area},
         success:function(data,textStatus){setPins(data, map, volunteerSession);},
