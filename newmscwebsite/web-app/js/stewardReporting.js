@@ -16,7 +16,7 @@ var volunteerSessions = [];
 /**
  * Adds a table row dynamically to the stewardReportingTable.
  */
-function addReportingTableRow() {
+function addReportingTableRow(programs) {
     var index = reportingTableRowIndex;
     var validationTableRow = index + 1;
     var dateFieldId = "sessionDateId-" + index;
@@ -52,7 +52,7 @@ function addReportingTableRow() {
         center: new google.maps.LatLng(33.647900, -111.862236),
         mapTypeId: google.maps.MapTypeId.TERRAIN
     };
-    
+
     var southMapOptions = {
         zoom: 12,
         center: new google.maps.LatLng(33.647900, -111.862236),
@@ -118,30 +118,22 @@ function addReportingTableRow() {
     // Initialize a date picker for the date field
     $('#' + dateFieldId).datepicker({defaultDate: new Date(), dateFormat: 'mm-dd-yy'});
 
-    // Initialize the program select element
-    getPrograms(index);
+    setProgramOptions(programs, index);
 
     reportingTableRowIndex++;
 }
 
 /**
- * Retrieves all selectable programs from the back end.
- * @param index
+ * Sets the options for the program
+ * dropdown at the provided index.
+ * @param data The program data
+ * @param index Index of the dynamically incremented program element.
  */
-function getPrograms(index) {
-    $.ajax({
-        type: "GET",
-        url: appContext + "/volunteerSessionReporting/getPrograms"
-    }).done(function(data, textStatus, jqXHR) {
-            $("#sessionProgramId-" + index).append(new Option("Select one...", null));
-            $(data).each(function(i, d) {
-                $("#sessionProgramId-" + index).append(new Option(d.programValue, d.programKey));
-            });
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error("Error")
-            console.error("Error Thrown: " + errorThrown)
-            console.error("textStatus: " + textStatus)
-        });
+function setProgramOptions(data, index) {
+    $("#sessionProgramId-" + index).append(new Option("Select one...", null));
+    $(data).each(function(i, d) {
+        $("#sessionProgramId-" + index).append(new Option(d.programValue, d.programKey));
+    });
 }
 
 /**
@@ -252,7 +244,8 @@ function setPins(pinJSON, map, volunteerSession) {
  * @param volunteerSession The current volunteerSession object to associate trail reports from the map to
  */
 function loadPins(map, area, volunteerSession) {
-    $.ajax({type:'GET', url: window.appContext + '/trailSection/pinsForArea',
+    $.ajax({type:'GET',
+        url: window.appContext + '/trailSection/pinsForArea',
         data: {'area': area},
         success:function(data,textStatus){setPins(data, map, volunteerSession);},
         error:function(XMLHttpRequest,textStatus,errorThrown){}});
