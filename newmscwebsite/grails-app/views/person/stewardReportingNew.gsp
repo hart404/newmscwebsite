@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="generatedLayout" />
     <title>Steward Reporting</title>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA06rHmQZkZE4U8ReKgerDPJvPSoczh8j0&sensor=false"></script>
 	%{--<script type="text/javascript" src="<g:createLinkTo dir='/js' file='maplabel.js'/>"></script>--}%
     <g:javascript src="stewardReporting.js" />
     <g:javascript src="trailReporting.js" />
