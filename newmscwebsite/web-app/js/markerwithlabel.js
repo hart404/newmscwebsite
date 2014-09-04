@@ -738,8 +738,6 @@ inherits(MarkerWithLabel, google.maps.Marker);
  * @private
  */
 MarkerWithLabel.prototype.setMap = function(theMap) {
-	debugger;
-
 	// Call the inherited function...
 	google.maps.Marker.prototype.setMap.apply(this, arguments);
 
