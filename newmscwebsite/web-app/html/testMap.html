@@ -34,12 +34,11 @@
 				mapTypeId: google.maps.MapTypeId.TERRAIN
 		  	}
 			map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			setPins();
 			
-			jQuery.ajax({type:'GET', url:"/trailSection/pinsForArea", data: {'area': 'south'}, success:function(data,textStatus){setPins(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
 		}
 		
-		function setPins(pinJSON) {
-			console.log(pinJSON);
+		function setPins() {
 			
 			var marker = new google.maps.Marker({
 			    position: new google.maps.LatLng(33.647900, -111.862236),

@@ -78,7 +78,7 @@ function addReportingTableRow(programs) {
         show: "blind",
         hide: "blind",
         buttons: {
-            "Close": function () {
+            "Save": function () {
                 northMapDialog.dialog('close');
             }
         }
@@ -97,7 +97,7 @@ function addReportingTableRow(programs) {
         show: "blind",
         hide: "blind",
         buttons: {
-            "Close": function () {
+            "Save": function () {
                 southMapDialog.dialog('close');
             }
         },
@@ -166,7 +166,7 @@ function setPins(pinJSON, map, volunteerSession) {
         google.maps.event.addListener(marker, 'click', function() {
             var reportFormObject;
 
-            if(marker.reportingForm == null) {
+            if (marker.reportingForm == null) {
                 reportFormObject = initializeTrailReportingForm(volunteerSession);
                 reportFormObject.attributes.pinId = marker.id;
                 marker.set("reportingForm", "trailReportingDiv-" + reportFormObject.attributes.uid.toString());
@@ -191,7 +191,7 @@ function setPins(pinJSON, map, volunteerSession) {
                 var dialog = trailReportingDiv.dialog({
                     title: "Report Trail Issue",
                     width: 500,
-                    height: 550,
+                    height: 750,
                     resizable: false,
                     draggable: false,
                     buttons: {

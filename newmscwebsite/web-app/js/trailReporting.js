@@ -32,9 +32,33 @@ function initializeTrailReportingForm(volunteerSession) {
         '</tr>' +
         '</table>' +
             '<p style="color:#54534a;">' +
-            "Please describe the situation.  If possible, include the nearest emergency marker #, " +
-            "direction from that marker, and approximate distance from the marker. If you don't know, " +
-            "please explain the exact location of the situation as best you can." +
+            "1) Briefly describe the issue" +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            "2) Describe the location with GPS coordinates from:" +
+            '<ul>' +
+            '<li> Your MSC GPS Map' +
+            '<li> Coordinates from a photo, if taken' +
+            '<li> Coordinates from your GPS' +
+            '</ul>' +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or' +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            'List the emergency markers located on the trail map, which is the circle with a black dot in the center. (Click on the circle and the marker name will appear).' +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            '<u><i>Sample Report</i></u>' +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            '"Saguaro across trail at GPS coordinate 33.761111 -111.863889"' +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or' +
+            '</p>' +
+            '<p style="color:#54534a;">' +
+            '"Saguaro across trail 1/2 way between DX5 and DX3"' +
             '</p>' +
         '</form>' +
         '</div>');

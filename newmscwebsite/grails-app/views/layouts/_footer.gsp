@@ -6,7 +6,7 @@
         <li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'photoCredits'])}" class="parent"><span>Photo Credits</span></a></li>
 		<li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'contactUs'])}" class="parent"><span>Contact Us</span></a></li>
 		<li class="bottomMenuListItem"><a href="${createLink(controller: 'content', action: 'handlePage', params: [link: 'sitemap'])}" class="parent"><span>Sitemap</span></a></li>
-        <li class="bottomMenuListItem"><a href="${createLink(controller: 'person', action: 'stewardReporting') }" class="parent"><span>Steward Reporting</span></a></li>
+        <li class="bottomMenuListItem"><a href="${createLink(controller: 'person', action: 'stewardReportingNew') }" class="parent"><span>Steward Reporting</span></a></li>
 		<sec:ifNotLoggedIn>
 			<li class="bottomMenuListItem"><a href="${createLink(controller: 'login')}" class="parent"><span>Login</span></a></li>
 		</sec:ifNotLoggedIn>	

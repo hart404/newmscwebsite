@@ -67,8 +67,8 @@ grails.project.dependency.resolution = {
 		// runtime ":database-migration:1.3.y"
 		compile ":richui:0.8"
 		compile ":google-analytics:2.0"
-		compile ":searchable:0.6.5"
-		compile ":joda-time:1.4"
+		compile ":searchable:0.6.9"
+		compile ":joda-time:1.5"
 		compile ":authorize-net:0.12"
         test ":greenmail:1.3.4"
 	}

@@ -27,7 +27,7 @@ class NotificationService {
                 to notificationType.recipients.collect {it.username}.toArray()
                 from sender
                 subject messageSubject
-                body message
+                html message
             }
         }
     }
