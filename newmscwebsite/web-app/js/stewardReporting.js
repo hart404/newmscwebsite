@@ -67,8 +67,8 @@ function addReportingTableRow(programs) {
 
     var northMapDialog = $("#" + northMapCanvasId).dialog({
         autoOpen:false,
-        width: 1000,
-        height: 900,
+        width: 800,
+        height: 600,
         title: "North Area Reporting",
         resizeStop: function(event, ui) {},
         open: function(event, ui) {
@@ -86,8 +86,8 @@ function addReportingTableRow(programs) {
 
     var southMapDialog = $("#" + southMapCanvasId).dialog({
         autoOpen:false,
-        width: 1000,
-        height: 900,
+        width: 800,
+        height: 600,
         title: "South Area Reporting",
         resizeStop: function(event, ui) {},
         open: function(event, ui) {
