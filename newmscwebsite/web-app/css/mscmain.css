@@ -2,6 +2,10 @@
  * MSC Style - Created 1/19/2012 Phil Hartley
  */
  
+/* Attempted fix for date picker z-order issue */
+
+.dateField {position: relative; z-index:100;}
+ 
 h1 {
 	font-family: "Book Antiqua", "Palatino Linotype", Palatino, serif;
 	font-size: 24px;

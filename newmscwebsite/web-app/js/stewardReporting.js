@@ -34,7 +34,7 @@ function addReportingTableRow(programs) {
     // Add a new row onto the reporting table
     $('#stewardReportingTable').find('tbody:last')
         .append('<tr>')
-        .append('<td>Date <input id="' + dateFieldId + '" name="date" type="text" data-vs-bind-' + index + '="date"></td>')
+        .append('<td>Date <input class="dateField" id="' + dateFieldId + '" name="date" type="text" data-vs-bind-' + index + '="date"></td>')
         .append('<td>Program <select id="' + programFieldId + '" onchange="checkPatrolButtons(jQuery(this));" data-vs-bind-' + index + '="program"></select></td>')
         .append('<td>Hours <input id="' + hoursFieldId + '" name="hours" type="number" min="0" value="0" step="0.5" data-vs-bind-' + index + '="hours"/></td>')
         .append('<td><input class="southarea" disabled="disabled" id="' + southMapFieldId + '" name="southarea" type="button" value="South Area"/></td>')
