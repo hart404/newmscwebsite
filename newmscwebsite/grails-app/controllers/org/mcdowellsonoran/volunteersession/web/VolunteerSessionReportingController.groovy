@@ -92,6 +92,7 @@ class VolunteerSessionReportingController {
                 for (TrailReportCommand trc : vcs.trailReports) {
                     TrailReport trailReport = new TrailReport()
                     trailReport.trailSection = TrailSection.get(trc.pinId)
+					updateLastPatrolled(trailReport.trailSection, volunteerSession.date)
                     trailReport.date = vcs.date
                     trailReport.issue = trc.issue
 
@@ -115,4 +116,11 @@ class VolunteerSessionReportingController {
         }
         return volunteerSessions
     }
+	
+	private void updateLastPatrolled(TrailSection trailSection, LocalDate date) {
+		// Update the lastPatrolled date on the trail section. Update it if it is null or the date given is after the current last patrolled date
+		if (trailSection.lastPatrolled == null || date.isAfter(trailSection.lastPatrolled)) {
+			trailSection.lastPatrolled = date
+		}
+	}
 }

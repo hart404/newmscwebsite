@@ -42,6 +42,10 @@ body {
 	font-weight: bold;
 }
 
+.buttonRight {
+	float: right;
+}
+
 .highlight2 {
 	color: black;
 	font-weight: bold;

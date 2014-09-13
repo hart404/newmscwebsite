@@ -30,7 +30,7 @@
             <tbody></tbody>
         </table>
         <br />
-        <button id="reportingTableSubmit" onclick="submitStewardReport();">Submit</button>
+        <button class="buttonRight" id="reportingTableSubmit" onclick="submitStewardReport();">Submit</button>
     </blockquote>
     <div id="mapCanvasContainer"></div>
     <div id="trailReportingContainer"></div>
