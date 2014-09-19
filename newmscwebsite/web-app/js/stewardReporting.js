@@ -191,7 +191,7 @@ function setPins(pinJSON, map, volunteerSession) {
                 var dialog = trailReportingDiv.dialog({
                     title: "Report Trail Issue",
                     width: 500,
-                    height: 750,
+                    height: 780,
                     resizable: false,
                     draggable: false,
                     buttons: {

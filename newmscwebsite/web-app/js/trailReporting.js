@@ -12,10 +12,11 @@ function initializeTrailReportingForm(volunteerSession) {
     $('#trailReportingContainer')
         .append('<div style="display:none" id="trailReportingDiv-' + index + '">' +
         '<p style="color:#54534a;">' +
-        'Please use this form to report any issues for this trail segment. Note that all issues ' +
-                'will not be logged and communicated until the report is saved as a whole. ' +
-                'These fields can be updated as needed until the report is saved. Clicking ' +
-                '"Clear" will reset this trail section to an unpatrolled state and clear the form.' +
+        'Please use this form to report any issues for this trail section. Clicking ' +
+        '"Clear" will reset this trail section to an unpatrolled state and clear the form. ' +
+        'Please select Trail Problem Type by using the pull down menu arrow. ' +
+        '"Emergency Action Needed" constitutes a risk for potential injury by a trail user or prevention of use of the trail. ' +
+        'Please <em>DO NOT</em> file a report if the trail is in good condition.' +
         '</p>' +
         '<div id="errorsDiv-' + index +'">' +
         '<ul class="errors" role="alert" id=errorsListId-"' + index + '"></ul>' +
@@ -28,10 +29,11 @@ function initializeTrailReportingForm(volunteerSession) {
         '</tr>' +
         '<tr>' +
         '<td>Description</td>' +
-        '<td><textarea name="problemDescription" style="width:18em; height:10em;" id="' + descriptionId +'" data-tr-bind-' + index + '="problemDescription"></textarea></td>' +
+        '<td><textarea name="problemDescription" maxlength="250" style="width:18em; height:10em;" id="' + descriptionId +'" data-tr-bind-' + index + '="problemDescription"></textarea></td>' +
         '</tr>' +
         '</table>' +
             '<p style="color:#54534a;">' +
+            'In the description field, please provide the following information in order: </br></br>' +
             "1) Briefly describe the issue" +
             '</p>' +
             '<p style="color:#54534a;">' +

@@ -25,6 +25,7 @@
 <body>
     <h1>Steward Reporting</h1>
     <blockquote>
+    <p class="grayEventText">Area maps are accessible after you select a Program of type Patrol. Please note, if the trail is in good condition <em>DO NOT</em> file a report.</p>
         <ul class="errors" role="alert" id="volunteerSessionErrors"></ul>
         <table id="stewardReportingTable">
             <tbody></tbody>
