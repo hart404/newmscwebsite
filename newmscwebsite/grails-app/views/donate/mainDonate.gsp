@@ -13,7 +13,7 @@
 	        <p class="bigp grayEventText">Choose the gift level you wish to support:</p>
 	        <g:radioGroup values="[1, 2, 3, 4, 5, 6, 7]" onclick="donationSelected(this)" id="donationSelection" value="1" name="giftLevel" labels="['$1500 McDowell Sonoran Society', '$1000 Steward Circle', '$500 Trailbuilder Circle', '$250 Caretaker Circle', '$100 Pathfinder Circle', '$50 Hiker Circle', 'Other']">
 	        <g:if test="${it.label == 'Other'}">
-	        <p class="bigp grayEventText">${it.radio} ${it.label} $ <g:textField name="otherDonationAmount" /></p>
+	        <p class="bigp grayEventText">${it.radio} ${it.label} $ <g:textField name="otherDonationAmount" onclick="selectOtherDonationAmount()"/></p>
 	        </g:if>
 	        <g:else>
 	        <p class="bigp grayEventText">${it.radio} ${it.label}</p>
@@ -189,6 +189,12 @@
    	   	   	var radio = $('input:radio[name=eCardSelection]')[radioNumber];
    	        eCardSelect(radio);
    	        radio.checked = true;
+   	   	}
+
+   	   	function selectOtherDonationAmount() {
+   	   	   	var radio = $('input:radio[name=giftLevel]')[6];
+   	   	   	selectedAmountButton = 7;
+   	   	   	radio.checked = true;
    	   	}
     </script>
 </body>
