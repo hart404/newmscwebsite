@@ -4,6 +4,7 @@ public enum ProgramReporting {
 	PATROL_FOOT("Patrol - Foot"), 
 	PATROL_BIKE("Patrol - Bike"), 
 	PATROL_HORSE("Patrol - Horse"), 
+	PATROL_ADMIN("Patrol - Administration"),
 	PATHFINDERS("Pathfinder Program"), 
 	CONSTRUCTION_AND_MAINTENANCE("Construction/Maintenance Program"), 
 	HIKE("Hike Program"), 

@@ -28,9 +28,7 @@
 					
 						<g:sortableColumn property="trailName" title="${message(code: 'trailSection.trailName.label', default: 'Trail Name')}" />
 					
-						<g:sortableColumn property="notes" title="${message(code: 'trailSection.notes.label', default: 'Notes')}" />
-					
-						<g:sortableColumn property="description" title="${message(code: 'trailSection.description.label', default: 'Description')}" />
+						<g:sortableColumn property="frequency" title="${message(code: 'trailSection.frequency.label', default: 'Frequency')}" />
 					
 						<g:sortableColumn property="color" title="${message(code: 'trailSection.color.label', default: 'Color')}" />
 					
@@ -46,9 +44,7 @@
 					
 						<td>${fieldValue(bean: trailSectionInstance, field: "trailName")}</td>
 					
-						<td>${fieldValue(bean: trailSectionInstance, field: "notes")}</td>
-					
-						<td>${fieldValue(bean: trailSectionInstance, field: "description")}</td>
+						<td>${fieldValue(bean: trailSectionInstance, field: "frequency")}</td>
 					
 						<td>${fieldValue(bean: trailSectionInstance, field: "color")}</td>
 					

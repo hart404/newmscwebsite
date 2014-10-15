@@ -38,7 +38,7 @@ function addReportingTableRow(programs) {
         .append('<td>Program <select id="' + programFieldId + '" onchange="checkPatrolButtons(jQuery(this));" data-vs-bind-' + index + '="program"></select></td>')
         .append('<td>Hours <input id="' + hoursFieldId + '" name="hours" type="number" min="0" value="0" step="0.5" data-vs-bind-' + index + '="hours"/></td>')
         .append('<td><input class="southarea" disabled="disabled" id="' + southMapFieldId + '" name="southarea" type="button" value="South Area"/></td>')
-        .append('<td><input class="northarea" disabled="disabled" id="' + northMapFieldId + '" name="northarea" type="button" value="Central/North Area"/></td>')
+        .append('<td><input class="northarea" disabled="disabled" id="' + northMapFieldId + '" name="northarea" type="button" value="North/Central Area"/></td>')
         .append('</tr>');
 
     var mapCanvasContainer = $('#mapCanvasContainer');
@@ -282,7 +282,7 @@ function disablePatrolButtons(siblingElement) {
  */
 function checkPatrolButtons(selectElement) {
     var programValue = selectElement.find(":selected").val();
-    if (programValue.substring(0,7) == 'PATROL_') {
+    if (programValue.substring(0,7) == 'PATROL_' && programValue.substring(0,8) != 'PATROL_A') {
         enablePatrolButtons(selectElement);
     } else {
         disablePatrolButtons(selectElement);

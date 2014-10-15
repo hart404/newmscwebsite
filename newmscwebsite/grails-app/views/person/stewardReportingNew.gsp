@@ -23,9 +23,14 @@
     </script>
 </head>
 <body>
-    <h1>Steward Reporting</h1>
+    <h1>Reporting Instructions</h1>
     <blockquote>
-    <p class="grayEventText">Area maps are accessible after you select a Program of type Patrol. Please note, if the trail is in good condition <em>DO NOT</em> file a report.</p>
+    	<p class="grayEventText">
+1)  Select Date<br/>
+2)  Select Program  (Note: When Patrol is selected, area map buttons will be accessible)<br/>
+3)  Record your hours<br/>
+4)  Click on appropriate area map and the map will appear<br/></p>
+    	<p class="grayEventText">Please note, if the trail is in good condition <em>DO NOT</em> file a report.</p>
         <ul class="errors" role="alert" id="volunteerSessionErrors"></ul>
         <table id="stewardReportingTable">
             <tbody></tbody>
