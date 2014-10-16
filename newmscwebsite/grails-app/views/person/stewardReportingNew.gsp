@@ -29,8 +29,11 @@
 1)  Select Date<br/>
 2)  Select Program  (Note: When Patrol is selected, area map buttons will be accessible)<br/>
 3)  Record your hours<br/>
-4)  Click on appropriate area map and the map will appear<br/></p>
-    	<p class="grayEventText">Please note, if the trail is in good condition <em>DO NOT</em> file a report.</p>
+4)  Click on appropriate area map and the map will appear<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;    a)  When the map opens, click on each pin that corresponds with the trail that you hiked.  The pin will turn green after one click. <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        If the trail is in good condition, click on Save.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;    b)  If there is an issue on the trail, click on the green pin a second time and it will turn to red. A "Report Trail Issue" screen pops up.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;    c)  Follow the instructions to complete the form and hit Save.<br/>  </p>
         <ul class="errors" role="alert" id="volunteerSessionErrors"></ul>
         <table id="stewardReportingTable">
             <tbody></tbody>

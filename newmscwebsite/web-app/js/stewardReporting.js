@@ -66,12 +66,18 @@ function addReportingTableRow(programs) {
     loadPins(southMap, "south", volunteerSession);
 
     var northMapDialog = $("#" + northMapCanvasId).dialog({
-        autoOpen:false,
+        autoOpen: false,
+        closeOnEscape: true,
         width: 800,
         height: 600,
         title: "North Area Reporting",
         resizeStop: function(event, ui) {
         	google.maps.event.trigger(northMap, 'resize');
+        	$("#" + northMapCanvasId).dialog("option", "buttons", {
+                "Save": function () {
+                	$("#" + northMapCanvasId).dialog('close');
+                }
+            });
         },
         open: function(event, ui) {
             google.maps.event.trigger(northMap, 'resize');
@@ -88,11 +94,17 @@ function addReportingTableRow(programs) {
 
     var southMapDialog = $("#" + southMapCanvasId).dialog({
         autoOpen:false,
+        closeOnEscape: true,
         width: 800,
         height: 600,
         title: "South Area Reporting",
         resizeStop: function(event, ui) {
         	google.maps.event.trigger(southMap, 'resize');
+        	$("#" + southMapCanvasId).dialog("option", "buttons", {
+                "Save": function () {
+                	$("#" + southMapCanvasId).dialog('close');
+                }
+            });
         },
         open: function(event, ui) {
             google.maps.event.trigger(southMap, 'resize');

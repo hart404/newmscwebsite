@@ -12,11 +12,10 @@ function initializeTrailReportingForm(volunteerSession) {
     $('#trailReportingContainer')
         .append('<div style="display:none" id="trailReportingDiv-' + index + '">' +
         '<p style="color:#54534a;">' +
-        'Please use this form to report any issues for this trail section. Clicking ' +
-        '"Clear" will reset this trail section to an unpatrolled state and clear the form. ' +
+        '<em>Please DO NOT file a Trail Issue report if the trail is in good condition.</em> Clicking ' +
+        '"Clear" will reset this report and clear the form. ' +
         'Please select Trail Problem Type by using the pull down menu arrow. ' +
-        '"Emergency Action Needed" constitutes a risk for potential injury by a trail user or prevention of use of the trail. ' +
-        'Please <em>DO NOT</em> file a report if the trail is in good condition.' +
+        '"Emergency Action Needed" constitutes a risk for potential injury by a trail user or prevention of the use of the trail. ' +
         '</p>' +
         '<div id="errorsDiv-' + index +'">' +
         '<ul class="errors" role="alert" id=errorsListId-"' + index + '"></ul>' +
