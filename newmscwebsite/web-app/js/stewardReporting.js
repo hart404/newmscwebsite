@@ -70,7 +70,9 @@ function addReportingTableRow(programs) {
         width: 800,
         height: 600,
         title: "North Area Reporting",
-        resizeStop: function(event, ui) {},
+        resizeStop: function(event, ui) {
+        	google.maps.event.trigger(northMap, 'resize');
+        },
         open: function(event, ui) {
             google.maps.event.trigger(northMap, 'resize');
             $(".ui-dialog-titlebar-close").hide();
@@ -89,7 +91,9 @@ function addReportingTableRow(programs) {
         width: 800,
         height: 600,
         title: "South Area Reporting",
-        resizeStop: function(event, ui) {},
+        resizeStop: function(event, ui) {
+        	google.maps.event.trigger(southMap, 'resize');
+        },
         open: function(event, ui) {
             google.maps.event.trigger(southMap, 'resize');
             $(".ui-dialog-titlebar-close").hide();
