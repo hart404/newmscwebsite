@@ -43,6 +43,7 @@
 				<thead>
 					<tr>					
 						<g:sortableColumn property="program" title="${message(code: 'volunteerSession.program.label', default: 'Program')}" />
+						<th>Trails</th>
 						<g:sortableColumn property="date" title="${message(code: 'volunteerSession.date.label', default: 'Date')}" />
 						<g:sortableColumn property="hours" title="${message(code: 'volunteerSession.hours.label', default: 'Hours')}" />
 						<th></th>					
@@ -52,6 +53,7 @@
 				<g:each in="${volunteerSessions}" status="i" var="volunteerSessionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>${((ProgramReporting)(volunteerSessionInstance.program)).value()}</td>
+						<td>${volunteerSessionInstance.trailReports.size()}</td>
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "date")}</td>
 						<td>${fieldValue(bean: volunteerSessionInstance, field: "hours")}</td>
 						<td><g:link controller="volunteerSession" action="userEdit" id="${volunteerSessionInstance.id}">Edit</g:link></td>

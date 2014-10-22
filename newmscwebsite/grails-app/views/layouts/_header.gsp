@@ -129,6 +129,19 @@
 	}
 </script>
 
+<script>
+  (function() {
+    var cx = '005874652006257067709:f4sfssokca4';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
 <g:set var="emailIcon">
 	<g:createLinkTo dir='images/layout' file="img_at.png" />
 </g:set>
@@ -156,17 +169,16 @@
 <div class="pageHeader">
 	<img class="logo" alt="logo" src="<g:resource dir='images/layout' file='img_msc-logo-white-157x105.png'/>">
 	<div class="headerIcons">
-		<a href="http://www.facebook.com/pages/McDowell-Sonoran-Conservancy/163961445687?ref=ts" target="_blank"><img src="<g:createLinkTo dir='images/layout' file="img_like.png"/>" alt="Like" /></a> <a
-			href="<g:createLink controller="person" action='registerUser'/>"><img src="${emailIcon}" alt="Email" onmouseover="this.src='${emailIconOn}}'" onmouseout="this.src='${emailIcon}'" /></a> <a
-			href="http://www.facebook.com/pages/McDowell-Sonoran-Conservancy/163961445687?ref=ts" target="_blank"><img src="${facebookIcon}" alt="Facebook" onmouseover="this.src='${facebookIconOn}'"
-			onmouseout="this.src='${facebookIcon}'" /></a> <a href="http://twitter.com/McDowellSonoran" target="_blank"><img src="${twitterIcon}" alt="Twitter" onmouseover="this.src='${twitterIconOn}'"
-			onmouseout="this.src='${twitterIcon}'" /></a> <a href="http://mcdowellsonoranconservancy.wordpress.com/" target="_blank"><img src="${rssIcon}" alt="Blogspot" onmouseover="this.src='${rssIconOn}'"
-			onmouseout="this.src='${rssIcon}'" /></a>
+		<div class="facebooketc">
+			<a href="http://www.facebook.com/pages/McDowell-Sonoran-Conservancy/163961445687?ref=ts" target="_blank"><img src="<g:createLinkTo dir='images/layout' file="img_like.png"/>" alt="Like" /></a> <a
+				href="<g:createLink controller="person" action='registerUser'/>"><img src="${emailIcon}" alt="Email" onmouseover="this.src='${emailIconOn}}'" onmouseout="this.src='${emailIcon}'" /></a> <a
+				href="http://www.facebook.com/pages/McDowell-Sonoran-Conservancy/163961445687?ref=ts" target="_blank"><img src="${facebookIcon}" alt="Facebook" onmouseover="this.src='${facebookIconOn}'"
+				onmouseout="this.src='${facebookIcon}'" /></a> <a href="http://twitter.com/McDowellSonoran" target="_blank"><img src="${twitterIcon}" alt="Twitter" onmouseover="this.src='${twitterIconOn}'"
+				onmouseout="this.src='${twitterIcon}'" /></a> <a href="http://mcdowellsonoranconservancy.wordpress.com/" target="_blank"><img src="${rssIcon}" alt="Blogspot" onmouseover="this.src='${rssIconOn}'"
+				onmouseout="this.src='${rssIcon}'" /></a>
+	    </div>
 		<div class="searchBar">
-			<g:form name="searchSite" url="[action:'search',controller:'home']" class='searchForm'>
-				<input type="text" name="searchInput" class="searchInput" placeholder="SEARCH" />
-				<input type="image" value="Submit" class="searchButton" alt="Submit" src="<g:createLinkTo dir='images/layout' file='img_searchButton-27x24.png'/>" />
-			</g:form>
+			<gcse:searchbox-only></gcse:searchbox-only>
 			<p></p>
 		</div>
 	</div>

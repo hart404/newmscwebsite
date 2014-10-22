@@ -295,9 +295,8 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 }
 
 .searchBar {
-	background-image: url('../images/layout/img_search-box-background-153x24.png');
-	background-repeat:no-repeat;
 	display: inline-block;
+	width: 250px;
 }
 
 .marginRight {
@@ -307,6 +306,11 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 .padded {
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.facebooketc {
+	margin-top: 4px;
+	margin-right: 4px;
 }
 
 .pageHeader {
@@ -326,6 +330,7 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 	float: right;
 	margin-top: 5px;
 	margin-right: 44px;
+	display: inline-flex;
 }
 
 .topMenu {
