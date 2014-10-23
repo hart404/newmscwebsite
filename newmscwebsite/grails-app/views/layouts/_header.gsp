@@ -169,18 +169,18 @@
 <div class="pageHeader">
 	<img class="logo" alt="logo" src="<g:resource dir='images/layout' file='img_msc-logo-white-157x105.png'/>">
 	<div class="headerIcons">
-		<div class="facebooketc">
+		<div class="searchBar">
+			<gcse:searchbox-only></gcse:searchbox-only>
+			<p></p>
+		</div>
+	</div>
+	<div class="facebooketc">
 			<a href="http://www.facebook.com/pages/McDowell-Sonoran-Conservancy/163961445687?ref=ts" target="_blank"><img src="<g:createLinkTo dir='images/layout' file="img_like.png"/>" alt="Like" /></a> <a
 				href="<g:createLink controller="person" action='registerUser'/>"><img src="${emailIcon}" alt="Email" onmouseover="this.src='${emailIconOn}}'" onmouseout="this.src='${emailIcon}'" /></a> <a
 				href="http://www.facebook.com/pages/McDowell-Sonoran-Conservancy/163961445687?ref=ts" target="_blank"><img src="${facebookIcon}" alt="Facebook" onmouseover="this.src='${facebookIconOn}'"
 				onmouseout="this.src='${facebookIcon}'" /></a> <a href="http://twitter.com/McDowellSonoran" target="_blank"><img src="${twitterIcon}" alt="Twitter" onmouseover="this.src='${twitterIconOn}'"
 				onmouseout="this.src='${twitterIcon}'" /></a> <a href="http://mcdowellsonoranconservancy.wordpress.com/" target="_blank"><img src="${rssIcon}" alt="Blogspot" onmouseover="this.src='${rssIconOn}'"
 				onmouseout="this.src='${rssIcon}'" /></a>
-	    </div>
-		<div class="searchBar">
-			<gcse:searchbox-only></gcse:searchbox-only>
-			<p></p>
-		</div>
 	</div>
 	<div class="topMenu">
 		<ul class="topMenuList">
