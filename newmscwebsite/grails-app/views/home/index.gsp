@@ -7,12 +7,7 @@
 
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <link rel="stylesheet" href="${resource(dir:'css',file:'grid/style.css')}" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
-	
-</script>
-<script src="js/galleria/galleria-1.2.6.min.js"></script>
 <script src="js/script.js"></script>
-<script src="js/donate.js"></script>
 </head>
 
 <body>

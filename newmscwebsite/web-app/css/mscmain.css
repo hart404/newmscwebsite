@@ -330,9 +330,13 @@ input:-moz-placeholder { color: rgb(153, 143, 134); }
 
 .headerIcons {
 	float: right;
-	margin-top: 5px;
 	margin-right: 44px;
+	margin-top: 5px;
 	display: inline-block;
+}
+
+td, th {
+    padding: 0;
 }
 
 .topMenu {
