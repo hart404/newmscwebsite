@@ -43,7 +43,7 @@
 				<thead>
 					<tr>					
 						<g:sortableColumn property="program" title="${message(code: 'volunteerSession.program.label', default: 'Program')}" />
-						<th>Trails</th>
+						<th>Trail Sections</th>
 						<g:sortableColumn property="date" title="${message(code: 'volunteerSession.date.label', default: 'Date')}" />
 						<g:sortableColumn property="hours" title="${message(code: 'volunteerSession.hours.label', default: 'Hours')}" />
 						<th></th>					

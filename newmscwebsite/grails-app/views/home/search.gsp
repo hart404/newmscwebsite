@@ -5,6 +5,7 @@
 </head>
 <body>
 	<div class="generalContainer">
-		<gcse:searchresults-only></gcse:searchresults-only>
+		<gcse:searchresults-only linktarget="_parent"></gcse:searchresults-only>
+	</div>
 </body>
 </html>

@@ -1,5 +1,5 @@
-var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/7cfd43c8-85e6-4341-b763-6f1155e43ee85459184511650637164.kmz";
-var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/4b12c162-5e1d-44e4-9704-21dfda61b0bf8959453618454565333.kmz";
+var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/f295e336-821b-4d4f-9a34-c5436d865ec83286289184355902882.kmz";
+var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/50a025f1-2acb-4d6f-8ad8-68dbbecdc3f32263111933160253280.kmz";
 
 // Since the reporting table is dynamic, we need
 // this counter so we can append a number to each
