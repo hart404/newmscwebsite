@@ -11,7 +11,7 @@
 	        <h2 class="redEventText wideBackground">Donation Details</h2>
 	        <g:form name="donateForm" controller="donate" action="takeDonation">
 	        <p class="bigp grayEventText">Choose the gift level you wish to support:</p>
-	        <g:radioGroup values="[1, 2, 3, 4, 5, 6, 7]" onclick="donationSelected(this)" id="donationSelection" value="1" name="giftLevel" labels="['$1500 McDowell Sonoran Society', '$1000 Steward Circle', '$500 Trailbuilder Circle', '$250 Caretaker Circle', '$100 Pathfinder Circle', '$50 Hiker Circle', 'Other']">
+	        <g:radioGroup values="[1, 2, 3, 4, 5, 6]" onclick="donationSelected(this)" id="donationSelection" value="1" name="giftLevel" labels="['$1500 McDowell Sonoran Society', '$1000 Gold Friends Gift', '$500 Silver Friends Gift', '$250 Bronze Friends Gift', '$100 Copper Friends Gift', 'Other']">
 	        <g:if test="${it.label == 'Other'}">
 	        <p class="bigp grayEventText">${it.radio} ${it.label} $ <g:textField name="otherDonationAmount" onclick="selectOtherDonationAmount()"/></p>
 	        </g:if>
@@ -138,11 +138,11 @@
     
         var selectedAmountButton = 1;
 
-        var amounts = [1500, 1000, 500, 250, 100, 50, 0]
+        var amounts = [1500, 1000, 500, 250, 100, 0]
     
         function donationSelected(radioButton) {
             selectedAmountButton = radioButton.value;
-            if (radioButton.value == 7) {
+            if (radioButton.value == 6) {
                 $("#otherDonationAmount").focus();
             }
         }
@@ -160,7 +160,7 @@
         function donateNow() {
             var button = selectedAmountButton;
             $('#actualDonationAmount').val(amounts[selectedAmountButton - 1]);
-            if (selectedAmountButton == 7) {
+            if (selectedAmountButton == 6) {
                 // Other amount selected
             	$('#actualDonationAmount').val($("#otherDonationAmount").val());
             }
@@ -192,8 +192,8 @@
    	   	}
 
    	   	function selectOtherDonationAmount() {
-   	   	   	var radio = $('input:radio[name=giftLevel]')[6];
-   	   	   	selectedAmountButton = 7;
+   	   	   	var radio = $('input:radio[name=giftLevel]')[5];
+   	   	   	selectedAmountButton = 6;
    	   	   	radio.checked = true;
    	   	}
     </script>
