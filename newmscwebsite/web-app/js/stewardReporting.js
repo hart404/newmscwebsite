@@ -1,4 +1,4 @@
-var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/f295e336-821b-4d4f-9a34-c5436d865ec83286289184355902882.kmz";
+var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/01c2e512-ec83-4d8b-ba65-b3d426baadf73877998034998336911.kmz";
 var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/50a025f1-2acb-4d6f-8ad8-68dbbecdc3f32263111933160253280.kmz";
 
 // Since the reporting table is dynamic, we need

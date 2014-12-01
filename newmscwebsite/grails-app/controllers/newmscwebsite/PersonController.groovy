@@ -627,11 +627,13 @@ class PersonController {
 		def hours = params.list('hours')
 		def steward = Person.get(params.stewardId)
 		programs.eachWithIndex { program, index ->
+			println "Processing program: ${program}"
 			def year = params."reportingDate${index + 1}_year" as Integer
 			def month = params."reportingDate${index + 1}_month" as Integer
 			def day = params."reportingDate${index + 1}_day" as Integer
 			def date = new LocalDate(year, month, day)
 			def volunteerSession = new VolunteerSession(person: steward, hours: hours[index] as BigDecimal, date: date, program: program)
+			volunteerSession.trailReports = []
 			volunteerSession.save(failOnError: true)
 		}
 		render(view: "showStewardReportingSummary", model: stewardReportingData(steward))

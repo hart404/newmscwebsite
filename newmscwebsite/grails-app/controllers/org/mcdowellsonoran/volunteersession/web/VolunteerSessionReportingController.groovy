@@ -29,7 +29,7 @@ class VolunteerSessionReportingController {
 
         stewardReportingCommand.volunteerSessions.each { it.validate() }
 
-        if(stewardReportingCommand.volunteerSessions.any { it.hasErrors() }) {
+        if (stewardReportingCommand.volunteerSessions.any { it.hasErrors() }) {
             response.status = 400
             errorsMap.put("hasErrors", true)
             List errors = []
