@@ -43,12 +43,14 @@ class DonateController {
 			email params.email
 		}
 		def anr = s.submit()
+		
+		println "Actual donation amount: ${params.actualDonationAmount}"
 
 		println "ANR: ${anr}"
 		println "Response Reason Code: ${anr.responseReasonCode}"
 		println "Response Reason Text: ${anr.responseReasonText}"
 		// 4007000000027
-		// Note that the actualDOnationAmount is now not being stored in the DB for security reasons
+		// Note that the actualDonationAmount is now not being stored in the DB for security reasons
 		if (anr.responseReasonText.contains("This transaction has been approved.")) {
 			println "SUCCESS"
 			def donation = new Donation(firstName: params.firstName, lastName: params.lastName,

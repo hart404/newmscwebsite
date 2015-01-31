@@ -62,7 +62,7 @@
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${volunteerSessionsCount}" />
+				<g:paginate total="${volunteerSessionsCount}" id="${steward.id}" />
 			</div>
 			<g:form controller="volunteerSession" action="downloadVolunteerSessionsAsCSV" id="${steward.id}">
             <g:submitButton class="edit" name="submit" value="${message(code: 'default.button.download.label', default: 'Download as CSV')}" />
