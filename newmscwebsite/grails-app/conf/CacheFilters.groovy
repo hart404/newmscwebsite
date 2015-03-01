@@ -71,10 +71,21 @@ class CacheFilters {
 				}
 			}
 		}
+//		cors(uri : '/*') {
+//			before = {
+//				corsHeaders(response)
+//			}
+//		}
 	}
 	
 	void noCache(response) {
 		HttpUtils.NO_CACHE_HEADERS.each  { key,value ->
+			response.setHeader(key, value)
+		}
+	}
+	
+	void corsHeaders(response) {
+		HttpUtils.CORS_HEADERS.each  { key,value ->
 			response.setHeader(key, value)
 		}
 	}

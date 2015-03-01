@@ -19,7 +19,7 @@ grails.project.dependency.resolution = {
 		// uncomment to disable ehcache
 		// excludes 'ehcache'
 	}
-	log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+	log "verbose" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
 	repositories {
 		grailsPlugins()
 		grailsHome()
@@ -74,4 +74,5 @@ grails.project.dependency.resolution = {
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"
+grails.plugin.location.cors = "../../grails-cors"
 

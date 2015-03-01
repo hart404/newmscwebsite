@@ -272,3 +272,6 @@ grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/role'
 // grails.plugin.databasemigration.updateOnStart = false
 // grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 
+cors.url.pattern = '/*'
+cors.enabled = true
+

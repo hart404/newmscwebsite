@@ -8,4 +8,7 @@ class HttpUtils {
 		'Cache-Control' : 'no-cache,no-store',
 		'Pragma' : 'no-cache'
 	]
+	static def CORS_HEADERS = [
+		'Access-Control-Allow-Origin' : '*'		
+	]
 }
