@@ -97,7 +97,7 @@ class VolunteerSessionReportingController {
                     trailReport.issue = trc.issue
 
                     // There will only be a TrailReportNotification if there is an issue
-                    if(trc.issue){
+                    if (trc.issue) {
                         TrailReportNotification notification = new TrailReportNotification()
                         notification.notificationType = NotificationType.findByCode(trc.notificationType)
                         notification.description = trc.problemDescription

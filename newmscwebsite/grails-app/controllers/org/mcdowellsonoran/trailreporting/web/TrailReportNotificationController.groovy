@@ -17,7 +17,7 @@ class TrailReportNotificationController {
      */
     def validateTrailReport(TrailReportNotificationCommand trailReportNotification) {
         Map errorsMap = [:]
-        if(trailReportNotification.hasErrors()) {
+        if (trailReportNotification.hasErrors()) {
             response.status = 400
             List errors = []
             errorsMap.put("hasErrors", true)

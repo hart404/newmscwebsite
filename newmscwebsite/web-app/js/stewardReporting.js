@@ -1,5 +1,5 @@
 var southMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/01c2e512-ec83-4d8b-ba65-b3d426baadf73877998034998336911.kmz";
-var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/50a025f1-2acb-4d6f-8ad8-68dbbecdc3f32263111933160253280.kmz";
+var northMapURL = "https://s3.amazonaws.com/McDowellSonoranConservancyImages/1e4596de-d878-4ce8-9a09-7399bd94b35e6741894477034935351.kmz";
 
 // Since the reporting table is dynamic, we need
 // this counter so we can append a number to each
@@ -171,7 +171,7 @@ function setPins(pinJSON, map, volunteerSession) {
         var marker = new MarkerWithLabel({
             map: map,
             position: latLong,
-            icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+            icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=���|" + color,
             labelContent: pin.pinName
         });
         marker.set("id", pin.id);

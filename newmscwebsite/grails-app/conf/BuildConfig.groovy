@@ -35,6 +35,7 @@ grails.project.dependency.resolution = {
 		mavenRepo "http://repository.jboss.com/maven2/"
 		mavenRepo "http://repo.springsource.org/milestone"
 		mavenRepo "http://mavenrepo.google-api-java-client.googlecode.com/hg"
+		mavenRepo "https://repo.grails.org/grails/plugins"
 	}
 
 	dependencies {
@@ -71,6 +72,7 @@ grails.project.dependency.resolution = {
 		compile ":joda-time:1.5"
 		compile ":authorize-net:0.12"
         test ":greenmail:1.3.4"
+//		compile ":quartz:1.0.2"
 	}
 }
 grails.plugin.location.'simple-cms' = "../../simple-cms/simple-cms"

@@ -658,6 +658,11 @@ class PersonController {
 		def volunteerSessionsByStewardCount = volunteerSessionService.countSessionsBySteward(steward)
 		[steward: steward, total: total, totalYTD: totalYTD, byProgram: byProgram, byProgramYTD: byProgramYTD, volunteerSessions: volunteerSessionsBySteward, volunteerSessionsCount: volunteerSessionsByStewardCount]
 	}
+	
+	def reportingSummary() {
+		def steward = (Person)springSecurityService.currentUser
+		render stewardReportingData(steward) as JSON
+	}
 
 }
 

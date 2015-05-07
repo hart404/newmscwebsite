@@ -1,5 +1,6 @@
 package newmscwebsite
 
+import grails.converters.JSON
 import org.joda.time.LocalDate
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -128,5 +129,9 @@ class NewsItemController {
 	
 	def displayNewsItem = {
 		[newsItem: NewsItem.get(params.id)]
+	}
+	
+	def homePageNewsItems() {
+		render newsItemService.getHomePageNewsItems() as JSON
 	}
 }
