@@ -171,7 +171,7 @@ function setPins(pinJSON, map, volunteerSession) {
         var marker = new MarkerWithLabel({
             map: map,
             position: latLong,
-            icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=���|" + color,
+            icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
             labelContent: pin.pinName
         });
         marker.set("id", pin.id);
@@ -201,7 +201,7 @@ function setPins(pinJSON, map, volunteerSession) {
                 var errorsList = trailReportingDiv.find("[id^='errorsListId-']");
 
                 // Turn marker to red
-                marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|FF0000" );
+                marker.setIcon("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|FF0000" );
                 marker.color = "FF0000";
 
                 var dialog = trailReportingDiv.dialog({
