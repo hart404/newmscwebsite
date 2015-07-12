@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Page Not Found or other error</title>
+        <title>Error including Page Not Found</title>
         <meta name="layout" content="mainLayout">
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'errors.css')}" type="text/css">
     </head>

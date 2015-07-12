@@ -48,6 +48,52 @@
 					}
 				});
 	</script>
+	<script>
+	function validateForm()
+
+	{
+		var email_address = document.getElementById("email_address").value
+
+		var atpos = email_address.indexOf("@");
+		var dotpos = email_address.lastIndexOf(".");
+		if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email_address.length) {
+			$("#email_addessError").html("You must enter a valid Email.")
+			return false;
+		}
+
+		var firstname = document.getElementById("firstname").value
+		var lastname = document.getElementById("lastname").value
+		var company = document.getElementById("company").value
+
+		var myJSONText = "data={'email_address':'" + email_address
+				+ "','firstname':'" + firstname + "','lastname':'" + lastname
+				+ "','companyname':'" + company + "'}"
+
+		var contact_url = "./person/registerUser";
+		//	    
+		// $(location).attr('href',url);
+
+		$.ajax({
+			type : "POST",
+			url : contact_url,
+			data : myJSONText,
+			cache : false,
+			success : function(text) {
+				alert("You are successfully subscribed");
+				location.reload();
+			}
+
+		}).fail(function() {
+			closeprocessing();
+			alert("Sorry, there was an error. Please try again");
+		});
+
+	}
+
+	function closeprocessing() {
+		$("div.loader1").fadeOut('normal');
+	}
+	</script>
 
 	<div class="homePageItems">
 		<div class="homePageItem marginRight">
@@ -148,9 +194,9 @@
 	<g:render template="/widget/updatePhotoWidget" plugin="simple-cms" />
 	<g:render template="/photo/searchPhotoDialog" plugin="simple-cms" />
 
-	<!-- start of userfull info popup -->
+	<!-- start of userful info popup -->
 
-	<div class="" id="myDiv6" style="float: right;">
+	<div class="" id="myDiv6" style="z-index: 999; float: right;">
 		<!--span-->
 		<div class="span12">
 			<!--box-->
@@ -175,9 +221,9 @@
 								<div style="width: 30%; background:; float: left;">
 									<label style="visibility: hidden;">Na</label> <label>Email Address:</label>
 								</div>
-								<input type="text" class="" placeholder="email address" name="email_addess" id="email_addess" style="width: 200px;">
+								<input type="text" class="" placeholder="email address" name="email_address" id="email_address" style="width: 200px;">
 							</div>
-							<span id="email_addessError" style="color: #F70000; margin-left: 150px;"></span>
+							<span id="email_addressError" style="color: #F70000; margin-left: 150px;"></span>
 							<div style="">
 								<div style="width: 30%; background:; float: left;">
 									<label style="visibility: hidden;">Na</label> <label>First Name:</label>

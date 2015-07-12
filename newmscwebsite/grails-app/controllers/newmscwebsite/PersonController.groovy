@@ -1,8 +1,7 @@
 package newmscwebsite
 
 import grails.converters.JSON
-import org.mcdowellsonoran.notification.NotificationType
-import org.mcdowellsonoran.volunteersession.VolunteerSession
+import grails.plugins.springsecurity.Secured
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -10,12 +9,12 @@ import java.text.SimpleDateFormat
 import javax.net.ssl.HttpsURLConnection
 
 import org.joda.time.LocalDate
+import org.mcdowellsonoran.notification.NotificationType
+import org.mcdowellsonoran.volunteersession.VolunteerSession
 import org.springframework.dao.DataIntegrityViolationException
 
 import simple.cms.SCMSMenu
 import simple.cms.SCMSPhoto
-
-import com.vinomis.authnet.AuthorizeNet
 
 class PersonController {
 
@@ -301,8 +300,6 @@ class PersonController {
 	def registerUser() {
 		def jsonObj = JSON.parse(params.data)
 		try {
-			//println("apikey"+grailsApplication.config.constant_contact.apikey)
-			//println("accesstoken"+grailsApplication.config.constant_contact.accesstoken)
 			TimeZone tz = TimeZone.getTimeZone("UTC");
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 			df.setTimeZone(tz);
@@ -349,8 +346,7 @@ class PersonController {
 			println(response.toString());
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			if(e.getMessage().contains("Server returned HTTP response code: 409")){
+			if (e.getMessage().contains("Server returned HTTP response code: 409")) {
 				def message = "You are already subscribed "
 				chain(controller:"home" ,action: "index", model: [message:message])
 			}
@@ -358,7 +354,7 @@ class PersonController {
 	}
 
 
-	String getJSONObject(String listid, String status, String optSource, String optDate, String emailAddress, String first_name, String last_name, String company_name ) {
+	private String getJSONObject(String listid, String status, String optSource, String optDate, String emailAddress, String first_name, String last_name, String company_name ) {
 		def _mainjsonObject = [:]
 		def idjsonObject = [:]
 		idjsonObject.id = listid
@@ -382,22 +378,6 @@ class PersonController {
 		_mainjsonObject.last_name = last_name
 		_mainjsonObject.company_name = company_name
 		return _mainjsonObject as JSON
-	}
-
-	def test() {
-
-		def s = new AuthorizeNet()
-		s.authorizeAndCapture {
-			amount '100.00'
-			ccNumber '370000000000002'
-			cvv '122'
-			ccExpDate '012011'
-			email 'john@acme.com'
-			invoiceId '123'
-		}
-		def anr = s.submit()
-		println("authoooooooooooooo::::"+ anr)
-
 	}
 
 	def registerForEmail() {
